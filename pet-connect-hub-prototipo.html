@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   :root{
     --primary:#FF7A38;
@@ -510,6 +511,29 @@
   .toggle-switch.on{background:var(--secondary);}
   .toggle-switch .knob{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .15s ease;box-shadow:var(--shadow);}
   .toggle-switch.on .knob{left:21px;}
+
+  /* Carteira de Identidade do Pet (ID Card) */
+  .pet-id-card{position:relative;border-radius:20px;padding:24px 26px;background:linear-gradient(135deg, var(--turquoise-1) 0%, var(--turquoise-2) 55%, var(--turquoise-3) 100%);color:#fff;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:20px;}
+  .pet-id-card::before{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.08);}
+  .pet-id-card::after{content:"KODA";position:absolute;bottom:14px;right:22px;font-family:'Poppins',sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,0.32);}
+  .pet-id-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;}
+  .pet-id-label{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+  .pet-id-chip{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#F4D8A8,#D9B067);position:relative;}
+  .pet-id-chip::before,.pet-id-chip::after{content:"";position:absolute;left:5px;right:5px;height:1px;background:rgba(0,0,0,0.25);}
+  .pet-id-chip::before{top:9px;}
+  .pet-id-chip::after{top:16px;}
+  .pet-id-body{display:flex;gap:20px;align-items:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:2;}
+  .pet-id-photo{width:88px;height:88px;border-radius:16px;object-fit:cover;border:3px solid rgba(255,255,255,0.7);flex-shrink:0;}
+  .pet-id-info{flex:1;min-width:220px;}
+  .pet-id-info h3{font-size:22px;margin:0 0 2px;color:#fff;}
+  .pet-id-info .pet-id-code{font-size:11px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,0.7);margin-bottom:12px;}
+  .pet-id-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;}
+  .pet-id-grid div{font-size:12px;color:rgba(255,255,255,0.8);}
+  .pet-id-grid b{display:block;font-size:13.5px;color:#fff;font-weight:700;margin-top:1px;}
+  .pet-id-restrictions{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,0.32);font-size:12.5px;color:rgba(255,255,255,0.92);position:relative;z-index:2;}
+  .pet-id-restrictions b{color:#fff;}
+  .pet-id-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;position:relative;z-index:2;}
+  .pet-id-actions .btn{font-size:12.5px;padding:10px 16px;box-shadow:none;}
 
   /* ===========================================================
      TEMA: gradiente turquesa + glassmorphism (fundo do sistema)
@@ -1802,6 +1826,31 @@
 
     <div class="profile-body" style="grid-template-columns:1fr 300px;">
       <div>
+        <div class="pet-id-card" id="pet-id-card">
+          <div class="pet-id-top">
+            <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+            <div class="pet-id-chip"></div>
+          </div>
+          <div class="pet-id-body">
+            <img class="pet-id-photo" id="pet-id-photo" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thor">
+            <div class="pet-id-info">
+              <h3 id="pet-id-name">Thor</h3>
+              <div class="pet-id-code" id="pet-id-code">ID KODA-THOR-0417</div>
+              <div class="pet-id-grid">
+                <div>Espécie / Raça<b id="pet-id-raca">Cão · SRD</b></div>
+                <div>Cor<b id="pet-id-cor">Caramelo</b></div>
+                <div>Peso<b id="pet-id-peso">14 kg</b></div>
+                <div>Idade<b id="pet-id-idade">3 anos</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span id="pet-id-restricoes">Nenhuma alergia registrada até o momento.</span></div>
+          <div class="pet-id-actions">
+            <button class="btn btn-primary" id="pet-id-export-btn">⬇️ Exportar carteira em PDF</button>
+            <button class="btn btn-outline" id="pet-id-share-btn">🔗 Compartilhar carteira</button>
+          </div>
+        </div>
+
         <div class="card-block">
           <div class="level-card">
             <div class="level-info">
@@ -1837,18 +1886,19 @@
         <div class="card-block">
           <h3>Dados do pet</h3>
           <div class="form-grid">
-            <div class="form-field"><label>Nome</label><input type="text" value="Thor"></div>
-            <div class="form-field"><label>Espécie</label><select><option>Cão</option><option>Gato</option><option>Outro</option></select></div>
-            <div class="form-field"><label>Raça</label><input type="text" value="SRD (Sem Raça Definida)"></div>
-            <div class="form-field"><label>Data de nascimento</label><input type="text" value="04/2023"></div>
-            <div class="form-field"><label>Peso</label><input type="text" value="14 kg"></div>
-            <div class="form-field"><label>Sexo</label><select><option>Macho</option><option>Fêmea</option></select></div>
-            <div class="form-field"><label>Castrado(a)</label><select><option>Sim</option><option>Não</option></select></div>
-            <div class="form-field"><label>Microchip</label><input type="text" placeholder="Número do microchip (opcional)"></div>
-            <div class="form-field full"><label>Alergias e restrições</label><textarea>Nenhuma alergia registrada até o momento.</textarea></div>
-            <div class="form-field full"><label>Medicações em uso</label><textarea>Nenhuma medicação contínua.</textarea></div>
+            <div class="form-field"><label>Nome</label><input type="text" id="input-pet-nome" value="Thor"></div>
+            <div class="form-field"><label>Espécie</label><select id="input-pet-especie"><option>Cão</option><option>Gato</option><option>Outro</option></select></div>
+            <div class="form-field"><label>Raça</label><input type="text" id="input-pet-raca" value="SRD (Sem Raça Definida)"></div>
+            <div class="form-field"><label>Cor da pelagem</label><input type="text" id="input-pet-cor" value="Caramelo"></div>
+            <div class="form-field"><label>Data de nascimento</label><input type="text" id="input-pet-nascimento" value="04/2023"></div>
+            <div class="form-field"><label>Peso</label><input type="text" id="input-pet-peso" value="14 kg"></div>
+            <div class="form-field"><label>Sexo</label><select id="input-pet-sexo"><option>Macho</option><option>Fêmea</option></select></div>
+            <div class="form-field"><label>Castrado(a)</label><select id="input-pet-castrado"><option>Sim</option><option>Não</option></select></div>
+            <div class="form-field"><label>Microchip</label><input type="text" id="input-pet-microchip" placeholder="Número do microchip (opcional)"></div>
+            <div class="form-field full"><label>Alergias e restrições</label><textarea id="input-pet-alergias">Nenhuma alergia registrada até o momento.</textarea></div>
+            <div class="form-field full"><label>Medicações em uso</label><textarea id="input-pet-medicacoes">Nenhuma medicação contínua.</textarea></div>
           </div>
-          <button class="btn btn-primary" style="margin-top:18px;" data-toast="+10 pontos de cuidado 🦴 — dados do pet atualizados!">Salvar dados do pet</button>
+          <button class="btn btn-primary" style="margin-top:18px;" id="save-pet-data-btn" data-toast="+10 pontos de cuidado 🦴 — dados do pet atualizados e carteira sincronizada!">Salvar dados do pet</button>
         </div>
 
         <div class="card-block">
@@ -2139,15 +2189,54 @@
       name: 'Thor',
       sub: 'Cão · SRD · 3 anos · tutor: Pedro',
       photo: 'https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200',
-      cover: 'https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=1200'
+      cover: 'https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      code: 'KODA-THOR-0417',
+      especie: 'Cão', raca: 'SRD (Sem Raça Definida)', cor: 'Caramelo',
+      nascimento: '04/2023', peso: '14 kg', idadeLabel: '3 anos',
+      sexo: 'Macho', castrado: 'Sim', microchip: '',
+      alergias: 'Nenhuma alergia registrada até o momento.',
+      medicacoes: 'Nenhuma medicação contínua.'
     },
     mia: {
       name: 'Mia',
       sub: 'Gata · Siamês · 2 anos · tutor: Pedro',
       photo: 'https://images.pexels.com/photos/13473569/pexels-photo-13473569.jpeg?auto=compress&cs=tinysrgb&w=200',
-      cover: 'https://images.pexels.com/photos/13473569/pexels-photo-13473569.jpeg?auto=compress&cs=tinysrgb&w=1200'
+      cover: 'https://images.pexels.com/photos/13473569/pexels-photo-13473569.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      code: 'KODA-MIA-0892',
+      especie: 'Gato', raca: 'Siamês', cor: 'Creme e marrom (colorpoint)',
+      nascimento: '06/2024', peso: '4 kg', idadeLabel: '2 anos',
+      sexo: 'Fêmea', castrado: 'Sim', microchip: '',
+      alergias: 'Sensibilidade a frango — dieta especial.',
+      medicacoes: 'Nenhuma medicação contínua.'
     }
   };
+
+  // Preenche o cartão de identidade (carteira) e o formulário a partir dos dados de um pet
+  function fillPetWallet(p){
+    document.getElementById('pet-id-photo').src = p.photo;
+    document.getElementById('pet-id-name').textContent = p.name;
+    document.getElementById('pet-id-code').textContent = 'ID ' + p.code;
+    document.getElementById('pet-id-raca').textContent = p.especie + ' · ' + p.raca;
+    document.getElementById('pet-id-cor').textContent = p.cor;
+    document.getElementById('pet-id-peso').textContent = p.peso;
+    document.getElementById('pet-id-idade').textContent = p.idadeLabel;
+    document.getElementById('pet-id-restricoes').textContent = p.alergias;
+
+    var setVal = function(id, val){ var el = document.getElementById(id); if(el) el.value = val; };
+    setVal('input-pet-nome', p.name);
+    setVal('input-pet-especie', p.especie);
+    setVal('input-pet-raca', p.raca);
+    setVal('input-pet-cor', p.cor);
+    setVal('input-pet-nascimento', p.nascimento);
+    setVal('input-pet-peso', p.peso);
+    setVal('input-pet-sexo', p.sexo);
+    setVal('input-pet-castrado', p.castrado);
+    setVal('input-pet-microchip', p.microchip);
+    var alergiasEl = document.getElementById('input-pet-alergias'); if(alergiasEl) alergiasEl.value = p.alergias;
+    var medEl = document.getElementById('input-pet-medicacoes'); if(medEl) medEl.value = p.medicacoes;
+  }
+  fillPetWallet(petProfileData.thor);
+
   document.querySelectorAll('.pet-switch-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       document.querySelectorAll('.pet-switch-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
@@ -2157,9 +2246,139 @@
         document.getElementById('pet-profile-sub').textContent = p.sub;
         document.getElementById('pet-profile-avatar').src = p.photo;
         document.getElementById('pet-profile-cover').style.backgroundImage = "url('" + p.cover + "')";
+        fillPetWallet(p);
       }
     });
   });
+
+  // Sincroniza edições manuais do formulário de volta para o cartão de identidade
+  var savePetDataBtn = document.getElementById('save-pet-data-btn');
+  if(savePetDataBtn){
+    savePetDataBtn.addEventListener('click', function(){
+      var getVal = function(id){ var el = document.getElementById(id); return el ? el.value : ''; };
+      document.getElementById('pet-id-name').textContent = getVal('input-pet-nome') || 'Pet';
+      document.getElementById('pet-id-raca').textContent = getVal('input-pet-especie') + ' · ' + getVal('input-pet-raca');
+      document.getElementById('pet-id-cor').textContent = getVal('input-pet-cor');
+      document.getElementById('pet-id-peso').textContent = getVal('input-pet-peso');
+      document.getElementById('pet-id-restricoes').textContent = getVal('input-pet-alergias');
+    });
+  }
+
+  // Exportar a Carteira de Identidade Pet em PDF (gerado no navegador, sem depender de servidor)
+  function exportPetWalletPDF(){
+    if(typeof window.jspdf === 'undefined'){
+      showToast('Não foi possível carregar o gerador de PDF agora. Verifique sua conexão e tente novamente.');
+      return;
+    }
+    var jsPDFCtor = window.jspdf.jsPDF;
+    var W = 380, H = 620;
+    var doc = new jsPDFCtor({ unit: 'pt', format: [W, H] });
+
+    var name = document.getElementById('pet-id-name').textContent || 'Pet';
+    var code = document.getElementById('pet-id-code').textContent;
+    var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var cor = document.getElementById('pet-id-cor').textContent;
+    var peso = document.getElementById('pet-id-peso').textContent;
+    var idade = document.getElementById('pet-id-idade').textContent;
+    var restricoes = document.getElementById('pet-id-restricoes').textContent;
+    var sexoEl = document.getElementById('input-pet-sexo');
+    var sexo = sexoEl ? sexoEl.value : '';
+    var medEl = document.getElementById('input-pet-medicacoes');
+    var medicacoes = medEl ? medEl.value : '';
+
+    // Fundo em gradiente simulado com formas sobrepostas, no estilo visual da Carteira Digital
+    doc.setFillColor(8, 59, 73); doc.rect(0, 0, W, H, 'F');
+    doc.setFillColor(23, 184, 196); doc.triangle(0, H, W, H, W, H - 200, 'F');
+    doc.setFillColor(255, 122, 56); doc.circle(W - 40, 40, 70, 'F');
+
+    doc.setTextColor(255, 255, 255);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+    doc.text('CARTEIRA DE IDENTIDADE PET', 30, 40);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+    doc.text('KODA — Connecting pets. Empowering care.', 30, 54);
+    doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
+    doc.line(30, 66, W - 30, 66);
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+    doc.text(name, 30, 105);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+    doc.text(code, 30, 122);
+
+    var fields = [
+      ['Espécie / Raça', racaLinha],
+      ['Cor', cor],
+      ['Peso', peso],
+      ['Idade', idade],
+      ['Sexo', sexo || '—']
+    ];
+    var y = 160;
+    fields.forEach(function(f){
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
+      doc.text(String(f[0]).toUpperCase(), 30, y);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(12.5); doc.setTextColor(255, 255, 255);
+      doc.text(String(f[1] || '—'), 30, y + 15);
+      y += 40;
+    });
+
+    y += 6;
+    doc.setDrawColor(255, 255, 255); doc.line(30, y, W - 30, y);
+    y += 20;
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
+    doc.text('RESTRIÇÕES / ALERGIAS', 30, y);
+    y += 15;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
+    var restricoesLines = doc.splitTextToSize(restricoes || '—', W - 60);
+    doc.text(restricoesLines, 30, y);
+    y += restricoesLines.length * 13 + 16;
+
+    if(medicacoes){
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
+      doc.text('MEDICAÇÕES EM USO', 30, y);
+      y += 15;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
+      var medLines = doc.splitTextToSize(medicacoes, W - 60);
+      doc.text(medLines, 30, y);
+    }
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(210, 235, 235);
+    doc.text('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
+
+    doc.save('carteira-pet-' + name.toLowerCase().replace(/\s+/g, '-') + '.pdf');
+    showToast('Carteira de ' + name + ' exportada em PDF! 🦴 +5 pontos de cuidado');
+  }
+
+  // Compartilhar a Carteira de Identidade Pet (Web Share API, com fallback para copiar)
+  function sharePetWallet(){
+    var name = document.getElementById('pet-id-name').textContent || 'Pet';
+    var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var cor = document.getElementById('pet-id-cor').textContent;
+    var peso = document.getElementById('pet-id-peso').textContent;
+    var idade = document.getElementById('pet-id-idade').textContent;
+    var restricoes = document.getElementById('pet-id-restricoes').textContent;
+    var texto = 'Carteira de Identidade Pet — ' + name + '\n' +
+      racaLinha + ' · ' + cor + '\n' +
+      'Peso: ' + peso + ' · Idade: ' + idade + '\n' +
+      'Restrições/alergias: ' + restricoes + '\n' +
+      'Gerado pelo Koda 🐾';
+
+    if(navigator.share){
+      navigator.share({ title: 'Carteira de ' + name + ' — Koda', text: texto }).catch(function(){});
+    } else if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(function(){
+        showToast('Carteira de ' + name + ' copiada! Cole em qualquer app para compartilhar 📋');
+      }).catch(function(){
+        showToast('Não foi possível copiar automaticamente neste navegador.');
+      });
+    } else {
+      showToast('Compartilhamento não suportado neste navegador.');
+    }
+  }
+
+  var petIdExportBtn = document.getElementById('pet-id-export-btn');
+  if(petIdExportBtn) petIdExportBtn.addEventListener('click', exportPetWalletPDF);
+  var petIdShareBtn = document.getElementById('pet-id-share-btn');
+  if(petIdShareBtn) petIdShareBtn.addEventListener('click', sharePetWallet);
 
   // Seleção de capa e cor da Carteira Digital (visual)
   document.querySelectorAll('.cover-opt').forEach(function(opt){
