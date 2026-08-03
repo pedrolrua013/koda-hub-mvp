@@ -316,8 +316,9 @@
   .subscreen{display:none;}
   .subscreen.active{display:block;}
 
-  .dash-body{display:grid;grid-template-columns:1fr 280px;gap:24px;padding:24px 44px 50px;align-items:start;}
+  .dash-body{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:24px 44px 50px;align-items:start;}
   @media (max-width:900px){.dash-body{grid-template-columns:1fr;}}
+  .aside-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
   .booking-card{display:flex;gap:16px;background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:18px;margin-bottom:14px;align-items:center;}
   .booking-photo{width:64px;height:64px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;background-size:cover;background-position:center;overflow:hidden;}
   .booking-photo img{width:100%;height:100%;object-fit:cover;}
@@ -1888,11 +1889,20 @@
 
     <div class="dash-body">
       <div>
-        <div class="payout-card">
-          <div class="payout-row"><span>Ganhos brutos do mês</span><span>R$ 2.140,00</span></div>
-          <div class="payout-row"><span>Comissão Koda (15%)</span><span>− R$ 321,00</span></div>
-          <div class="payout-row"><span>Repasse líquido a receber</span><span>R$ 1.819,00</span></div>
+        <div class="charts-grid">
+          <div class="card-block">
+            <div class="chart-card-head">
+              <h3>Evolução dos ganhos (últimos 6 meses)</h3>
+              <span class="chart-badge">↑ 73% em 6 meses</span>
+            </div>
+            <div class="chart-canvas-wrap"><canvas id="chart-ganhos-mensal"></canvas></div>
+          </div>
+          <div class="card-block">
+            <h3>Ganhos por tipo de serviço</h3>
+            <div class="chart-canvas-wrap"><canvas id="chart-servicos"></canvas></div>
+          </div>
         </div>
+        <p class="info-tag" style="margin:14px 0 26px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
 
         <div class="rank-card">
           <div class="rank-num">#12</div>
@@ -1936,21 +1946,6 @@
           <button class="btn btn-block" style="background:#fff;color:var(--primary-dark);" data-goto="assinatura-pro">Contratar destaque</button>
         </div>
 
-        <div class="charts-grid">
-          <div class="card-block">
-            <div class="chart-card-head">
-              <h3>Evolução dos ganhos (últimos 6 meses)</h3>
-              <span class="chart-badge">↑ 73% em 6 meses</span>
-            </div>
-            <div class="chart-canvas-wrap"><canvas id="chart-ganhos-mensal"></canvas></div>
-          </div>
-          <div class="card-block">
-            <h3>Ganhos por tipo de serviço</h3>
-            <div class="chart-canvas-wrap"><canvas id="chart-servicos"></canvas></div>
-          </div>
-        </div>
-        <p class="info-tag" style="margin:14px 0 22px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
-
         <h3 style="font-size:15px;margin:22px 0 14px;">Próximos atendimentos</h3>
         <div class="booking-card">
           <div class="booking-photo" style="background:linear-gradient(135deg,#FF9A7A,var(--primary));">JF</div>
@@ -1979,11 +1974,11 @@
 
       <aside>
         <div class="stat-card"><div class="n">R$ 1.819</div><div class="l">repasse líquido deste mês</div></div>
-        <div class="stat-card"><div class="n">#12</div><div class="l">posição no ranking regional</div></div>
-        <div class="stat-card"><div class="n">4.8 ★</div><div class="l">nota média (156 avaliações)</div></div>
-        <button class="btn btn-outline btn-block" data-goto="assinatura-pro" style="margin-bottom:10px;">⭐ Ver planos e assinatura</button>
-        <button class="btn btn-outline btn-block" data-goto="ferramentas-pro" style="margin-bottom:10px;">🛠️ Ver todas as ferramentas</button>
-        <button class="btn btn-primary btn-block" data-goto="cadastro-pro">Editar minha vitrine</button>
+        <div class="aside-actions">
+          <button class="btn btn-outline btn-block" data-goto="assinatura-pro">⭐ Ver planos e assinatura</button>
+          <button class="btn btn-outline btn-block" data-goto="ferramentas-pro">🛠️ Ver todas as ferramentas</button>
+          <button class="btn btn-primary btn-block" data-goto="cadastro-pro">Editar minha vitrine</button>
+        </div>
       </aside>
     </div>
   </section>
