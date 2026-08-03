@@ -1100,12 +1100,12 @@
     <div class="section">
       <div class="section-head"><h2>O que você precisa hoje?</h2></div>
       <div class="cat-grid">
-        <a class="cat-card" data-goto="busca"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Veterinário</span></a>
-        <a class="cat-card" data-goto="busca"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/1436139/pexels-photo-1436139.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Banho &amp; Tosa</span></a>
-        <a class="cat-card" data-goto="busca"><div class="cat-icon" style="background:#FFF3D6;">🏠</div><span>Pet Sitter</span></a>
-        <a class="cat-card" data-goto="busca"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/16180680/pexels-photo-16180680.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Passeador</span></a>
-        <a class="cat-card" data-goto="busca"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/10013055/pexels-photo-10013055.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Adestrador</span></a>
-        <a class="cat-card" data-goto="busca"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/11087477/pexels-photo-11087477.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Creche</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="vet"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Veterinário</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="banho"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/1436139/pexels-photo-1436139.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Banho &amp; Tosa</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="sitter"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/6578817/pexels-photo-6578817.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Pet Sitter</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="passeador"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/16180680/pexels-photo-16180680.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Passeador</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="adestrador"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/10013055/pexels-photo-10013055.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Adestrador</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="creche"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/11087477/pexels-photo-11087477.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Creche</span></a>
       </div>
     </div>
 
@@ -1261,12 +1261,12 @@
   <!-- ===== SCREEN: BUSCA ===== -->
   <section class="screen" id="busca">
     <div class="search-header">
-      <h2>Veterinário perto de você</h2>
-      <p class="muted">32 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização</p>
+      <h2 id="busca-title"><span id="busca-title-icon" aria-hidden="true">🩺</span> Veterinário perto de você</h2>
+      <p class="muted" id="busca-sub">32 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização</p>
     </div>
     <div class="filter-bar">
       <div class="chip active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>Todos os filtros</div>
-      <div class="chip">Categoria: Veterinário</div>
+      <div class="chip" id="busca-cat-chip">Categoria: Veterinário</div>
       <div class="chip">Avaliação 4.5+</div>
       <div class="chip">Disponível hoje</div>
       <div class="chip">📍 Até 5 km</div>
@@ -1275,13 +1275,14 @@
     <div class="results-layout">
       <aside class="filters-panel">
         <h4>Filtrar resultados</h4>
-        <div class="fgroup">
+        <div class="fgroup" id="busca-cat-filters">
           <div class="flabel">Categoria</div>
-          <div class="frow"><input type="checkbox" checked> Veterinário</div>
-          <div class="frow"><input type="checkbox"> Banho &amp; Tosa</div>
-          <div class="frow"><input type="checkbox"> Pet Sitter</div>
-          <div class="frow"><input type="checkbox"> Passeador</div>
-          <div class="frow"><input type="checkbox"> Adestrador</div>
+          <label class="frow"><input type="checkbox" checked data-cat="vet"> Veterinário</label>
+          <label class="frow"><input type="checkbox" data-cat="banho"> Banho &amp; Tosa</label>
+          <label class="frow"><input type="checkbox" data-cat="sitter"> Pet Sitter</label>
+          <label class="frow"><input type="checkbox" data-cat="passeador"> Passeador</label>
+          <label class="frow"><input type="checkbox" data-cat="adestrador"> Adestrador</label>
+          <label class="frow"><input type="checkbox" data-cat="creche"> Creche</label>
         </div>
         <div class="fgroup">
           <div class="flabel">Preço (por atendimento)</div>
@@ -1306,10 +1307,11 @@
         <div id="busca-map"><div class="map-loading" id="busca-map-loading">📍 Obtendo sua localização...</div></div>
         <div class="info-tag" style="margin:-4px 0 14px;">🖐️ Arraste para navegar e use scroll/pinça para zoom · mapa real (OpenStreetMap) baseado na sua geolocalização</div>
         <div class="results-top">
-          <span>32 resultados</span>
+          <span id="busca-count">32 resultados</span>
           <select class="sort-select"><option>Ordenar: Relevância</option><option>Menor preço</option><option>Melhor avaliação</option><option>Mais próximo</option></select>
         </div>
 
+        <div id="busca-results">
         <div class="result-card" data-goto="perfil">
           <div class="result-photo" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"><div class="online-dot"></div></div>
           <div class="result-info">
@@ -1362,6 +1364,7 @@
             <div class="price">a partir de<b>R$ 100</b></div>
             <button class="btn btn-outline btn-sm">Ver perfil</button>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -2483,6 +2486,116 @@
     }
   }
 
+  // ===== Categorias da tela Buscar: cada categoria tem seu próprio título, contagem e cards =====
+  var KODA_CATS = {
+    vet: {
+      icon:'🩺', title:'Veterinário perto de você', chip:'Veterinário', count:'32 resultados',
+      sub:'32 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Dra. Carla Mendes', cat:'Veterinária • Clínica geral e felinos', stars:'★★★★★ 4.9 (218 avaliações)', tags:['Atende em domicílio','Aceita PIX','Emergência'], dist:'1.2 km', resp:'Responde em 10 min', price:'R$ 90', photo:'7468978'},
+        {name:'Dr. Lucas Barbosa', cat:'Veterinário • Ortopedia e cirurgia', stars:'★★★★★ 4.8 (142 avaliações)', tags:['Clínica própria','Convênios pet'], dist:'2.4 km', resp:'Responde em 25 min', price:'R$ 130', photo:'6234624'},
+        {name:'Dra. Amanda Vieira', cat:'Veterinária • Dermatologia animal', stars:'★★★★☆ 4.6 (77 avaliações)', tags:['Teleconsulta','Aceita PIX'], dist:'3.1 km', resp:'Responde em 1h', price:'R$ 100', avatarBg:'linear-gradient(135deg,#FFC26F,#FF9F45)', initials:'AV'}
+      ]
+    },
+    banho: {
+      icon:'🛁', title:'Banho & Tosa perto de você', chip:'Banho & Tosa', count:'21 resultados',
+      sub:'21 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Juliana Torres', cat:'Banho & Tosa • A domicílio', stars:'★★★★★ 5.0 (89 avaliações)', tags:['Atende em domicílio','Produtos hipoalergênicos'], dist:'0.9 km', resp:'Responde em 15 min', price:'R$ 60', photo:'1436139'},
+        {name:'Studio PetSpa', cat:'Banho & Tosa • Estética e tosa na tesoura', stars:'★★★★★ 4.9 (134 avaliações)', tags:['Tosa na tesoura','Hidratação'], dist:'1.6 km', resp:'Responde em 20 min', price:'R$ 75', photo:'19022002'},
+        {name:'Marcos Aguiar', cat:'Banho & Tosa • Raças de grande porte', stars:'★★★★☆ 4.7 (58 avaliações)', tags:['Tosa higiênica','Corte de unhas'], dist:'2.3 km', resp:'Responde em 40 min', price:'R$ 55', avatarBg:'linear-gradient(135deg,#7C5CFF,#4A3FBF)', initials:'MA'}
+      ]
+    },
+    sitter: {
+      icon:'🏠', title:'Pet Sitter perto de você', chip:'Pet Sitter', count:'14 resultados',
+      sub:'14 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Bianca Ferraz', cat:'Pet Sitter • Hospedagem na casa dela', stars:'★★★★★ 4.9 (61 avaliações)', tags:['Hospedagem 24h','Câmera ao vivo'], dist:'1.1 km', resp:'Responde em 12 min', price:'R$ 70/diária', photo:'6578817'},
+        {name:'Diego Nolasco', cat:'Pet Sitter • Visitas na sua casa', stars:'★★★★★ 4.8 (39 avaliações)', tags:['Visitas 2x ao dia','Envia fotos'], dist:'2.0 km', resp:'Responde em 30 min', price:'R$ 45/visita', avatarBg:'linear-gradient(135deg,#2D9CDB,#1B6FA8)', initials:'DN'},
+        {name:'Renata Klein', cat:'Pet Sitter • Especialista em gatos', stars:'★★★★☆ 4.6 (22 avaliações)', tags:['Só felinos','Medicação'], dist:'3.4 km', resp:'Responde em 1h', price:'R$ 50/visita', avatarBg:'linear-gradient(135deg,#FF7A5A,#E8611F)', initials:'RK'}
+      ]
+    },
+    passeador: {
+      icon:'🐕', title:'Passeador perto de você', chip:'Passeador', count:'27 resultados',
+      sub:'27 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Rafael Souza', cat:'Passeador • Cães de todos os portes', stars:'★★★★★ 4.8 (156 avaliações)', tags:['Passeio em grupo','GPS ao vivo'], dist:'0.8 km', resp:'Responde em 8 min', price:'R$ 35', photo:'30810890'},
+        {name:'Camila Duarte', cat:'Passeador • Filhotes e cães idosos', stars:'★★★★★ 4.9 (98 avaliações)', tags:['Passeio individual','Ritmo adaptado'], dist:'1.4 km', resp:'Responde em 10 min', price:'R$ 40', photo:'16180680'},
+        {name:'Bruno Lacerda', cat:'Passeador • Trilhas e parques', stars:'★★★★☆ 4.7 (44 avaliações)', tags:['Passeios longos','Fotos do trajeto'], dist:'2.7 km', resp:'Responde em 35 min', price:'R$ 30', avatarBg:'linear-gradient(135deg,#12A181,#0a6d58)', initials:'BL'}
+      ]
+    },
+    adestrador: {
+      icon:'🎓', title:'Adestrador perto de você', chip:'Adestrador', count:'11 resultados',
+      sub:'11 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Pedro Andrade', cat:'Adestrador • Comportamental', stars:'★★★★☆ 4.7 (64 avaliações)', tags:['Adestramento positivo','Visita domiciliar'], dist:'3.4 km', resp:'Responde em 40 min', price:'R$ 120', photo:'10013055'},
+        {name:'Fernanda Ríos', cat:'Adestrador • Obediência e agilidade', stars:'★★★★★ 4.9 (81 avaliações)', tags:['Aulas em grupo','Cães reativos'], dist:'1.9 km', resp:'Responde em 18 min', price:'R$ 110', photo:'13918163'},
+        {name:'Thiago Moraes', cat:'Adestrador • Filhotes', stars:'★★★★☆ 4.6 (37 avaliações)', tags:['Socialização','Casa própria'], dist:'2.6 km', resp:'Responde em 50 min', price:'R$ 90', avatarBg:'linear-gradient(135deg,#6C5CE7,#4A3FBF)', initials:'TM'}
+      ]
+    },
+    creche: {
+      icon:'🏫', title:'Creche perto de você', chip:'Creche', count:'9 resultados',
+      sub:'9 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização',
+      results:[
+        {name:'Creche Amigo Fiel', cat:'Creche • Período integral e meio período', stars:'★★★★★ 4.9 (72 avaliações)', tags:['Câmeras ao vivo','Área externa'], dist:'1.5 km', resp:'Responde em 20 min', price:'R$ 65/dia', photo:'11087477'},
+        {name:'Creche Cão Feliz', cat:'Creche • Piscina e recreação', stars:'★★★★★ 4.8 (55 avaliações)', tags:['Piscina','Socialização'], dist:'2.2 km', resp:'Responde em 25 min', price:'R$ 70/dia', photo:'37443358'},
+        {name:'Creche Patas Boas', cat:'Creche • Filhotes e pets idosos', stars:'★★★★☆ 4.6 (31 avaliações)', tags:['Turmas separadas','Boletim diário'], dist:'3.0 km', resp:'Responde em 45 min', price:'R$ 60/dia', avatarBg:'linear-gradient(135deg,#FFB020,#C97A00)', initials:'PB'}
+      ]
+    }
+  };
+
+  function resultCardHTML(item){
+    var photoHtml = item.photo
+      ? '<div class="result-photo" style="background-image:url(\'https://images.pexels.com/photos/'+item.photo+'/pexels-photo-'+item.photo+'.jpeg?auto=compress&cs=tinysrgb&w=200\');"><div class="online-dot"></div></div>'
+      : '<div class="result-photo"><div class="avatar-fallback" style="background:'+item.avatarBg+';">'+item.initials+'</div></div>';
+    var tagsHtml = item.tags.map(function(t){ return '<span class="tag">'+t+'</span>'; }).join('');
+    return '<div class="result-card" data-goto="perfil">'
+      + photoHtml
+      + '<div class="result-info">'
+      +   '<div class="rtop"><h4>'+item.name+'</h4></div>'
+      +   '<div class="rcat">'+item.cat+'</div>'
+      +   '<span class="stars">'+item.stars+'</span>'
+      +   '<div class="result-tags">'+tagsHtml+'</div>'
+      +   '<div class="result-meta"><span class="meta-item">📍 '+item.dist+'</span><span class="meta-item">⏱ '+item.resp+'</span></div>'
+      + '</div>'
+      + '<div class="result-right"><div class="price">a partir de<b>'+item.price+'</b></div><button class="btn btn-outline btn-sm">Ver perfil</button></div>'
+      + '</div>';
+  }
+
+  var buscaCurrentCat = 'vet';
+  function renderBusca(catId){
+    var data = KODA_CATS[catId];
+    if(!data || catId === buscaCurrentCat) return;
+    buscaCurrentCat = catId;
+
+    var titleEl = document.getElementById('busca-title');
+    var subEl = document.getElementById('busca-sub');
+    var chipEl = document.getElementById('busca-cat-chip');
+    var countEl = document.getElementById('busca-count');
+    var resultsEl = document.getElementById('busca-results');
+
+    if(titleEl) titleEl.innerHTML = '<span id="busca-title-icon" aria-hidden="true">'+data.icon+'</span> '+data.title;
+    if(subEl) subEl.textContent = data.sub;
+    if(chipEl) chipEl.textContent = 'Categoria: '+data.chip;
+    if(countEl) countEl.textContent = data.count;
+    if(resultsEl){
+      resultsEl.innerHTML = data.results.map(resultCardHTML).join('');
+      resultsEl.querySelectorAll('[data-goto]').forEach(function(el){
+        el.addEventListener('click', function(e){ e.preventDefault(); goTo(el.getAttribute('data-goto')); });
+      });
+    }
+    document.querySelectorAll('#busca-cat-filters input[data-cat]').forEach(function(cb){
+      cb.checked = (cb.getAttribute('data-cat') === catId);
+    });
+  }
+
+  document.querySelectorAll('#busca-cat-filters input[data-cat]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      if(cb.checked){ renderBusca(cb.getAttribute('data-cat')); }
+      else { cb.checked = true; }
+    });
+  });
+
   // ===== Mapa real e arrastável (Leaflet + OpenStreetMap) na aba Buscar =====
   window.buscaMap = null;
   function renderBuscaMap(lat, lng, isRealLocation){
@@ -2561,6 +2674,8 @@
   document.querySelectorAll('[data-goto]').forEach(function(el){
     el.addEventListener('click', function(e){
       e.preventDefault();
+      var cat = el.getAttribute('data-cat');
+      if(cat) renderBusca(cat);
       goTo(el.getAttribute('data-goto'));
     });
   });
