@@ -91,6 +91,7 @@
   body.mode-profissional .tabs-consumidor{display:none;}
   body.mode-consumidor .tabs-m-profissional{display:none !important;}
   body.mode-profissional .tabs-m-consumidor{display:none !important;}
+  body.mode-profissional .nav-switch-role{display:none;}
 
   .screen{display:none;animation:fadeIn .35s ease;}
   .screen.active{display:block;}
@@ -1086,13 +1087,13 @@
         </button>
         <button class="tab-btn" data-tab="cadastro-pro">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-          Vitrine
+          Meu Negócio
         </button>
       </div>
     </div>
     <div class="nav-actions">
       <a class="btn-ghost" href="#" id="switch-profile-link">🔁 Trocar perfil</a>
-      <a class="btn-ghost" href="#" data-mode-goto="profissional:painel-pro">Sou parceiro</a>
+      <a class="btn-ghost nav-switch-role" href="#" data-mode-goto="profissional:painel-pro">Sou parceiro</a>
       <div class="header-gamification" id="header-gamification">
         <span class="hg-label" id="hg-label">Nível de Cuidado</span>
         <div class="bone-progress" id="hg-bone-btn" title="68% para o próximo nível">
@@ -2616,7 +2617,7 @@
       <button class="tab-btn" data-tab="solicitacoes">🔔<span>Pedidos</span></button>
       <button class="tab-btn" data-tab="ferramentas-pro">🛠️<span>Ferramentas</span></button>
       <button class="tab-btn" data-tab="assinatura-pro">⭐<span>Planos</span></button>
-      <button class="tab-btn" data-tab="cadastro-pro">📝<span>Vitrine</span></button>
+      <button class="tab-btn" data-tab="cadastro-pro">📝<span>Meu Negócio</span></button>
     </div>
   </div>
 
