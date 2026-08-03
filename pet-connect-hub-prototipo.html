@@ -54,6 +54,9 @@
 
   .app{min-height:100vh;background:var(--bg);display:flex;align-items:stretch;}
   .app-main{flex:1;min-width:0;overflow-x:hidden;}
+  /* #landing e #login ficam fora do .app-main (antes da sidebar no DOM); como filhos
+     diretos do .app (flex row), precisam de width:100% para preencher a tela toda. */
+  .app > .screen{width:100%;}
 
   /* ===== Sidebar de navegação (layout SaaS) ===== */
   .sidebar{
@@ -530,6 +533,7 @@
 
   /* Tela de entrada (seleção de perfil) */
   body.landing-active .sidebar,
+  body.landing-active .app-main,
   body.landing-active .mode-bar,
   body.landing-active .mode-caption,
   body.landing-active .bottom-tabs{display:none !important;}
