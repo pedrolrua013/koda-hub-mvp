@@ -340,8 +340,16 @@
   .sub-banner h4{margin:0 0 4px;font-size:15.5px;}
   .sub-banner p{margin:0;font-size:12.5px;opacity:.9;}
 
-  /* Hub de Parcerias — destaque pago de marcas/produtos/locais pet friendly (camada de monetização própria) */
-  .hub-parcerias{margin-bottom:20px;}
+  /* Hub de Parcerias — destaque pago de marcas/produtos pet friendly (camada de monetização própria) */
+  .hub-parcerias{margin:0 44px 8px;}
+  .hub-petz-banner{background:linear-gradient(120deg, var(--turquoise-1) 0%, var(--turquoise-2) 100%);border-radius:18px;padding:22px 26px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;color:#fff;margin-bottom:18px;}
+  .hub-petz-logo{background:#fff;color:#1E5FA8;font-family:'Poppins',sans-serif;font-weight:800;font-size:16px;padding:9px 16px;border-radius:10px;letter-spacing:-0.02em;flex-shrink:0;}
+  .hub-petz-text{flex:1;min-width:240px;}
+  .hub-petz-text h4{margin:0 0 4px;font-size:16.5px;font-weight:800;}
+  .hub-petz-text p{margin:0;font-size:12.5px;color:rgba(255,255,255,0.85);line-height:1.55;max-width:560px;}
+  .hub-petz-text p b{color:#fff;}
+  .hub-petz-cta{flex-shrink:0;white-space:nowrap;}
+  .hub-petz-fine{width:100%;font-size:10.5px;color:rgba(255,255,255,0.6);margin-top:2px;}
   .hub-parcerias-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
   .hub-parcerias-head h4{margin:0;font-size:14.5px;font-weight:800;color:var(--dark);}
   .hub-parcerias-head p{margin:0;font-size:11.5px;color:var(--gray-500);}
@@ -349,14 +357,17 @@
   .hub-marquee::before,.hub-marquee::after{content:"";position:absolute;top:0;bottom:0;width:56px;z-index:2;pointer-events:none;}
   .hub-marquee::before{left:0;background:linear-gradient(90deg, var(--turquoise-1), rgba(34,56,58,0));}
   .hub-marquee::after{right:0;background:linear-gradient(270deg, var(--turquoise-2), rgba(54,81,83,0));}
-  .hub-track{display:flex;gap:14px;width:max-content;padding:0 16px;animation:hubScroll 32s linear infinite;}
+  .hub-track{display:flex;gap:14px;width:max-content;padding:0 16px;animation:hubScroll 34s linear infinite;}
   .hub-marquee:hover .hub-track{animation-play-state:paused;}
   @keyframes hubScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-  .hub-card{flex-shrink:0;width:196px;background:rgba(255,255,255,0.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:14px;color:#fff;display:flex;flex-direction:column;gap:8px;}
-  .hub-card .hub-tag{align-self:flex-start;background:var(--primary);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:100px;}
-  .hub-card .hub-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;font-size:19px;}
-  .hub-card h5{margin:0;font-size:13px;font-weight:700;}
-  .hub-card p{margin:0;font-size:11px;color:rgba(255,255,255,0.78);line-height:1.4;}
+  .hub-card{flex-shrink:0;width:200px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;}
+  .hub-card-photo{height:100px;background-size:cover;background-position:center;position:relative;flex-shrink:0;}
+  .hub-card-photo .hub-tag{position:absolute;top:8px;left:8px;background:var(--primary);color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:100px;}
+  .hub-card-photo .hub-off{position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.95);color:var(--secondary-dark);font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:100px;}
+  .hub-card-body{padding:12px 13px 13px;display:flex;flex-direction:column;gap:5px;flex:1;}
+  .hub-card-body h5{margin:0;font-size:12.5px;font-weight:700;color:var(--dark);line-height:1.3;}
+  .hub-card-body p{margin:0 0 4px;font-size:10.5px;color:var(--gray-500);line-height:1.35;}
+  .hub-card-btn{margin-top:auto;width:100%;justify-content:center;padding:7px 10px;font-size:11px;border-radius:9px;box-shadow:none;}
   @media (prefers-reduced-motion: reduce){ .hub-track{animation:none;} }
 
   /* Viagem pet friendly */
@@ -1159,6 +1170,75 @@
       </div>
     </div>
 
+    <div class="hub-parcerias">
+      <div class="hub-petz-banner">
+        <div class="hub-petz-logo">Petz</div>
+        <div class="hub-petz-text">
+          <h4>🐾 Koda é parceiro Petz!</h4>
+          <p>Como parceiro oficial, todo tutor Koda tem <b>10% OFF em toda a loja Petz</b> — site e lojas físicas — com o cupom exclusivo abaixo.</p>
+        </div>
+        <button class="btn btn-primary hub-petz-cta" data-toast="🎉 Cupom KODA10 copiado! 10% OFF ativado em toda a loja Petz (demonstração)">Resgatar cupom KODA10</button>
+        <div class="hub-petz-fine">Cupom válido para novas compras, uma vez por CPF. Sujeito aos termos da parceria Koda x Petz.</div>
+      </div>
+
+      <div class="hub-parcerias-head">
+        <h4>🐾 Hub de Parcerias</h4>
+        <p>Produtos em destaque para você e Thor, com desconto exclusivo Koda</p>
+      </div>
+      <div class="hub-marquee">
+        <div class="hub-track">
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/4432260/pexels-photo-4432260.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Ração Premium Cães Adultos</h5><p>Fórmula completa, todas as raças</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/7310213/pexels-photo-7310213.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Petiscos Naturais</h5><p>Ossinhos prensados sem conservantes</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/19022002/pexels-photo-19022002.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Shampoo &amp; Condicionador</h5><p>Fórmula hipoalergênica para banho</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/13518812/pexels-photo-13518812.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Brinquedo Resistente</h5><p>Linha indestrutível para cães ansiosos</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/37051950/pexels-photo-37051950.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Coleiras &amp; Acessórios</h5><p>Variedade de cores e tamanhos</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/14029292/pexels-photo-14029292.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Suplementos &amp; Vitaminas</h5><p>Reforço nutricional diário</p><button class="btn btn-primary btn-sm hub-card-btn" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/4432260/pexels-photo-4432260.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Ração Premium Cães Adultos</h5><p>Fórmula completa, todas as raças</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/7310213/pexels-photo-7310213.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Petiscos Naturais</h5><p>Ossinhos prensados sem conservantes</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/19022002/pexels-photo-19022002.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Shampoo &amp; Condicionador</h5><p>Fórmula hipoalergênica para banho</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/13518812/pexels-photo-13518812.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Brinquedo Resistente</h5><p>Linha indestrutível para cães ansiosos</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/37051950/pexels-photo-37051950.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Coleiras &amp; Acessórios</h5><p>Variedade de cores e tamanhos</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+          <div class="hub-card" aria-hidden="true">
+            <div class="hub-card-photo" style="background-image:url('https://images.pexels.com/photos/14029292/pexels-photo-14029292.jpeg?auto=compress&cs=tinysrgb&w=400');"><span class="hub-tag">Petz</span><span class="hub-off">10% OFF</span></div>
+            <div class="hub-card-body"><h5>Suplementos &amp; Vitaminas</h5><p>Reforço nutricional diário</p><button class="btn btn-primary btn-sm hub-card-btn" tabindex="-1" data-toast="Cupom KODA10 aplicado — 10% OFF na Petz (demonstração)">Pegar desconto</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="section">
       <div class="section-head"><h2>Como funciona</h2></div>
       <div class="steps">
@@ -1544,34 +1624,6 @@
     <!-- Sub: Viagem Pet Friendly -->
     <div class="subscreen" id="sub-viagem">
       <div class="section" style="padding-top:20px;">
-
-        <div class="hub-parcerias">
-          <div class="hub-parcerias-head">
-            <h4>🐾 Hub de Parcerias</h4>
-            <p>Marcas, produtos e locais pet friendly em destaque para você e Thor</p>
-          </div>
-          <div class="hub-marquee">
-            <div class="hub-track">
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🦴</div><h5>Dogtreats Naturais</h5><p>20% OFF para tutores Koda esta semana</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🏨</div><h5>Hotel Vista Verde</h5><p>Suíte pet friendly com jardim privativo</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🛡️</div><h5>Seguro Pet Amigo</h5><p>Proteção completa a partir de R$ 29/mês</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🍖</div><h5>Ração PremiumPet</h5><p>Fórmula veterinária, frete grátis no 1º pedido</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">☕</div><h5>Café Amigo Fiel</h5><p>Área pet friendly com cardápio para cães</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🚗</div><h5>PetTransp Express</h5><p>Transporte porta a porta, 24h</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🎾</div><h5>ChewLab Brinquedos</h5><p>Linha indestrutível para cães ansiosos</p></div>
-              <div class="hub-card"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🛁</div><h5>Spa PetRelax</h5><p>Day spa e hidratação capilar sob demanda</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🦴</div><h5>Dogtreats Naturais</h5><p>20% OFF para tutores Koda esta semana</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🏨</div><h5>Hotel Vista Verde</h5><p>Suíte pet friendly com jardim privativo</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🛡️</div><h5>Seguro Pet Amigo</h5><p>Proteção completa a partir de R$ 29/mês</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🍖</div><h5>Ração PremiumPet</h5><p>Fórmula veterinária, frete grátis no 1º pedido</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">☕</div><h5>Café Amigo Fiel</h5><p>Área pet friendly com cardápio para cães</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🚗</div><h5>PetTransp Express</h5><p>Transporte porta a porta, 24h</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🎾</div><h5>ChewLab Brinquedos</h5><p>Linha indestrutível para cães ansiosos</p></div>
-              <div class="hub-card" aria-hidden="true"><span class="hub-tag">Patrocinado</span><div class="hub-icon">🛁</div><h5>Spa PetRelax</h5><p>Day spa e hidratação capilar sob demanda</p></div>
-            </div>
-          </div>
-        </div>
-
         <div class="card-block">
           <div class="travel-banner">
             <img src="https://images.pexels.com/photos/7863033/pexels-photo-7863033.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cachorro viajando de carro">
