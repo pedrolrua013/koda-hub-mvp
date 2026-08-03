@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <style>
   :root{
     /* Paleta oficial Koda (doc PIM -2, seção 5.1.1): azul-petróleo = cor principal (confiança/estabilidade),
@@ -134,6 +135,25 @@
   .stat .trend.up{color:#1E8E5A;background:#E4F5EC;}
   .stat .trend.down{color:#C0392B;background:#FBE8E6;}
   .dash-month-tag{display:inline-flex;align-items:center;gap:6px;background:var(--turquoise-4);color:var(--turquoise-1);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-top:6px;}
+
+  /* ===== KPI grid (dashboard estilo SaaS) ===== */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-28px 44px 0;position:relative;z-index:3;}
+  @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);margin:-28px 20px 0;}}
+  .kpi-card{background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:18px 20px;}
+  .kpi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;}
+  .kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--turquoise-4);flex-shrink:0;}
+  .kpi-num{font-family:'Poppins',sans-serif;font-weight:800;font-size:23px;color:var(--dark);line-height:1.1;}
+  .kpi-lbl{font-size:12px;color:var(--gray-500);font-weight:500;margin-top:3px;}
+  .trend{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  .trend.up{color:#1E8E5A;background:#E4F5EC;}
+  .trend.down{color:#C0392B;background:#FBE8E6;}
+
+  /* ===== Gráficos do painel do parceiro ===== */
+  .charts-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;}
+  @media (max-width:900px){.charts-grid{grid-template-columns:1fr;}}
+  .chart-card-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .chart-badge{font-size:11.5px;font-weight:700;color:#1E8E5A;background:#E4F5EC;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .chart-canvas-wrap{position:relative;height:230px;margin-top:14px;}
 
   .section{padding:48px 44px 8px;}
   .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
@@ -1842,11 +1862,27 @@
     </div>
 
     <div class="section" style="padding-top:14px;padding-bottom:8px;">
-      <div class="stats-row" style="margin:0;">
-        <div class="stat"><div class="num">R$ 2.140</div><div class="lbl">ganhos brutos este mês</div><span class="trend up">↑ 12% vs. julho</span></div>
-        <div class="stat"><div class="num">58</div><div class="lbl">atendimentos concluídos</div><span class="trend up">↑ 8 vs. julho</span></div>
-        <div class="stat"><div class="num">4.8 ★</div><div class="lbl">nota média (156 avaliações)</div><span class="trend up">↑ 0.1 vs. julho</span></div>
-        <div class="stat"><div class="num">94%</div><div class="lbl">taxa de aceite</div><span class="trend up">↑ 2 p.p. vs. julho</span></div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-top"><span class="kpi-icon">💰</span><span class="trend up">↑ 12%</span></div>
+          <div class="kpi-num">R$ 2.140</div>
+          <div class="kpi-lbl">Ganhos brutos este mês</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top"><span class="kpi-icon">✅</span><span class="trend up">↑ 8</span></div>
+          <div class="kpi-num">58</div>
+          <div class="kpi-lbl">Atendimentos concluídos</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top"><span class="kpi-icon">⭐</span><span class="trend up">↑ 0.1</span></div>
+          <div class="kpi-num">4.8 ★</div>
+          <div class="kpi-lbl">Nota média (156 avaliações)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top"><span class="kpi-icon">🎯</span><span class="trend up">↑ 2 p.p.</span></div>
+          <div class="kpi-num">94%</div>
+          <div class="kpi-lbl">Taxa de aceite</div>
+        </div>
       </div>
     </div>
 
@@ -1900,18 +1936,20 @@
           <button class="btn btn-block" style="background:#fff;color:var(--primary-dark);" data-goto="assinatura-pro">Contratar destaque</button>
         </div>
 
-        <div class="card-block">
-          <h3>Ganhos por mês (últimos 6 meses)</h3>
-          <div class="chart-bars">
-            <div class="bar-col"><div class="bval">R$1.240</div><div class="bar" style="height:58%;"></div><div class="blabel">Mar</div></div>
-            <div class="bar-col"><div class="bval">R$1.480</div><div class="bar" style="height:69%;"></div><div class="blabel">Abr</div></div>
-            <div class="bar-col"><div class="bval">R$1.650</div><div class="bar" style="height:77%;"></div><div class="blabel">Mai</div></div>
-            <div class="bar-col"><div class="bval">R$1.820</div><div class="bar" style="height:85%;"></div><div class="blabel">Jun</div></div>
-            <div class="bar-col"><div class="bval">R$1.910</div><div class="bar" style="height:89%;"></div><div class="blabel">Jul</div></div>
-            <div class="bar-col"><div class="bval">R$2.140</div><div class="bar" style="height:100%;"></div><div class="blabel">Ago</div></div>
+        <div class="charts-grid">
+          <div class="card-block">
+            <div class="chart-card-head">
+              <h3>Evolução dos ganhos (últimos 6 meses)</h3>
+              <span class="chart-badge">↑ 73% em 6 meses</span>
+            </div>
+            <div class="chart-canvas-wrap"><canvas id="chart-ganhos-mensal"></canvas></div>
           </div>
-          <p class="info-tag" style="margin-top:14px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
+          <div class="card-block">
+            <h3>Ganhos por tipo de serviço</h3>
+            <div class="chart-canvas-wrap"><canvas id="chart-servicos"></canvas></div>
+          </div>
         </div>
+        <p class="info-tag" style="margin:14px 0 22px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
 
         <h3 style="font-size:15px;margin:22px 0 14px;">Próximos atendimentos</h3>
         <div class="booking-card">
@@ -2490,6 +2528,109 @@
       startBuscaMap();
       setTimeout(function(){ if(window.buscaMap){ window.buscaMap.invalidateSize(); } }, 200);
     }
+    if(tabName === 'painel-pro'){
+      setTimeout(initPainelCharts, 60);
+    }
+  }
+
+  // ===== Gráficos do painel do parceiro (Chart.js) =====
+  window.painelChartsInitialized = false;
+  function initPainelCharts(){
+    if(window.painelChartsInitialized || typeof Chart === 'undefined') return;
+    var ctxGanhos = document.getElementById('chart-ganhos-mensal');
+    var ctxServicos = document.getElementById('chart-servicos');
+    if(!ctxGanhos || !ctxServicos) return;
+    window.painelChartsInitialized = true;
+
+    Chart.defaults.font.family = "'Inter',sans-serif";
+
+    new Chart(ctxGanhos, {
+      type: 'line',
+      data: {
+        labels: ['Mar','Abr','Mai','Jun','Jul','Ago'],
+        datasets: [{
+          label: 'Ganhos brutos',
+          data: [1240,1480,1650,1820,1910,2140],
+          borderColor: '#F37C5E',
+          backgroundColor: function(context){
+            var chart = context.chart;
+            var area = chart.chartArea;
+            if(!area) return 'rgba(243,124,94,0.15)';
+            var gradient = chart.ctx.createLinearGradient(0, area.top, 0, area.bottom);
+            gradient.addColorStop(0, 'rgba(243,124,94,0.35)');
+            gradient.addColorStop(1, 'rgba(243,124,94,0)');
+            return gradient;
+          },
+          fill: true,
+          tension: 0.4,
+          borderWidth: 3,
+          pointBackgroundColor: '#F37C5E',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2,
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#22383A',
+            padding: 10,
+            titleFont: { weight: '700' },
+            callbacks: {
+              label: function(ctx){ return 'R$ ' + ctx.parsed.y.toLocaleString('pt-BR'); }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            grid: { color: '#F1F3F5' },
+            ticks: { color: '#8A949C', font: { size: 11 }, callback: function(v){ return 'R$'+v; } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#8A949C', font: { size: 11 } }
+          }
+        }
+      }
+    });
+
+    new Chart(ctxServicos, {
+      type: 'doughnut',
+      data: {
+        labels: ['Passeio','Hospedagem','Adestramento','Visitas avulsas'],
+        datasets: [{
+          data: [45,28,17,10],
+          backgroundColor: ['#F37C5E','#365153','#6C8C8E','#F3BE91'],
+          borderColor: '#fff',
+          borderWidth: 2,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '68%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { boxWidth: 10, font: { size: 11 }, color: '#4A5560', padding: 12 }
+          },
+          tooltip: {
+            backgroundColor: '#22383A',
+            padding: 10,
+            callbacks: {
+              label: function(ctx){ return ctx.label + ': ' + ctx.parsed + '%'; }
+            }
+          }
+        }
+      }
+    });
   }
 
   // ===== Categorias da tela Buscar: cada categoria tem seu próprio título, contagem e cards =====
