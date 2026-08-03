@@ -165,11 +165,16 @@
   .trend.down{color:#C0392B;background:#FBE8E6;}
 
   /* ===== Gráficos do painel do parceiro ===== */
-  .charts-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;}
-  @media (max-width:900px){.charts-grid{grid-template-columns:1fr;}}
+  .charts-grid{display:grid;grid-template-columns:1.3fr 1fr 0.85fr;gap:18px;align-items:stretch;}
+  @media (max-width:1100px){.charts-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:700px){.charts-grid{grid-template-columns:1fr;}}
+  .charts-grid .card-block{display:flex;flex-direction:column;margin-bottom:0;}
   .chart-card-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
   .chart-badge{font-size:11.5px;font-weight:700;color:#1E8E5A;background:#E4F5EC;padding:4px 10px;border-radius:20px;white-space:nowrap;}
   .chart-canvas-wrap{position:relative;height:230px;margin-top:14px;}
+  .chart-stat-card{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;flex:1;}
+  .chart-stat-card .kpi-num{font-size:30px;}
+  .chart-stat-card .kpi-lbl{margin-top:6px;font-size:13px;}
 
   .section{padding:48px 44px 8px;}
   .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
@@ -334,7 +339,9 @@
 
   .dash-body{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:24px 44px 50px;align-items:start;}
   @media (max-width:900px){.dash-body{grid-template-columns:1fr;}}
-  .aside-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+  .aside-actions{display:flex;flex-direction:column;gap:10px;}
+  .aside-actions-card{margin-bottom:0;}
+  .aside-actions-title{font-size:12px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;margin:0 0 14px;}
   .booking-card{display:flex;gap:16px;background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:18px;margin-bottom:14px;align-items:center;}
   .booking-photo{width:64px;height:64px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;background-size:cover;background-position:center;overflow:hidden;}
   .booking-photo img{width:100%;height:100%;object-fit:cover;}
@@ -482,6 +489,12 @@
   .tools-balance{display:flex;align-items:center;gap:8px;background:var(--gray-100);padding:9px 16px;border-radius:100px;font-weight:800;font-size:14px;flex-shrink:0;}
   .tools-balance .add-btn{width:22px;height:22px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;}
   .tools-search{border:1.5px solid var(--gray-300);border-radius:10px;padding:10px 14px;font-size:13.5px;width:230px;font-family:inherit;}
+  .tools-cat-filter{display:flex;gap:8px;flex-wrap:wrap;padding:20px 44px 0;}
+  .tools-cat-chip{padding:9px 16px;border-radius:100px;background:#fff;border:1.5px solid var(--gray-300);font-size:13px;font-weight:700;color:var(--gray-700);cursor:pointer;transition:all .15s ease;font-family:inherit;}
+  .tools-cat-chip:hover{border-color:var(--primary);}
+  .tools-cat-chip.active{background:var(--dark);color:#fff;border-color:var(--dark);}
+  .tools-cat-group{display:none;}
+  .tools-cat-group.active{display:block;}
   .tools-group{padding:26px 44px 0;}
   .tools-group h3{font-size:15px;margin:0 0 16px;color:var(--gray-700);}
   .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
@@ -1929,6 +1942,10 @@
             <h3>Ganhos por tipo de serviço</h3>
             <div class="chart-canvas-wrap"><canvas id="chart-servicos"></canvas></div>
           </div>
+          <div class="card-block chart-stat-card">
+            <div class="kpi-num">R$ 1.819</div>
+            <div class="kpi-lbl">Repasse líquido deste mês</div>
+          </div>
         </div>
         <p class="info-tag" style="margin:14px 0 26px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
 
@@ -2001,11 +2018,13 @@
       </div>
 
       <aside>
-        <div class="stat-card"><div class="n">R$ 1.819</div><div class="l">repasse líquido deste mês</div></div>
-        <div class="aside-actions">
-          <button class="btn btn-outline btn-block" data-goto="assinatura-pro">⭐ Ver planos e assinatura</button>
-          <button class="btn btn-outline btn-block" data-goto="ferramentas-pro">🛠️ Ver todas as ferramentas</button>
-          <button class="btn btn-primary btn-block" data-goto="cadastro-pro">Editar minha vitrine</button>
+        <div class="aside-actions-card card-block">
+          <h4 class="aside-actions-title">Ações rápidas</h4>
+          <div class="aside-actions">
+            <button class="btn btn-outline btn-block" data-goto="assinatura-pro">⭐ Ver planos e assinatura</button>
+            <button class="btn btn-outline btn-block" data-goto="ferramentas-pro">🛠️ Ver todas as ferramentas</button>
+            <button class="btn btn-primary btn-block" data-goto="cadastro-pro">Editar minha vitrine</button>
+          </div>
         </div>
       </aside>
     </div>
@@ -2024,124 +2043,167 @@
       </div>
     </div>
 
-    <div class="tools-group">
-      <h3>Marketing &amp; Conteúdo</h3>
-      <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
-            <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">Continuar</div>
-            📸
-          </div>
-          <div class="tool-body">
-            <h4>Gerador de Imagens IA</h4>
-            <p>Crie fotos profissionais pro seu perfil: antes/depois de banho e tosa, banners de promoção e fotos ambientadas dos pets.</p>
-          </div>
-        </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
-            <div class="tool-ribbon">Atualizado</div>
-            <div class="tool-cost">🐾 600</div>
-            🎬
-          </div>
-          <div class="tool-body">
-            <h4>Criação de Clips</h4>
-            <p>Transforme as fotos do atendimento em vídeos curtos prontos para Reels e Stories, com IA.</p>
-          </div>
-        </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
-            <div class="tool-cost">Grátis</div>
-            💬
-          </div>
-          <div class="tool-body">
-            <h4>Assistente de Respostas IA</h4>
-            <p>Sugestões automáticas de resposta para as dúvidas mais comuns dos tutores no chat — mais rapidez, mais conversão.</p>
-          </div>
-        </div>
-      </div>
+    <div class="tools-cat-filter" id="tools-cat-filter">
+      <button class="tools-cat-chip" data-toolcat="vet">🩺 Veterinário</button>
+      <button class="tools-cat-chip" data-toolcat="banho">🛁 Banho &amp; Tosa</button>
+      <button class="tools-cat-chip" data-toolcat="sitter">🏠 Pet Sitter</button>
+      <button class="tools-cat-chip active" data-toolcat="passeador">🐕 Passeador</button>
+      <button class="tools-cat-chip" data-toolcat="adestrador">🎓 Adestrador</button>
+      <button class="tools-cat-chip" data-toolcat="creche">🏫 Creche</button>
     </div>
 
-    <div class="tools-group">
-      <h3>Financeiro</h3>
-      <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
-            <div class="tool-ribbon">Atualizado</div>
-            <div class="tool-cost">Grátis</div>
-            🧮
-          </div>
-          <div class="tool-body">
-            <h4>Calculadora de Precificação</h4>
-            <p>Descubra o preço certo pro seu serviço considerando insumos, tempo, deslocamento e a comissão da plataforma.</p>
-          </div>
-        </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
-            <div class="tool-cost">🐾 50</div>
-            ⚖️
-          </div>
-          <div class="tool-body">
-            <h4>Ponto de Equilíbrio</h4>
-            <p>Quantos atendimentos por mês você precisa para cobrir seus custos fixos e variáveis e sair do zero a zero.</p>
-          </div>
-        </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
-            <div class="tool-cost">🐾 25</div>
-            🚀
-          </div>
-          <div class="tool-body">
-            <h4>Simulador de Impulsionamento</h4>
-            <p>Estime quantos agendamentos a mais você pode ganhar contratando destaque na busca por região e categoria.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tools-group" style="padding-bottom:50px;">
-      <h3>Gestão &amp; Relacionamento</h3>
+    <div class="tools-group tools-cat-group" data-toolcat="vet" style="padding-bottom:50px;">
+      <h3>Ferramentas para Veterinário</h3>
       <div class="tools-grid">
         <div class="tool-card">
           <div class="tool-visual tv-c">
-            <div class="tool-cost">🐾 50</div>
+            <div class="tool-cost">🐾 100</div>
             🩺
           </div>
           <div class="tool-body">
-            <h4>Diagnóstico do Negócio</h4>
-            <p>Descubra o nível de maturidade do seu negócio pet: pontos fortes, oportunidades e um plano de ação personalizado.</p>
+            <h4>Prontuário Assistido por Voz</h4>
+            <p>Narre o atendimento e a IA organiza automaticamente anamnese, diagnóstico e prescrição direto na carteira digital do pet.</p>
           </div>
         </div>
         <div class="tool-card">
-          <div class="tool-visual tv-c">
-            <div class="tool-cost">🐾 25</div>
-            🔍
-          </div>
-          <div class="tool-body">
-            <h4>Raio-X da Vitrine</h4>
-            <p>Diagnóstico completo do seu perfil: funil de visualizações, mensagens, agendamentos e ações recomendadas.</p>
-          </div>
-        </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+          <div class="tool-visual tv-a">
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">Grátis</div>
-            🔔
+            <div class="tool-cost">🐾 120</div>
+            🔬
           </div>
           <div class="tool-body">
-            <h4>CRM de Recompra &amp; Lembretes</h4>
-            <p>Lista de pets no prazo de voltar (banho a cada 30 dias, vacina vencendo) pra você puxar assunto antes da concorrência.</p>
+            <h4>Assistente de Triagem por Imagem</h4>
+            <p>Envie fotos de lesões, olhos ou pele e receba sugestões de triagem e diagnósticos diferenciais para apoiar sua avaliação clínica.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-b">
+            <div class="tool-cost">Grátis</div>
+            💉
+          </div>
+          <div class="tool-body">
+            <h4>Lembrete Inteligente de Vacinas &amp; Retorno</h4>
+            <p>Notificações automáticas de vacinas e retornos vencendo, enviadas direto pro tutor na carteira digital do pet.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="tools-group" style="padding-bottom:50px;">
-      <h3>Ferramentas por categoria de profissional</h3>
+    <div class="tools-group tools-cat-group" data-toolcat="banho" style="padding-bottom:50px;">
+      <h3>Ferramentas para Banho &amp; Tosa</h3>
       <div class="tools-grid">
         <div class="tool-card">
           <div class="tool-visual tv-a">
-            <div class="tool-ribbon">Adestrador</div>
+            <div class="tool-ribbon">Novo</div>
+            <div class="tool-cost">🐾 60</div>
+            📸
+          </div>
+          <div class="tool-body">
+            <h4>Gerador de Fotos Antes/Depois</h4>
+            <p>Cria composições profissionais de antes/depois pro seu portfólio e redes sociais a partir das fotos do atendimento.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-b">
+            <div class="tool-cost">Grátis</div>
+            🗓️
+          </div>
+          <div class="tool-body">
+            <h4>Agenda Otimizada de Encaixes</h4>
+            <p>Sugere os melhores horários pra encaixar banhos extras sem estourar o tempo de secagem e tosa.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-c">
+            <div class="tool-cost">🐾 30</div>
+            📋
+          </div>
+          <div class="tool-body">
+            <h4>Ficha de Preferências do Pet</h4>
+            <p>Guarda tipo de tosa, sensibilidades de pele e produtos preferidos de cada pet pra não errar na próxima visita.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-group tools-cat-group" data-toolcat="sitter" style="padding-bottom:50px;">
+      <h3>Ferramentas para Pet Sitter</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-visual tv-b">
+            <div class="tool-cost">🐾 50</div>
+            📷
+          </div>
+          <div class="tool-body">
+            <h4>Diário de Hospedagem com Fotos</h4>
+            <p>Gera um resumo diário com fotos e observações da estadia, enviado automaticamente pro tutor.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-c">
+            <div class="tool-cost">Grátis</div>
+            ✅
+          </div>
+          <div class="tool-body">
+            <h4>Checklist de Rotina do Pet</h4>
+            <p>Lista de alimentação, remédios e passeios combinados com o tutor, com lembretes ao longo do dia.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-a">
+            <div class="tool-ribbon">Novo</div>
+            <div class="tool-cost">🐾 80</div>
+            🎥
+          </div>
+          <div class="tool-body">
+            <h4>Resumo do Dia por IA</h4>
+            <p>Transforma as fotos e anotações do dia em um resumo curto e afetuoso pra mandar pro tutor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-group tools-cat-group active" data-toolcat="passeador" style="padding-bottom:50px;">
+      <h3>Ferramentas para Passeador</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-visual tv-c">
+            <div class="tool-cost">🐾 40</div>
+            🗺️
+          </div>
+          <div class="tool-body">
+            <h4>Rota Inteligente de Passeio</h4>
+            <p>Sugere o melhor trajeto considerando duração, sombra e pontos de água pro pet.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-a">
+            <div class="tool-cost">Grátis</div>
+            📊
+          </div>
+          <div class="tool-body">
+            <h4>Relatório Automático do Passeio</h4>
+            <p>Distância, tempo e paradas registrados automaticamente e enviados pro tutor ao final do passeio.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-b">
+            <div class="tool-cost">Grátis</div>
+            ☀️
+          </div>
+          <div class="tool-body">
+            <h4>Alerta de Clima</h4>
+            <p>Avisa com antecedência sobre chuva ou calor extremo pra você reagendar com o tutor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-group tools-cat-group" data-toolcat="adestrador" style="padding-bottom:50px;">
+      <h3>Ferramentas para Adestrador</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-visual tv-a">
             <div class="tool-cost">🐾 80</div>
             🐕‍🦺
           </div>
@@ -2152,28 +2214,66 @@
         </div>
         <div class="tool-card">
           <div class="tool-visual tv-b">
-            <div class="tool-ribbon">Creche</div>
+            <div class="tool-cost">Grátis</div>
+            📈
+          </div>
+          <div class="tool-body">
+            <h4>Diário de Evolução do Pet</h4>
+            <p>Registro visual do progresso do pet a cada sessão, compartilhado automaticamente com o tutor.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-c">
+            <div class="tool-ribbon">Novo</div>
+            <div class="tool-cost">🐾 40</div>
+            🎬
+          </div>
+          <div class="tool-body">
+            <h4>Biblioteca de Exercícios em Vídeo</h4>
+            <p>Vídeos curtos de exercícios pra indicar ao tutor praticar em casa entre as sessões.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools-group tools-cat-group" data-toolcat="creche" style="padding-bottom:50px;">
+      <h3>Ferramentas para Creche</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-visual tv-b">
             <div class="tool-cost">🐾 60</div>
             🎒
           </div>
           <div class="tool-body">
             <h4>Carteirinha do Aluno &amp; Gestão de Turmas</h4>
-            <p>Controle vacinação, restrições e perfil de sociabilização de cada pet-aluno, com sugestão automática de turmas compatíveis e boletim diário gerado por IA.</p>
+            <p>Controle vacinação, restrições e perfil de sociabilização de cada pet-aluno, com sugestão automática de turmas compatíveis.</p>
           </div>
         </div>
         <div class="tool-card">
           <div class="tool-visual tv-c">
-            <div class="tool-cost">🐾 100</div>
-            🩺
+            <div class="tool-ribbon">Novo</div>
+            <div class="tool-cost">Grátis</div>
+            📝
           </div>
           <div class="tool-body">
-            <h4>Prontuário Assistido por Voz</h4>
-            <p>Para veterinários: narre o atendimento e a IA organiza automaticamente anamnese, diagnóstico e prescrição direto na carteira digital do pet.</p>
+            <h4>Boletim Diário Automático por IA</h4>
+            <p>Gera um boletim do dia do pet (brincadeiras, socialização, humor) a partir das suas anotações rápidas.</p>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-visual tv-a">
+            <div class="tool-cost">🐾 70</div>
+            📹
+          </div>
+          <div class="tool-body">
+            <h4>Câmeras ao Vivo para os Tutores</h4>
+            <p>Link de transmissão ao vivo do pátio pros tutores acompanharem o pet durante o dia.</p>
           </div>
         </div>
       </div>
-      <p class="info-tag" style="margin-top:18px;">ⓘ Ferramentas de IA incluídas sem custo adicional de Patinhas para assinantes do plano <a data-goto="assinatura-pro" style="color:var(--primary);font-weight:700;">Pro</a>.</p>
     </div>
+
+    <p class="info-tag" style="margin:0 44px 50px;">ⓘ Ferramentas de IA incluídas sem custo adicional de Patinhas para assinantes do plano <a data-goto="assinatura-pro" style="color:var(--primary);font-weight:700;">Pro</a>.</p>
   </section>
 
   <!-- ===== SCREEN: PLANOS / ASSINATURA DO PARCEIRO ===== -->
@@ -2978,6 +3078,17 @@
       scope.querySelectorAll('.subscreen').forEach(function(s){ s.classList.remove('active'); });
       document.getElementById(target).classList.add('active');
       scope.querySelectorAll('.subnav-pill').forEach(function(p){ p.classList.toggle('active', p===pill); });
+    });
+  });
+
+  // ===== Ferramentas do parceiro: filtro por categoria de profissional =====
+  document.querySelectorAll('.tools-cat-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var cat = chip.getAttribute('data-toolcat');
+      document.querySelectorAll('.tools-cat-chip').forEach(function(c){ c.classList.toggle('active', c===chip); });
+      document.querySelectorAll('.tools-cat-group').forEach(function(g){
+        g.classList.toggle('active', g.getAttribute('data-toolcat') === cat);
+      });
     });
   });
 
