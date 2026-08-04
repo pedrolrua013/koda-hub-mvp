@@ -52,15 +52,16 @@
   ul{list-style:none;margin:0;padding:0;}
   img{max-width:100%;display:block;}
 
-  .app{min-height:100vh;background:var(--bg);display:flex;align-items:stretch;}
-  .app-main{flex:1;min-width:0;overflow-x:hidden;}
+  .app{min-height:100vh;background:var(--bg);}
+  .app-main{min-width:0;overflow-x:hidden;margin-left:264px;}
   /* #landing e #login ficam fora do .app-main (antes da sidebar no DOM); como filhos
-     diretos do .app (flex row), precisam de width:100% para preencher a tela toda. */
+     diretos do .app, ocupam 100% da largura naturalmente (bloco), mas a regra fica
+     explícita para garantir. */
   .app > .screen{width:100%;}
 
-  /* ===== Sidebar de navegação (layout SaaS) ===== */
+  /* ===== Sidebar de navegação (layout SaaS) — fixa, ocupa a lateral esquerda inteira ===== */
   .sidebar{
-    width:264px;flex-shrink:0;position:sticky;top:0;height:100vh;z-index:100;
+    position:fixed;top:0;left:0;bottom:0;width:264px;z-index:100;
     display:flex;flex-direction:column;gap:22px;padding:22px 16px;
     background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);
     border-right:1px solid var(--gray-300);overflow-y:auto;
@@ -88,9 +89,8 @@
 
   .bottom-tabs{display:none;}
   @media (max-width:980px){
-    .app{flex-direction:column;}
     .sidebar{
-      position:sticky;top:0;width:auto;height:auto;flex-direction:row;align-items:center;
+      position:sticky;top:0;left:auto;bottom:auto;width:auto;height:auto;flex-direction:row;align-items:center;
       justify-content:space-between;flex-wrap:wrap;padding:14px 20px;gap:12px;overflow:visible;
       border-right:none;border-bottom:1px solid var(--gray-300);
     }
@@ -100,7 +100,7 @@
     .bottom-tabs .tab-group-m{display:flex;flex:1;justify-content:space-around;}
     .bottom-tabs .tab-btn{flex-direction:column;gap:3px;font-size:10.5px;padding:6px 8px;border-radius:8px;width:auto;}
     .bottom-tabs .tab-btn.active{background:var(--primary-light);color:var(--primary-dark);}
-    .app-main{padding-bottom:64px;}
+    .app-main{margin-left:0;padding-bottom:64px;}
   }
   body.mode-consumidor .tabs-profissional{display:none;}
   body.mode-profissional .tabs-consumidor{display:none;}
@@ -303,9 +303,37 @@
   .profile-title .stars{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.3);}
   .profile-actions{display:flex;gap:10px;padding-bottom:8px;flex-shrink:0;}
 
-  .profile-body{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:26px 44px 50px;align-items:start;}
+  .profile-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:28px;padding:26px 44px 50px;align-items:start;}
   @media (max-width:900px){.profile-body{grid-template-columns:1fr;}}
+  .profile-body > *{min-width:0;}
   .card-block{background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:22px;margin-bottom:20px;}
+
+  /* ===== Prontuário Médico (Perfil do Pet) ===== */
+  .prontuario-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px;}
+  .prontuario-head h3{margin:0 0 4px;}
+  .prontuario-form{display:none;background:var(--gray-100);border:1px solid var(--gray-300);border-radius:14px;padding:18px;margin-bottom:20px;}
+  .prontuario-form.active{display:block;}
+  .prontuario-upload-fake{border:1.5px dashed var(--gray-300);border-radius:10px;padding:14px;text-align:center;font-size:12.5px;color:var(--gray-500);background:#fff;}
+  .prontuario-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+  .prontuario-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .prontuario-tab{padding:9px 16px;border-radius:100px;background:#fff;border:1.5px solid var(--gray-300);font-size:12.5px;font-weight:700;color:var(--gray-700);display:flex;align-items:center;gap:6px;}
+  .prontuario-tab .count{background:var(--gray-100);color:var(--gray-700);font-size:11px;font-weight:800;padding:1px 7px;border-radius:100px;}
+  .prontuario-tab.active{background:var(--dark);color:#fff;border-color:var(--dark);}
+  .prontuario-tab.active .count{background:rgba(255,255,255,0.22);color:#fff;}
+  .prontuario-list{display:none;flex-direction:column;gap:12px;}
+  .prontuario-list.active{display:flex;}
+  .prontuario-empty{text-align:center;color:var(--gray-500);font-size:13px;padding:28px 12px;margin:0;}
+  .prontuario-item{display:flex;gap:14px;background:#fff;border:1px solid var(--gray-300);border-radius:14px;padding:16px 18px;align-items:flex-start;}
+  .prontuario-item-icon{width:40px;height:40px;border-radius:11px;background:var(--turquoise-4);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .prontuario-item-body{flex:1;min-width:0;}
+  .prontuario-item-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .prontuario-item-top h4{margin:0;font-size:14.5px;}
+  .prontuario-item-date{font-size:12px;color:var(--gray-500);font-weight:700;white-space:nowrap;}
+  .prontuario-item-prof{margin:3px 0 0;font-size:12.5px;color:var(--secondary);font-weight:600;}
+  .prontuario-item-obs{margin:6px 0 0;font-size:13px;color:var(--gray-700);line-height:1.55;}
+  .prontuario-item-del{background:transparent;border:none;color:var(--gray-500);font-size:15px;cursor:pointer;flex-shrink:0;padding:4px;line-height:1;}
+  .prontuario-item-del:hover{color:#C0392B;}
+  @media (max-width:640px){.prontuario-tabs{gap:6px;} .prontuario-tab{padding:8px 12px;font-size:11.5px;}}
   .card-block h3{font-size:15.5px;margin:0 0 14px;}
   .card-block p.bio{font-size:13.5px;color:var(--gray-700);line-height:1.7;margin:0 0 14px;}
   .pill-row{display:flex;gap:8px;flex-wrap:wrap;}
@@ -2412,6 +2440,54 @@
           </div>
         </div>
 
+        <div class="card-block prontuario-card" id="prontuario-card">
+          <div class="prontuario-head">
+            <div>
+              <h3>🩺 Prontuário Médico</h3>
+              <p class="bio">Guarde exames, receitas, consultas e o histórico de saúde de <span id="prontuario-pet-name">Thor</span> em um só lugar.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="prontuario-add-btn">+ Adicionar registro</button>
+          </div>
+
+          <div class="prontuario-form" id="prontuario-form">
+            <div class="form-grid">
+              <div class="form-field">
+                <label>Tipo de registro</label>
+                <select id="prontuario-input-tipo">
+                  <option value="historico">Histórico médico</option>
+                  <option value="exames">Exame</option>
+                  <option value="receitas">Receita</option>
+                  <option value="consultas">Consulta</option>
+                </select>
+              </div>
+              <div class="form-field"><label>Data</label><input type="text" id="prontuario-input-data" placeholder="dd/mm/aaaa"></div>
+              <div class="form-field full"><label>Título</label><input type="text" id="prontuario-input-titulo" placeholder="Ex: Hemograma completo"></div>
+              <div class="form-field full"><label>Profissional / clínica</label><input type="text" id="prontuario-input-prof" placeholder="Ex: Dra. Carla Mendes · Clínica Vet+"></div>
+              <div class="form-field full"><label>Observações</label><textarea id="prontuario-input-obs" placeholder="Detalhes, resultado, orientações de uso, próxima dose..."></textarea></div>
+              <div class="form-field full">
+                <label>Anexo (opcional)</label>
+                <div class="prontuario-upload-fake">📎 Anexar arquivo (PDF ou foto) — em breve neste protótipo</div>
+              </div>
+            </div>
+            <div class="prontuario-form-actions">
+              <button class="btn btn-outline" id="prontuario-cancel-btn">Cancelar</button>
+              <button class="btn btn-primary" id="prontuario-save-btn">Salvar no prontuário</button>
+            </div>
+          </div>
+
+          <div class="prontuario-tabs">
+            <button class="prontuario-tab active" data-prontab="historico">📋 Histórico<span class="count" id="count-historico">0</span></button>
+            <button class="prontuario-tab" data-prontab="exames">🧪 Exames<span class="count" id="count-exames">0</span></button>
+            <button class="prontuario-tab" data-prontab="receitas">💊 Receitas<span class="count" id="count-receitas">0</span></button>
+            <button class="prontuario-tab" data-prontab="consultas">🩺 Consultas<span class="count" id="count-consultas">0</span></button>
+          </div>
+
+          <div class="prontuario-list active" id="prontuario-list-historico"></div>
+          <div class="prontuario-list" id="prontuario-list-exames"></div>
+          <div class="prontuario-list" id="prontuario-list-receitas"></div>
+          <div class="prontuario-list" id="prontuario-list-consultas"></div>
+        </div>
+
         <div class="pet-achv-card">
           <div class="pet-achv-top">
             <span class="pet-achv-label"><svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4"/><ellipse cx="5" cy="9" rx="2.2" ry="3"/><ellipse cx="10" cy="6" rx="2.2" ry="3"/><ellipse cx="14" cy="6" rx="2.2" ry="3"/><ellipse cx="19" cy="9" rx="2.2" ry="3"/></svg> Conquistas do Pet</span>
@@ -3186,7 +3262,23 @@
       nascimento: '04/2023', peso: '14 kg', idadeLabel: '3 anos',
       sexo: 'Macho', castrado: 'Sim', microchip: '',
       alergias: 'Nenhuma alergia registrada até o momento.',
-      medicacoes: 'Nenhuma medicação contínua.'
+      medicacoes: 'Nenhuma medicação contínua.',
+      prontuario: {
+        historico: [
+          { data:'15/01/2026', titulo:'Início do acompanhamento na Koda', prof:'Cadastro na plataforma', obs:'Pet cadastrado com histórico de vacinação em dia e sem restrições conhecidas.' }
+        ],
+        exames: [
+          { data:'02/07/2026', titulo:'Hemograma completo', prof:'Dra. Carla Mendes · Clínica Vet+', obs:'Resultados dentro da normalidade. Reavaliação sugerida em 6 meses.' },
+          { data:'18/03/2026', titulo:'Ultrassom abdominal', prof:'Dr. Bruno Alves · PetImagem', obs:'Nenhuma alteração significativa encontrada.' }
+        ],
+        receitas: [
+          { data:'02/07/2026', titulo:'Anti-inflamatório pós-consulta', prof:'Dra. Carla Mendes', obs:'1 comprimido a cada 12h por 5 dias. Administrar com alimento.' }
+        ],
+        consultas: [
+          { data:'02/07/2026', titulo:'Consulta de rotina', prof:'Dra. Carla Mendes · Clínica Vet+', obs:'Pet saudável, peso estável. Reforço de vermífugo agendado para setembro.' },
+          { data:'10/01/2026', titulo:'Consulta — checkup anual', prof:'Dr. Felipe Souza', obs:'Vacinação atualizada (V10 e antirrábica).' }
+        ]
+      }
     },
     mia: {
       name: 'Mia',
@@ -3198,7 +3290,19 @@
       nascimento: '06/2024', peso: '4 kg', idadeLabel: '2 anos',
       sexo: 'Fêmea', castrado: 'Sim', microchip: '',
       alergias: 'Sensibilidade a frango — dieta especial.',
-      medicacoes: 'Nenhuma medicação contínua.'
+      medicacoes: 'Nenhuma medicação contínua.',
+      prontuario: {
+        historico: [
+          { data:'20/02/2026', titulo:'Início do acompanhamento na Koda', prof:'Cadastro na plataforma', obs:'Pet cadastrada com restrição alimentar a frango.' }
+        ],
+        exames: [],
+        receitas: [
+          { data:'05/06/2026', titulo:'Suplemento para pele e pelagem', prof:'Dra. Renata Lima', obs:'1x ao dia, junto da ração, por 30 dias.' }
+        ],
+        consultas: [
+          { data:'05/06/2026', titulo:'Consulta dermatológica', prof:'Dra. Renata Lima · Clínica Amiga', obs:'Leve dermatite alimentar associada à proteína de frango — dieta ajustada.' }
+        ]
+      }
     }
   };
 
@@ -3228,16 +3332,132 @@
   }
   fillPetWallet(petProfileData.thor);
 
+  // ===== Prontuário Médico (Perfil do Pet) =====
+  var currentPetKey = 'thor';
+  var PRONTUARIO_ICONS = { historico:'📋', exames:'🧪', receitas:'💊', consultas:'🩺' };
+  var PRONTUARIO_LABELS = { historico:'histórico médico', exames:'exames', receitas:'receitas', consultas:'consultas' };
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function renderProntuarioList(cat){
+    var pet = petProfileData[currentPetKey];
+    var data = (pet.prontuario && pet.prontuario[cat]) || [];
+    var el = document.getElementById('prontuario-list-' + cat);
+    if(!el) return;
+    if(data.length === 0){
+      el.innerHTML = '<p class="prontuario-empty">Nenhum registro em ' + PRONTUARIO_LABELS[cat] + ' ainda. Use "+ Adicionar registro" para começar.</p>';
+    } else {
+      el.innerHTML = data.map(function(item, idx){
+        return '<div class="prontuario-item">' +
+          '<div class="prontuario-item-icon">' + PRONTUARIO_ICONS[cat] + '</div>' +
+          '<div class="prontuario-item-body">' +
+            '<div class="prontuario-item-top"><h4>' + escapeHtml(item.titulo) + '</h4><span class="prontuario-item-date">' + escapeHtml(item.data) + '</span></div>' +
+            (item.prof ? '<p class="prontuario-item-prof">' + escapeHtml(item.prof) + '</p>' : '') +
+            (item.obs ? '<p class="prontuario-item-obs">' + escapeHtml(item.obs) + '</p>' : '') +
+          '</div>' +
+          '<button class="prontuario-item-del" data-del-cat="' + cat + '" data-del-index="' + idx + '" title="Remover registro">✕</button>' +
+        '</div>';
+      }).join('');
+    }
+    var countEl = document.getElementById('count-' + cat);
+    if(countEl) countEl.textContent = data.length;
+  }
+
+  function renderProntuarioAll(){
+    ['historico','exames','receitas','consultas'].forEach(renderProntuarioList);
+    var nameEl = document.getElementById('prontuario-pet-name');
+    if(nameEl) nameEl.textContent = petProfileData[currentPetKey].name;
+  }
+  renderProntuarioAll();
+
+  var prontuarioCard = document.getElementById('prontuario-card');
+  var prontuarioForm = document.getElementById('prontuario-form');
+  var prontuarioAddBtn = document.getElementById('prontuario-add-btn');
+  var prontuarioCancelBtn = document.getElementById('prontuario-cancel-btn');
+  var prontuarioSaveBtn = document.getElementById('prontuario-save-btn');
+
+  if(prontuarioAddBtn && prontuarioForm){
+    prontuarioAddBtn.addEventListener('click', function(){
+      prontuarioForm.classList.add('active');
+      prontuarioForm.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    });
+  }
+  if(prontuarioCancelBtn && prontuarioForm){
+    prontuarioCancelBtn.addEventListener('click', function(){
+      prontuarioForm.classList.remove('active');
+    });
+  }
+  if(prontuarioSaveBtn && prontuarioForm){
+    prontuarioSaveBtn.addEventListener('click', function(){
+      var getVal = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      var tipo = getVal('prontuario-input-tipo') || 'historico';
+      var titulo = getVal('prontuario-input-titulo');
+      var dataStr = getVal('prontuario-input-data');
+      var prof = getVal('prontuario-input-prof');
+      var obs = getVal('prontuario-input-obs');
+      if(!titulo){
+        showToast('Preencha ao menos o título do registro.');
+        return;
+      }
+      var pet = petProfileData[currentPetKey];
+      if(!pet.prontuario) pet.prontuario = { historico:[], exames:[], receitas:[], consultas:[] };
+      if(!pet.prontuario[tipo]) pet.prontuario[tipo] = [];
+      pet.prontuario[tipo].unshift({ titulo: titulo, data: dataStr || 'Sem data informada', prof: prof, obs: obs });
+      renderProntuarioList(tipo);
+
+      document.querySelectorAll('.prontuario-tab').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-prontab') === tipo); });
+      document.querySelectorAll('.prontuario-list').forEach(function(l){ l.classList.toggle('active', l.id === 'prontuario-list-' + tipo); });
+
+      document.getElementById('prontuario-input-titulo').value = '';
+      document.getElementById('prontuario-input-data').value = '';
+      document.getElementById('prontuario-input-prof').value = '';
+      document.getElementById('prontuario-input-obs').value = '';
+      prontuarioForm.classList.remove('active');
+      showToast('+8 pontos de cuidado 🦴 — registro salvo no prontuário!');
+    });
+  }
+
+  if(prontuarioCard){
+    prontuarioCard.addEventListener('click', function(e){
+      var delBtn = e.target.closest('.prontuario-item-del');
+      if(delBtn){
+        var cat = delBtn.getAttribute('data-del-cat');
+        var idx = parseInt(delBtn.getAttribute('data-del-index'), 10);
+        var pet = petProfileData[currentPetKey];
+        if(pet.prontuario && pet.prontuario[cat] && !isNaN(idx)){
+          pet.prontuario[cat].splice(idx, 1);
+          renderProntuarioList(cat);
+          showToast('Registro removido do prontuário.');
+        }
+        return;
+      }
+      var tabBtn = e.target.closest('.prontuario-tab');
+      if(tabBtn){
+        var cat2 = tabBtn.getAttribute('data-prontab');
+        document.querySelectorAll('.prontuario-tab').forEach(function(b){ b.classList.toggle('active', b===tabBtn); });
+        document.querySelectorAll('.prontuario-list').forEach(function(l){ l.classList.toggle('active', l.id === 'prontuario-list-' + cat2); });
+      }
+    });
+  }
+
   document.querySelectorAll('.pet-switch-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       document.querySelectorAll('.pet-switch-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
-      var p = petProfileData[btn.getAttribute('data-pet')];
+      var petKey = btn.getAttribute('data-pet');
+      var p = petProfileData[petKey];
       if(p){
         document.getElementById('pet-profile-name').textContent = p.name;
         document.getElementById('pet-profile-sub').textContent = p.sub;
         document.getElementById('pet-profile-avatar').src = p.photo;
         document.getElementById('pet-profile-cover').style.backgroundImage = "url('" + p.cover + "')";
         fillPetWallet(p);
+        currentPetKey = petKey;
+        renderProntuarioAll();
+        if(prontuarioForm) prontuarioForm.classList.remove('active');
       }
     });
   });
