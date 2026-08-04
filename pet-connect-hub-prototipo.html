@@ -685,10 +685,12 @@
   .pet-achv-level{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:16px;position:relative;z-index:2;}
   .pet-achv-level h3{margin:0 0 3px;font-size:17px;color:#fff;}
   .pet-achv-level p{margin:0;font-size:12.5px;color:rgba(255,255,255,0.82);}
-  .pet-achv-card .bone-progress.lg .bone-track .bone-bar{background:rgba(255,255,255,0.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);}
-  .pet-achv-card .bone-progress.lg .bone-track .bone-fill{background:#fff;}
-  .pet-achv-card .bone-progress.lg .bone-track .bone-lobe{background:rgba(255,255,255,0.28);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.4);}
-  .pet-achv-card .bone-progress.lg .bone-pct{color:#fff;text-shadow:0 1px 5px rgba(0,0,0,0.15);}
+  .pet-achv-card .xp-progress.lg .xp-badge{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.3);}
+  .pet-achv-card .xp-progress.lg .xp-track{background:rgba(255,255,255,0.22);box-shadow:inset 0 1px 3px rgba(0,0,0,0.12),inset 0 0 0 1px rgba(255,255,255,0.32);}
+  .pet-achv-card .xp-progress.lg .xp-track::after{background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(0,0,0,0.14) calc(25% - 1px),rgba(0,0,0,0.14) 25%);}
+  .pet-achv-card .xp-progress.lg .xp-fill{background:#fff;}
+  .pet-achv-card .xp-progress.lg .xp-fill::before{background-image:repeating-linear-gradient(45deg,rgba(0,0,0,0.07) 0 6px,transparent 6px 12px);}
+  .pet-achv-card .xp-progress.lg .xp-pct{color:#fff;background:rgba(255,255,255,0.22);}
   .pet-achv-heading{font-size:13px;font-weight:800;letter-spacing:.02em;margin:20px 0 12px;color:rgba(255,255,255,0.92);position:relative;z-index:2;}
   .pet-achv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;position:relative;z-index:2;}
   @media (max-width:700px){.pet-achv-grid{grid-template-columns:repeat(2,1fr);}}
@@ -784,26 +786,36 @@
   .landing-brand .paw-badge-lg{background:rgba(255,255,255,0.18);}
 
   /* ===========================================================
-     GAMIFICAÇÃO — barra de progresso em formato de osso
+     GAMIFICAÇÃO — barra de XP / nível (energy bar estilo game HUD)
      =========================================================== */
-  .bone-progress{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;}
-  .bone-track{position:relative;width:76px;height:18px;flex-shrink:0;}
-  .bone-track .bone-bar{position:absolute;left:7px;right:7px;top:5px;height:8px;border-radius:4px;background:var(--gray-100);overflow:hidden;box-shadow:inset 0 0 0 1px var(--gray-300);}
-  .bone-track .bone-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--primary),var(--primary-dark));transition:width .5s ease;}
-  .bone-track .bone-lobe{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--gray-100);box-shadow:inset 0 0 0 1px var(--gray-300);}
-  .bone-track .bone-lobe.tl{left:0;top:0;} .bone-track .bone-lobe.bl{left:0;bottom:0;}
-  .bone-track .bone-lobe.tr{right:0;top:0;} .bone-track .bone-lobe.br{right:0;bottom:0;}
-  .bone-pct{font-size:11.5px;font-weight:800;color:var(--dark);text-shadow:none;white-space:nowrap;}
+  .xp-progress{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;}
+  .xp-badge{
+    width:20px;height:20px;border-radius:50%;flex-shrink:0;font-size:10px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    box-shadow:0 0 0 3px rgba(243,124,94,0.18);
+    animation:xpBadgePulse 2.6s ease-in-out infinite;
+  }
+  @keyframes xpBadgePulse{
+    0%,100%{box-shadow:0 0 0 3px rgba(243,124,94,0.18);}
+    50%{box-shadow:0 0 0 5px rgba(243,124,94,0.3);}
+  }
+  .xp-track{position:relative;width:76px;min-width:76px;height:10px;flex-shrink:0;border-radius:100px;background:var(--gray-100);box-shadow:inset 0 1px 3px rgba(0,0,0,0.08),inset 0 0 0 1px var(--gray-300);overflow:hidden;}
+  .xp-track::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(0,0,0,0.09) calc(25% - 1px),rgba(0,0,0,0.09) 25%);}
+  .xp-fill{position:relative;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--primary) 0%,var(--primary-dark) 100%);transition:width .6s cubic-bezier(.22,.9,.36,1);overflow:hidden;}
+  .xp-fill::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.24) 0 6px,transparent 6px 12px);opacity:.6;}
+  .xp-fill-shine{position:absolute;top:0;bottom:0;width:38%;left:-50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);animation:xpShine 2.8s ease-in-out infinite;}
+  @keyframes xpShine{0%{left:-50%;}100%{left:120%;}}
+  .xp-pct{font-size:11.5px;font-weight:800;color:var(--dark);white-space:nowrap;background:var(--gray-100);padding:3px 9px;border-radius:100px;flex-shrink:0;}
   .header-gamification{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;}
   .header-gamification .hg-label{font-size:9.5px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;}
   @media (max-width:980px){ .header-gamification{display:none;} }
 
   /* Versão grande, usada dentro de cards (Nível de Cuidado / painel do parceiro) */
-  .bone-progress.lg{gap:14px;}
-  .bone-progress.lg .bone-track{width:160px;height:26px;}
-  .bone-progress.lg .bone-track .bone-bar{left:10px;right:10px;top:8px;height:10px;border-radius:5px;background:var(--gray-100);box-shadow:inset 0 0 0 1px var(--gray-300);}
-  .bone-progress.lg .bone-track .bone-lobe{width:16px;height:16px;background:var(--gray-100);box-shadow:inset 0 0 0 1px var(--gray-300);}
-  .bone-progress.lg .bone-pct{font-size:15px;color:var(--dark);text-shadow:none;}
+  .xp-progress.lg{gap:14px;}
+  .xp-progress.lg .xp-badge{width:32px;height:32px;font-size:15px;}
+  .xp-progress.lg .xp-track{width:160px;min-width:160px;height:14px;}
+  .xp-progress.lg .xp-pct{font-size:14px;padding:5px 13px;}
 
   .level-card{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;}
   .level-info h3{margin:0 0 3px;font-size:16.5px;}
@@ -1145,13 +1157,12 @@
         <div class="avatar-mini" id="header-avatar-btn" title="Meu perfil" style="cursor:pointer;">PR</div>
         <div class="header-gamification" id="header-gamification">
           <span class="hg-label" id="hg-label">Nível de Cuidado</span>
-          <div class="bone-progress" id="hg-bone-btn" title="68% para o próximo nível">
-            <div class="bone-track">
-              <span class="bone-lobe tl"></span><span class="bone-lobe bl"></span>
-              <span class="bone-lobe tr"></span><span class="bone-lobe br"></span>
-              <div class="bone-bar"><div class="bone-fill" id="hg-bone-fill" style="width:64%;"></div></div>
+          <div class="xp-progress" id="hg-bone-btn" title="68% para o próximo nível">
+            <div class="xp-badge">⚡</div>
+            <div class="xp-track">
+              <div class="xp-fill" id="hg-bone-fill" style="width:64%;"><span class="xp-fill-shine"></span></div>
             </div>
-            <span class="bone-pct" id="hg-bone-pct">64%</span>
+            <span class="xp-pct" id="hg-bone-pct">64%</span>
           </div>
         </div>
       </div>
@@ -2015,13 +2026,12 @@
               <h3>420 de 600 pontos de reputação</h3>
               <p>Faltam 180 pontos para virar Parceiro Top e entrar no Top 10 da região.</p>
             </div>
-            <div class="bone-progress lg" title="55% para o próximo nível">
-              <div class="bone-track">
-                <span class="bone-lobe tl"></span><span class="bone-lobe bl"></span>
-                <span class="bone-lobe tr"></span><span class="bone-lobe br"></span>
-                <div class="bone-bar"><div class="bone-fill" style="width:55%;"></div></div>
+            <div class="xp-progress lg" title="55% para o próximo nível">
+              <div class="xp-badge">⚡</div>
+              <div class="xp-track">
+                <div class="xp-fill" style="width:55%;"><span class="xp-fill-shine"></span></div>
               </div>
-              <span class="bone-pct">55%</span>
+              <span class="xp-pct">55%</span>
             </div>
           </div>
           <h4 style="font-size:13.5px;margin:0 0 12px;">Conquistas</h4>
@@ -2498,13 +2508,12 @@
               <h3>310 de 400 pontos de cuidado</h3>
               <p>Faltam 90 pontos para virar Tutor Expert e desbloquear novos selos.</p>
             </div>
-            <div class="bone-progress lg" title="64% para o próximo nível">
-              <div class="bone-track">
-                <span class="bone-lobe tl"></span><span class="bone-lobe bl"></span>
-                <span class="bone-lobe tr"></span><span class="bone-lobe br"></span>
-                <div class="bone-bar"><div class="bone-fill" style="width:64%;"></div></div>
+            <div class="xp-progress lg" title="64% para o próximo nível">
+              <div class="xp-badge">⚡</div>
+              <div class="xp-track">
+                <div class="xp-fill" style="width:64%;"><span class="xp-fill-shine"></span></div>
               </div>
-              <span class="bone-pct">64%</span>
+              <span class="xp-pct">64%</span>
             </div>
           </div>
 
