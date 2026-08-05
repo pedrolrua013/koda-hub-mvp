@@ -66,32 +66,40 @@
     overflow-y:auto;overflow-x:hidden;
     transition:width .22s ease,padding .22s ease;
   }
-  .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:19px;white-space:nowrap;padding:0 6px;flex-shrink:0;}
-  .brand .paw-badge{width:34px;height:34px;border-radius:10px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:17px;}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;white-space:nowrap;padding:0 6px;flex-shrink:0;}
+  .brand .paw-badge{width:38px;height:38px;border-radius:11px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:18px;}
   .brand .paw-badge img{width:100%;height:100%;object-fit:contain;display:block;}
-  .tabs{display:flex;flex-direction:column;gap:2px;background:transparent;padding:0;border-radius:0;flex:0 0 auto;min-height:0;}
-  .tab-group{display:flex;flex-direction:column;gap:2px;}
-  .tab-btn{padding:12px 14px;border-radius:12px;font-size:13.5px;font-weight:600;background:transparent;transition:all .15s ease;display:flex;align-items:center;gap:10px;white-space:nowrap;width:100%;justify-content:flex-start;}
-  .tab-btn svg{width:18px;height:18px;flex-shrink:0;}
+  .tabs{display:flex;flex-direction:column;gap:4px;background:transparent;padding:0;border-radius:0;flex:0 0 auto;min-height:0;}
+  .tab-group{display:flex;flex-direction:column;gap:4px;}
+  .tab-btn{padding:14px 16px;border-radius:13px;font-size:15px;font-weight:600;background:transparent;transition:all .15s ease;display:flex;align-items:center;gap:12px;white-space:nowrap;width:100%;justify-content:flex-start;}
+  .tab-btn svg{width:20px;height:20px;flex-shrink:0;}
 
   /* ===== Navegação secundária/utilitária da sidebar (Configurações, Política, Parceiro Petz) ===== */
-  .sidebar-secondary{display:flex;flex-direction:column;gap:2px;flex-shrink:0;padding-top:10px;border-top:1px solid var(--gray-300);}
-  .sidebar-secondary-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:0 14px 6px;}
-  .sidebar-sec-btn{padding:10px 14px;border-radius:12px;font-size:12.5px;font-weight:600;background:transparent;transition:all .15s ease;display:flex;align-items:center;gap:10px;white-space:nowrap;width:100%;justify-content:flex-start;}
-  .sidebar-sec-btn svg{width:16px;height:16px;flex-shrink:0;}
-  .nav-actions{display:flex;flex-direction:column;align-items:stretch;gap:10px;flex-shrink:0;padding-top:14px;border-top:1px solid var(--gray-300);margin-top:auto;}
+  .sidebar-secondary{display:flex;flex-direction:column;gap:4px;flex-shrink:0;padding-top:14px;border-top:1px solid var(--gray-300);}
+  .sidebar-secondary-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:0 14px 8px;}
+  .sidebar-sec-btn{padding:12px 16px;border-radius:13px;font-size:14px;font-weight:600;background:transparent;transition:all .15s ease;display:flex;align-items:center;gap:12px;white-space:nowrap;width:100%;justify-content:flex-start;}
+  .sidebar-sec-btn svg{width:18px;height:18px;flex-shrink:0;}
+  .nav-actions{display:flex;flex-direction:column;align-items:stretch;gap:12px;flex-shrink:0;padding-top:16px;border-top:1px solid var(--gray-300);margin-top:auto;}
   .sidebar-identity{display:flex;align-items:center;gap:10px;padding:0 4px 4px;}
-  .btn-ghost{padding:9px 14px;font-size:13.5px;font-weight:600;border-radius:9px;}
-  .avatar-mini{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FFD3C4,#FFB199);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary-dark);font-size:13px;flex-shrink:0;}
+  .btn-ghost{padding:10px 14px;font-size:14.5px;font-weight:600;border-radius:9px;}
+  .avatar-mini{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFD3C4,#FFB199);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary-dark);font-size:13.5px;flex-shrink:0;}
+  .sidebar-social{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:2px;}
+  .sidebar-social-btn{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--secondary-dark);background:rgba(74,107,109,0.10);transition:all .15s ease;flex-shrink:0;}
+  .sidebar-social-btn:hover{background:var(--primary);color:#fff;transform:translateY(-2px);}
+  .sidebar-social-btn svg{width:16px;height:16px;}
+  .sidebar-logout-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);background:var(--gray-100);border:1.5px solid var(--gray-300);flex-shrink:0;transition:all .15s ease;}
+  .sidebar-logout-btn:hover{background:#FBE8E6;color:#C0392B;border-color:#F2C6C1;}
+  .sidebar-logout-btn svg{width:17px;height:17px;}
+  .sidebar-account-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .sidebar-account-row .btn-ghost{flex:1;}
 
   /* ===== Patinhas (saldo de recompensas) na sidebar — modo tutor ===== */
-  .sidebar-patinhas{display:flex;align-items:center;gap:10px;background:var(--turquoise-4);border:1px solid rgba(74,107,109,0.28);border-radius:14px;padding:9px 12px;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;}
+  .sidebar-patinhas{display:flex;align-items:center;gap:11px;background:var(--turquoise-4);border:1px solid rgba(74,107,109,0.28);border-radius:14px;padding:11px 14px;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;}
   .sidebar-patinhas:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
-  .sidebar-patinhas .sp-icon{width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,0.55);}
+  .sidebar-patinhas .sp-icon{width:30px;height:30px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,0.55);}
   .sidebar-patinhas .sp-info{display:flex;flex-direction:column;line-height:1.15;min-width:0;flex:1;}
-  .sidebar-patinhas .sp-label{font-size:9.5px;font-weight:700;color:var(--turquoise-1);text-transform:uppercase;letter-spacing:.03em;}
-  .sidebar-patinhas .sp-value{font-size:14px;font-weight:800;color:var(--dark);}
-  .sidebar-patinhas .sp-add{width:20px;height:20px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+  .sidebar-patinhas .sp-label{font-size:10.5px;font-weight:700;color:var(--turquoise-1);text-transform:uppercase;letter-spacing:.03em;}
+  .sidebar-patinhas .sp-value{font-size:15.5px;font-weight:800;color:var(--dark);}
   @media (max-width:980px){ .sidebar .tabs{display:none;} .sidebar-secondary{display:none;} }
 
   .mode-bar{display:flex;justify-content:center;padding:16px 24px 0;}
@@ -213,16 +221,21 @@
   .section-head h2{font-size:22px;margin:0;font-weight:700;}
   .section-head .see-all{font-size:13.5px;font-weight:700;color:var(--primary);}
 
+  .cat-grid-panel{background:linear-gradient(135deg, rgba(108,140,142,0.16), rgba(243,190,145,0.16));border-radius:26px;padding:22px;}
   .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
   @media (max-width:900px){.cat-grid{grid-template-columns:repeat(3,1fr);}}
-  .cat-card{background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:20px 12px;text-align:center;transition:all .15s ease;}
-  .cat-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow);}
-  .cat-icon{width:52px;height:52px;border-radius:16px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:21px;background-size:cover;background-position:center;overflow:hidden;position:relative;}
-  .cat-icon.photo-icon::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.15));}
+  .cat-card{background:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.8);border-radius:18px;padding:20px 12px;text-align:center;transition:all .18s ease;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 6px 18px rgba(20,45,50,0.06);}
+  .cat-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:0 12px 26px rgba(20,45,50,0.12);}
+  .cat-icon-wrap{position:relative;width:56px;height:56px;margin:0 auto 12px;}
+  .cat-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:21px;background-size:cover;background-position:center;overflow:hidden;position:relative;}
+  .cat-icon.photo-icon::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.18));}
+  .cat-badge{position:absolute;bottom:-6px;right:-6px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(0,0,0,0.22);border:2px solid #fff;}
+  .cat-badge svg{width:13px;height:13px;color:#fff;}
   .cat-card span{font-size:12.5px;font-weight:600;color:var(--gray-700);}
 
-  .pro-scroll{display:flex;gap:16px;overflow-x:auto;padding-bottom:6px;}
-  .pro-card{min-width:250px;max-width:250px;background:var(--card);border:1px solid var(--gray-300);border-radius:18px;overflow:hidden;transition:all .15s ease;flex-shrink:0;}
+  .pro-scroll{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;}
+  @media (max-width:640px){.pro-scroll{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}}
+  .pro-card{width:100%;background:var(--card);border:1px solid var(--gray-300);border-radius:18px;overflow:hidden;transition:all .15s ease;}
   .pro-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
   .pro-cover{height:96px;position:relative;background-size:cover;background-position:center;}
   .pro-avatar{width:58px;height:58px;border-radius:50%;border:3px solid #fff;position:absolute;left:16px;bottom:-29px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;}
@@ -247,6 +260,23 @@
   .cta-banner p{margin:0;font-size:13.5px;color:var(--gray-300);}
   .cta-thumb{width:120px;height:80px;border-radius:14px;object-fit:cover;flex-shrink:0;box-shadow:var(--shadow-lg);}
   .cta-left{display:flex;align-items:center;gap:18px;}
+
+  /* ===== Seção institucional (missão Koda) ===== */
+  .institutional-panel{display:flex;align-items:stretch;border-radius:24px;overflow:hidden;background:linear-gradient(120deg,var(--turquoise-1),var(--turquoise-2));box-shadow:var(--shadow-lg);}
+  .institutional-media{flex:0 0 40%;min-height:400px;background-size:cover;background-position:center top;}
+  @media (max-width:860px){.institutional-panel{flex-direction:column;}.institutional-media{flex:none;height:260px;}}
+  .institutional-content{flex:1;padding:44px;color:#fff;display:flex;flex-direction:column;justify-content:center;min-width:0;}
+  .institutional-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.14);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;margin-bottom:16px;width:fit-content;}
+  .institutional-content h2{font-size:27px;margin:0 0 12px;line-height:1.28;font-weight:800;}
+  .institutional-content h2 em{font-style:normal;color:var(--primary-light);}
+  .institutional-content > p{font-size:14px;color:rgba(255,255,255,0.82);line-height:1.7;margin:0 0 26px;max-width:480px;}
+  .institutional-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:18px 26px;}
+  @media (max-width:560px){.institutional-list{grid-template-columns:1fr;}}
+  .institutional-list li{display:flex;gap:12px;align-items:flex-start;}
+  .il-icon{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .il-icon svg{width:17px;height:17px;color:#fff;}
+  .institutional-list b{display:block;font-size:13.5px;margin-bottom:2px;}
+  .institutional-list span{font-size:12px;color:rgba(255,255,255,0.68);line-height:1.5;}
 
   .footer{padding:36px 44px 40px;color:var(--gray-500);font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--gray-300);margin-top:36px;}
 
@@ -833,11 +863,13 @@
     body.sidebar-collapsed .sidebar-sec-btn{font-size:0;justify-content:center;gap:0;padding:10px 0;}
     body.sidebar-collapsed .header-gamification{display:none;}
     body.sidebar-collapsed .sidebar-patinhas{justify-content:center;padding:9px;gap:0;}
-    body.sidebar-collapsed .sidebar-patinhas .sp-info,
-    body.sidebar-collapsed .sidebar-patinhas .sp-add{display:none;}
+    body.sidebar-collapsed .sidebar-patinhas .sp-info{display:none;}
     body.sidebar-collapsed .sidebar-identity{justify-content:center;}
     body.sidebar-collapsed .btn-ghost{display:none;}
     body.sidebar-collapsed .avatar-mini{margin:0 auto;}
+    body.sidebar-collapsed .sidebar-social{display:none;}
+    body.sidebar-collapsed .sidebar-account-row{justify-content:center;}
+    body.sidebar-collapsed .sidebar-logout-btn{margin:0 auto;}
   }
   @media (max-width:980px){ .sidebar{border-right:none;box-shadow:none;} }
   .mode-switch{background:rgba(255,255,255,0.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.4);}
@@ -856,12 +888,24 @@
     backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
     border-color:var(--glass-border) !important;
   }
+  .cat-card{background:rgba(255,255,255,0.55) !important;border-color:rgba(255,255,255,0.85) !important;}
   .payout-card, .boost-card, .sub-banner, .cta-banner, .credits-banner{
     background:linear-gradient(120deg, rgba(34,56,58,0.82), rgba(54,81,83,0.82)) !important;
     backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   }
   .boost-card{background:linear-gradient(120deg, rgba(243,124,94,0.92), rgba(217,88,58,0.92)) !important;}
   .plan-card.featured{background:linear-gradient(160deg, rgba(255,255,255,0.82), rgba(243,190,145,0.7)) !important;}
+  .plan-card.plan-essencial{background:linear-gradient(160deg, rgba(255,255,255,0.9), rgba(210,228,230,0.75)) !important;border-top:4px solid var(--secondary) !important;}
+  .plan-card.plan-pro.featured{border-top:4px solid var(--primary) !important;}
+  .plan-card.plan-360{background:linear-gradient(160deg, rgba(255,255,255,0.9), rgba(34,56,58,0.14)) !important;border-top:4px solid var(--turquoise-1) !important;}
+  .plan-card .plan-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0;}
+  .plan-card .plan-icon svg{width:22px;height:22px;color:#fff;}
+  .plan-card.plan-essencial .plan-icon{background:linear-gradient(135deg,var(--secondary),var(--turquoise-1));}
+  .plan-card.plan-pro.featured .plan-icon{background:linear-gradient(135deg,var(--primary),var(--primary-dark));}
+  .plan-card.plan-360 .plan-icon{background:linear-gradient(135deg,var(--turquoise-1),#0d2426);}
+  .plan-card.plan-essencial .plan-tag{background:var(--secondary);}
+  .plan-card.plan-360 .plan-tag{background:var(--turquoise-1);}
+  .plan-card .plan-audience{display:inline-block;font-size:11px;font-weight:700;color:var(--gray-500);background:var(--gray-100);padding:3px 10px;border-radius:100px;margin:0 0 10px;}
   .mode-btn.active, .chip.active, .subnav-pill.active, .ptype-btn.active,
   .avail-slot.free, .status-pill.confirmed{background-color:var(--primary) !important;}
   .sidebar .tab-btn.active{background-color:#fff !important;color:var(--primary-dark) !important;}
@@ -1312,10 +1356,21 @@
           <span class="sp-label">Patinhas</span>
           <span class="sp-value" id="sidebar-patinhas-value">320</span>
         </div>
-        <span class="sp-add">+</span>
       </div>
-      <a class="btn-ghost" href="#" id="switch-profile-link">🔁 Trocar perfil</a>
-      <a class="btn-ghost nav-switch-role" href="#" data-mode-goto="profissional:painel-pro">Sou parceiro</a>
+      <div class="sidebar-social">
+        <a class="sidebar-social-btn" href="#" title="Koda no Instagram" aria-label="Instagram" data-toast="Instagram da Koda — em breve neste protótipo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="sidebar-social-btn" href="#" title="Koda no TikTok" aria-label="TikTok" data-toast="TikTok da Koda — em breve neste protótipo">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.6 2.5c.4 2.2 1.9 4 4 4.4v3a7.4 7.4 0 01-4-1.2v6.8a5.9 5.9 0 11-5.9-5.9c.2 0 .5 0 .7.1v3.1a2.8 2.8 0 102 2.7V2.5h3.2z"/></svg>
+        </a>
+      </div>
+      <div class="sidebar-account-row">
+        <a class="btn-ghost" href="#" id="switch-profile-link">🔁 Trocar perfil</a>
+        <button type="button" class="sidebar-logout-btn" id="sidebar-logout-btn" title="Sair" aria-label="Sair">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        </button>
+      </div>
     </div>
   </aside>
 
@@ -1368,13 +1423,51 @@
 
     <div class="section">
       <div class="section-head"><h2>O que você precisa hoje?</h2></div>
+      <div class="cat-grid-panel">
       <div class="cat-grid">
-        <a class="cat-card" data-goto="busca" data-cat="vet"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Veterinário</span></a>
-        <a class="cat-card" data-goto="busca" data-cat="banho"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/1436139/pexels-photo-1436139.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Banho &amp; Tosa</span></a>
-        <a class="cat-card" data-goto="busca" data-cat="sitter"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/6578817/pexels-photo-6578817.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Pet Sitter</span></a>
-        <a class="cat-card" data-goto="busca" data-cat="passeador"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/16180680/pexels-photo-16180680.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Passeador</span></a>
-        <a class="cat-card" data-goto="busca" data-cat="adestrador"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/10013055/pexels-photo-10013055.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Adestrador</span></a>
-        <a class="cat-card" data-goto="busca" data-cat="creche"><div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/11087477/pexels-photo-11087477.jpeg?auto=compress&cs=tinysrgb&w=200');"></div><span>Creche</span></a>
+        <a class="cat-card" data-goto="busca" data-cat="vet">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,var(--primary),var(--primary-dark));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div>
+          </div>
+          <span>Veterinário</span>
+        </a>
+        <a class="cat-card" data-goto="busca" data-cat="banho">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/1436139/pexels-photo-1436139.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,#2D9CDB,#1B6FA8);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2s7 8 7 13a7 7 0 01-14 0c0-5 7-13 7-13z"/></svg></div>
+          </div>
+          <span>Banho &amp; Tosa</span>
+        </a>
+        <a class="cat-card" data-goto="busca" data-cat="sitter">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/6578817/pexels-photo-6578817.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,var(--secondary),var(--turquoise-1));"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div>
+          </div>
+          <span>Pet Sitter</span>
+        </a>
+        <a class="cat-card" data-goto="busca" data-cat="passeador">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/16180680/pexels-photo-16180680.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,#0d8f74,#0a6d58);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="6" cy="6" r="2.2"/><path d="M8 8c4 2 6 6 6 10"/></svg></div>
+          </div>
+          <span>Passeador</span>
+        </a>
+        <a class="cat-card" data-goto="busca" data-cat="adestrador">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/10013055/pexels-photo-10013055.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,#6C5CE7,#4A3FBF);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-5.5"/></svg></div>
+          </div>
+          <span>Adestrador</span>
+        </a>
+        <a class="cat-card" data-goto="busca" data-cat="creche">
+          <div class="cat-icon-wrap">
+            <div class="cat-icon photo-icon" style="background-image:url('https://images.pexels.com/photos/11087477/pexels-photo-11087477.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
+            <div class="cat-badge" style="background:linear-gradient(135deg,#F3BE91,#F37C5E);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg></div>
+          </div>
+          <span>Creche</span>
+        </a>
+      </div>
       </div>
     </div>
 
@@ -1429,6 +1522,54 @@
             <div class="pro-cat">Adestrador • Comportamental</div>
             <span class="stars">★★★★☆ 4.7 (64)</span>
             <div class="pro-price">A partir de <b>R$ 120</b> • 3.4 km</div>
+            <span class="badge">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="pro-card" data-goto="perfil">
+          <div class="pro-cover" style="background-image:url('https://images.pexels.com/photos/6234624/pexels-photo-6234624.jpeg?auto=compress&cs=tinysrgb&w=400');">
+            <div class="pro-avatar" style="background:var(--secondary);">LB</div>
+          </div>
+          <div class="pro-body">
+            <h4>Dr. Lucas Barbosa</h4>
+            <div class="pro-cat">Veterinário • Ortopedia e cirurgia</div>
+            <span class="stars">★★★★★ 4.8 (142)</span>
+            <div class="pro-price">A partir de <b>R$ 130</b> • 2.4 km</div>
+            <span class="badge">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="pro-card" data-goto="perfil">
+          <div class="pro-cover" style="background-image:url('https://images.pexels.com/photos/6578817/pexels-photo-6578817.jpeg?auto=compress&cs=tinysrgb&w=400');">
+            <div class="pro-avatar" style="background:#0d8f74;">BF</div>
+          </div>
+          <div class="pro-body">
+            <h4>Bianca Ferraz</h4>
+            <div class="pro-cat">Pet Sitter • Hospedagem na casa dela</div>
+            <span class="stars">★★★★★ 4.9 (61)</span>
+            <div class="pro-price">A partir de <b>R$ 70</b>/diária • 1.1 km</div>
+            <span class="badge">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="pro-card" data-goto="perfil">
+          <div class="pro-cover" style="background-image:url('https://images.pexels.com/photos/16180680/pexels-photo-16180680.jpeg?auto=compress&cs=tinysrgb&w=400');">
+            <div class="pro-avatar" style="background:#C97A00;">CD</div>
+          </div>
+          <div class="pro-body">
+            <h4>Camila Duarte</h4>
+            <div class="pro-cat">Passeador • Filhotes e cães idosos</div>
+            <span class="stars">★★★★★ 4.9 (98)</span>
+            <div class="pro-price">A partir de <b>R$ 40</b> • 1.4 km</div>
+            <span class="badge">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="pro-card" data-goto="perfil">
+          <div class="pro-cover" style="background-image:url('https://images.pexels.com/photos/11087477/pexels-photo-11087477.jpeg?auto=compress&cs=tinysrgb&w=400');">
+            <div class="pro-avatar" style="background:var(--primary-dark);">AF</div>
+          </div>
+          <div class="pro-body">
+            <h4>Creche Amigo Fiel</h4>
+            <div class="pro-cat">Creche • Período integral e meio período</div>
+            <span class="stars">★★★★★ 4.9 (72)</span>
+            <div class="pro-price">A partir de <b>R$ 65</b>/dia • 1.5 km</div>
             <span class="badge">✓ Verificado</span>
           </div>
         </div>
@@ -1510,6 +1651,35 @@
         <div class="step-card"><div class="step-num">1</div><h4>Busque e compare</h4><p>Filtre por categoria, distância (geolocalização), preço e avaliação — nota calculada com base no Google e nos tutores da plataforma.</p></div>
         <div class="step-card"><div class="step-num">2</div><h4>Agende com segurança</h4><p>Veja a agenda em tempo real, converse antes de fechar e pague pelo app com garantia.</p></div>
         <div class="step-card"><div class="step-num">3</div><h4>Tudo fica registrado</h4><p>Exame, receita e vacina entram sozinhos na carteira digital do seu pet — sem digitação manual.</p></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="institutional-panel">
+        <div class="institutional-media" style="background-image:url('koda-institucional.jpg');"></div>
+        <div class="institutional-content">
+          <span class="institutional-tag">🐾 Nossa missão</span>
+          <h2>Todo cuidado que <em>seu pet merece</em>, em um só lugar.</h2>
+          <p>A Koda nasceu para conectar tutores aos melhores profissionais e serviços pet — com praticidade, segurança e confiança. Acreditamos que cuidar de quem a gente ama não devia ser complicado.</p>
+          <ul class="institutional-list">
+            <li>
+              <div class="il-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+              <div><b>Encontre o profissional ideal</b><span>Veterinários, pet sitters, adestradores, passeadores e muito mais.</span></div>
+            </li>
+            <li>
+              <div class="il-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+              <div><b>Agendamentos rápidos e fáceis</b><span>Reserve, altere ou cancele em poucos toques.</span></div>
+            </li>
+            <li>
+              <div class="il-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              <div><b>Segurança e confiança</b><span>Todos os profissionais são verificados e avaliados por outros tutores.</span></div>
+            </li>
+            <li>
+              <div class="il-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+              <div><b>Suporte humano quando você precisar</b><span>Histórico, mensagens, pagamentos e favoritos sempre com você.</span></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -2492,51 +2662,58 @@
   <section class="screen" id="assinatura-pro">
     <div class="plan-intro">
       <h2>Planos para o seu negócio</h2>
-      <p>Cuidamos do seu negócio como você cuida do seu pet: escolha o plano certo pra sua fase — da visibilidade gratuita até um time de ferramentas de IA trabalhando por você todos os dias.</p>
+      <p>Três planos pensados para cada fase e porte do seu negócio na rede Koda — do prestador autônomo até clínicas veterinárias com prontuário clínico completo. Todos incluem 15% de comissão por agendamento concluído.</p>
     </div>
 
     <div class="plan-grid">
-      <div class="plan-card">
-        <h3>Gratuito</h3>
-        <p class="plan-sub">Para começar a receber demanda</p>
-        <div class="plan-price">R$ 0<span>/mês</span></div>
+      <div class="plan-card plan-essencial">
+        <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5"/><path d="M3 9a2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2 2 2 0 002 2 2 2 0 002-2"/><path d="M5 11v8h14v-8"/></svg></div>
+        <span class="plan-audience">Prestadores de pequeno porte</span>
+        <h3>Essencial</h3>
+        <p class="plan-sub">Para começar a estruturar sua vitrine na Koda</p>
+        <div class="plan-price">R$ 49<span>–69/mês</span></div>
         <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Cadastro e vitrine na busca</li>
-          <li><span class="ico">✓</span> Recebimento de solicitações</li>
-          <li><span class="ico">✓</span> Carteira digital sincronizada automaticamente</li>
-          <li><span class="ico">✓</span> Assistente de Respostas IA (básico)</li>
+          <li><span class="ico">✓</span> Leitura básica de dados do pet (vacinas e perfil)</li>
+          <li><span class="ico">✓</span> Compliance LGPD padrão</li>
+          <li><span class="ico">✓</span> Suporte via chat em fila padrão</li>
+          <li><span class="ico">✓</span> Vitrine e recebimento de solicitações na busca</li>
         </ul>
-        <button class="btn btn-outline btn-block" disabled>Plano atual</button>
+        <button class="btn btn-outline btn-block" data-toast="Assinatura Essencial simulada — pagamento não incluso neste protótipo">Assinar Essencial</button>
       </div>
 
-      <div class="plan-card featured">
+      <div class="plan-card plan-pro featured">
         <span class="plan-tag">Mais escolhido</span>
-        <h3>Pro</h3>
-        <p class="plan-sub">Visibilidade + ferramentas de IA ilimitadas</p>
-        <div class="plan-price">R$ 79<span>/mês</span></div>
+        <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+        <span class="plan-audience">Médio porte</span>
+        <h3>Pró</h3>
+        <p class="plan-sub">Inteligência de gestão para acelerar recompra</p>
+        <div class="plan-price">R$ 149<span>–199/mês</span></div>
         <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Prioridade de ranking na sua categoria e região</li>
-          <li><span class="ico">✓</span> Ferramentas de IA transversais ilimitadas</li>
-          <li><span class="ico">✓</span> 🐾 500 Patinhas incluídas todo mês</li>
-          <li><span class="ico">✓</span> Selo "Parceiro Pro" no perfil</li>
-          <li><span class="ico">✓</span> Diagnóstico do Negócio mensal automático</li>
+          <li><span class="ico">✓</span> Histórico aprofundado de rotina do pet</li>
+          <li><span class="ico">✓</span> CRM de recompra, precificação e automação (IA inclusa)</li>
+          <li><span class="ico">✓</span> Consultor dedicado + chat prioritário</li>
+          <li><span class="ico">✓</span> Compliance LGPD padrão</li>
         </ul>
-        <button class="btn btn-primary btn-block" data-toast="Assinatura Pro simulada — pagamento não incluso neste protótipo">Assinar Pro</button>
+        <button class="btn btn-primary btn-block" data-toast="Assinatura Pró simulada — pagamento não incluso neste protótipo">Assinar Pró</button>
       </div>
 
-      <div class="plan-card">
-        <h3>Impulsionamento avulso</h3>
-        <p class="plan-sub">Reforço pontual de destaque, sem assinatura</p>
-        <div class="plan-price">R$ 29<span>/semana</span></div>
-        <div class="plan-note">Ideal para lançamentos e baixa temporada</div>
+      <div class="plan-card plan-360">
+        <span class="plan-tag">Health/Vet</span>
+        <div class="plan-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div>
+        <span class="plan-audience">Médicos veterinários, clínicas e hospitais</span>
+        <h3>360</h3>
+        <p class="plan-sub">Prontuário clínico completo com compliance CFMV</p>
+        <div class="plan-price">R$ 299<span>–399/mês</span></div>
+        <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Destaque extra na busca por período determinado</li>
-          <li><span class="ico">✓</span> Sem compromisso mensal</li>
-          <li><span class="ico">✓</span> Pode ser combinado com qualquer plano</li>
+          <li><span class="ico">✓</span> Prontuário clínico 360° e histórico de saúde completo</li>
+          <li><span class="ico">✓</span> Compliance CFMV (Res. 1.321/2020 e 1.653/2025) + LGPD</li>
+          <li><span class="ico">✓</span> Suporte a decisões clínicas e gestão avançada</li>
+          <li><span class="ico">✓</span> Consultor dedicado + suporte a onboarding</li>
         </ul>
-        <button class="btn btn-outline btn-block" data-goto="painel-pro">Contratar destaque</button>
+        <button class="btn btn-outline btn-block" data-toast="Assinatura 360 simulada — pagamento não incluso neste protótipo">Assinar 360</button>
       </div>
     </div>
 
@@ -3498,6 +3675,15 @@
       e.preventDefault();
       document.body.classList.add('landing-active');
       goTo('landing');
+    });
+  }
+
+  var sidebarLogoutBtn = document.getElementById('sidebar-logout-btn');
+  if(sidebarLogoutBtn){
+    sidebarLogoutBtn.addEventListener('click', function(){
+      document.body.classList.add('landing-active');
+      goTo('landing');
+      showToast('Você saiu da sua conta 👋');
     });
   }
 
