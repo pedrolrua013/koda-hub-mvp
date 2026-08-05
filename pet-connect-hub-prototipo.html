@@ -772,7 +772,13 @@
 
   /* Navegação e chrome — sidebar em gradiente laranja (mesmo gradiente do hover/CTA principal) */
   .sidebar{
-    background:linear-gradient(165deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background-color:var(--primary-dark);
+    background-image:
+      linear-gradient(165deg, var(--primary) 0%, var(--primary-dark) 100%),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='60'%20height='60'%3E%3Cg%20fill='white'%20fill-opacity='0.05'%3E%3Cellipse%20cx='30'%20cy='38'%20rx='10'%20ry='8'/%3E%3Cellipse%20cx='16'%20cy='22'%20rx='4.5'%20ry='5.5'/%3E%3Cellipse%20cx='27'%20cy='14'%20rx='4.5'%20ry='5.5'/%3E%3Cellipse%20cx='38'%20cy='16'%20rx='4.5'%20ry='5.5'/%3E%3Cellipse%20cx='46'%20cy='24'%20rx='4'%20ry='5'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat:no-repeat, repeat;
+    background-size:cover, 70px 70px;
+    background-position:0 0, 0 0;
     backdrop-filter:none;-webkit-backdrop-filter:none;
     border-right:none;box-shadow:4px 0 28px rgba(146,58,34,0.22);
   }
@@ -792,6 +798,18 @@
   .sidebar .btn-ghost:hover{background:rgba(255,255,255,0.16);color:#fff;}
   .sidebar .avatar-mini{box-shadow:0 0 0 2px rgba(255,255,255,0.55);}
   .sidebar .hg-label{color:rgba(255,255,255,0.75);}
+  /* Nível de Cuidado: fica em branco sobre o gradiente laranja (evita laranja-sobre-laranja) */
+  .sidebar .xp-badge{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.4);animation:xpBadgePulseLight 2.6s ease-in-out infinite;}
+  .sidebar .xp-badge span{font-size:10px;}
+  @keyframes xpBadgePulseLight{
+    0%,100%{box-shadow:0 0 0 3px rgba(255,255,255,0.28);}
+    50%{box-shadow:0 0 0 5px rgba(255,255,255,0.5);}
+  }
+  .sidebar .xp-track{background:rgba(255,255,255,0.28);box-shadow:inset 0 1px 3px rgba(0,0,0,0.14),inset 0 0 0 1px rgba(255,255,255,0.35);}
+  .sidebar .xp-track::after{background-image:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(0,0,0,0.16) calc(25% - 1px),rgba(0,0,0,0.16) 25%);}
+  .sidebar .xp-fill{background:#fff;}
+  .sidebar .xp-fill::before{background-image:repeating-linear-gradient(45deg,rgba(0,0,0,0.07) 0 6px,transparent 6px 12px);}
+  .sidebar .xp-pct{background:#fff;color:var(--primary-dark);}
   @media (max-width:980px){ .sidebar{border-right:none;box-shadow:none;} }
   .mode-switch{background:rgba(255,255,255,0.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.4);}
   .mode-btn.active{background:var(--primary);box-shadow:0 6px 16px rgba(243,124,94,0.35);}
@@ -856,11 +874,12 @@
   .xp-progress{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;}
   .xp-badge{
     width:20px;height:20px;border-radius:50%;flex-shrink:0;font-size:10px;line-height:1;
-    display:flex;align-items:center;justify-content:center;
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     box-shadow:0 0 0 3px rgba(243,124,94,0.18);
     animation:xpBadgePulse 2.6s ease-in-out infinite;
   }
+  .xp-badge img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;}
   @keyframes xpBadgePulse{
     0%,100%{box-shadow:0 0 0 3px rgba(243,124,94,0.18);}
     50%{box-shadow:0 0 0 5px rgba(243,124,94,0.3);}
@@ -1238,7 +1257,10 @@
         <div class="header-gamification" id="header-gamification">
           <span class="hg-label" id="hg-label">Nível de Cuidado</span>
           <div class="xp-progress" id="hg-bone-btn" title="68% para o próximo nível">
-            <div class="xp-badge">🐾</div>
+            <div class="xp-badge" id="hg-bone-badge">
+              <img class="tabs-consumidor" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100" alt="Thor">
+              <span class="tabs-profissional">🐾</span>
+            </div>
             <div class="xp-track">
               <div class="xp-fill" id="hg-bone-fill" style="width:64%;"><span class="xp-fill-shine"></span></div>
             </div>
@@ -3309,7 +3331,7 @@
 
   // ===== Gamificação =====
   var gamification = {
-    consumidor: { label: 'Nível de Cuidado', pct: 64, tooltip: '64% para o próximo nível — Tutor Expert' },
+    consumidor: { label: 'Nível de Cuidado · Thor', pct: 64, tooltip: '64% para o próximo nível — Tutor Expert' },
     profissional: { label: 'Nível de Parceiro', pct: 55, tooltip: '55% para o próximo nível — Parceiro Top' }
   };
   function updateHeaderGamification(mode){
