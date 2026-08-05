@@ -189,32 +189,81 @@
   .stat .trend.down{color:#C0392B;background:#FBE8E6;}
   .dash-month-tag{display:inline-flex;align-items:center;gap:6px;background:var(--turquoise-4);color:var(--turquoise-1);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-top:6px;}
 
-  /* ===== KPI grid (dashboard estilo SaaS) ===== */
-  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:-28px 44px 0;position:relative;z-index:3;}
-  @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);margin:-28px 20px 0;}}
+  /* ===== KPI grid (dashboard estilo SaaS, glassmorphism) ===== */
+  .pro-metrics-panel{position:relative;margin:18px 44px 0;padding:26px 26px 22px;border-radius:28px;background:linear-gradient(135deg,var(--turquoise-1) 0%,var(--secondary) 52%,var(--primary) 130%);overflow:hidden;isolation:isolate;}
+  .pro-metrics-panel::before{content:'';position:absolute;top:-60px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.22),transparent 70%);z-index:0;}
+  .pro-metrics-panel::after{content:'';position:absolute;bottom:-80px;left:20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%);z-index:0;}
+  .pro-metrics-head{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .pro-metrics-head h4{color:#fff;font-size:14.5px;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;}
+  .pro-metrics-head span{color:rgba(255,255,255,0.75);font-size:12px;font-weight:600;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:2;align-items:stretch;}
+  @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
   .kpi-grid > *{min-width:0;}
-  .kpi-card{background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:18px 20px;min-width:0;}
+  .kpi-card{background:rgba(255,255,255,0.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.28);border-radius:18px;box-shadow:0 8px 24px rgba(4,30,38,0.18);padding:18px 20px;min-width:0;display:flex;flex-direction:column;transition:transform .18s ease,background .18s ease;}
+  .kpi-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.22);}
   .kpi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:8px;}
-  .kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--turquoise-4);flex-shrink:0;}
+  .kpi-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,0.22);flex-shrink:0;}
   .kpi-num{font-family:'Poppins',sans-serif;font-weight:800;font-size:23px;color:var(--dark);line-height:1.1;}
   .kpi-lbl{font-size:12px;color:var(--gray-500);font-weight:500;margin-top:3px;}
   .trend{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;}
   .trend.up{color:#1E8E5A;background:#E4F5EC;}
   .trend.down{color:#C0392B;background:#FBE8E6;}
+  /* KPI card white-on-glass variant (values readable straight on the gradient) */
+  .kpi-card.kpi-light .kpi-num{color:#fff;}
+  .kpi-card.kpi-light .kpi-lbl{color:rgba(255,255,255,0.78);}
+  .kpi-card.kpi-light .trend.up{color:#eafff2;background:rgba(30,142,90,0.45);}
+  /* Sparkline-type KPI card */
+  .kpi-spark{margin-top:10px;height:32px;}
+  .kpi-spark svg{width:100%;height:100%;display:block;}
+  /* Mini bar-type KPI card */
+  .kpi-bars{display:flex;align-items:flex-end;gap:4px;height:32px;margin-top:10px;}
+  .kpi-bars i{flex:1;background:rgba(255,255,255,0.32);border-radius:3px 3px 1px 1px;display:block;}
+  .kpi-bars i:last-child{background:#fff;}
+  /* Ring/progress-type KPI card */
+  .kpi-card.kpi-ring-type{align-items:center;text-align:center;}
+  .kpi-ring-wrap{position:relative;width:72px;height:72px;margin:2px auto 10px;}
+  .kpi-ring-wrap svg{width:72px;height:72px;transform:rotate(-90deg);}
+  .kpi-ring-wrap circle{fill:none;stroke-width:8;}
+  .kpi-ring-track{stroke:rgba(255,255,255,0.25);}
+  .kpi-ring-progress{stroke:#fff;stroke-linecap:round;transition:stroke-dashoffset 1s ease;}
+  .kpi-ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;color:#fff;}
+  .kpi-ring-type .kpi-lbl{color:rgba(255,255,255,0.78);}
+  .kpi-ring-type .trend{margin-top:6px;}
 
   /* ===== Gráficos do painel do parceiro ===== */
   .charts-grid{display:grid;grid-template-columns:1.3fr 1fr 0.85fr;gap:18px;align-items:stretch;}
   @media (max-width:1100px){.charts-grid{grid-template-columns:1fr 1fr;}}
   @media (max-width:700px){.charts-grid{grid-template-columns:1fr;}}
   .charts-grid > *{min-width:0;}
-  .charts-grid .card-block{display:flex;flex-direction:column;margin-bottom:0;min-width:0;}
+  .charts-grid .card-block{display:flex;flex-direction:column;margin-bottom:0;min-width:0;height:100%;}
   .chart-card-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
   .chart-badge{font-size:11.5px;font-weight:700;color:#1E8E5A;background:#E4F5EC;padding:4px 10px;border-radius:20px;white-space:nowrap;}
   .chart-canvas-wrap{position:relative;height:230px;margin-top:14px;min-width:0;}
   .chart-canvas-wrap canvas{max-width:100%;}
-  .chart-stat-card{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;flex:1;}
+  .chart-stat-card{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;flex:1;background:linear-gradient(150deg,rgba(74,107,109,0.10),rgba(243,124,94,0.10)) !important;}
   .chart-stat-card .kpi-num{font-size:30px;}
   .chart-stat-card .kpi-lbl{margin-top:6px;font-size:13px;}
+  .chart-stat-card .chart-stat-ring{margin:0 0 14px;}
+  .mini-ring{position:relative;width:56px;height:56px;margin-bottom:14px;}
+  .mini-ring svg{width:56px;height:56px;}
+  .mini-ring-center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--dark);font-family:'Poppins',sans-serif;}
+
+  /* ===== Mapa de calor de horários de pico ===== */
+  .heatmap-card{margin-top:18px;}
+  .heatmap-scroll{overflow-x:auto;}
+  .heatmap-grid{display:flex;flex-direction:column;gap:7px;margin-top:16px;min-width:460px;}
+  .heatmap-row{display:grid;grid-template-columns:64px repeat(7,1fr);gap:7px;align-items:center;}
+  .heatmap-row.heatmap-header span{font-size:11px;font-weight:700;color:var(--gray-500);text-align:center;}
+  .hm-label{font-size:12px;font-weight:700;color:var(--gray-700);}
+  .hm-cell{position:relative;aspect-ratio:1/1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;cursor:default;transition:transform .12s ease;}
+  .hm-cell:hover{transform:scale(1.08);}
+  .hm-1{background:#E7F2EF;color:var(--secondary-dark);}
+  .hm-2{background:#BFE0D6;color:var(--secondary-dark);}
+  .hm-3{background:var(--primary-light);color:var(--secondary-dark);}
+  .hm-4{background:var(--primary);color:#fff;}
+  .hm-5{background:var(--primary-dark);color:#fff;}
+  .heatmap-legend{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:11px;color:var(--gray-500);font-weight:600;}
+  .hm-scale{flex:1;max-width:180px;height:8px;border-radius:6px;background:linear-gradient(90deg,#E7F2EF,#BFE0D6,var(--primary-light),var(--primary),var(--primary-dark));}
 
   .section{padding:48px 44px 8px;}
   .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
@@ -2283,27 +2332,52 @@
       <button class="btn btn-outline btn-sm" data-goto="solicitacoes">Ver solicitações</button>
     </div>
 
-    <div class="section" style="padding-top:14px;padding-bottom:8px;">
+    <div class="pro-metrics-panel">
+      <div class="pro-metrics-head">
+        <h4>📊 Métricas do mês</h4>
+        <span>Agosto de 2026 · atualizado hoje</span>
+      </div>
       <div class="kpi-grid">
-        <div class="kpi-card">
+        <div class="kpi-card kpi-light">
           <div class="kpi-top"><span class="kpi-icon">💰</span><span class="trend up">↑ 12%</span></div>
           <div class="kpi-num">R$ 2.140</div>
           <div class="kpi-lbl">Ganhos brutos este mês</div>
+          <div class="kpi-spark">
+            <svg viewBox="0 0 100 32" preserveAspectRatio="none">
+              <polyline points="0,26 16,24 32,20 48,21 64,14 80,10 100,3" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,26 16,24 32,20 48,21 64,14 80,10 100,3 100,32 0,32" fill="rgba(255,255,255,0.16)" stroke="none"/>
+            </svg>
+          </div>
         </div>
-        <div class="kpi-card">
+        <div class="kpi-card kpi-light">
           <div class="kpi-top"><span class="kpi-icon">✅</span><span class="trend up">↑ 8</span></div>
           <div class="kpi-num">58</div>
           <div class="kpi-lbl">Atendimentos concluídos</div>
+          <div class="kpi-bars">
+            <i style="height:35%;"></i><i style="height:48%;"></i><i style="height:42%;"></i><i style="height:64%;"></i><i style="height:58%;"></i><i style="height:100%;"></i>
+          </div>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-top"><span class="kpi-icon">⭐</span><span class="trend up">↑ 0.1</span></div>
-          <div class="kpi-num">4.8 ★</div>
+        <div class="kpi-card kpi-ring-type">
+          <div class="kpi-ring-wrap">
+            <svg viewBox="0 0 72 72">
+              <circle class="kpi-ring-track" cx="36" cy="36" r="30"/>
+              <circle class="kpi-ring-progress" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="7.5"/>
+            </svg>
+            <div class="kpi-ring-center">4.8★</div>
+          </div>
           <div class="kpi-lbl">Nota média (156 avaliações)</div>
+          <span class="trend up">↑ 0.1</span>
         </div>
-        <div class="kpi-card">
-          <div class="kpi-top"><span class="kpi-icon">🎯</span><span class="trend up">↑ 2 p.p.</span></div>
-          <div class="kpi-num">94%</div>
+        <div class="kpi-card kpi-ring-type">
+          <div class="kpi-ring-wrap">
+            <svg viewBox="0 0 72 72">
+              <circle class="kpi-ring-track" cx="36" cy="36" r="30"/>
+              <circle class="kpi-ring-progress" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="11.3"/>
+            </svg>
+            <div class="kpi-ring-center">94%</div>
+          </div>
           <div class="kpi-lbl">Taxa de aceite</div>
+          <span class="trend up">↑ 2 p.p.</span>
         </div>
       </div>
     </div>
@@ -2323,11 +2397,69 @@
             <div class="chart-canvas-wrap"><canvas id="chart-servicos"></canvas></div>
           </div>
           <div class="card-block chart-stat-card">
+            <div class="mini-ring">
+              <svg viewBox="0 0 72 72">
+                <circle cx="36" cy="36" r="26" fill="none" stroke="rgba(34,56,58,0.08)" stroke-width="8"/>
+                <circle cx="36" cy="36" r="26" fill="none" stroke="var(--primary)" stroke-width="8" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="24.5" transform="rotate(-90 36 36)"/>
+              </svg>
+              <div class="mini-ring-center">85%</div>
+            </div>
             <div class="kpi-num">R$ 1.819</div>
             <div class="kpi-lbl">Repasse líquido deste mês</div>
+            <div class="kpi-lbl" style="margin-top:2px;">85% do valor bruto arrecadado</div>
           </div>
         </div>
         <p class="info-tag" style="margin:14px 0 26px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
+
+        <div class="card-block heatmap-card">
+          <div class="chart-card-head">
+            <h3>🔥 Horários de pico de demanda</h3>
+            <span class="chart-badge">Seg–Dom · últimos 30 dias</span>
+          </div>
+          <div class="heatmap-scroll">
+            <div class="heatmap-grid">
+              <div class="heatmap-row heatmap-header">
+                <span></span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+              </div>
+              <div class="heatmap-row">
+                <span class="hm-label">Manhã</span>
+                <span class="hm-cell hm-4" title="Segunda de manhã · 14 atendimentos">14</span>
+                <span class="hm-cell hm-4" title="Terça de manhã · 15 atendimentos">15</span>
+                <span class="hm-cell hm-3" title="Quarta de manhã · 11 atendimentos">11</span>
+                <span class="hm-cell hm-4" title="Quinta de manhã · 13 atendimentos">13</span>
+                <span class="hm-cell hm-5" title="Sexta de manhã · 18 atendimentos">18</span>
+                <span class="hm-cell hm-3" title="Sábado de manhã · 10 atendimentos">10</span>
+                <span class="hm-cell hm-2" title="Domingo de manhã · 6 atendimentos">6</span>
+              </div>
+              <div class="heatmap-row">
+                <span class="hm-label">Tarde</span>
+                <span class="hm-cell hm-2" title="Segunda à tarde · 7 atendimentos">7</span>
+                <span class="hm-cell hm-2" title="Terça à tarde · 8 atendimentos">8</span>
+                <span class="hm-cell hm-2" title="Quarta à tarde · 7 atendimentos">7</span>
+                <span class="hm-cell hm-3" title="Quinta à tarde · 9 atendimentos">9</span>
+                <span class="hm-cell hm-3" title="Sexta à tarde · 10 atendimentos">10</span>
+                <span class="hm-cell hm-5" title="Sábado à tarde · 19 atendimentos">19</span>
+                <span class="hm-cell hm-4" title="Domingo à tarde · 15 atendimentos">15</span>
+              </div>
+              <div class="heatmap-row">
+                <span class="hm-label">Noite</span>
+                <span class="hm-cell hm-5" title="Segunda à noite · 17 atendimentos">17</span>
+                <span class="hm-cell hm-4" title="Terça à noite · 14 atendimentos">14</span>
+                <span class="hm-cell hm-4" title="Quarta à noite · 13 atendimentos">13</span>
+                <span class="hm-cell hm-4" title="Quinta à noite · 15 atendimentos">15</span>
+                <span class="hm-cell hm-5" title="Sexta à noite · 20 atendimentos">20</span>
+                <span class="hm-cell hm-3" title="Sábado à noite · 9 atendimentos">9</span>
+                <span class="hm-cell hm-1" title="Domingo à noite · 4 atendimentos">4</span>
+              </div>
+            </div>
+          </div>
+          <div class="heatmap-legend">
+            <span>Menos demanda</span>
+            <div class="hm-scale"></div>
+            <span>Mais demanda</span>
+          </div>
+          <p class="info-tag" style="margin:14px 0 0;">💡 Sexta à noite e sábado à tarde são seus horários de maior procura — mantenha a agenda aberta nesses períodos para não perder solicitações.</p>
+        </div>
 
         <div class="rank-card">
           <div class="rank-num">#12</div>
