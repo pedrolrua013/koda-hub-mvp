@@ -653,7 +653,11 @@
   .plan-features{list-style:none;margin:0 0 22px;padding:0;flex:1;}
   .plan-features li{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--gray-700);padding:7px 0;border-bottom:1px solid var(--gray-100);line-height:1.5;}
   .plan-features li:last-child{border-bottom:none;}
-  .plan-features li .ico{flex-shrink:0;color:var(--secondary-dark);font-weight:800;}
+  .plan-features li .ico{flex-shrink:0;width:22px;height:22px;display:flex;align-items:center;justify-content:center;}
+  .plan-features li .ico svg{width:16px;height:16px;}
+  .plan-card.plan-essencial .plan-features li .ico{color:var(--secondary);}
+  .plan-card.plan-pro.featured .plan-features li .ico{color:var(--primary);}
+  .plan-card.plan-360 .plan-features li .ico{color:var(--turquoise-1);}
   .credits-banner{margin:8px 44px 0;padding:22px 26px;border-radius:18px;background:linear-gradient(120deg,var(--dark),#2C3446);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;}
   .credits-banner h4{margin:0 0 4px;font-size:15.5px;}
   .credits-banner p{margin:0;font-size:12.5px;color:rgba(255,255,255,0.75);max-width:520px;}
@@ -1332,6 +1336,14 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
         Política de Privacidade
       </button>
+      <div class="sidebar-social">
+        <a class="sidebar-social-btn" href="#" title="Koda no Instagram" aria-label="Instagram" data-toast="Instagram da Koda — em breve neste protótipo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="sidebar-social-btn" href="#" title="Koda no TikTok" aria-label="TikTok" data-toast="TikTok da Koda — em breve neste protótipo">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.6 2.5c.4 2.2 1.9 4 4 4.4v3a7.4 7.4 0 01-4-1.2v6.8a5.9 5.9 0 11-5.9-5.9c.2 0 .5 0 .7.1v3.1a2.8 2.8 0 102 2.7V2.5h3.2z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="nav-actions">
       <div class="sidebar-identity">
@@ -1349,14 +1361,6 @@
             <span class="xp-pct" id="hg-bone-pct">64%</span>
           </div>
         </div>
-      </div>
-      <div class="sidebar-social">
-        <a class="sidebar-social-btn" href="#" title="Koda no Instagram" aria-label="Instagram" data-toast="Instagram da Koda — em breve neste protótipo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a class="sidebar-social-btn" href="#" title="Koda no TikTok" aria-label="TikTok" data-toast="TikTok da Koda — em breve neste protótipo">
-          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.6 2.5c.4 2.2 1.9 4 4 4.4v3a7.4 7.4 0 01-4-1.2v6.8a5.9 5.9 0 11-5.9-5.9c.2 0 .5 0 .7.1v3.1a2.8 2.8 0 102 2.7V2.5h3.2z"/></svg>
-        </a>
       </div>
       <div class="sidebar-account-row">
         <a class="btn-ghost" href="#" id="switch-profile-link">🔁 Trocar perfil</a>
@@ -2667,10 +2671,10 @@
         <div class="plan-price">R$ 49<span>–69/mês</span></div>
         <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Leitura básica de dados do pet (vacinas e perfil)</li>
-          <li><span class="ico">✓</span> Compliance LGPD padrão</li>
-          <li><span class="ico">✓</span> Suporte via chat em fila padrão</li>
-          <li><span class="ico">✓</span> Vitrine e recebimento de solicitações na busca</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></span> Leitura básica de dados do pet (vacinas e perfil)</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg></span> Compliance LGPD padrão</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span> Suporte via chat em fila padrão</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span> Vitrine e recebimento de solicitações na busca</li>
         </ul>
         <button class="btn btn-outline btn-block" data-toast="Assinatura Essencial simulada — pagamento não incluso neste protótipo">Assinar Essencial</button>
       </div>
@@ -2684,10 +2688,10 @@
         <div class="plan-price">R$ 149<span>–199/mês</span></div>
         <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Histórico aprofundado de rotina do pet</li>
-          <li><span class="ico">✓</span> CRM de recompra, precificação e automação (IA inclusa)</li>
-          <li><span class="ico">✓</span> Consultor dedicado + chat prioritário</li>
-          <li><span class="ico">✓</span> Compliance LGPD padrão</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span> Histórico aprofundado de rotina do pet</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4.5 13H11l-1 9L20 10h-6.5L13 2z"/></svg></span> CRM de recompra, precificação e automação (IA inclusa)</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg></span> Consultor dedicado + chat prioritário</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg></span> Compliance LGPD padrão</li>
         </ul>
         <button class="btn btn-primary btn-block" data-toast="Assinatura Pró simulada — pagamento não incluso neste protótipo">Assinar Pró</button>
       </div>
@@ -2701,25 +2705,15 @@
         <div class="plan-price">R$ 299<span>–399/mês</span></div>
         <div class="plan-note">+ comissão de 15% por agendamento concluído</div>
         <ul class="plan-features">
-          <li><span class="ico">✓</span> Prontuário clínico 360° e histórico de saúde completo</li>
-          <li><span class="ico">✓</span> Compliance CFMV (Res. 1.321/2020 e 1.653/2025) + LGPD</li>
-          <li><span class="ico">✓</span> Suporte a decisões clínicas e gestão avançada</li>
-          <li><span class="ico">✓</span> Consultor dedicado + suporte a onboarding</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span> Prontuário clínico 360° e histórico de saúde completo</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span> Compliance CFMV (Res. 1.321/2020 e 1.653/2025) + LGPD</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a6 6 0 00-3 11c1 .6 1 1.5 1 2h4c0-.5 0-1.4 1-2a6 6 0 00-3-11z"/></svg></span> Suporte a decisões clínicas e gestão avançada</li>
+          <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg></span> Consultor dedicado + suporte a onboarding</li>
         </ul>
         <button class="btn btn-outline btn-block" data-toast="Assinatura 360 simulada — pagamento não incluso neste protótipo">Assinar 360</button>
       </div>
     </div>
 
-    <div class="credits-banner">
-      <div><h4>🐾 Patinhas — créditos avulsos</h4><p>Sem assinar o Pro? Compre créditos avulsos e use nas ferramentas mais pesadas (geração de imagem, vídeo, rotinas personalizadas) sempre que precisar.</p></div>
-      <button class="btn btn-secondary" data-goto="ferramentas-pro">Ver ferramentas</button>
-    </div>
-
-    <div class="credit-pack-row">
-      <div class="credit-pack"><div class="amt">🐾 200</div><div class="price">R$ 19,90</div><button class="btn btn-outline btn-sm btn-block" data-toast="Compra de 200 Patinhas simulada (demonstração)">Comprar</button></div>
-      <div class="credit-pack"><div class="amt">🐾 500</div><div class="price">R$ 39,90</div><button class="btn btn-outline btn-sm btn-block" data-toast="Compra de 500 Patinhas simulada (demonstração)">Comprar</button></div>
-      <div class="credit-pack"><div class="amt">🐾 1.200</div><div class="price">R$ 79,90</div><button class="btn btn-outline btn-sm btn-block" data-toast="Compra de 1.200 Patinhas simulada (demonstração)">Comprar</button></div>
-    </div>
   </section>
 
   <!-- ===== SCREEN: PERFIL DO PET (TUTOR) ===== -->
