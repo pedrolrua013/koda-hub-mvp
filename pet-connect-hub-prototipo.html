@@ -66,7 +66,7 @@
     overflow-y:auto;overflow-x:hidden;
     transition:width .22s ease,padding .22s ease;
   }
-  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;white-space:nowrap;padding:0 6px;flex-shrink:0;}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;white-space:nowrap;padding:0 6px;flex-shrink:0;margin-bottom:16px;}
   .brand .paw-badge{width:38px;height:38px;border-radius:11px;background:transparent;display:flex;align-items:center;justify-content:center;font-size:18px;}
   .brand .paw-badge img{width:100%;height:100%;object-fit:contain;display:block;}
   .tabs{display:flex;flex-direction:column;gap:4px;background:transparent;padding:0;border-radius:0;flex:0 0 auto;min-height:0;}
@@ -83,10 +83,10 @@
   .sidebar-identity{display:flex;align-items:center;gap:10px;padding:0 4px 4px;}
   .btn-ghost{padding:10px 14px;font-size:14.5px;font-weight:600;border-radius:9px;}
   .avatar-mini{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFD3C4,#FFB199);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary-dark);font-size:13.5px;flex-shrink:0;}
-  .sidebar-social{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:2px;}
-  .sidebar-social-btn{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--secondary-dark);background:rgba(74,107,109,0.10);transition:all .15s ease;flex-shrink:0;}
-  .sidebar-social-btn:hover{background:var(--primary);color:#fff;transform:translateY(-2px);}
-  .sidebar-social-btn svg{width:16px;height:16px;}
+  .sidebar-social{display:flex;align-items:center;justify-content:center;gap:12px;padding-top:2px;}
+  .sidebar-social-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--secondary);transition:all .15s ease;flex-shrink:0;}
+  .sidebar-social-btn:hover{background:var(--turquoise-1);transform:translateY(-2px);}
+  .sidebar-social-btn svg{width:21px;height:21px;}
   .sidebar-logout-btn{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);background:var(--gray-100);border:1.5px solid var(--gray-300);flex-shrink:0;transition:all .15s ease;}
   .sidebar-logout-btn:hover{background:#FBE8E6;color:#C0392B;border-color:#F2C6C1;}
   .sidebar-logout-btn svg{width:17px;height:17px;}
@@ -1348,13 +1348,6 @@
             </div>
             <span class="xp-pct" id="hg-bone-pct">64%</span>
           </div>
-        </div>
-      </div>
-      <div class="sidebar-patinhas tabs-consumidor" id="sidebar-patinhas-btn" data-goto="missoes" title="Ver Central de Recompensas">
-        <span class="sp-icon">🐾</span>
-        <div class="sp-info">
-          <span class="sp-label">Patinhas</span>
-          <span class="sp-value" id="sidebar-patinhas-value">320</span>
         </div>
       </div>
       <div class="sidebar-social">
