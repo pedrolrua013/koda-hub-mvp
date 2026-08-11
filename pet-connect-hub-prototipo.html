@@ -1093,6 +1093,53 @@
   .toast{background:rgba(14,46,54,0.94);color:#fff;padding:12px 20px;border-radius:100px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);backdrop-filter:blur(10px);opacity:0;transform:translateY(10px);transition:all .25s ease;}
   .toast.show{opacity:1;transform:translateY(0);}
 
+  /* ===== Sistema de notificações (tutor) — sino + painel + pop-ups ===== */
+  .notif-bell-btn{position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-700);background:var(--gray-100);border:1.5px solid var(--gray-300);flex-shrink:0;transition:all .15s ease;}
+  .notif-bell-btn:hover{background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary-light);}
+  .notif-bell-btn svg{width:17px;height:17px;}
+  .notif-bell-btn.has-unread svg{animation:notifBellRing 4s ease-in-out infinite;}
+  @keyframes notifBellRing{0%,88%,100%{transform:rotate(0);}90%{transform:rotate(-12deg);}92%{transform:rotate(10deg);}94%{transform:rotate(-8deg);}96%{transform:rotate(6deg);}98%{transform:rotate(0);}}
+  .notif-badge{position:absolute;top:-3px;right:-3px;min-width:17px;height:17px;padding:0 4px;border-radius:100px;background:var(--primary);color:#fff;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff;line-height:1;}
+  .notif-badge.zero{display:none;}
+
+  .notif-panel{position:fixed;z-index:2500;width:368px;max-height:min(72vh,560px);background:#fff;border-radius:20px;box-shadow:var(--shadow-lg);display:none;flex-direction:column;overflow:hidden;border:1px solid var(--gray-300);}
+  .notif-panel.active{display:flex;}
+  @media (min-width:981px){
+    .notif-panel{left:284px;bottom:20px;}
+    body.sidebar-collapsed .notif-panel{left:96px;}
+  }
+  @media (max-width:980px){
+    .notif-panel{top:66px;left:12px;right:12px;width:auto;}
+  }
+  .notif-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;border-bottom:1px solid var(--gray-100);flex-shrink:0;}
+  .notif-panel-head h3{margin:0;font-size:15.5px;}
+  .notif-mark-all{background:transparent;border:none;color:var(--primary-dark);font-size:11.5px;font-weight:700;cursor:pointer;padding:4px 6px;white-space:nowrap;}
+  .notif-mark-all:hover{text-decoration:underline;}
+  .notif-list{overflow-y:auto;flex:1;padding:6px;}
+  .notif-empty{padding:40px 20px;text-align:center;color:var(--gray-500);font-size:13px;}
+  .notif-item{display:flex;align-items:flex-start;gap:12px;padding:12px 12px;border-radius:14px;cursor:pointer;transition:background .15s ease;position:relative;}
+  .notif-item:hover{background:var(--gray-100);}
+  .notif-item.unread{background:var(--primary-light);}
+  .notif-item.unread:hover{background:#FFDCCB;}
+  .notif-item-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16.5px;flex-shrink:0;background:var(--turquoise-4);}
+  .notif-item-body{flex:1;min-width:0;}
+  .notif-item-body h4{margin:0 0 2px;font-size:13px;line-height:1.35;padding-right:14px;}
+  .notif-item-body p{margin:0;font-size:11.5px;color:var(--gray-500);line-height:1.5;}
+  .notif-item-time{display:block;margin-top:4px;font-size:10.5px;color:var(--gray-500);font-weight:600;}
+  .notif-dot{position:absolute;top:14px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+
+  /* Pop-ups de notificação em tempo real (canto inferior direito, desktop) */
+  #notif-popup-container{position:fixed;bottom:24px;right:24px;z-index:2600;display:flex;flex-direction:column-reverse;gap:10px;pointer-events:none;width:340px;}
+  @media (max-width:980px){ #notif-popup-container{display:none;} }
+  .notif-popup{pointer-events:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;border-left:4px solid var(--primary);opacity:0;transform:translateX(24px);transition:all .32s ease;cursor:pointer;}
+  .notif-popup.show{opacity:1;transform:translateX(0);}
+  .notif-popup-icon{width:36px;height:36px;border-radius:50%;background:var(--turquoise-4);display:flex;align-items:center;justify-content:center;font-size:15.5px;flex-shrink:0;}
+  .notif-popup-body{flex:1;min-width:0;}
+  .notif-popup-body h4{margin:0 0 3px;font-size:13px;}
+  .notif-popup-body p{margin:0;font-size:11.5px;color:var(--gray-500);line-height:1.5;}
+  .notif-popup-close{background:transparent;border:none;color:var(--gray-500);cursor:pointer;font-size:15px;flex-shrink:0;padding:2px;line-height:1;}
+  .notif-popup-close:hover{color:var(--dark);}
+
   /* ===========================================================
      DESIGN SYSTEM v2 — refresh (tipografia, elevação, motion)
      Referências: Duolingo (hierarquia lúdica), padrões de login
@@ -1443,6 +1490,10 @@
     <div class="nav-actions">
       <div class="sidebar-identity">
         <div class="avatar-mini" id="header-avatar-btn" title="Meu perfil" style="cursor:pointer;">PR</div>
+        <button type="button" class="notif-bell-btn tabs-consumidor has-unread" id="notif-bell-btn" title="Notificações" aria-label="Notificações">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+          <span class="notif-badge" id="notif-badge">3</span>
+        </button>
         <div class="header-gamification" id="header-gamification">
           <span class="hg-label" id="hg-label">Nível de Cuidado</span>
           <div class="xp-progress" id="hg-bone-btn" title="68% para o próximo nível">
@@ -3478,6 +3529,15 @@
 
 <div id="toast-container"></div>
 
+<div class="notif-panel" id="notif-panel">
+  <div class="notif-panel-head">
+    <h3>Notificações</h3>
+    <button type="button" class="notif-mark-all" id="notif-mark-all-btn">Marcar todas como lidas</button>
+  </div>
+  <div class="notif-list" id="notif-list"></div>
+</div>
+<div id="notif-popup-container"></div>
+
 <script>
   function showToast(msg){
     var container = document.getElementById('toast-container');
@@ -4439,6 +4499,160 @@
   document.querySelectorAll('.filter-bar .chip').forEach(function(chip){
     chip.addEventListener('click', function(){ chip.classList.toggle('active'); });
   });
+
+  // ===== Sistema de notificações (tutor) =====
+  var notifData = [
+    {id:5, icon:'🛁', bg:'#FFE4D6', title:'Banho e tosa do Thor amanhã', desc:'Clínica Vet Aurora confirmou o horário das 14h.', time:'Hoje, 09:12', unread:true, goto:'agenda'},
+    {id:4, icon:'💉', bg:'#D9F2E6', title:'Vacina antirrábica vence em 5 dias', desc:'Agende a dose de reforço do Thor para não atrasar a carteirinha.', time:'Ontem, 18:40', unread:true, goto:'perfil-pet'},
+    {id:3, icon:'✅', bg:'#DCEEFB', title:'Sua consulta foi aceita', desc:'Dra. Carla Mendes aceitou seu pedido de consulta de hoje.', time:'Ontem, 14:05', unread:true, goto:'agenda'},
+    {id:2, icon:'🏷️', bg:'#FDEBD3', title:'10% off Petz para tutores Koda', desc:'Aproveite o desconto exclusivo da parceria até domingo.', time:'2 dias atrás', unread:false, goto:'home'},
+    {id:1, icon:'🦴', bg:'#F1E4FB', title:'+15 pontos de cuidado', desc:'Você completou uma missão semanal do Thor.', time:'3 dias atrás', unread:false, goto:'missoes'}
+  ];
+  var notifNextId = 6;
+
+  function notifUnreadCount(){
+    return notifData.filter(function(n){ return n.unread; }).length;
+  }
+
+  function renderNotifBadge(){
+    var badge = document.getElementById('notif-badge');
+    var bell = document.getElementById('notif-bell-btn');
+    if(!badge || !bell) return;
+    var count = notifUnreadCount();
+    badge.textContent = count > 9 ? '9+' : String(count);
+    badge.classList.toggle('zero', count === 0);
+    bell.classList.toggle('has-unread', count > 0);
+  }
+
+  function renderNotifList(){
+    var list = document.getElementById('notif-list');
+    if(!list) return;
+    if(notifData.length === 0){
+      list.innerHTML = '<div class="notif-empty">🔔 Nenhuma notificação por aqui ainda.</div>';
+      return;
+    }
+    list.innerHTML = notifData.map(function(n){
+      return '<div class="notif-item' + (n.unread ? ' unread' : '') + '" data-notif-id="' + n.id + '" data-goto="' + n.goto + '">' +
+        '<div class="notif-item-icon" style="background:' + n.bg + '">' + n.icon + '</div>' +
+        '<div class="notif-item-body">' +
+          '<h4>' + escapeHtml(n.title) + '</h4>' +
+          '<p>' + escapeHtml(n.desc) + '</p>' +
+          '<span class="notif-item-time">' + escapeHtml(n.time) + '</span>' +
+        '</div>' +
+        (n.unread ? '<span class="notif-dot"></span>' : '') +
+      '</div>';
+    }).join('');
+  }
+
+  function renderNotifs(){
+    renderNotifBadge();
+    renderNotifList();
+  }
+  renderNotifs();
+
+  var notifPanel = document.getElementById('notif-panel');
+  var notifBellBtn = document.getElementById('notif-bell-btn');
+
+  function openNotifPanel(){
+    if(!notifPanel) return;
+    renderNotifs();
+    notifPanel.classList.add('active');
+  }
+  function closeNotifPanel(){
+    if(!notifPanel) return;
+    notifPanel.classList.remove('active');
+  }
+  function toggleNotifPanel(){
+    if(!notifPanel) return;
+    if(notifPanel.classList.contains('active')) closeNotifPanel();
+    else openNotifPanel();
+  }
+
+  if(notifBellBtn){
+    notifBellBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleNotifPanel();
+    });
+  }
+  if(notifPanel){
+    notifPanel.addEventListener('click', function(e){ e.stopPropagation(); });
+  }
+  document.addEventListener('click', function(e){
+    if(notifPanel && notifPanel.classList.contains('active') && !notifPanel.contains(e.target) && e.target !== notifBellBtn){
+      closeNotifPanel();
+    }
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeNotifPanel();
+  });
+
+  var notifMarkAllBtn = document.getElementById('notif-mark-all-btn');
+  if(notifMarkAllBtn){
+    notifMarkAllBtn.addEventListener('click', function(){
+      notifData.forEach(function(n){ n.unread = false; });
+      renderNotifs();
+      showToast('Todas as notificações foram marcadas como lidas ✔️');
+    });
+  }
+
+  var notifList = document.getElementById('notif-list');
+  if(notifList){
+    notifList.addEventListener('click', function(e){
+      var item = e.target.closest('.notif-item');
+      if(!item) return;
+      var id = parseInt(item.getAttribute('data-notif-id'), 10);
+      var goto_ = item.getAttribute('data-goto');
+      var n = notifData.find(function(x){ return x.id === id; });
+      if(n) n.unread = false;
+      renderNotifs();
+      closeNotifPanel();
+      if(goto_) goTo(goto_);
+    });
+  }
+
+  // Pop-up de notificação em tempo real (canto inferior direito, desktop)
+  function showNotifPopup(n){
+    var container = document.getElementById('notif-popup-container');
+    if(!container) return;
+    var el = document.createElement('div');
+    el.className = 'notif-popup';
+    el.innerHTML =
+      '<div class="notif-popup-icon" style="background:' + n.bg + '">' + n.icon + '</div>' +
+      '<div class="notif-popup-body"><h4>' + escapeHtml(n.title) + '</h4><p>' + escapeHtml(n.desc) + '</p></div>' +
+      '<button type="button" class="notif-popup-close" aria-label="Fechar">✕</button>';
+    container.appendChild(el);
+    requestAnimationFrame(function(){ el.classList.add('show'); });
+    function dismiss(){
+      el.classList.remove('show');
+      setTimeout(function(){ el.remove(); }, 320);
+    }
+    el.addEventListener('click', function(e){
+      if(e.target.closest('.notif-popup-close')){ dismiss(); return; }
+      var target = notifData.find(function(x){ return x.id === n.id; });
+      if(target) target.unread = false;
+      renderNotifs();
+      dismiss();
+      if(n.goto) goTo(n.goto);
+    });
+    var autoTimer = setTimeout(dismiss, 7000);
+    el.addEventListener('mouseenter', function(){ clearTimeout(autoTimer); });
+  }
+
+  function pushNotification(data){
+    var n = Object.assign({id: notifNextId++, unread: true, time: 'agora mesmo'}, data);
+    notifData.unshift(n);
+    renderNotifs();
+    showNotifPopup(n);
+  }
+
+  // Simula uma notificação chegando pouco depois de entrar no modo tutor
+  if(!window.__kodaNotifSimulated){
+    window.__kodaNotifSimulated = true;
+    setTimeout(function(){
+      if(document.body.classList.contains('mode-profissional')) return;
+      pushNotification({icon:'🛁', bg:'#FFE4D6', title:'Lembrete: banho e tosa do Thor', desc:'Amanhã às 14h na Clínica Vet Aurora. Toque para ver na agenda.', goto:'agenda'});
+    }, 6000);
+  }
 </script>
 </body>
 </html>
