@@ -625,6 +625,33 @@
   .boost-card h4{margin:0 0 4px;font-size:15px;}
   .boost-card p{margin:0 0 12px;font-size:12px;opacity:.92;}
 
+  /* Ranking Koda gamificado (painel-pro) */
+  .rank-board-sub{font-size:12.5px;color:var(--gray-500);margin:6px 0 18px;line-height:1.6;max-width:640px;}
+  .rank-total-banner{display:flex;align-items:center;gap:16px;background:linear-gradient(120deg,var(--turquoise-1) 0%,var(--secondary) 55%,var(--primary) 145%);color:#fff;border-radius:16px;padding:16px 20px;margin-bottom:20px;}
+  .rank-total-icon{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .rank-total-num{font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;flex-shrink:0;white-space:nowrap;}
+  .rank-total-lbl{font-size:12.5px;line-height:1.5;opacity:.92;}
+  .rank-list{display:flex;flex-direction:column;gap:9px;}
+  .rank-row{display:flex;align-items:center;gap:14px;padding:11px 14px;border-radius:14px;background:var(--gray-100);}
+  .rank-row.top1{background:linear-gradient(90deg,#FFEFD6,var(--gray-100) 70%);}
+  .rank-row.top2{background:linear-gradient(90deg,#EEF1F4,var(--gray-100) 70%);}
+  .rank-row.top3{background:linear-gradient(90deg,#FBE7D9,var(--gray-100) 70%);}
+  .rank-pos{width:28px;flex-shrink:0;text-align:center;font-size:14.5px;font-weight:800;color:var(--gray-500);}
+  .rank-row.top1 .rank-pos,.rank-row.top2 .rank-pos,.rank-row.top3 .rank-pos{font-size:19px;}
+  .rank-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;}
+  .rank-info{flex:1;min-width:0;}
+  .rank-info h4{margin:0 0 2px;font-size:13.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .rank-info>span{font-size:11px;color:var(--gray-500);}
+  .rank-bar-wrap{margin-top:6px;height:6px;border-radius:100px;background:var(--gray-300);overflow:hidden;}
+  .rank-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--primary),var(--primary-dark));}
+  .rank-value{text-align:right;flex-shrink:0;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;color:var(--dark);}
+  .rank-value span{display:block;font-family:'Inter',sans-serif;font-weight:600;font-size:9px;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;}
+  .rank-ellipsis{text-align:center;color:var(--gray-500);font-size:15px;letter-spacing:.25em;padding:1px 0;}
+  .rank-row.me{background:var(--primary-light);border:1.5px solid var(--primary);}
+  .rank-row.me .rank-bar-fill{background:linear-gradient(90deg,var(--primary-dark),var(--secondary-dark));}
+  .rank-row.me .rank-value{color:var(--primary-dark);}
+  .me-tag{background:var(--primary-dark);color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.03em;}
+
   /* Ferramentas do parceiro */
   .tools-header{display:flex;justify-content:space-between;align-items:center;padding:28px 44px 0;flex-wrap:wrap;gap:14px;}
   .tools-header h2{margin:0;font-size:22px;}
@@ -2391,6 +2418,85 @@
           </div>
         </div>
         <p class="info-tag" style="margin:14px 0 26px;">📈 Crescimento consistente há 6 meses — mantenha a taxa de aceite acima de 90% para continuar subindo no ranking regional.</p>
+
+        <div class="card-block rank-board">
+          <div class="chart-card-head">
+            <h3>🏆 Ranking Koda · parceiros que mais cuidam de vidas</h3>
+            <span class="chart-badge">Agosto de 2026</span>
+          </div>
+          <p class="rank-board-sub">Vidas Cuidadas conta cada pet único atendido com sucesso no período — em consulta, banho &amp; tosa, hospedagem, adestramento, creche ou passeio. Quanto mais vidas cuidadas, mais alto o parceiro sobe no ranking da rede.</p>
+
+          <div class="rank-total-banner">
+            <div class="rank-total-icon">🐾</div>
+            <div class="rank-total-num">6.480</div>
+            <div class="rank-total-lbl">vidas cuidadas pela rede Koda este mês, por +2.400 parceiros ativos</div>
+          </div>
+
+          <div class="rank-list">
+            <div class="rank-row top1">
+              <div class="rank-pos">🥇</div>
+              <div class="rank-avatar" style="background:var(--primary-dark);">CM</div>
+              <div class="rank-info">
+                <h4>Dra. Carla Mendes</h4>
+                <span>Veterinária · Clínica geral</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:100%;"></div></div>
+              </div>
+              <div class="rank-value">214<span>vidas cuidadas</span></div>
+            </div>
+            <div class="rank-row top2">
+              <div class="rank-pos">🥈</div>
+              <div class="rank-avatar" style="background:var(--secondary);">VA</div>
+              <div class="rank-info">
+                <h4>Clínica Vet Aurora</h4>
+                <span>Veterinária · Equipe multidisciplinar</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:93%;"></div></div>
+              </div>
+              <div class="rank-value">198<span>vidas cuidadas</span></div>
+            </div>
+            <div class="rank-row top3">
+              <div class="rank-pos">🥉</div>
+              <div class="rank-avatar" style="background:var(--secondary-dark);">LB</div>
+              <div class="rank-info">
+                <h4>Dr. Lucas Barbosa</h4>
+                <span>Veterinário · Ortopedia e cirurgia</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:82%;"></div></div>
+              </div>
+              <div class="rank-value">176<span>vidas cuidadas</span></div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-pos">4</div>
+              <div class="rank-avatar" style="background:#0d8f74;">BF</div>
+              <div class="rank-info">
+                <h4>Bianca Ferraz</h4>
+                <span>Pet Sitter · Hospedagem na casa dela</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:71%;"></div></div>
+              </div>
+              <div class="rank-value">152<span>vidas cuidadas</span></div>
+            </div>
+            <div class="rank-row">
+              <div class="rank-pos">5</div>
+              <div class="rank-avatar" style="background:#C97A00;">JT</div>
+              <div class="rank-info">
+                <h4>Juliana Torres</h4>
+                <span>Banho &amp; Tosa · A domicílio</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:63%;"></div></div>
+              </div>
+              <div class="rank-value">134<span>vidas cuidadas</span></div>
+            </div>
+            <div class="rank-ellipsis">⋮</div>
+            <div class="rank-row me">
+              <div class="rank-pos">#12</div>
+              <div class="rank-avatar" style="background:var(--secondary-dark);">RS</div>
+              <div class="rank-info">
+                <h4>Rafael Souza <span class="me-tag">Você</span></h4>
+                <span>Passeador · Cães de todos os portes</span>
+                <div class="rank-bar-wrap"><div class="rank-bar-fill" style="width:22%;"></div></div>
+              </div>
+              <div class="rank-value">46<span>vidas cuidadas</span></div>
+            </div>
+          </div>
+          <p class="info-tag" style="margin:16px 0 0;">🚀 Faltam apenas 8 vidas cuidadas para você entrar no Top 10 da rede este mês.</p>
+        </div>
 
         <div class="card-block heatmap-card">
           <div class="chart-card-head">
