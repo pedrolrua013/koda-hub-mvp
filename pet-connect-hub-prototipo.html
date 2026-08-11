@@ -1144,17 +1144,16 @@
   .auth-brand{
     flex:1;min-width:0;position:relative;overflow:hidden;display:none;
     background-color:var(--turquoise-2);
-    background-image:
-      linear-gradient(190deg, rgba(20,45,46,0.30) 0%, rgba(18,38,40,0.55) 55%, rgba(12,26,28,0.86) 100%),
-      url('https://images.pexels.com/photos/4453160/pexels-photo-4453160.jpeg?auto=compress&cs=tinysrgb&w=1200');
-    background-repeat:no-repeat,no-repeat;
-    background-size:cover,cover;
-    background-position:center,center 25%;
     color:#fff;padding:56px 48px;flex-direction:column;justify-content:space-between;
   }
   @media (min-width:860px){ .auth-brand{display:flex;} }
-  .auth-brand::before{content:"";position:absolute;top:-70px;right:-70px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.08);}
-  .auth-brand::after{content:"";position:absolute;left:-90px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.06);}
+  .auth-brand-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .auth-brand-overlay{
+    position:absolute;inset:0;z-index:1;
+    background-image:linear-gradient(190deg, rgba(20,45,46,0.30) 0%, rgba(18,38,40,0.55) 55%, rgba(12,26,28,0.86) 100%);
+  }
+  .auth-brand::before{content:"";position:absolute;top:-70px;right:-70px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,0.08);z-index:2;}
+  .auth-brand::after{content:"";position:absolute;left:-90px;bottom:-90px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.06);z-index:2;}
   .auth-brand-top{position:relative;z-index:2;display:flex;align-items:center;gap:12px;}
   .auth-brand-top .paw-badge-lg{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.32);display:flex;align-items:center;justify-content:center;}
   .auth-brand-top .paw-badge-lg img{width:68%;height:68%;object-fit:contain;}
@@ -1279,14 +1278,18 @@
   <section class="screen auth-screen-wrap" id="login">
     <div class="auth-screen">
       <div class="auth-brand">
+        <video class="auth-brand-video" autoplay muted loop playsinline>
+          <source src="koda-login-video.mp4" type="video/mp4">
+        </video>
+        <div class="auth-brand-overlay"></div>
         <div class="auth-brand-top">
           <span class="paw-badge-lg" id="auth-logo-lg"></span>
           <span class="brand-name">Koda</span>
         </div>
         <div class="auth-brand-mid">
           <span class="auth-persona-pill" id="auth-persona-pill">🧑 Entrando como tutor</span>
-          <h1 style="margin-top:16px;">Tudo do seu pet, num só lugar.</h1>
-          <p>Histórico de saúde, agendamentos e a rede de profissionais que você confia — sincronizados entre tutor e parceiros.</p>
+          <h1 style="margin-top:16px;">Conectando pessoas, serviços e cuidado ao longo da vida do pet.</h1>
+          <p>O hub que reúne tutores, profissionais e parceiros pet num único ecossistema.</p>
         </div>
         <div class="auth-brand-stats">
           <div><b>+2.400</b><span>parceiros verificados</span></div>
