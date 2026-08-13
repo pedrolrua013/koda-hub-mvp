@@ -1166,7 +1166,46 @@
   .koda-assistant-fab-logo img{width:100%;height:100%;object-fit:contain;display:block;}
   @media (max-width:980px){ .koda-assistant-fab{right:16px;bottom:76px;width:52px;height:52px;} .koda-assistant-fab-logo{width:29px;height:29px;} }
   body:has(#landing.active) .koda-assistant-fab,
-  body:has(#login.active) .koda-assistant-fab{display:none;}
+  body:has(#login.active) .koda-assistant-fab,
+  body:has(#landing.active) .assistant-panel,
+  body:has(#login.active) .assistant-panel{display:none !important;}
+
+  /* ===== Painel de chat do Assistente Virtual Koda ===== */
+  .assistant-panel{
+    position:fixed;right:24px;bottom:94px;z-index:2500;
+    width:368px;max-height:min(70vh,540px);
+    background:#fff;border-radius:22px;box-shadow:var(--shadow-lg);border:1px solid var(--gray-300);
+    display:none;flex-direction:column;overflow:hidden;
+  }
+  .assistant-panel.active{display:flex;animation:fadeIn .25s ease;}
+  @media (max-width:640px){ .assistant-panel{right:12px;left:12px;bottom:76px;width:auto;max-height:64vh;} }
+  .assistant-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;background:linear-gradient(120deg,var(--turquoise-1),var(--secondary));flex-shrink:0;}
+  .assistant-head-info{display:flex;align-items:center;gap:11px;min-width:0;}
+  .assistant-head-avatar{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;padding:5px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,0.4);}
+  .assistant-head-avatar img{width:100%;height:100%;object-fit:contain;display:block;}
+  .assistant-head-text h3{margin:0;font-size:14.5px;color:#fff;}
+  .assistant-status{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.82);font-weight:600;margin-top:2px;}
+  .assistant-status-dot{width:7px;height:7px;border-radius:50%;background:#3DDC84;display:inline-block;box-shadow:0 0 0 2px rgba(61,220,132,0.28);}
+  .assistant-close-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.16);color:#fff;border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .assistant-close-btn:hover{background:rgba(255,255,255,0.28);}
+  .assistant-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--gray-100);min-height:220px;}
+  .assistant-msg{max-width:82%;padding:10px 13px;border-radius:15px;font-size:13px;line-height:1.5;}
+  .assistant-msg.bot{align-self:flex-start;background:#fff;color:var(--dark);border-bottom-left-radius:4px;box-shadow:0 2px 6px rgba(6,40,48,0.08);}
+  .assistant-msg.user{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:4px;}
+  .assistant-msg.typing{display:flex;align-items:center;gap:4px;padding:13px 15px;}
+  .assistant-msg.typing i{width:6px;height:6px;border-radius:50%;background:var(--gray-500);display:inline-block;animation:assistantTypingDot 1.1s ease-in-out infinite;}
+  .assistant-msg.typing i:nth-child(2){animation-delay:.15s;}
+  .assistant-msg.typing i:nth-child(3){animation-delay:.3s;}
+  @keyframes assistantTypingDot{0%,60%,100%{opacity:.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+  .assistant-quick-replies{display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px;flex-shrink:0;border-top:1px solid var(--gray-300);}
+  .assistant-quick-reply{background:var(--turquoise-4);color:var(--turquoise-1);border:1px solid rgba(74,107,109,0.24);font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:100px;cursor:pointer;white-space:nowrap;}
+  .assistant-quick-reply:hover{background:#c3dadc;}
+  .assistant-input-row{display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--gray-300);flex-shrink:0;}
+  .assistant-input-row input{flex:1;min-width:0;border:1.5px solid var(--gray-300);border-radius:100px;padding:10px 16px;font-family:inherit;font-size:13px;outline:none;}
+  .assistant-input-row input:focus{border-color:var(--primary);}
+  .assistant-send-btn{width:38px;height:38px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .12s ease;}
+  .assistant-send-btn:hover{transform:scale(1.06);}
+  .assistant-send-btn svg{width:16px;height:16px;}
   .notif-popup{pointer-events:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;border-left:4px solid var(--primary);opacity:0;transform:translateX(24px);transition:all .32s ease;cursor:pointer;}
   .notif-popup.show{opacity:1;transform:translateX(0);}
   .notif-popup-icon{width:36px;height:36px;border-radius:50%;background:var(--turquoise-4);display:flex;align-items:center;justify-content:center;font-size:15.5px;flex-shrink:0;}
@@ -3575,10 +3614,31 @@
 </div>
 <div id="notif-popup-container"></div>
 
-<button type="button" class="koda-assistant-fab" id="koda-assistant-fab" title="Assistente virtual Koda" aria-label="Abrir assistente virtual Koda" data-toast="🤖 Assistente virtual Koda — em breve neste protótipo!">
+<button type="button" class="koda-assistant-fab" id="koda-assistant-fab" title="Assistente virtual Koda" aria-label="Abrir assistente virtual Koda">
   <span class="koda-assistant-fab-ring"></span>
   <span class="koda-assistant-fab-logo" id="koda-assistant-fab-logo"></span>
 </button>
+
+<div class="assistant-panel" id="assistant-panel">
+  <div class="assistant-panel-head">
+    <div class="assistant-head-info">
+      <span class="assistant-head-avatar" id="assistant-head-avatar"></span>
+      <div class="assistant-head-text">
+        <h3>Assistente Koda</h3>
+        <span class="assistant-status"><i class="assistant-status-dot"></i>Online agora</span>
+      </div>
+    </div>
+    <button type="button" class="assistant-close-btn" id="assistant-close-btn" aria-label="Fechar assistente">✕</button>
+  </div>
+  <div class="assistant-messages" id="assistant-messages"></div>
+  <div class="assistant-quick-replies" id="assistant-quick-replies"></div>
+  <form class="assistant-input-row" id="assistant-input-row">
+    <input type="text" id="assistant-input" placeholder="Pergunte algo sobre a Koda..." autocomplete="off">
+    <button type="submit" class="assistant-send-btn" aria-label="Enviar mensagem">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </form>
+</div>
 
 <script>
   function showToast(msg){
@@ -3974,7 +4034,7 @@
     var sourceLogo = document.querySelector('.brand .paw-badge img');
     var src = sourceLogo ? sourceLogo.getAttribute('src') : null;
     if(src){
-      ['auth-logo-lg','auth-logo-sm','koda-assistant-fab-logo'].forEach(function(id){
+      ['auth-logo-lg','auth-logo-sm','koda-assistant-fab-logo','assistant-head-avatar'].forEach(function(id){
         var el = document.getElementById(id);
         if(el){
           var img = document.createElement('img');
@@ -4695,6 +4755,151 @@
       pushNotification({icon:'🛁', bg:'#FFE4D6', title:'Lembrete: banho e tosa do Thor', desc:'Amanhã às 14h na Clínica Vet Aurora. Toque para ver na agenda.', goto:'agenda'});
     }, 6000);
   }
+
+  // ===== Assistente Virtual Koda (chat simulado — respostas contextuais, sem API externa) =====
+  (function(){
+    var fabBtn = document.getElementById('koda-assistant-fab');
+    var panel = document.getElementById('assistant-panel');
+    var closeBtn = document.getElementById('assistant-close-btn');
+    var messagesEl = document.getElementById('assistant-messages');
+    var quickRepliesEl = document.getElementById('assistant-quick-replies');
+    var formEl = document.getElementById('assistant-input-row');
+    var inputEl = document.getElementById('assistant-input');
+    if(!fabBtn || !panel) return;
+
+    var hasGreeted = false;
+
+    // Base de conhecimento simples: intenção (palavras-chave) → resposta contextual sobre a Koda.
+    // Simula raciocínio por correspondência de intenção — sem chamar nenhuma API externa.
+    var KNOWLEDGE = [
+      { keys:['oi','olá','ola','bom dia','boa tarde','boa noite','opa','eae','e ai'],
+        reply:'Oi! 👋 Eu sou o assistente virtual da Koda. Posso te ajudar a agendar serviços, entender os planos, o prontuário do seu pet, as Patinhas de recompensa e muito mais. O que você quer saber?' },
+      { keys:['agendar','agendamento','marcar','marcar consulta','horário','horario','reservar'],
+        reply:'Para agendar um serviço: vá em "Buscar" na barra lateral, escolha a categoria (veterinário, banho & tosa, pet sitter etc.), selecione um profissional verificado e escolha o horário disponível. O pagamento é feito direto pelo app, sem sair da Koda. 📅' },
+      { keys:['plano','planos','assinatura','assinaturas','preço','preco','quanto custa','mensalidade'],
+        reply:'A Koda tem planos para tutores e para parceiros. Para parceiros, existem 3 níveis de assinatura B2B com benefícios crescentes de destaque e ferramentas. Dá uma olhada na aba "Planos" do menu do parceiro para ver os valores atualizados. 💳' },
+      { keys:['prontuário','prontuario','exame','exames','vacina','vacinas','saúde','saude','histórico médico','historico medico'],
+        reply:'O Prontuário Médico fica no Perfil do Pet. Lá você encontra consultas, vacinas e exames organizados por categoria — inclusive documentos anexados, como laudos de exame. É a memória de saúde completa do seu pet. 🩺' },
+      { keys:['patinha','patinhas','recompensa','recompensas','pontos','cupom','desconto koda'],
+        reply:'Patinhas são a moeda de recompensa da Koda! Você ganha ao completar missões, agendar serviços e cuidar do seu pet pelo app, e pode trocar por benefícios na Central de Recompensas. 🦴' },
+      { keys:['ranking','desempenho','performance','minha posição','minha posicao'],
+        reply:'Se você é parceiro Koda, o Ranking fica no Painel, logo abaixo dos gráficos — mostra os parceiros que mais cuidaram de vidas no mês e a sua posição atual, mesmo fora do Top 5. 🏆' },
+      { keys:['petz','parceria petz'],
+        reply:'A Koda tem uma parceria com a Petz: tutores ganham 10% de desconto em produtos, e isso aparece em destaque na tela Início. 🛍️' },
+      { keys:['notificação','notificacao','notificações','notificacoes','sino','aviso','avisos'],
+        reply:'O sininho no topo do menu lateral mostra suas notificações — lembretes de banho e tosa, vacinas, consultas aceitas e novidades da rede Koda. É só clicar para abrir. 🔔' },
+      { keys:['missão','missao','missões','missoes'],
+        reply:'A Central de Missões tem desafios diários e semanais que rendem Patinhas quando completados — é uma forma leve de manter o cuidado do seu pet em dia. 🎯' },
+      { keys:['o que é a koda','o que e a koda','quem é a koda','sobre a koda','o que vocês fazem','o que voces fazem'],
+        reply:'A Koda é o hub que conecta tutores, profissionais e parceiros pet num único ecossistema — conectando pessoas, serviços e cuidado ao longo da vida do pet. 🐾' },
+      { keys:['obrigado','obrigada','valeu','vlw','thanks'],
+        reply:'Disponha! Se precisar de mais alguma coisa sobre a Koda, é só chamar. 😊' }
+    ];
+    var FALLBACKS = [
+      'Ainda estou aprendendo sobre esse assunto específico, mas posso te ajudar com agendamentos, planos, prontuário médico, Patinhas de recompensa ou o Ranking Koda. O que você gostaria de saber?',
+      'Não tenho certeza sobre isso ainda — mas posso explicar como agendar serviços, como funcionam as Patinhas ou o prontuário do seu pet. Quer tentar alguma dessas?'
+    ];
+    var QUICK_REPLIES = [
+      'Como agendo um serviço?',
+      'Quais são os planos?',
+      'Como funciona o prontuário?',
+      'O que são Patinhas?'
+    ];
+
+    function getReply(text){
+      var t = text.toLowerCase();
+      for(var i = 0; i < KNOWLEDGE.length; i++){
+        var item = KNOWLEDGE[i];
+        for(var j = 0; j < item.keys.length; j++){
+          if(t.indexOf(item.keys[j]) !== -1) return item.reply;
+        }
+      }
+      return FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)];
+    }
+
+    function scrollToBottom(){
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addMessage(text, who){
+      var bubble = document.createElement('div');
+      bubble.className = 'assistant-msg ' + who;
+      bubble.textContent = text;
+      messagesEl.appendChild(bubble);
+      scrollToBottom();
+    }
+
+    function renderQuickReplies(){
+      if(!quickRepliesEl) return;
+      quickRepliesEl.innerHTML = QUICK_REPLIES.map(function(q){
+        return '<button type="button" class="assistant-quick-reply">' + escapeHtml(q) + '</button>';
+      }).join('');
+    }
+
+    function sendUserMessage(text){
+      text = (text || '').trim();
+      if(!text) return;
+      addMessage(text, 'user');
+      inputEl.value = '';
+      var typing = document.createElement('div');
+      typing.className = 'assistant-msg bot typing';
+      typing.innerHTML = '<i></i><i></i><i></i>';
+      messagesEl.appendChild(typing);
+      scrollToBottom();
+      var delay = 550 + Math.random() * 700;
+      setTimeout(function(){
+        typing.remove();
+        addMessage(getReply(text), 'bot');
+      }, delay);
+    }
+
+    function openAssistant(){
+      panel.classList.add('active');
+      if(!hasGreeted){
+        hasGreeted = true;
+        renderQuickReplies();
+        setTimeout(function(){
+          addMessage('Oi! 👋 Eu sou o assistente virtual da Koda. Posso te ajudar com agendamentos, planos, prontuário médico, Patinhas de recompensa e mais. Como posso ajudar?', 'bot');
+        }, 300);
+      }
+      if(inputEl) inputEl.focus();
+    }
+    function closeAssistant(){
+      panel.classList.remove('active');
+    }
+    function toggleAssistant(){
+      if(panel.classList.contains('active')) closeAssistant();
+      else openAssistant();
+    }
+
+    fabBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleAssistant();
+    });
+    if(closeBtn) closeBtn.addEventListener('click', closeAssistant);
+    panel.addEventListener('click', function(e){ e.stopPropagation(); });
+    document.addEventListener('click', function(e){
+      if(panel.classList.contains('active') && !panel.contains(e.target) && e.target !== fabBtn && !fabBtn.contains(e.target)){
+        closeAssistant();
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeAssistant();
+    });
+    if(formEl){
+      formEl.addEventListener('submit', function(e){
+        e.preventDefault();
+        sendUserMessage(inputEl.value);
+      });
+    }
+    if(quickRepliesEl){
+      quickRepliesEl.addEventListener('click', function(e){
+        var btn = e.target.closest('.assistant-quick-reply');
+        if(!btn) return;
+        sendUserMessage(btn.textContent);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
