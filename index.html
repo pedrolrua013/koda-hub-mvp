@@ -184,6 +184,17 @@
   }
   @keyframes liveBannerPulseOrange{0%,100%{box-shadow:0 0 0 0 rgba(243,124,94,0.45);}50%{box-shadow:0 0 0 8px rgba(243,124,94,0);}}
   @media (prefers-reduced-motion: reduce){.live-request-banner{animation:none !important;}.live-dot{animation:none;opacity:1;}}
+  /* Estado "expirado" do pedido em tempo real (desktop e mobile) */
+  .live-request-banner.request-expired{animation:none !important;cursor:default;box-shadow:none;background:var(--gray-100);border-color:var(--gray-300);opacity:.85;}
+  .live-request-banner.request-expired .live-dot{animation:none;background:var(--gray-500);}
+  .live-request-banner.request-expired .live-dot-wrap{color:var(--gray-500);}
+  .live-request-banner.request-expired .live-req-badge{background:var(--gray-300);color:var(--gray-700);}
+  @media (max-width:980px){
+    .live-request-banner.request-expired{background:linear-gradient(120deg,#657477 0%,#405255 100%);box-shadow:none;opacity:.9;}
+    .live-request-banner.request-expired .live-dot-wrap,
+    .live-request-banner.request-expired .live-req-detail{color:#fff;}
+    .live-request-banner.request-expired .live-req-badge{background:rgba(255,255,255,0.22);color:#fff;}
+  }
 
   /* Hero — redesenhado em glassmorphism escuro premium (rebranding v3, ref. jornadas 3D) */
   .hero{position:relative;overflow:hidden;margin:20px 24px 0;border-radius:24px;background:linear-gradient(135deg,#0A1E22 0%,#123239 48%,#0D2427 100%);padding:52px 44px;color:#fff;box-shadow:0 24px 60px rgba(6,20,24,0.35);}
@@ -1142,11 +1153,10 @@
   .sidebar .btn-ghost:hover{background:rgba(255,255,255,0.16);color:#fff;}
   .sidebar .avatar-mini{box-shadow:0 0 0 2px rgba(255,255,255,0.55);}
   .sidebar .hg-label{color:#fff;font-weight:800;}
-  .dog-progress-svg{flex:1;min-width:0;height:auto;aspect-ratio:200/90;display:block;overflow:visible;}
-  .dog-progress .dog-track{fill:rgba(255,255,255,0.22);}
-  .dog-progress .dog-fill{fill:var(--secondary);}
-  .dog-progress .dog-eye{fill:#0D2427;}
-  #hg-dog-clip-rect{transition:width .6s cubic-bezier(.22,.9,.36,1);}
+  .paw-progress-svg{flex:1;min-width:0;height:auto;aspect-ratio:100/90;display:block;overflow:visible;}
+  .paw-progress .paw-track{fill:rgba(255,255,255,0.22);}
+  .paw-progress .paw-fill{fill:#3DDC84;}
+  #hg-paw-clip-rect{transition:width .6s cubic-bezier(.22,.9,.36,1);}
   /* Nível de Cuidado: fica em branco sobre o gradiente laranja (evita laranja-sobre-laranja) */
   .sidebar .xp-badge{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.4);animation:xpBadgePulseLight 2.6s ease-in-out infinite;}
   .sidebar .xp-badge span{font-size:10px;}
@@ -1308,6 +1318,9 @@
   .xp-progress.lg .xp-badge{width:32px;height:32px;font-size:15px;}
   .xp-progress.lg .xp-track{width:160px;min-width:160px;height:14px;}
   .xp-progress.lg .xp-pct{font-size:14px;padding:5px 13px;}
+  /* Nível de Cuidado / Nível de Parceiro: pata vetorizada com preenchimento verde no lugar da barra */
+  .xp-progress.lg.paw-progress .paw-progress-svg{flex:0 0 auto;width:70px;height:auto;aspect-ratio:100/90;}
+  .xp-progress.lg.paw-progress .xp-pct{font-size:14px;padding:5px 13px;}
 
   .level-card{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;}
   .level-info h3{margin:0 0 3px;font-size:16.5px;}
@@ -1810,31 +1823,26 @@
       </button>
       <div class="header-gamification" id="header-gamification">
         <span class="hg-label" id="hg-label">Nível de Cuidado</span>
-        <div class="xp-progress dog-progress" id="hg-bone-btn" title="68% para o próximo nível">
+        <div class="xp-progress paw-progress" id="hg-bone-btn" title="68% para o próximo nível">
           <div class="xp-badge" id="hg-bone-badge">
             <img class="tabs-consumidor" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=100" alt="Thor">
             <span class="tabs-profissional">🐾</span>
           </div>
-          <svg class="dog-progress-svg" viewBox="0 0 200 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+          <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
             <defs>
-              <g id="hgDogShape">
-                <path d="M 44,42 C 26,36 14,20 20,8 C 23,2 31,3 30,10 C 27,20 34,32 48,38 Z"/>
-                <rect x="54" y="58" width="11" height="24" rx="5.5"/>
-                <rect x="76" y="58" width="11" height="24" rx="5.5"/>
-                <rect x="106" y="58" width="11" height="24" rx="5.5"/>
-                <rect x="128" y="58" width="11" height="24" rx="5.5"/>
-                <rect x="40" y="32" width="102" height="34" rx="17"/>
-                <ellipse cx="148" cy="34" rx="20" ry="22"/>
-                <path d="M 138,16 C 134,4 146,-2 152,6 C 156,12 152,20 144,20 C 141,20 139,18 138,16 Z"/>
-                <rect x="160" y="28" width="24" height="16" rx="8"/>
+              <g id="hgPawShape">
+                <ellipse cx="50" cy="62" rx="28" ry="22"/>
+                <ellipse cx="14" cy="39" rx="11" ry="14"/>
+                <ellipse cx="36" cy="18" rx="12" ry="15"/>
+                <ellipse cx="64" cy="18" rx="12" ry="15"/>
+                <ellipse cx="86" cy="39" rx="11" ry="14"/>
               </g>
-              <clipPath id="hgDogClip" clipPathUnits="userSpaceOnUse">
-                <rect id="hg-dog-clip-rect" x="0" y="0" width="128" height="90"/>
+              <clipPath id="hgPawClip" clipPathUnits="userSpaceOnUse">
+                <rect id="hg-paw-clip-rect" x="0" y="0" width="64" height="90"/>
               </clipPath>
             </defs>
-            <use href="#hgDogShape" class="dog-track"></use>
-            <use href="#hgDogShape" class="dog-fill" clip-path="url(#hgDogClip)"></use>
-            <circle cx="146" cy="26" r="2.2" class="dog-eye"></circle>
+            <use href="#hgPawShape" class="paw-track"></use>
+            <use href="#hgPawShape" class="paw-fill" clip-path="url(#hgPawClip)"></use>
           </svg>
           <span class="xp-pct" id="hg-bone-pct">64%</span>
         </div>
@@ -2699,15 +2707,15 @@
 
   <!-- ===== SCREEN: PAINEL PARCEIRO ===== -->
   <section class="screen" id="painel-pro">
-    <div class="live-request-banner" data-goto="solicitacoes">
-      <div class="live-dot-wrap"><span class="live-dot"></span>AO VIVO</div>
+    <div class="live-request-banner" id="partner-request-alert" data-goto="solicitacoes">
+      <div class="live-dot-wrap"><span class="live-dot"></span><span class="live-status-text">AO VIVO</span></div>
       <div class="live-req-photo" style="background-image:url('https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200');"></div>
       <div class="live-req-info">
         <div class="live-req-title">Novo pedido recebido</div>
         <div class="live-req-detail"><b>Thor</b> · Passeio de 60 min · Juliana Ferreira</div>
         <div class="live-req-meta">Solicitado agora mesmo · 1.1 km de você</div>
       </div>
-      <span class="live-req-badge">⏱ Expira em 0:47</span>
+      <span class="live-req-badge" id="partner-request-timer" data-duration="47" aria-live="polite">⏱ Expira em 0:47</span>
     </div>
 
     <div class="pro-metrics-panel">
@@ -2726,7 +2734,7 @@
       <div class="kpi-grid">
         <div class="kpi-card kpi-light">
           <div class="kpi-top"><span class="kpi-icon">💰</span><span class="trend up">↑ 12%</span></div>
-          <div class="kpi-num">R$ 2.140</div>
+          <div class="kpi-num metric-counter" data-counter-target="2140" data-counter-format="currency">R$ 0</div>
           <div class="kpi-lbl">Ganhos brutos este mês</div>
           <div class="kpi-spark">
             <svg viewBox="0 0 100 32" preserveAspectRatio="none">
@@ -2737,7 +2745,7 @@
         </div>
         <div class="kpi-card kpi-light">
           <div class="kpi-top"><span class="kpi-icon">✅</span><span class="trend up">↑ 8</span></div>
-          <div class="kpi-num">58</div>
+          <div class="kpi-num metric-counter" data-counter-target="58" data-counter-format="integer">0</div>
           <div class="kpi-lbl">Atendimentos concluídos</div>
           <div class="kpi-bars">
             <i style="height:35%;"></i><i style="height:48%;"></i><i style="height:42%;"></i><i style="height:64%;"></i><i style="height:58%;"></i><i style="height:100%;"></i>
@@ -2749,7 +2757,7 @@
               <circle class="kpi-ring-track" cx="36" cy="36" r="30"/>
               <circle class="kpi-ring-progress" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="7.5"/>
             </svg>
-            <div class="kpi-ring-center">4.8★</div>
+            <div class="kpi-ring-center metric-counter" data-counter-target="4.8" data-counter-decimals="1" data-counter-format="rating" data-ring-max="5">0,0★</div>
           </div>
           <div class="kpi-lbl">Nota média (156 avaliações)</div>
           <span class="trend up">↑ 0.1</span>
@@ -2760,7 +2768,7 @@
               <circle class="kpi-ring-track" cx="36" cy="36" r="30"/>
               <circle class="kpi-ring-progress" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="11.3"/>
             </svg>
-            <div class="kpi-ring-center">94%</div>
+            <div class="kpi-ring-center metric-counter" data-counter-target="94" data-counter-format="percent" data-ring-max="100">0%</div>
           </div>
           <div class="kpi-lbl">Taxa de aceite</div>
           <span class="trend up">↑ 2 p.p.</span>
@@ -2790,7 +2798,7 @@
               </svg>
               <div class="mini-ring-center">85%</div>
             </div>
-            <div class="kpi-num">R$ 1.819</div>
+            <div class="kpi-num metric-counter" data-counter-target="1819" data-counter-format="currency">R$ 0</div>
             <div class="kpi-lbl">Repasse líquido deste mês</div>
             <div class="kpi-lbl" style="margin-top:2px;">85% do valor bruto arrecadado</div>
           </div>
@@ -2938,11 +2946,23 @@
               <h3>420 de 600 pontos de reputação</h3>
               <p>Faltam 180 pontos para virar Parceiro Top e entrar no Top 10 da região.</p>
             </div>
-            <div class="xp-progress lg" title="55% para o próximo nível">
-              <div class="xp-badge">🐾</div>
-              <div class="xp-track">
-                <div class="xp-fill" style="width:55%;"><span class="xp-fill-shine"></span></div>
-              </div>
+            <div class="xp-progress lg paw-progress" title="55% para o próximo nível">
+              <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+                <defs>
+                  <g id="hgPawShape2">
+                    <ellipse cx="50" cy="62" rx="28" ry="22"/>
+                    <ellipse cx="14" cy="39" rx="11" ry="14"/>
+                    <ellipse cx="36" cy="18" rx="12" ry="15"/>
+                    <ellipse cx="64" cy="18" rx="12" ry="15"/>
+                    <ellipse cx="86" cy="39" rx="11" ry="14"/>
+                  </g>
+                  <clipPath id="proLevelPawClip" clipPathUnits="userSpaceOnUse">
+                    <rect id="pro-level-paw-clip-rect" x="0" y="0" width="55" height="90"/>
+                  </clipPath>
+                </defs>
+                <use href="#hgPawShape2" class="paw-track"></use>
+                <use href="#hgPawShape2" class="paw-fill" clip-path="url(#proLevelPawClip)"></use>
+              </svg>
               <span class="xp-pct">55%</span>
             </div>
           </div>
@@ -3460,11 +3480,23 @@
               <h3>310 de 400 pontos de cuidado</h3>
               <p>Faltam 90 pontos para virar Tutor Expert e desbloquear novos selos.</p>
             </div>
-            <div class="xp-progress lg" title="64% para o próximo nível">
-              <div class="xp-badge">🐾</div>
-              <div class="xp-track">
-                <div class="xp-fill" style="width:64%;"><span class="xp-fill-shine"></span></div>
-              </div>
+            <div class="xp-progress lg paw-progress" title="64% para o próximo nível">
+              <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
+                <defs>
+                  <g id="hgPawShape3">
+                    <ellipse cx="50" cy="62" rx="28" ry="22"/>
+                    <ellipse cx="14" cy="39" rx="11" ry="14"/>
+                    <ellipse cx="36" cy="18" rx="12" ry="15"/>
+                    <ellipse cx="64" cy="18" rx="12" ry="15"/>
+                    <ellipse cx="86" cy="39" rx="11" ry="14"/>
+                  </g>
+                  <clipPath id="petLevelPawClip" clipPathUnits="userSpaceOnUse">
+                    <rect id="pet-level-paw-clip-rect" x="0" y="0" width="64" height="90"/>
+                  </clipPath>
+                </defs>
+                <use href="#hgPawShape3" class="paw-track"></use>
+                <use href="#hgPawShape3" class="paw-fill" clip-path="url(#petLevelPawClip)"></use>
+              </svg>
               <span class="xp-pct">64%</span>
             </div>
           </div>
@@ -4015,8 +4047,177 @@
     setTimeout(positionAssistantFab, 220);
     if(tabName === 'painel-pro'){
       setTimeout(initPainelCharts, 60);
+      setTimeout(animateMonthlyMetrics, 90);
+      startPartnerRequestTimer();
     }
   }
+
+  // ===== Métricas do mês + timer do pedido ao vivo: contadores em tempo real (painel do parceiro) =====
+  var monthlyMetricsAnimationToken = 0;
+  var lastMetricsPanelActivation = false;
+  var KPI_RING_CIRCUMFERENCE = 188.5;
+
+  function formatMetricCounter(value, format, decimals){
+    decimals = Number(decimals || 0);
+    if(format === 'currency') return 'R$ ' + Math.round(value).toLocaleString('pt-BR');
+    if(format === 'percent') return Math.round(value).toLocaleString('pt-BR') + '%';
+    if(format === 'rating') return Number(value).toLocaleString('pt-BR', {
+      minimumFractionDigits: decimals || 1,
+      maximumFractionDigits: decimals || 1
+    }) + '★';
+    return Math.round(value).toLocaleString('pt-BR');
+  }
+
+  function animateMonthlyMetrics(force){
+    var panel = document.getElementById('painel-pro');
+    if(!panel || (!force && !panel.classList.contains('active'))) return;
+    var counters = panel.querySelectorAll('.metric-counter[data-counter-target]');
+    if(!counters.length) return;
+
+    var token = ++monthlyMetricsAnimationToken;
+    var startTime = performance.now();
+    var duration = 1400;
+
+    counters.forEach(function(el){
+      el.textContent = formatMetricCounter(0, el.dataset.counterFormat, el.dataset.counterDecimals);
+      var ring = el.closest('.kpi-ring-wrap');
+      var progressCircle = ring ? ring.querySelector('.kpi-ring-progress') : null;
+      if(progressCircle) progressCircle.style.strokeDashoffset = KPI_RING_CIRCUMFERENCE;
+    });
+
+    function frame(now){
+      if(token !== monthlyMetricsAnimationToken) return;
+      var progress = Math.min((now - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 4);
+
+      counters.forEach(function(el){
+        var target = parseFloat(el.dataset.counterTarget) || 0;
+        var decimals = Number(el.dataset.counterDecimals || 0);
+        var current = target * eased;
+        if(decimals > 0) current = Number(current.toFixed(decimals));
+        el.textContent = formatMetricCounter(current, el.dataset.counterFormat, decimals);
+
+        var ring = el.closest('.kpi-ring-wrap');
+        var progressCircle = ring ? ring.querySelector('.kpi-ring-progress') : null;
+        if(progressCircle){
+          var max = parseFloat(el.dataset.ringMax) || target || 1;
+          progressCircle.style.strokeDashoffset = KPI_RING_CIRCUMFERENCE * (1 - Math.min(current / max, 1));
+        }
+      });
+
+      if(progress < 1){
+        requestAnimationFrame(frame);
+      } else {
+        counters.forEach(function(el){
+          var target = parseFloat(el.dataset.counterTarget) || 0;
+          el.textContent = formatMetricCounter(target, el.dataset.counterFormat, el.dataset.counterDecimals);
+        });
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  // Timer do pedido ao vivo, baseado em timestamp absoluto (não perde segundos se a aba ficar em segundo plano)
+  var partnerRequestTimerState = { endAt: null, duration: 47, ticker: null, expired: false };
+
+  function expirePartnerRequest(){
+    var badge = document.getElementById('partner-request-timer');
+    var card = document.getElementById('partner-request-alert');
+    if(!badge || !card) return;
+
+    partnerRequestTimerState.expired = true;
+    badge.textContent = '⏱ Expirado';
+    card.classList.add('request-expired');
+    card.removeAttribute('data-goto');
+    card.setAttribute('aria-disabled', 'true');
+
+    var status = card.querySelector('.live-status-text');
+    var title = card.querySelector('.live-req-title');
+    var meta = card.querySelector('.live-req-meta');
+    if(status) status.textContent = 'ENCERRADO';
+    if(title) title.textContent = 'Pedido expirado';
+    if(meta) meta.textContent = 'O tempo para responder a esta solicitação terminou.';
+  }
+
+  function updatePartnerRequestTimer(){
+    var badge = document.getElementById('partner-request-timer');
+    var card = document.getElementById('partner-request-alert');
+    if(!badge || !card || !partnerRequestTimerState.endAt) return;
+
+    var remainingMs = partnerRequestTimerState.endAt - Date.now();
+    if(remainingMs <= 0){
+      expirePartnerRequest();
+      return;
+    }
+
+    var remaining = Math.ceil(remainingMs / 1000);
+    var mins = Math.floor(remaining / 60);
+    var secs = remaining % 60;
+    badge.textContent = '⏱ Expira em ' + mins + ':' + String(secs).padStart(2, '0');
+  }
+
+  function startPartnerRequestTimer(){
+    var badge = document.getElementById('partner-request-timer');
+    if(!badge || partnerRequestTimerState.expired) return;
+
+    if(!partnerRequestTimerState.endAt){
+      partnerRequestTimerState.duration = parseInt(badge.dataset.duration, 10) || 47;
+      partnerRequestTimerState.endAt = Date.now() + (partnerRequestTimerState.duration * 1000);
+    }
+
+    updatePartnerRequestTimer();
+
+    if(!partnerRequestTimerState.ticker){
+      partnerRequestTimerState.ticker = window.setInterval(function(){
+        updatePartnerRequestTimer();
+        if(partnerRequestTimerState.expired && partnerRequestTimerState.ticker){
+          clearInterval(partnerRequestTimerState.ticker);
+          partnerRequestTimerState.ticker = null;
+        }
+      }, 250);
+    }
+  }
+
+  function syncPartnerPanelRealtime(){
+    var panel = document.getElementById('painel-pro');
+    if(!panel) return;
+    var active = panel.classList.contains('active');
+    if(active && !lastMetricsPanelActivation){
+      animateMonthlyMetrics(true);
+      startPartnerRequestTimer();
+    }
+    lastMetricsPanelActivation = active;
+  }
+
+  // Observa diretamente o painel do parceiro — funciona mesmo se ele for ativado por um fluxo
+  // diferente de goTo() (rede de segurança), e mantém o timer sincronizado ao voltar para a aba.
+  (function initPartnerPanelRealtime(){
+    var panel = document.getElementById('painel-pro');
+    if(!panel) return;
+
+    var observer = new MutationObserver(syncPartnerPanelRealtime);
+    observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+
+    syncPartnerPanelRealtime();
+
+    window.setInterval(function(){
+      if(partnerRequestTimerState.endAt && !partnerRequestTimerState.expired){
+        updatePartnerRequestTimer();
+      }
+    }, 1000);
+
+    document.addEventListener('visibilitychange', function(){
+      if(!document.hidden){
+        updatePartnerRequestTimer();
+        syncPartnerPanelRealtime();
+      }
+    });
+    window.addEventListener('focus', function(){
+      updatePartnerRequestTimer();
+      syncPartnerPanelRealtime();
+    });
+  })();
 
   // ===== Gráficos do painel do parceiro (Chart.js) =====
   window.painelChartsInitialized = false;
@@ -4335,11 +4536,11 @@
   function updateHeaderGamification(mode){
     var g = gamification[mode] || gamification.consumidor;
     var labelEl = document.getElementById('hg-label');
-    var fillEl = document.getElementById('hg-dog-clip-rect');
+    var fillEl = document.getElementById('hg-paw-clip-rect');
     var pctEl = document.getElementById('hg-bone-pct');
     var btnEl = document.getElementById('hg-bone-btn');
     if(labelEl) labelEl.textContent = g.label;
-    if(fillEl) fillEl.setAttribute('width', g.pct * 2);
+    if(fillEl) fillEl.setAttribute('width', g.pct);
     if(pctEl) pctEl.textContent = g.pct + '%';
     if(btnEl) btnEl.setAttribute('title', g.tooltip);
   }
