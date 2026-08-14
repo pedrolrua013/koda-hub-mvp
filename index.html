@@ -197,14 +197,16 @@
   .home-search-card .search-divider{background:var(--gray-300);}
   @media (max-width:700px){.home-map-wrap{margin:12px;height:calc(100vh - 24px);} .home-search-card{flex-direction:column;}}
 
-  /* ===== Início — layout responsivo (mobile): header hamburger + logo central + logout,
-     busca fixa no rodapé no lugar do menu, hamburger abre o mesmo menu do desktop ===== */
+  /* ===== Header responsivo (mobile) — hamburger + logo central + logout,
+     replicado em TODAS as telas do sistema (tutor e parceiro).
+     O hamburger abre o mesmo menu lateral do desktop, deslizando por cima. ===== */
   .home-mobile-header{display:none;}
   .mobile-menu-backdrop{display:none;}
   @media (max-width:980px){
+    #tabs-mobile{display:none !important;}
+    .app-main{padding-bottom:0;}
+    .footer{display:none !important;}
     body.home-screen-active .home-map-wrap{margin:0;border-radius:0;height:calc(100vh - 62px);min-height:0;box-shadow:none;}
-    body.home-screen-active #tabs-mobile{display:none !important;}
-    body.home-screen-active .app-main{padding-bottom:0;}
 
     .home-mobile-header{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -224,7 +226,7 @@
     .home-mobile-logo .paw-badge{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .home-mobile-logo .paw-badge img{width:100%;height:100%;object-fit:contain;display:block;}
 
-    /* Busca sai do topo do mapa e vira uma folha fixa no rodapé, onde ficava o menu */
+    /* Início: busca sai do topo do mapa e vira uma folha fixa no rodapé, onde ficava o menu */
     body.home-screen-active .home-search-card{
       position:fixed;top:auto;left:0;right:0;bottom:0;z-index:50;
       border-radius:20px 20px 0 0;flex-direction:column;
@@ -233,20 +235,20 @@
     body.home-screen-active .home-search-card .search-divider{width:100%;height:1px;margin:2px 0;}
     body.home-screen-active .home-search-card .btn-primary{width:100%;}
 
-    /* Drawer: o hamburger abre o mesmo menu lateral do desktop, deslizando por cima */
-    body.home-screen-active .sidebar{
+    /* Drawer: o hamburger abre o mesmo menu lateral do desktop, em qualquer tela */
+    .sidebar{
       position:fixed;top:0;left:0;bottom:0;width:280px;max-width:82vw;height:100vh;
       flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:16px;padding:22px 16px;
       overflow-y:auto;border-bottom:none;
       transform:translateX(-100%);transition:transform .3s cubic-bezier(.22,.9,.36,1);
     }
-    body.home-screen-active .sidebar .tabs,
-    body.home-screen-active .sidebar-secondary,
-    body.home-screen-active .sidebar-social{display:flex;flex-direction:column;}
-    body.home-screen-active .sidebar .tab-group{display:flex;flex-direction:column;}
-    body.home-screen-active .nav-actions{flex-direction:column;align-items:stretch;}
-    body.home-screen-active.mobile-menu-open .sidebar{transform:translateX(0);}
-    body.home-screen-active.mobile-menu-open .mobile-menu-backdrop{
+    .sidebar .tabs,
+    .sidebar-secondary,
+    .sidebar-social{display:flex;flex-direction:column;}
+    .sidebar .tab-group{display:flex;flex-direction:column;}
+    .nav-actions{flex-direction:column;align-items:stretch;}
+    body.mobile-menu-open .sidebar{transform:translateX(0);}
+    body.mobile-menu-open .mobile-menu-backdrop{
       display:block;position:fixed;inset:0;background:rgba(13,36,39,0.5);z-index:900;
     }
   }
@@ -1268,7 +1270,7 @@
   @keyframes kodaFabPulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.14);opacity:0;}}
   .koda-assistant-fab-logo{width:34px;height:34px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
   .koda-assistant-fab-logo img{width:100%;height:100%;object-fit:contain;display:block;}
-  @media (max-width:980px){ .koda-assistant-fab{right:16px;bottom:76px;width:52px;height:52px;} .koda-assistant-fab-logo{width:29px;height:29px;} }
+  @media (max-width:980px){ .koda-assistant-fab{left:0;right:0;margin:0 auto;bottom:20px;width:52px;height:52px;} .koda-assistant-fab-logo{width:29px;height:29px;} }
   body:has(#landing.active) .koda-assistant-fab,
   body:has(#login.active) .koda-assistant-fab,
   body:has(#landing.active) .assistant-panel,
@@ -1733,20 +1735,21 @@
 
   <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
 
+  <!-- Header mobile global (hamburger + logo central + logout) — replicado em todas as telas -->
+  <div class="home-mobile-header" id="home-mobile-header">
+    <button type="button" class="home-hamburger-btn" id="home-hamburger-btn" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <span class="home-mobile-logo"><span class="paw-badge"><img class="home-mobile-logo-img" src="" alt="Koda"></span> Koda</span>
+    <button type="button" class="home-mobile-logout-btn" id="home-mobile-logout-btn" title="Sair" aria-label="Sair">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+    </button>
+  </div>
+
   <div class="app-main" id="app-main">
 
   <!-- ===== SCREEN: HOME ===== -->
   <section class="screen" id="home">
-
-    <div class="home-mobile-header" id="home-mobile-header">
-      <button type="button" class="home-hamburger-btn" id="home-hamburger-btn" aria-label="Abrir menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <span class="home-mobile-logo"><span class="paw-badge"><img class="home-mobile-logo-img" src="" alt="Koda"></span> Koda</span>
-      <button type="button" class="home-mobile-logout-btn" id="home-mobile-logout-btn" title="Sair" aria-label="Sair">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-      </button>
-    </div>
 
     <div class="home-map-wrap">
       <div id="home-map"><div class="map-loading" id="home-map-loading">📍 Obtendo sua localização...</div></div>
@@ -3764,6 +3767,7 @@
     }
     document.body.classList.toggle('home-screen-active', tabName === 'home');
     document.body.classList.remove('mobile-menu-open');
+    setTimeout(positionAssistantFab, 220);
     if(tabName === 'painel-pro'){
       setTimeout(initPainelCharts, 60);
     }
@@ -4237,6 +4241,23 @@
       btn.addEventListener('click', closeMobileMenu);
     });
   })();
+
+  // ===== Posiciona o FAB do assistente centralizado (mobile) — acima da folha de busca no Início =====
+  function positionAssistantFab(){
+    var fab = document.getElementById('koda-assistant-fab');
+    if(!fab) return;
+    if(window.innerWidth > 980){ fab.style.bottom = ''; return; }
+    if(document.body.classList.contains('home-screen-active')){
+      var card = document.querySelector('.home-search-card');
+      if(card){
+        var h = card.getBoundingClientRect().height;
+        if(h > 0){ fab.style.bottom = Math.round(h - 26) + 'px'; return; }
+      }
+    }
+    fab.style.bottom = '20px';
+  }
+  window.addEventListener('resize', positionAssistantFab);
+  setTimeout(positionAssistantFab, 300);
 
   document.querySelectorAll('.toggle-avail').forEach(function(el){
     el.addEventListener('click', function(){ el.classList.toggle('free'); });
