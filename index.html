@@ -163,8 +163,27 @@
   .live-req-detail b{color:var(--primary-dark);}
   .live-req-meta{font-size:12px;color:var(--gray-500);margin-top:2px;}
   .live-req-badge{background:var(--secondary-light);color:var(--turquoise-1);font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
-  @media (max-width:640px){.live-request-banner{flex-wrap:wrap;margin:16px 16px 0;}.live-req-badge{margin-left:60px;}}
-  @media (prefers-reduced-motion: reduce){.live-request-banner{animation:none;}.live-dot{animation:none;opacity:1;}}
+  /* Modo responsivo (parceiro): 1º card vira alerta laranja piscando, horizontal, tudo numa linha só */
+  @media (max-width:980px){
+    .live-request-banner{
+      flex-wrap:nowrap;align-items:center;gap:10px;
+      margin:14px 16px 0;padding:12px 14px;
+      background:linear-gradient(120deg,var(--primary) 0%,var(--primary-dark) 100%);
+      border-color:transparent;box-shadow:0 8px 22px rgba(217,88,58,0.3);
+      animation:liveBannerPulseOrange 1.6s ease-in-out infinite;
+    }
+    .live-request-banner .live-req-photo{display:none;}
+    .live-request-banner .live-dot-wrap{color:#fff;}
+    .live-request-banner .live-dot{background:#fff;}
+    .live-request-banner .live-req-info{overflow:hidden;}
+    .live-request-banner .live-req-title,
+    .live-request-banner .live-req-meta{display:none;}
+    .live-request-banner .live-req-detail{color:#fff;font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;}
+    .live-request-banner .live-req-detail b{color:#fff;}
+    .live-request-banner .live-req-badge{background:rgba(255,255,255,0.25);color:#fff;margin-left:0;}
+  }
+  @keyframes liveBannerPulseOrange{0%,100%{box-shadow:0 0 0 0 rgba(243,124,94,0.45);}50%{box-shadow:0 0 0 8px rgba(243,124,94,0);}}
+  @media (prefers-reduced-motion: reduce){.live-request-banner{animation:none !important;}.live-dot{animation:none;opacity:1;}}
 
   /* Hero — redesenhado em glassmorphism escuro premium (rebranding v3, ref. jornadas 3D) */
   .hero{position:relative;overflow:hidden;margin:20px 24px 0;border-radius:24px;background:linear-gradient(135deg,#0A1E22 0%,#123239 48%,#0D2427 100%);padding:52px 44px;color:#fff;box-shadow:0 24px 60px rgba(6,20,24,0.35);}
@@ -284,6 +303,12 @@
   .pro-metrics-head span{color:rgba(255,255,255,0.75);font-size:12px;font-weight:600;}
   .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:2;align-items:stretch;}
   @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  /* Mobile (modo responsivo do parceiro): 1 card de métrica por linha, tudo centralizado */
+  @media (max-width:980px){
+    .kpi-grid{grid-template-columns:1fr;}
+    .kpi-card{align-items:center;text-align:center;}
+    .kpi-top{justify-content:center;}
+  }
   .kpi-grid > *{min-width:0;}
   .kpi-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.18);border-radius:18px;box-shadow:0 10px 26px rgba(2,14,17,0.35);padding:18px 20px;min-width:0;display:flex;flex-direction:column;transition:transform .18s ease,background .18s ease;}
   .kpi-card:hover{transform:translateY(-3px);background:rgba(255,255,255,0.13);}
@@ -588,16 +613,24 @@
   .aside-actions{display:flex;flex-direction:column;gap:10px;}
   .aside-actions-card{margin-bottom:0;}
   .aside-actions-title{font-size:12px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;margin:0 0 14px;}
-  .booking-card{display:flex;gap:16px;background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:18px;margin-bottom:14px;align-items:center;}
-  .booking-photo{width:64px;height:64px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:22px;background-size:cover;background-position:center;overflow:hidden;}
+  /* Padronizado no mesmo padrão compacto/horizontal dos cards de resultado de busca */
+  .booking-card{display:flex;gap:14px;background:var(--card);border:1px solid var(--gray-300);border-radius:14px;padding:10px 14px;margin-bottom:10px;align-items:center;}
+  .booking-photo{width:56px;height:56px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;background-size:cover;background-position:center;overflow:hidden;}
   .booking-photo img{width:100%;height:100%;object-fit:cover;}
   .booking-info{flex:1;min-width:0;}
-  .booking-info h4{margin:0 0 3px;font-size:14.5px;}
-  .booking-info .bmeta{font-size:12.5px;color:var(--gray-500);}
-  .status-pill{font-size:11px;font-weight:700;padding:5px 11px;border-radius:100px;white-space:nowrap;}
+  .booking-info h4{margin:0;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .booking-info .bmeta{font-size:12px;color:var(--gray-500);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .status-pill{font-size:11px;font-weight:700;padding:5px 11px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
   .status-pill.confirmed{background:var(--secondary-light);color:var(--secondary-dark);}
   .status-pill.done{background:var(--gray-100);color:var(--gray-500);}
-  .booking-actions{display:flex;gap:8px;flex-shrink:0;}
+  .booking-actions{display:flex;gap:6px;flex-shrink:0;}
+  @media (max-width:640px){
+    .booking-card{flex-wrap:wrap;}
+    .booking-info{flex-basis:100%;order:1;}
+    .booking-photo{order:0;}
+    .status-pill{order:2;}
+    .booking-actions{order:3;margin-left:auto;}
+  }
   .icon-btn{width:36px;height:36px;border-radius:9px;border:1.5px solid var(--gray-300);background:#fff;display:flex;align-items:center;justify-content:center;}
 
   .stat-card{background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:18px;margin-bottom:14px;}
@@ -999,17 +1032,24 @@
   .pet-achv-bio{margin:16px 0 0;font-size:13.5px;color:rgba(255,255,255,0.88);line-height:1.7;position:relative;z-index:2;}
 
   /* ===========================================================
-     TEMA: gradiente azul-petróleo (cor principal da marca) + glassmorphism (fundo do sistema)
+     TEMA: modo tutor = fundo branco/claro; modo parceiro = gradiente
+     azul-petróleo + glassmorphism (dashboard escuro, "glass premium")
      =========================================================== */
-  html{
+  html{background:var(--bg);}
+  html:has(body.mode-profissional){
     background:linear-gradient(160deg, var(--turquoise-1) 0%, var(--turquoise-2) 45%, var(--turquoise-3) 78%, var(--turquoise-4) 100%);
   }
   body{
-    background:linear-gradient(160deg, var(--turquoise-1) 0%, var(--turquoise-2) 45%, var(--turquoise-3) 78%, var(--turquoise-4) 100%);
+    background:var(--bg);
     background-attachment:fixed;
     min-height:100vh;
   }
-  body::before{
+  body.mode-profissional{
+    background:linear-gradient(160deg, var(--turquoise-1) 0%, var(--turquoise-2) 45%, var(--turquoise-3) 78%, var(--turquoise-4) 100%);
+  }
+  /* Modo tutor: cards sólidos e legíveis sobre fundo claro (em vez do vidro fosco pensado para o fundo escuro) */
+  body.mode-consumidor{ --glass-bg:#FFFFFF; --glass-border:var(--gray-300); }
+  body.mode-profissional::before{
     content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
     background:radial-gradient(circle at 15% 8%, rgba(255,255,255,0.14), transparent 45%),
                radial-gradient(circle at 88% 82%, rgba(243,124,94,0.12), transparent 40%);
@@ -1112,7 +1152,7 @@
     border-color:var(--glass-border) !important;
   }
   .cat-card{background:rgba(255,255,255,0.55) !important;border-color:rgba(255,255,255,0.85) !important;}
-  .payout-card, .boost-card, .sub-banner, .cta-banner, .credits-banner{
+  .payout-card, .boost-card, .cta-banner, .credits-banner{
     background:linear-gradient(120deg, rgba(34,56,58,0.82), rgba(54,81,83,0.82)) !important;
     backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   }
@@ -1140,16 +1180,28 @@
   .badge{background:rgba(255,255,255,0.9) !important;color:var(--secondary-dark) !important;}
   .status-pill.confirmed{color:#fff !important;}
 
-  /* Texto solto diretamente sobre o gradiente (fora de cards) fica claro */
-  .section-head h2, .search-header h2, .search-header p.muted,
-  .dash-header h2, .dash-header p, .tools-header h2, .tools-header p,
-  .plan-intro h2, .plan-intro p, .results-top, .footer, .info-tag,
-  .tools-group h3, .subnav-pills + .subscreen h3, #agenda h3{
+  /* Texto solto diretamente sobre o fundo da tela (fora de cards):
+     claro sobre o gradiente escuro (modo parceiro), escuro sobre o fundo branco (modo tutor) */
+  body.mode-profissional .section-head h2, body.mode-profissional .search-header h2, body.mode-profissional .search-header p.muted,
+  body.mode-profissional .dash-header h2, body.mode-profissional .dash-header p, body.mode-profissional .tools-header h2, body.mode-profissional .tools-header p,
+  body.mode-profissional .plan-intro h2, body.mode-profissional .plan-intro p, body.mode-profissional .results-top, body.mode-profissional .footer, body.mode-profissional .info-tag,
+  body.mode-profissional .tools-group h3, body.mode-profissional .subnav-pills + .subscreen h3, body.mode-profissional #agenda h3{
     color:#fff !important;
     text-shadow:0 1px 8px rgba(0,0,0,0.18);
   }
+  body.mode-consumidor .section-head h2, body.mode-consumidor .search-header h2, body.mode-consumidor .search-header p.muted,
+  body.mode-consumidor .dash-header h2, body.mode-consumidor .dash-header p, body.mode-consumidor .tools-header h2, body.mode-consumidor .tools-header p,
+  body.mode-consumidor .plan-intro h2, body.mode-consumidor .plan-intro p, body.mode-consumidor .results-top, body.mode-consumidor .footer, body.mode-consumidor .info-tag,
+  body.mode-consumidor .tools-group h3, body.mode-consumidor .subnav-pills + .subscreen h3, body.mode-consumidor #agenda h3{
+    color:var(--dark) !important;
+    text-shadow:none;
+  }
+  body.mode-consumidor .search-header p.muted, body.mode-consumidor .dash-header p, body.mode-consumidor .tools-header p, body.mode-consumidor .plan-intro p, body.mode-consumidor .info-tag{
+    color:var(--gray-500) !important;
+  }
   .results-top .sort-select{color:var(--dark);text-shadow:none;}
-  .section-head .see-all{color:#fff !important;text-decoration:underline;}
+  body.mode-profissional .section-head .see-all{color:#fff !important;text-decoration:underline;}
+  body.mode-consumidor .section-head .see-all{color:var(--secondary-dark) !important;text-decoration:underline;}
 
   /* Botões — coral como cor de destaque/CTA em todo o sistema (petróleo é a cor principal/dominante) */
   .btn-primary{background:var(--primary);box-shadow:0 8px 20px rgba(243,124,94,0.4);}
