@@ -585,6 +585,25 @@
   .exame-modal-foot{padding:16px 20px 20px;}
   .exame-modal-foot h4{margin:0 0 4px;font-size:14.5px;}
   .exame-modal-foot p{margin:0;font-size:12.5px;color:var(--gray-500);line-height:1.55;}
+
+  /* ===== Modal: Criar/configurar nova carteira de pet ===== */
+  .new-pet-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,26,36,0.66);backdrop-filter:blur(4px);z-index:3100;align-items:center;justify-content:center;padding:24px 16px;}
+  .new-pet-modal-overlay.active{display:flex;}
+  .new-pet-modal{background:#fff;border-radius:22px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative;padding:28px 26px 24px;}
+  .new-pet-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--gray-100);color:var(--gray-700);display:flex;align-items:center;justify-content:center;font-size:15px;border:none;cursor:pointer;z-index:2;}
+  .new-pet-modal-close:hover{background:var(--gray-300);}
+  .new-pet-modal h3{margin:0 0 4px;font-size:18px;padding-right:36px;}
+  .new-pet-modal-sub{margin:0 0 22px;font-size:12.5px;color:var(--gray-500);line-height:1.55;}
+  .new-pet-photo-block{display:flex;align-items:center;gap:16px;margin-bottom:22px;padding:16px;background:var(--gray-100);border-radius:16px;}
+  .new-pet-photo-preview{width:72px;height:72px;border-radius:16px;flex-shrink:0;background:var(--gray-300) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--gray-500);border:2px dashed var(--gray-300);}
+  .new-pet-photo-preview.has-photo{border-style:solid;border-color:#fff;box-shadow:0 0 0 1px var(--gray-300);}
+  .new-pet-photo-info{flex:1;min-width:0;}
+  .new-pet-photo-info p{margin:0 0 8px;font-size:12px;color:var(--gray-500);line-height:1.5;}
+  .new-pet-photo-btn{background:#fff;border:1.5px solid var(--gray-300);color:var(--dark);font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:100px;cursor:pointer;white-space:nowrap;}
+  .new-pet-photo-btn:hover{border-color:var(--primary);color:var(--primary-dark);}
+  .new-pet-modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
+  @media (max-width:520px){ .new-pet-photo-block{flex-direction:column;align-items:flex-start;} .new-pet-modal-foot{flex-direction:column-reverse;} .new-pet-modal-foot .btn{width:100%;} }
+
   .card-block h3{font-size:15.5px;margin:0 0 14px;}
   .card-block p.bio{font-size:13.5px;color:var(--gray-700);line-height:1.7;margin:0 0 14px;}
   .pill-row{display:flex;gap:8px;flex-wrap:wrap;}
@@ -1386,38 +1405,9 @@
     opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);
     transition:opacity .22s ease, transform .22s ease, visibility 0s linear 0s;
   }
-  /* Backdrop do assistente (mobile — sheet estilo app) */
-  .assistant-backdrop{display:none;position:fixed;inset:0;background:rgba(13,36,39,0.46);z-index:2450;opacity:0;transition:opacity .25s ease;}
   @media (max-width:640px){
-    .assistant-backdrop{display:block;pointer-events:none;}
-    body.assistant-open .assistant-backdrop{opacity:1;pointer-events:auto;}
-    body.assistant-open{overflow:hidden;}
-    .assistant-panel{
-      left:0;right:0;bottom:0;top:auto;
-      width:100%;
-      max-height:none;
-      height:min(88dvh,720px);
-      height:min(88vh,720px);
-      border-radius:22px 22px 0 0;
-      border:none;
-      box-shadow:0 -10px 44px rgba(6,20,24,0.3);
-      transform:translateY(100%) scale(1);
-      transition:transform .34s cubic-bezier(.32,.72,0,1), visibility 0s linear .34s;
-    }
-    .assistant-panel.active{
-      transform:translateY(0) scale(1);
-      transition:transform .34s cubic-bezier(.32,.72,0,1), visibility 0s linear 0s;
-    }
-    .assistant-panel-head{position:relative;padding-top:20px;border-radius:22px 22px 0 0;}
-    .assistant-panel-head::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:38px;height:4px;border-radius:100px;background:rgba(255,255,255,0.55);}
-    .assistant-messages{min-height:0;-webkit-overflow-scrolling:touch;padding:16px 16px 10px;}
-    .assistant-msg{font-size:14px;max-width:86%;}
-    .assistant-quick-replies{padding:8px 14px 12px;}
-    .assistant-quick-reply{font-size:12.5px;padding:8px 13px;}
-    .assistant-input-row{padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));gap:10px;}
-    .assistant-input-row input{font-size:16px;padding:12px 16px;}
-    .assistant-send-btn{width:44px;height:44px;flex-shrink:0;}
-    .assistant-close-btn{width:34px;height:34px;font-size:15px;}
+    .assistant-panel{right:12px;left:12px;bottom:76px;width:auto;max-height:64vh;}
+    .assistant-input-row{padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));}
   }
   .assistant-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;background:linear-gradient(120deg,var(--turquoise-1),var(--secondary));flex-shrink:0;}
   .assistant-head-info{display:flex;align-items:center;gap:11px;min-width:0;}
@@ -1441,7 +1431,7 @@
   .assistant-quick-reply{background:var(--turquoise-4);color:var(--turquoise-1);border:1px solid rgba(74,107,109,0.24);font-size:11.5px;font-weight:700;padding:7px 12px;border-radius:100px;cursor:pointer;white-space:nowrap;}
   .assistant-quick-reply:hover{background:#c3dadc;}
   .assistant-input-row{display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--gray-300);flex-shrink:0;}
-  .assistant-input-row input{flex:1;min-width:0;border:1.5px solid var(--gray-300);border-radius:100px;padding:10px 16px;font-family:inherit;font-size:13px;outline:none;}
+  .assistant-input-row input{flex:1;min-width:0;border:1.5px solid var(--gray-300);border-radius:100px;padding:10px 16px;font-family:inherit;font-size:16px;outline:none;}
   .assistant-input-row input:focus{border-color:var(--primary);}
   .assistant-send-btn{width:38px;height:38px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .12s ease;}
   .assistant-send-btn:hover{transform:scale(1.06);}
@@ -1990,10 +1980,6 @@
     </div>
 
 
-    <div class="footer">
-      <span>© 2026 Koda — Protótipo acadêmico ESPM</span>
-      <span>Feito com 🐾 para conectar tutores e parceiros pet</span>
-    </div>
   </section>
 
   <!-- ===== SCREEN: PARCEIROS EM DESTAQUE ===== -->
@@ -3385,7 +3371,7 @@
     <div class="pet-switch-row">
       <button class="chip active pet-switch-btn" data-pet="thor">🐕 Thor</button>
       <button class="chip pet-switch-btn" data-pet="mia">🐈 Mia</button>
-      <button class="chip add-pet" data-toast="Cadastro de novo pet — em breve neste protótipo">+ Adicionar novo pet</button>
+      <button type="button" class="chip add-pet" id="new-pet-open-btn">+ Adicionar novo pet</button>
     </div>
 
     <div class="profile-body">
@@ -3411,6 +3397,7 @@
           <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span id="pet-id-restricoes">Nenhuma alergia registrada até o momento.</span></div>
           <div class="pet-id-actions">
             <button class="btn btn-primary" id="pet-id-export-btn">⬇️ Exportar carteira em PDF</button>
+            <button class="btn btn-outline" id="pet-id-export-png-btn">🖼️ Exportar em imagem (PNG)</button>
             <button class="btn btn-outline" id="pet-id-share-btn">🔗 Compartilhar carteira</button>
           </div>
         </div>
@@ -3900,6 +3887,62 @@
   </div>
 </div>
 
+<div class="new-pet-modal-overlay" id="new-pet-modal-overlay">
+  <div class="new-pet-modal">
+    <button class="new-pet-modal-close" id="new-pet-modal-close" aria-label="Fechar">✕</button>
+    <h3>🐾 Criar carteira de um novo pet</h3>
+    <p class="new-pet-modal-sub">Preencha os dados abaixo para gerar a Carteira de Identidade Pet. As informações ficam salvas apenas nesta sessão do protótipo (não são enviadas para nenhum servidor).</p>
+
+    <div class="new-pet-photo-block">
+      <div class="new-pet-photo-preview" id="new-pet-photo-preview">📷</div>
+      <div class="new-pet-photo-info">
+        <p id="new-pet-photo-hint">A Koda precisa da sua permissão para acessar a galeria de fotos do celular e escolher a imagem do pet.</p>
+        <button type="button" class="new-pet-photo-btn" id="new-pet-photo-permission-btn">Permitir acesso à galeria</button>
+        <input type="file" accept="image/*" id="new-pet-photo-input" style="display:none;">
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-field"><label>Nome do pet *</label><input type="text" id="new-pet-nome" placeholder="Ex: Luna" autocomplete="off"></div>
+      <div class="form-field">
+        <label>Espécie</label>
+        <select id="new-pet-especie">
+          <option value="Cão">Cão</option>
+          <option value="Gato">Gato</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Raça</label><input type="text" id="new-pet-raca" placeholder="Ex: SRD, Labrador, Siamês..." autocomplete="off"></div>
+      <div class="form-field"><label>Cor da pelagem</label><input type="text" id="new-pet-cor" placeholder="Ex: Preto e branco" autocomplete="off"></div>
+      <div class="form-field"><label>Data de nascimento</label><input type="text" id="new-pet-nascimento" placeholder="mm/aaaa"></div>
+      <div class="form-field"><label>Peso</label><input type="text" id="new-pet-peso" placeholder="Ex: 8 kg"></div>
+      <div class="form-field"><label>Idade</label><input type="text" id="new-pet-idade" placeholder="Ex: 1 ano"></div>
+      <div class="form-field">
+        <label>Sexo</label>
+        <select id="new-pet-sexo">
+          <option value="Macho">Macho</option>
+          <option value="Fêmea">Fêmea</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Castrado(a)</label>
+        <select id="new-pet-castrado">
+          <option value="Não">Não</option>
+          <option value="Sim">Sim</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Microchip (opcional)</label><input type="text" id="new-pet-microchip" placeholder="Número do microchip"></div>
+      <div class="form-field full"><label>Alergias e restrições</label><textarea id="new-pet-alergias" placeholder="Ex: Nenhuma alergia registrada até o momento."></textarea></div>
+      <div class="form-field full"><label>Medicações em uso</label><textarea id="new-pet-medicacoes" placeholder="Ex: Nenhuma medicação contínua."></textarea></div>
+    </div>
+
+    <div class="new-pet-modal-foot">
+      <button type="button" class="btn btn-outline" id="new-pet-cancel-btn">Cancelar</button>
+      <button type="button" class="btn btn-primary" id="new-pet-save-btn">Criar carteira do pet</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast-container"></div>
 
 <div class="notif-panel" id="notif-panel">
@@ -3916,7 +3959,6 @@
   <span class="koda-assistant-fab-logo" id="koda-assistant-fab-logo"></span>
 </button>
 
-<div class="assistant-backdrop" id="assistant-backdrop"></div>
 <div class="assistant-panel" id="assistant-panel">
   <div class="assistant-panel-head">
     <div class="assistant-head-info">
@@ -4831,23 +4873,156 @@
     if(e.key === 'Escape') closeExameModal();
   });
 
-  document.querySelectorAll('.pet-switch-btn').forEach(function(btn){
+  // Ativa um pet (aplicado ao trocar de pet e também logo após criar uma nova carteira)
+  function activatePet(petKey){
+    var p = petProfileData[petKey];
+    if(!p) return;
+    document.querySelectorAll('.pet-switch-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-pet') === petKey); });
+    document.getElementById('pet-profile-name').textContent = p.name;
+    document.getElementById('pet-profile-sub').textContent = p.sub;
+    document.getElementById('pet-profile-avatar').src = p.photo;
+    document.getElementById('pet-profile-cover').style.backgroundImage = "url('" + p.cover + "')";
+    fillPetWallet(p);
+    currentPetKey = petKey;
+    renderProntuarioAll();
+    if(prontuarioForm) prontuarioForm.classList.remove('active');
+  }
+
+  function wirePetSwitchBtn(btn){
     btn.addEventListener('click', function(){
-      document.querySelectorAll('.pet-switch-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
-      var petKey = btn.getAttribute('data-pet');
-      var p = petProfileData[petKey];
-      if(p){
-        document.getElementById('pet-profile-name').textContent = p.name;
-        document.getElementById('pet-profile-sub').textContent = p.sub;
-        document.getElementById('pet-profile-avatar').src = p.photo;
-        document.getElementById('pet-profile-cover').style.backgroundImage = "url('" + p.cover + "')";
-        fillPetWallet(p);
-        currentPetKey = petKey;
-        renderProntuarioAll();
-        if(prontuarioForm) prontuarioForm.classList.remove('active');
-      }
+      activatePet(btn.getAttribute('data-pet'));
     });
-  });
+  }
+  document.querySelectorAll('.pet-switch-btn').forEach(wirePetSwitchBtn);
+
+  // ===== Modal: Criar/configurar nova carteira de pet =====
+  (function(){
+    var overlay = document.getElementById('new-pet-modal-overlay');
+    var openBtn = document.getElementById('new-pet-open-btn');
+    var closeBtn = document.getElementById('new-pet-modal-close');
+    var cancelBtn = document.getElementById('new-pet-cancel-btn');
+    var saveBtn = document.getElementById('new-pet-save-btn');
+    var permissionBtn = document.getElementById('new-pet-photo-permission-btn');
+    var photoInput = document.getElementById('new-pet-photo-input');
+    var photoPreview = document.getElementById('new-pet-photo-preview');
+    var photoHint = document.getElementById('new-pet-photo-hint');
+    if(!overlay || !openBtn) return;
+
+    var photoDataUrl = null;
+    var FALLBACK_PHOTO = 'https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?auto=compress&cs=tinysrgb&w=200';
+    var formIds = ['new-pet-nome','new-pet-raca','new-pet-cor','new-pet-nascimento','new-pet-peso','new-pet-idade','new-pet-microchip','new-pet-alergias','new-pet-medicacoes'];
+
+    function resetForm(){
+      formIds.forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
+      var especieEl = document.getElementById('new-pet-especie'); if(especieEl) especieEl.value = 'Cão';
+      var sexoEl = document.getElementById('new-pet-sexo'); if(sexoEl) sexoEl.value = 'Macho';
+      var castradoEl = document.getElementById('new-pet-castrado'); if(castradoEl) castradoEl.value = 'Não';
+      photoDataUrl = null;
+      photoPreview.style.backgroundImage = '';
+      photoPreview.textContent = '📷';
+      photoPreview.classList.remove('has-photo');
+      if(permissionBtn) permissionBtn.textContent = 'Permitir acesso à galeria';
+      if(photoHint) photoHint.textContent = 'A Koda precisa da sua permissão para acessar a galeria de fotos do celular e escolher a imagem do pet.';
+      if(photoInput) photoInput.value = '';
+    }
+
+    function openModal(){ resetForm(); overlay.classList.add('active'); }
+    function closeModal(){ overlay.classList.remove('active'); }
+
+    openBtn.addEventListener('click', openModal);
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+    if(cancelBtn) cancelBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
+
+    if(permissionBtn && photoInput){
+      permissionBtn.addEventListener('click', function(){
+        showToast('Solicitando acesso à galeria de fotos do celular...');
+        photoInput.click();
+      });
+    }
+    if(photoInput){
+      photoInput.addEventListener('change', function(){
+        var file = photoInput.files && photoInput.files[0];
+        if(!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e){
+          photoDataUrl = e.target.result;
+          photoPreview.style.backgroundImage = "url('" + photoDataUrl + "')";
+          photoPreview.textContent = '';
+          photoPreview.classList.add('has-photo');
+          if(permissionBtn) permissionBtn.textContent = 'Trocar foto';
+          if(photoHint) photoHint.textContent = 'Foto selecionada da galeria. Toque em "Trocar foto" para escolher outra imagem.';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function slugify(str){
+      return String(str).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'') || 'pet';
+    }
+
+    if(saveBtn){
+      saveBtn.addEventListener('click', function(){
+        var getVal = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+        var name = getVal('new-pet-nome');
+        if(!name){
+          showToast('Digite o nome do pet para criar a carteira.');
+          return;
+        }
+        var baseKey = slugify(name);
+        var key = baseKey, n = 2;
+        while(petProfileData[key]){ key = baseKey + n; n++; }
+
+        var especie = getVal('new-pet-especie') || 'Cão';
+        var raca = getVal('new-pet-raca') || 'SRD (Sem Raça Definida)';
+        var cor = getVal('new-pet-cor') || 'Não informada';
+        var nascimento = getVal('new-pet-nascimento');
+        var peso = getVal('new-pet-peso') || 'Não informado';
+        var idadeLabel = getVal('new-pet-idade') || 'Não informada';
+        var sexo = getVal('new-pet-sexo') || 'Macho';
+        var castrado = getVal('new-pet-castrado') || 'Não';
+        var microchip = getVal('new-pet-microchip');
+        var alergias = getVal('new-pet-alergias') || 'Nenhuma alergia registrada até o momento.';
+        var medicacoes = getVal('new-pet-medicacoes') || 'Nenhuma medicação contínua.';
+        var photo = photoDataUrl || FALLBACK_PHOTO;
+        var code = 'KODA-' + baseKey.toUpperCase().slice(0,10) + '-' + String(Math.floor(1000 + Math.random() * 9000));
+        var todayStr = new Date().toLocaleDateString('pt-BR');
+
+        petProfileData[key] = {
+          name: name,
+          sub: especie + ' · ' + raca + ' · ' + idadeLabel + ' · tutor: Pedro',
+          photo: photo,
+          cover: photo,
+          code: code,
+          especie: especie, raca: raca, cor: cor,
+          nascimento: nascimento, peso: peso, idadeLabel: idadeLabel,
+          sexo: sexo, castrado: castrado, microchip: microchip,
+          alergias: alergias,
+          medicacoes: medicacoes,
+          prontuario: {
+            historico: [{ data: todayStr, titulo: 'Início do acompanhamento na Koda', prof: 'Cadastro na plataforma', obs: 'Carteira criada pelo tutor a partir do protótipo.' }],
+            exames: [], receitas: [], consultas: []
+          }
+        };
+
+        var emoji = especie === 'Gato' ? '🐈' : (especie === 'Cão' ? '🐕' : '🐾');
+        var newBtn = document.createElement('button');
+        newBtn.type = 'button';
+        newBtn.className = 'chip pet-switch-btn';
+        newBtn.setAttribute('data-pet', key);
+        newBtn.textContent = emoji + ' ' + name;
+        openBtn.parentNode.insertBefore(newBtn, openBtn);
+        wirePetSwitchBtn(newBtn);
+
+        activatePet(key);
+        closeModal();
+        showToast('Carteira do ' + name + ' criada com sucesso! 🐾');
+      });
+    }
+  })();
 
   // Sincroniza edições manuais do formulário de volta para o cartão de identidade
   var savePetDataBtn = document.getElementById('save-pet-data-btn');
@@ -4983,7 +5158,182 @@
     }
   }
 
-  // Compartilhar a Carteira de Identidade Pet (Web Share API, com fallback para copiar)
+  // Desenha a Carteira de Identidade Pet num <canvas> (mesmo visual do card/PDF), usado tanto
+  // para exportar em PNG quanto para anexar a imagem ao compartilhar.
+  function buildPetWalletCanvas(callback){
+    var W = 380, H = 620, SCALE = 2;
+    var name = document.getElementById('pet-id-name').textContent || 'Pet';
+    var code = document.getElementById('pet-id-code').textContent;
+    var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var cor = document.getElementById('pet-id-cor').textContent;
+    var peso = document.getElementById('pet-id-peso').textContent;
+    var idade = document.getElementById('pet-id-idade').textContent;
+    var restricoes = document.getElementById('pet-id-restricoes').textContent;
+    var sexoEl = document.getElementById('input-pet-sexo');
+    var sexo = sexoEl ? sexoEl.value : '';
+    var medEl = document.getElementById('input-pet-medicacoes');
+    var medicacoes = medEl ? medEl.value : '';
+    var photoEl = document.getElementById('pet-id-photo');
+
+    function roundRect(ctx, x, y, w, h, r){
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+      var words = String(text || '—').split(' ');
+      var line = '';
+      for(var i = 0; i < words.length; i++){
+        var test = line + words[i] + ' ';
+        if(ctx.measureText(test).width > maxWidth && line){
+          ctx.fillText(line, x, y);
+          line = words[i] + ' ';
+          y += lineHeight;
+        } else {
+          line = test;
+        }
+      }
+      ctx.fillText(line, x, y);
+      return y + lineHeight;
+    }
+
+    function draw(photoImg){
+      var canvas = document.createElement('canvas');
+      canvas.width = W * SCALE; canvas.height = H * SCALE;
+      var ctx = canvas.getContext('2d');
+      ctx.scale(SCALE, SCALE);
+
+      var grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, '#12474b');
+      grad.addColorStop(0.55, '#1c6167');
+      grad.addColorStop(1, '#2c8a8f');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = 'rgba(243,124,94,0.9)';
+      ctx.beginPath(); ctx.arc(W - 40, 40, 70, 0, Math.PI * 2); ctx.fill();
+
+      ctx.fillStyle = '#fff';
+      ctx.font = '700 13px Poppins, Arial, sans-serif';
+      ctx.fillText('CARTEIRA DE IDENTIDADE PET', 30, 42);
+      ctx.font = '400 10px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.82)';
+      ctx.fillText('KODA — Connecting pets. Empowering care.', 30, 58);
+      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(30, 68); ctx.lineTo(W - 30, 68); ctx.stroke();
+
+      var photoSize = 78, photoX = W - 30 - photoSize, photoY = 86;
+      ctx.fillStyle = '#fff';
+      roundRect(ctx, photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 8); ctx.fill();
+      if(photoImg){
+        ctx.save();
+        roundRect(ctx, photoX, photoY, photoSize, photoSize, 6);
+        ctx.clip();
+        ctx.drawImage(photoImg, photoX, photoY, photoSize, photoSize);
+        ctx.restore();
+      }
+
+      ctx.fillStyle = '#fff';
+      ctx.font = '800 24px Poppins, Arial, sans-serif';
+      ctx.fillText(name, 30, 112);
+      ctx.font = '400 11px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fillText(code, 30, 130);
+
+      var fields = [
+        ['ESPÉCIE / RAÇA', racaLinha],
+        ['COR', cor],
+        ['PESO', peso],
+        ['IDADE', idade],
+        ['SEXO', sexo || '—']
+      ];
+      var y = 195;
+      fields.forEach(function(f){
+        ctx.font = '600 9px Inter, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(210,235,235,0.9)';
+        ctx.fillText(f[0], 30, y);
+        ctx.font = '700 14px Inter, Arial, sans-serif';
+        ctx.fillStyle = '#fff';
+        ctx.fillText(f[1] || '—', 30, y + 18);
+        y += 42;
+      });
+
+      y += 8;
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(W - 30, y); ctx.stroke();
+      y += 24;
+
+      ctx.font = '600 9px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(210,235,235,0.9)';
+      ctx.fillText('RESTRIÇÕES / ALERGIAS', 30, y);
+      y += 18;
+      ctx.font = '400 11.5px Inter, Arial, sans-serif';
+      ctx.fillStyle = '#fff';
+      y = wrapText(ctx, restricoes, 30, y, W - 60, 16);
+
+      if(medicacoes){
+        y += 12;
+        ctx.font = '600 9px Inter, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(210,235,235,0.9)';
+        ctx.fillText('MEDICAÇÕES EM USO', 30, y);
+        y += 18;
+        ctx.font = '400 11.5px Inter, Arial, sans-serif';
+        ctx.fillStyle = '#fff';
+        wrapText(ctx, medicacoes, 30, y, W - 60, 16);
+      }
+
+      ctx.font = '400 9px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(210,235,235,0.9)';
+      ctx.fillText('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
+
+      ctx.font = '800 12px Poppins, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.textAlign = 'right';
+      ctx.fillText('KODA', W - 22, H - 16);
+      ctx.textAlign = 'left';
+
+      callback(canvas, name);
+    }
+
+    if(photoEl && photoEl.src){
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function(){ draw(img); };
+      img.onerror = function(){ draw(null); };
+      img.src = photoEl.src;
+    } else {
+      draw(null);
+    }
+  }
+
+  // Exportar a Carteira de Identidade Pet como arquivo de imagem PNG
+  function exportPetWalletPNG(){
+    buildPetWalletCanvas(function(canvas, name){
+      canvas.toBlob(function(blob){
+        if(!blob){
+          showToast('Não foi possível gerar a imagem agora. Tente novamente.');
+          return;
+        }
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'carteira-pet-' + name.toLowerCase().replace(/\s+/g, '-') + '.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        showToast('Carteira de ' + name + ' exportada em imagem PNG! 🖼️ +5 pontos de cuidado');
+      }, 'image/png');
+    });
+  }
+
+  // Compartilhar a Carteira de Identidade Pet — anexa a imagem PNG quando o navegador suporta
+  // compartilhamento de arquivos (Web Share API Level 2); cai para texto, depois para copiar.
   function sharePetWallet(){
     var name = document.getElementById('pet-id-name').textContent || 'Pet';
     var racaLinha = document.getElementById('pet-id-raca').textContent;
@@ -4997,21 +5347,41 @@
       'Restrições/alergias: ' + restricoes + '\n' +
       'Gerado pelo Koda 🐾';
 
-    if(navigator.share){
-      navigator.share({ title: 'Carteira de ' + name + ' — Koda', text: texto }).catch(function(){});
-    } else if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(texto).then(function(){
-        showToast('Carteira de ' + name + ' copiada! Cole em qualquer app para compartilhar 📋');
-      }).catch(function(){
-        showToast('Não foi possível copiar automaticamente neste navegador.');
+    function fallbackShare(){
+      if(navigator.share){
+        navigator.share({ title: 'Carteira de ' + name + ' — Koda', text: texto }).catch(function(){});
+      } else if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(texto).then(function(){
+          showToast('Carteira de ' + name + ' copiada! Cole em qualquer app para compartilhar 📋');
+        }).catch(function(){
+          showToast('Não foi possível copiar automaticamente neste navegador.');
+        });
+      } else {
+        showToast('Compartilhamento não suportado neste navegador — use "Exportar em imagem" para baixar e enviar manualmente.');
+      }
+    }
+
+    if(navigator.share && navigator.canShare && typeof File !== 'undefined'){
+      buildPetWalletCanvas(function(canvas, petName){
+        canvas.toBlob(function(blob){
+          if(!blob){ fallbackShare(); return; }
+          var file = new File([blob], 'carteira-pet-' + petName.toLowerCase().replace(/\s+/g, '-') + '.png', { type: 'image/png' });
+          if(navigator.canShare({ files: [file] })){
+            navigator.share({ title: 'Carteira de ' + petName + ' — Koda', text: texto, files: [file] }).catch(function(){});
+          } else {
+            fallbackShare();
+          }
+        }, 'image/png');
       });
     } else {
-      showToast('Compartilhamento não suportado neste navegador.');
+      fallbackShare();
     }
   }
 
   var petIdExportBtn = document.getElementById('pet-id-export-btn');
   if(petIdExportBtn) petIdExportBtn.addEventListener('click', exportPetWalletPDF);
+  var petIdExportPngBtn = document.getElementById('pet-id-export-png-btn');
+  if(petIdExportPngBtn) petIdExportPngBtn.addEventListener('click', exportPetWalletPNG);
   var petIdShareBtn = document.getElementById('pet-id-share-btn');
   if(petIdShareBtn) petIdShareBtn.addEventListener('click', sharePetWallet);
 
@@ -5215,7 +5585,6 @@
   (function(){
     var fabBtn = document.getElementById('koda-assistant-fab');
     var panel = document.getElementById('assistant-panel');
-    var backdrop = document.getElementById('assistant-backdrop');
     var closeBtn = document.getElementById('assistant-close-btn');
     var messagesEl = document.getElementById('assistant-messages');
     var quickRepliesEl = document.getElementById('assistant-quick-replies');
@@ -5311,7 +5680,6 @@
 
     function openAssistant(){
       panel.classList.add('active');
-      document.body.classList.add('assistant-open');
       if(!hasGreeted){
         hasGreeted = true;
         renderQuickReplies();
@@ -5319,12 +5687,10 @@
           addMessage('Oi! 👋 Eu sou o assistente virtual da Koda. Posso te ajudar com agendamentos, planos, prontuário médico, Patinhas de recompensa e mais. Como posso ajudar?', 'bot');
         }, 300);
       }
-      if(inputEl && window.innerWidth > 640) inputEl.focus();
+      if(inputEl) inputEl.focus();
     }
     function closeAssistant(){
       panel.classList.remove('active');
-      document.body.classList.remove('assistant-open');
-      if(inputEl) inputEl.blur();
     }
     function toggleAssistant(){
       if(panel.classList.contains('active')) closeAssistant();
@@ -5336,7 +5702,6 @@
       toggleAssistant();
     });
     if(closeBtn) closeBtn.addEventListener('click', closeAssistant);
-    if(backdrop) backdrop.addEventListener('click', closeAssistant);
     panel.addEventListener('click', function(e){ e.stopPropagation(); });
     document.addEventListener('click', function(e){
       if(panel.classList.contains('active') && !panel.contains(e.target) && e.target !== fabBtn && !fabBtn.contains(e.target)){
