@@ -90,7 +90,7 @@
   .sidebar-identity{display:flex;align-items:center;gap:10px;padding:0 4px 4px;}
   .btn-ghost{padding:10px 14px;font-size:14.5px;font-weight:600;border-radius:9px;}
   .avatar-mini{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#FFD3C4,#FFB199);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary-dark);font-size:13.5px;flex-shrink:0;}
-  .sidebar-social{display:flex;align-items:center;justify-content:center;gap:12px;padding-top:2px;}
+  .sidebar-social{display:flex;flex-direction:column;gap:4px;}
   .sidebar-social-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--secondary);transition:all .15s ease;flex-shrink:0;}
   .sidebar-social-btn:hover{background:var(--turquoise-1);transform:translateY(-2px);}
   .sidebar-social-btn svg{width:21px;height:21px;}
@@ -946,6 +946,16 @@
 
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   @media (max-width:700px){.form-grid{grid-template-columns:1fr;}}
+  .form-grid-1col{grid-template-columns:1fr;}
+
+  /* ===== Card colapsável: fica resumido (só o título) e abre ao clicar ===== */
+  .collapsible-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;}
+  .collapsible-chevron{width:18px;height:18px;flex-shrink:0;color:var(--gray-500);transition:transform .25s ease;}
+  .collapsible-card.open .collapsible-chevron{transform:rotate(180deg);}
+  .collapsible-card-body{max-height:0;overflow:hidden;opacity:0;transition:max-height .3s ease, opacity .2s ease;}
+  .collapsible-card.open .collapsible-card-body{max-height:2400px;opacity:1;margin-top:14px;}
+  .collapsible-card-summary{font-size:12.5px;color:var(--gray-500);margin-top:4px;}
+  .collapsible-card.open .collapsible-card-summary{display:none;}
   .form-field{display:flex;flex-direction:column;gap:6px;}
   .form-field label{font-size:11.5px;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.03em;}
   .form-field input,.form-field select,.form-field textarea{border:1.5px solid var(--gray-300);border-radius:10px;padding:10px 12px;font-family:inherit;font-size:13.5px;color:var(--dark);background:#fff;}
@@ -1800,11 +1810,13 @@
     </div>
     <div class="nav-actions">
       <div class="sidebar-social">
-        <a class="sidebar-social-btn" href="#" title="Koda no Instagram" aria-label="Instagram" data-toast="Instagram da Koda — em breve neste protótipo">
+        <a class="sidebar-sec-btn" href="#" title="Koda no Instagram" aria-label="Instagram" data-toast="Instagram da Koda — em breve neste protótipo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+          Instagram
         </a>
-        <a class="sidebar-social-btn" href="#" title="Koda no TikTok" aria-label="TikTok" data-toast="TikTok da Koda — em breve neste protótipo">
+        <a class="sidebar-sec-btn" href="#" title="Koda no TikTok" aria-label="TikTok" data-toast="TikTok da Koda — em breve neste protótipo">
           <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16.6 2.5c.4 2.2 1.9 4 4 4.4v3a7.4 7.4 0 01-4-1.2v6.8a5.9 5.9 0 11-5.9-5.9c.2 0 .5 0 .7.1v3.1a2.8 2.8 0 102 2.7V2.5h3.2z"/></svg>
+          TikTok
         </a>
       </div>
     </div>
@@ -2421,68 +2433,98 @@
     <div class="section" style="padding-top:14px;">
       <div class="profile-body" style="padding:0;">
         <div>
-          <div class="card-block">
-            <h3>Tipo de parceiro</h3>
-            <div class="ptype-row">
-              <button class="ptype-btn" data-ptype="vet"><span class="picon">🩺</span>Veterinário</button>
-              <button class="ptype-btn active" data-ptype="autonomo"><span class="picon">🐕</span>Profissional autônomo</button>
-              <button class="ptype-btn" data-ptype="petshop"><span class="picon">🛍️</span>Pet Shop</button>
-              <button class="ptype-btn" data-ptype="hotel"><span class="picon">🏨</span>Hotel Pet Friendly</button>
+          <div class="card-block collapsible-card">
+            <div class="collapsible-card-head">
+              <h3>Tipo de parceiro</h3>
+              <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
             </div>
-            <div class="info-tag">ⓘ Como você conheceu o Koda? — Indicação de outro parceiro</div>
-          </div>
-
-          <div class="card-block">
-            <h3>Dados pessoais <span class="badge">✓ concluído</span></h3>
-            <div class="pill-row">
-              <span class="pill">👤 Rafael Souza</span>
-              <span class="pill">🐕 Categoria: Passeador</span>
-              <span class="pill">📍 Vila Mariana, SP</span>
-              <span class="pill">📱 (11) 9****-2210</span>
+            <p class="collapsible-card-summary">🐕 Profissional autônomo</p>
+            <div class="collapsible-card-body">
+              <div class="ptype-row">
+                <button class="ptype-btn" data-ptype="vet"><span class="picon">🩺</span>Veterinário</button>
+                <button class="ptype-btn active" data-ptype="autonomo"><span class="picon">🐕</span>Profissional autônomo</button>
+                <button class="ptype-btn" data-ptype="petshop"><span class="picon">🛍️</span>Pet Shop</button>
+                <button class="ptype-btn" data-ptype="hotel"><span class="picon">🏨</span>Hotel Pet Friendly</button>
+              </div>
+              <div class="info-tag">ⓘ Como você conheceu o Koda? — Indicação de outro parceiro</div>
             </div>
           </div>
 
-          <div class="card-block">
-            <h3>Documentos para verificação <span class="badge">✓ enviados</span></h3>
-            <div class="doc-set active" data-docs="autonomo">
-              <span class="badge">✓ RG/CPF enviado</span>
-              <span class="badge">✓ Comprovante de endereço</span>
-              <span class="badge warn">⏳ Atestado de antecedentes — em análise</span>
+          <div class="card-block collapsible-card">
+            <div class="collapsible-card-head">
+              <h3>Dados pessoais <span class="badge">✓ concluído</span></h3>
+              <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
             </div>
-            <div class="doc-set" data-docs="vet">
-              <span class="badge">✓ RG/CPF enviado</span>
-              <span class="badge warn">⏳ CRMV — em análise</span>
-            </div>
-            <div class="doc-set" data-docs="petshop">
-              <span class="badge">✓ CNPJ enviado</span>
-              <span class="badge warn">⏳ Alvará de funcionamento — em análise</span>
-            </div>
-            <div class="doc-set" data-docs="hotel">
-              <span class="badge">✓ CNPJ enviado</span>
-              <span class="badge warn">⏳ Política de aceitação de pets — em análise</span>
+            <p class="collapsible-card-summary">Rafael Souza · Passeador · Vila Mariana, SP</p>
+            <div class="collapsible-card-body">
+              <div class="pill-row">
+                <span class="pill">👤 Rafael Souza</span>
+                <span class="pill">🐕 Categoria: Passeador</span>
+                <span class="pill">📍 Vila Mariana, SP</span>
+                <span class="pill">📱 (11) 9****-2210</span>
+              </div>
             </div>
           </div>
 
-          <div class="card-block">
-            <h3>Vitrine — serviços &amp; preços</h3>
-            <p class="bio" style="margin-bottom:14px;">Monte seu perfil com fotos, serviços, preços e política de aceitação de pets. Isso é o que os tutores veem na busca.</p>
-            <div class="service-row"><div><div class="sname">Passeio 30 min</div><div class="sdur">1 pet</div></div><div class="sprice">R$ 25</div></div>
-            <div class="service-row"><div><div class="sname">Passeio 60 min</div><div class="sdur">até 2 pets</div></div><div class="sprice">R$ 35</div></div>
-            <div class="service-row"><div><div class="sname">Hospedagem diária</div><div class="sdur">na casa do profissional</div></div><div class="sprice">R$ 80</div></div>
-            <button class="btn btn-outline btn-sm" style="margin-top:12px;" data-toast="Novo serviço adicionado à vitrine (demonstração)">+ Adicionar serviço</button>
+          <div class="card-block collapsible-card">
+            <div class="collapsible-card-head">
+              <h3>Documentos para verificação <span class="badge">✓ enviados</span></h3>
+              <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <p class="collapsible-card-summary">Enviados · 1 em análise</p>
+            <div class="collapsible-card-body">
+              <div class="doc-set active" data-docs="autonomo">
+                <span class="badge">✓ RG/CPF enviado</span>
+                <span class="badge">✓ Comprovante de endereço</span>
+                <span class="badge warn">⏳ Atestado de antecedentes — em análise</span>
+              </div>
+              <div class="doc-set" data-docs="vet">
+                <span class="badge">✓ RG/CPF enviado</span>
+                <span class="badge warn">⏳ CRMV — em análise</span>
+              </div>
+              <div class="doc-set" data-docs="petshop">
+                <span class="badge">✓ CNPJ enviado</span>
+                <span class="badge warn">⏳ Alvará de funcionamento — em análise</span>
+              </div>
+              <div class="doc-set" data-docs="hotel">
+                <span class="badge">✓ CNPJ enviado</span>
+                <span class="badge warn">⏳ Política de aceitação de pets — em análise</span>
+              </div>
+            </div>
           </div>
 
-          <div class="card-block">
-            <h3>Disponibilidade semanal</h3>
-            <p class="bio" style="margin-bottom:10px;">Toque nos horários abaixo para marcar quando você está disponível (visual, apenas demonstração).</p>
-            <div class="avail-grid">
-              <div class="avail-day"><div class="dname">SEG</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">TER</div><div class="avail-slot toggle-avail">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">QUA</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">QUI</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">SEX</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">SÁB</div><div class="avail-slot toggle-avail">08h-12h</div></div>
-              <div class="avail-day"><div class="dname">DOM</div><div class="avail-slot toggle-avail">08h-12h</div></div>
+          <div class="card-block collapsible-card">
+            <div class="collapsible-card-head">
+              <h3>Vitrine — serviços &amp; preços</h3>
+              <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <p class="collapsible-card-summary">3 serviços cadastrados</p>
+            <div class="collapsible-card-body">
+              <p class="bio" style="margin-bottom:14px;">Monte seu perfil com fotos, serviços, preços e política de aceitação de pets. Isso é o que os tutores veem na busca.</p>
+              <div class="service-row"><div><div class="sname">Passeio 30 min</div><div class="sdur">1 pet</div></div><div class="sprice">R$ 25</div></div>
+              <div class="service-row"><div><div class="sname">Passeio 60 min</div><div class="sdur">até 2 pets</div></div><div class="sprice">R$ 35</div></div>
+              <div class="service-row"><div><div class="sname">Hospedagem diária</div><div class="sdur">na casa do profissional</div></div><div class="sprice">R$ 80</div></div>
+              <button class="btn btn-outline btn-sm" style="margin-top:12px;" data-toast="Novo serviço adicionado à vitrine (demonstração)">+ Adicionar serviço</button>
+            </div>
+          </div>
+
+          <div class="card-block collapsible-card">
+            <div class="collapsible-card-head">
+              <h3>Disponibilidade semanal</h3>
+              <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <p class="collapsible-card-summary">4 de 7 dias com horário livre</p>
+            <div class="collapsible-card-body">
+              <p class="bio" style="margin-bottom:10px;">Toque nos horários abaixo para marcar quando você está disponível (visual, apenas demonstração).</p>
+              <div class="avail-grid">
+                <div class="avail-day"><div class="dname">SEG</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">TER</div><div class="avail-slot toggle-avail">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">QUA</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">QUI</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">SEX</div><div class="avail-slot toggle-avail free">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">SÁB</div><div class="avail-slot toggle-avail">08h-12h</div></div>
+                <div class="avail-day"><div class="dname">DOM</div><div class="avail-slot toggle-avail">08h-12h</div></div>
+              </div>
             </div>
           </div>
 
@@ -3394,24 +3436,6 @@
         </div>
 
         <div class="card-block">
-          <h3>Dados do pet</h3>
-          <div class="form-grid">
-            <div class="form-field"><label>Nome</label><input type="text" id="input-pet-nome" value="Thor"></div>
-            <div class="form-field"><label>Espécie</label><select id="input-pet-especie"><option>Cão</option><option>Gato</option><option>Outro</option></select></div>
-            <div class="form-field"><label>Raça</label><input type="text" id="input-pet-raca" value="SRD (Sem Raça Definida)"></div>
-            <div class="form-field"><label>Cor da pelagem</label><input type="text" id="input-pet-cor" value="Caramelo"></div>
-            <div class="form-field"><label>Data de nascimento</label><input type="text" id="input-pet-nascimento" value="04/2023"></div>
-            <div class="form-field"><label>Peso</label><input type="text" id="input-pet-peso" value="14 kg"></div>
-            <div class="form-field"><label>Sexo</label><select id="input-pet-sexo"><option>Macho</option><option>Fêmea</option></select></div>
-            <div class="form-field"><label>Castrado(a)</label><select id="input-pet-castrado"><option>Sim</option><option>Não</option></select></div>
-            <div class="form-field"><label>Microchip</label><input type="text" id="input-pet-microchip" placeholder="Número do microchip (opcional)"></div>
-            <div class="form-field full"><label>Alergias e restrições</label><textarea id="input-pet-alergias">Nenhuma alergia registrada até o momento.</textarea></div>
-            <div class="form-field full"><label>Medicações em uso</label><textarea id="input-pet-medicacoes">Nenhuma medicação contínua.</textarea></div>
-          </div>
-          <button class="btn btn-primary" style="margin-top:18px;" id="save-pet-data-btn" data-toast="+10 pontos de cuidado 🦴 — dados do pet atualizados e carteira sincronizada!">Salvar dados do pet</button>
-        </div>
-
-        <div class="card-block">
           <h3>Personalizar Carteira Digital</h3>
           <p class="bio">Escolha como a carteira de Thor aparece pra você e pra quem ele encontrar pelo caminho — inclusive em caso de emergência.</p>
           <label style="font-size:11.5px;font-weight:700;color:var(--gray-700);text-transform:uppercase;letter-spacing:.03em;">Foto de capa da carteira</label>
@@ -3445,6 +3469,30 @@
           <div class="row"><span>Peso atual</span><b>14 kg</b></div>
           <div class="row"><span>Na plataforma desde</span><b>2024</b></div>
         </div>
+
+        <div class="card-block collapsible-card" id="dados-pet-collapsible">
+          <div class="collapsible-card-head">
+            <h3 style="margin:0;">✎ Dados do pet</h3>
+            <svg class="collapsible-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="collapsible-card-body">
+            <div class="form-grid form-grid-1col">
+              <div class="form-field"><label>Nome</label><input type="text" id="input-pet-nome" value="Thor"></div>
+              <div class="form-field"><label>Espécie</label><select id="input-pet-especie"><option>Cão</option><option>Gato</option><option>Outro</option></select></div>
+              <div class="form-field"><label>Raça</label><input type="text" id="input-pet-raca" value="SRD (Sem Raça Definida)"></div>
+              <div class="form-field"><label>Cor da pelagem</label><input type="text" id="input-pet-cor" value="Caramelo"></div>
+              <div class="form-field"><label>Data de nascimento</label><input type="text" id="input-pet-nascimento" value="04/2023"></div>
+              <div class="form-field"><label>Peso</label><input type="text" id="input-pet-peso" value="14 kg"></div>
+              <div class="form-field"><label>Sexo</label><select id="input-pet-sexo"><option>Macho</option><option>Fêmea</option></select></div>
+              <div class="form-field"><label>Castrado(a)</label><select id="input-pet-castrado"><option>Sim</option><option>Não</option></select></div>
+              <div class="form-field"><label>Microchip</label><input type="text" id="input-pet-microchip" placeholder="Número do microchip (opcional)"></div>
+              <div class="form-field full"><label>Alergias e restrições</label><textarea id="input-pet-alergias">Nenhuma alergia registrada até o momento.</textarea></div>
+              <div class="form-field full"><label>Medicações em uso</label><textarea id="input-pet-medicacoes">Nenhuma medicação contínua.</textarea></div>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top:18px;" id="save-pet-data-btn" data-toast="+10 pontos de cuidado 🦴 — dados do pet atualizados e carteira sincronizada!">Salvar dados do pet</button>
+          </div>
+        </div>
+
         <button class="btn btn-outline btn-block" data-goto="agenda">🩺 Ver carteira digital completa</button>
       </aside>
     </div>
@@ -4347,6 +4395,14 @@
       toggleBtn.classList.toggle('active', open);
     });
   })();
+
+  // ===== Cards colapsáveis (resumo por padrão, abrem ao clicar) =====
+  document.querySelectorAll('.collapsible-card-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      var card = head.closest('.collapsible-card');
+      if(card) card.classList.toggle('open');
+    });
+  });
 
   // ===== Posiciona o FAB do assistente centralizado (mobile) — acima da folha de busca no Início =====
   function positionAssistantFab(){
