@@ -2486,6 +2486,31 @@
             </div>
           </div>
 
+          <div class="card-block">
+            <h3>🐾 Cuidados por mim</h3>
+            <p class="bio" style="margin-bottom:14px;">Pets que você atende regularmente e têm você como parceiro de confiança.</p>
+            <div class="pet-id-card" style="margin-bottom:0;">
+              <div class="pet-id-top">
+                <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+                <div class="pet-id-chip"></div>
+              </div>
+              <div class="pet-id-body">
+                <img class="pet-id-photo" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thor">
+                <div class="pet-id-info">
+                  <h3>Thor</h3>
+                  <div class="pet-id-code">ID KODA-THOR-0417</div>
+                  <div class="pet-id-grid">
+                    <div>Espécie / Raça<b>Cão · SRD</b></div>
+                    <div>Cor<b>Caramelo</b></div>
+                    <div>Peso<b>14 kg</b></div>
+                    <div>Idade<b>3 anos</b></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span>Nenhuma alergia registrada até o momento.</span></div>
+            </div>
+          </div>
+
           <button class="btn btn-primary btn-block" data-goto="solicitacoes">Enviar cadastro para análise</button>
         </div>
 
@@ -4719,7 +4744,6 @@
     }
     var jsPDFCtor = window.jspdf.jsPDF;
     var W = 380, H = 620;
-    var doc = new jsPDFCtor({ unit: 'pt', format: [W, H] });
 
     var name = document.getElementById('pet-id-name').textContent || 'Pet';
     var code = document.getElementById('pet-id-code').textContent;
@@ -4732,67 +4756,105 @@
     var sexo = sexoEl ? sexoEl.value : '';
     var medEl = document.getElementById('input-pet-medicacoes');
     var medicacoes = medEl ? medEl.value : '';
+    var photoEl = document.getElementById('pet-id-photo');
 
-    // Fundo em gradiente simulado com formas sobrepostas, no estilo visual da Carteira Digital
-    doc.setFillColor(34, 56, 58); doc.rect(0, 0, W, H, 'F');
-    doc.setFillColor(54, 81, 83); doc.triangle(0, H, W, H, W, H - 200, 'F');
-    doc.setFillColor(243, 124, 94); doc.circle(W - 40, 40, 70, 'F');
+    function buildPdf(photoDataUrl){
+      var doc = new jsPDFCtor({ unit: 'pt', format: [W, H] });
 
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
-    doc.text('CARTEIRA DE IDENTIDADE PET', 30, 40);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-    doc.text('KODA — Connecting pets. Empowering care.', 30, 54);
-    doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
-    doc.line(30, 66, W - 30, 66);
+      // Fundo em gradiente simulado com formas sobrepostas, no estilo visual da Carteira Digital
+      doc.setFillColor(34, 56, 58); doc.rect(0, 0, W, H, 'F');
+      doc.setFillColor(54, 81, 83); doc.triangle(0, H, W, H, W, H - 200, 'F');
+      doc.setFillColor(243, 124, 94); doc.circle(W - 40, 40, 70, 'F');
 
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
-    doc.text(name, 30, 105);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
-    doc.text(code, 30, 122);
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
+      doc.text('CARTEIRA DE IDENTIDADE PET', 30, 40);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
+      doc.text('KODA — Connecting pets. Empowering care.', 30, 54);
+      doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
+      doc.line(30, 66, W - 30, 66);
 
-    var fields = [
-      ['Espécie / Raça', racaLinha],
-      ['Cor', cor],
-      ['Peso', peso],
-      ['Idade', idade],
-      ['Sexo', sexo || '—']
-    ];
-    var y = 160;
-    fields.forEach(function(f){
+      // Foto do pet (mesma imagem exibida no card), com moldura branca
+      var photoSize = 78, photoX = W - 30 - photoSize, photoY = 84;
+      if(photoDataUrl){
+        try{
+          doc.setFillColor(255, 255, 255);
+          doc.roundedRect(photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 8, 8, 'F');
+          doc.addImage(photoDataUrl, 'JPEG', photoX, photoY, photoSize, photoSize, undefined, 'FAST');
+        }catch(e){ /* segue sem a foto se algo falhar na hora de desenhar */ }
+      }
+
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+      doc.text(name, 30, 105);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+      doc.text(code, 30, 122);
+
+      var fields = [
+        ['Espécie / Raça', racaLinha],
+        ['Cor', cor],
+        ['Peso', peso],
+        ['Idade', idade],
+        ['Sexo', sexo || '—']
+      ];
+      var y = 190;
+      fields.forEach(function(f){
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
+        doc.text(String(f[0]).toUpperCase(), 30, y);
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(12.5); doc.setTextColor(255, 255, 255);
+        doc.text(String(f[1] || '—'), 30, y + 15);
+        y += 40;
+      });
+
+      y += 6;
+      doc.setDrawColor(255, 255, 255); doc.line(30, y, W - 30, y);
+      y += 20;
+
       doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-      doc.text(String(f[0]).toUpperCase(), 30, y);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(12.5); doc.setTextColor(255, 255, 255);
-      doc.text(String(f[1] || '—'), 30, y + 15);
-      y += 40;
-    });
-
-    y += 6;
-    doc.setDrawColor(255, 255, 255); doc.line(30, y, W - 30, y);
-    y += 20;
-
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-    doc.text('RESTRIÇÕES / ALERGIAS', 30, y);
-    y += 15;
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
-    var restricoesLines = doc.splitTextToSize(restricoes || '—', W - 60);
-    doc.text(restricoesLines, 30, y);
-    y += restricoesLines.length * 13 + 16;
-
-    if(medicacoes){
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-      doc.text('MEDICAÇÕES EM USO', 30, y);
+      doc.text('RESTRIÇÕES / ALERGIAS', 30, y);
       y += 15;
       doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
-      var medLines = doc.splitTextToSize(medicacoes, W - 60);
-      doc.text(medLines, 30, y);
+      var restricoesLines = doc.splitTextToSize(restricoes || '—', W - 60);
+      doc.text(restricoesLines, 30, y);
+      y += restricoesLines.length * 13 + 16;
+
+      if(medicacoes){
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
+        doc.text('MEDICAÇÕES EM USO', 30, y);
+        y += 15;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
+        var medLines = doc.splitTextToSize(medicacoes, W - 60);
+        doc.text(medLines, 30, y);
+      }
+
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(210, 235, 235);
+      doc.text('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
+
+      doc.save('carteira-pet-' + name.toLowerCase().replace(/\s+/g, '-') + '.pdf');
+      showToast('Carteira de ' + name + ' exportada em PDF! 🦴 +5 pontos de cuidado');
     }
 
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(210, 235, 235);
-    doc.text('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
-
-    doc.save('carteira-pet-' + name.toLowerCase().replace(/\s+/g, '-') + '.pdf');
-    showToast('Carteira de ' + name + ' exportada em PDF! 🦴 +5 pontos de cuidado');
+    // Carrega a mesma foto do card (via canvas, pra virar base64 aceito pelo jsPDF) antes de montar o PDF
+    if(photoEl && photoEl.src){
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function(){
+        try{
+          var canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth || img.width;
+          canvas.height = img.naturalHeight || img.height;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          buildPdf(canvas.toDataURL('image/jpeg', 0.92));
+        }catch(e){
+          buildPdf(null);
+        }
+      };
+      img.onerror = function(){ buildPdf(null); };
+      img.src = photoEl.src;
+    } else {
+      buildPdf(null);
+    }
   }
 
   // Compartilhar a Carteira de Identidade Pet (Web Share API, com fallback para copiar)
