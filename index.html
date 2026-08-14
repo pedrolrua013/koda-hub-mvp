@@ -308,7 +308,7 @@
     }
     .cta-banner{padding-left:20px !important;padding-right:20px !important;}
     /* Grid de identidade do pet: 1 coluna em telas bem estreitas para não espremer os valores */
-    @media (max-width:380px){ .pet-id-grid{grid-template-columns:1fr;} }
+    @media (max-width:380px){ .pet-id-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row;} }
   }
   .hero-media{flex-shrink:0;width:250px;position:relative;display:none;}
   @media (min-width:860px){ .hero-media{display:block;} }
@@ -1044,26 +1044,32 @@
   .petz-step h5{margin:0 0 6px;font-size:14px;color:var(--dark);}
   .petz-step p{margin:0;font-size:12.5px;color:var(--gray-500);line-height:1.5;}
 
-  /* Carteira de Identidade do Pet (ID Card) */
+  /* Carteira de Identidade do Pet (ID Card) — modelo com logo, chip, dados e selo de comunidade */
   .pet-id-card{position:relative;border-radius:20px;padding:24px 26px;background:linear-gradient(135deg, var(--turquoise-1) 0%, var(--turquoise-2) 55%, var(--turquoise-3) 100%);color:#fff;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:20px;}
   .pet-id-card::before{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.08);}
-  .pet-id-card::after{content:"KODA";position:absolute;bottom:14px;right:22px;font-family:'Poppins',sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;color:rgba(255,255,255,0.32);}
   .pet-id-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;}
-  .pet-id-label{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+  .pet-id-logo{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:800;font-size:15px;color:#fff;}
+  .pet-id-logo-badge{width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,0.94);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .pet-id-logo-badge img{width:70%;height:70%;object-fit:contain;display:block;}
   .pet-id-chip{width:34px;height:26px;border-radius:6px;background:linear-gradient(135deg,#F4D8A8,#D9B067);position:relative;}
   .pet-id-chip::before,.pet-id-chip::after{content:"";position:absolute;left:5px;right:5px;height:1px;background:rgba(0,0,0,0.25);}
   .pet-id-chip::before{top:9px;}
   .pet-id-chip::after{top:16px;}
-  .pet-id-body{display:flex;gap:20px;align-items:center;margin-top:14px;flex-wrap:wrap;position:relative;z-index:2;}
+  .pet-id-body{display:flex;gap:20px;align-items:center;margin-top:18px;flex-wrap:wrap;position:relative;z-index:2;}
   .pet-id-photo{width:88px;height:88px;border-radius:16px;object-fit:cover;border:3px solid rgba(255,255,255,0.7);flex-shrink:0;}
-  .pet-id-info{flex:1;min-width:220px;}
-  .pet-id-info h3{font-size:22px;margin:0 0 2px;color:#fff;}
-  .pet-id-info .pet-id-code{font-size:11px;font-weight:700;letter-spacing:.07em;color:rgba(255,255,255,0.7);margin-bottom:12px;}
-  .pet-id-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;}
-  .pet-id-grid div{font-size:12px;color:rgba(255,255,255,0.8);}
-  .pet-id-grid b{display:block;font-size:13.5px;color:#fff;font-weight:700;margin-top:1px;}
-  .pet-id-restrictions{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(255,255,255,0.32);font-size:12.5px;color:rgba(255,255,255,0.92);position:relative;z-index:2;}
-  .pet-id-restrictions b{color:#fff;}
+  .pet-id-info{flex:1;min-width:240px;}
+  .pet-id-info h3{font-size:24px;margin:0 0 12px;color:#fff;}
+  .pet-id-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:10px 28px;}
+  .pet-id-grid div{font-size:11px;color:rgba(255,255,255,0.68);}
+  .pet-id-grid b{display:block;font-size:13.5px;color:#fff;font-weight:700;margin-top:2px;}
+  .pet-id-divider{margin-top:18px;border-top:1px dashed rgba(255,255,255,0.32);position:relative;z-index:2;}
+  .pet-id-foot{margin-top:14px;position:relative;z-index:2;}
+  .pet-id-member-label{display:block;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:10px;}
+  .pet-id-badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .pet-id-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:8px 13px;border-radius:100px;background:rgba(255,255,255,0.14);color:#fff;white-space:nowrap;}
+  .pet-id-badge.primary{background:var(--primary);color:#fff;}
+  .pet-id-number{position:absolute;bottom:0;right:0;font-size:11px;font-weight:700;color:rgba(255,255,255,0.55);letter-spacing:.04em;}
+  @media (max-width:480px){ .pet-id-badges{gap:6px;} .pet-id-badge{font-size:10px;padding:7px 11px;} .pet-id-number{position:static;display:block;margin-top:10px;} }
   .pet-id-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;position:relative;z-index:2;}
   .pet-id-actions .btn{font-size:12.5px;padding:10px 16px;box-shadow:none;}
 
@@ -2575,44 +2581,64 @@
             <p class="bio" style="margin-bottom:14px;">Pets que você atende regularmente e têm você como parceiro de confiança.</p>
             <div class="pet-id-card" style="margin-bottom:0;">
               <div class="pet-id-top">
-                <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+                <span class="pet-id-logo"><span class="pet-id-logo-badge"><img class="pet-id-logo-img" src="" alt="Koda"></span> Koda</span>
                 <div class="pet-id-chip"></div>
               </div>
               <div class="pet-id-body">
                 <img class="pet-id-photo" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thor">
                 <div class="pet-id-info">
                   <h3>Thor</h3>
-                  <div class="pet-id-code">ID KODA-THOR-0417</div>
                   <div class="pet-id-grid">
-                    <div>Espécie / Raça<b>Cão · SRD</b></div>
+                    <div>Data de Nascimento<b>05/2023</b></div>
+                    <div>Tutor<b>Pedro</b></div>
+                    <div>Raça<b>SRD (Sem Raça Definida)</b></div>
+                    <div>Sexo<b>Macho</b></div>
                     <div>Cor<b>Caramelo</b></div>
                     <div>Peso<b>14 kg</b></div>
-                    <div>Idade<b>3 anos</b></div>
                   </div>
                 </div>
               </div>
-              <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span>Nenhuma alergia registrada até o momento.</span></div>
+              <div class="pet-id-divider"></div>
+              <div class="pet-id-foot">
+                <span class="pet-id-member-label">MEMBRO DA COMUNIDADE KODA</span>
+                <div class="pet-id-badges">
+                  <span class="pet-id-badge primary">★ Carteira Única do Pet</span>
+                  <span class="pet-id-badge">👪 Integrado com Multisserviços</span>
+                  <span class="pet-id-badge">🔔 Acesso a cuidados e alertas</span>
+                </div>
+                <span class="pet-id-number"># 001</span>
+              </div>
             </div>
 
             <div class="pet-id-card" style="margin-bottom:0;margin-top:16px;">
               <div class="pet-id-top">
-                <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+                <span class="pet-id-logo"><span class="pet-id-logo-badge"><img class="pet-id-logo-img" src="" alt="Koda"></span> Koda</span>
                 <div class="pet-id-chip"></div>
               </div>
               <div class="pet-id-body">
                 <img class="pet-id-photo" src="https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Caramelo">
                 <div class="pet-id-info">
                   <h3>Caramelo</h3>
-                  <div class="pet-id-code">ID KODA-CARAMELO-0822</div>
                   <div class="pet-id-grid">
-                    <div>Espécie / Raça<b>Cão · Vira-lata</b></div>
+                    <div>Data de Nascimento<b>08/2024</b></div>
+                    <div>Tutor<b>Pedro</b></div>
+                    <div>Raça<b>Vira-lata</b></div>
+                    <div>Sexo<b>Macho</b></div>
                     <div>Cor<b>Caramelo</b></div>
                     <div>Peso<b>9 kg</b></div>
-                    <div>Idade<b>2 anos</b></div>
                   </div>
                 </div>
               </div>
-              <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span>Sensibilidade a ração com corante artificial.</span></div>
+              <div class="pet-id-divider"></div>
+              <div class="pet-id-foot">
+                <span class="pet-id-member-label">MEMBRO DA COMUNIDADE KODA</span>
+                <div class="pet-id-badges">
+                  <span class="pet-id-badge primary">★ Carteira Única do Pet</span>
+                  <span class="pet-id-badge">👪 Integrado com Multisserviços</span>
+                  <span class="pet-id-badge">🔔 Acesso a cuidados e alertas</span>
+                </div>
+                <span class="pet-id-number"># 002</span>
+              </div>
             </div>
           </div>
 
@@ -3398,23 +3424,33 @@
       <div>
         <div class="pet-id-card" id="pet-id-card">
           <div class="pet-id-top">
-            <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+            <span class="pet-id-logo"><span class="pet-id-logo-badge"><img class="pet-id-logo-img" src="" alt="Koda"></span> Koda</span>
             <div class="pet-id-chip"></div>
           </div>
           <div class="pet-id-body">
             <img class="pet-id-photo" id="pet-id-photo" src="https://images.pexels.com/photos/19143039/pexels-photo-19143039.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Thor">
             <div class="pet-id-info">
               <h3 id="pet-id-name">Thor</h3>
-              <div class="pet-id-code" id="pet-id-code">ID KODA-THOR-0417</div>
               <div class="pet-id-grid">
-                <div>Espécie / Raça<b id="pet-id-raca">Cão · SRD</b></div>
+                <div>Data de Nascimento<b id="pet-id-nascimento">04/2023</b></div>
+                <div>Tutor<b id="pet-id-tutor">Pedro</b></div>
+                <div>Raça<b id="pet-id-raca">SRD (Sem Raça Definida)</b></div>
+                <div>Sexo<b id="pet-id-sexo">Macho</b></div>
                 <div>Cor<b id="pet-id-cor">Caramelo</b></div>
                 <div>Peso<b id="pet-id-peso">14 kg</b></div>
-                <div>Idade<b id="pet-id-idade">3 anos</b></div>
               </div>
             </div>
           </div>
-          <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span id="pet-id-restricoes">Nenhuma alergia registrada até o momento.</span></div>
+          <div class="pet-id-divider"></div>
+          <div class="pet-id-foot">
+            <span class="pet-id-member-label">MEMBRO DA COMUNIDADE KODA</span>
+            <div class="pet-id-badges">
+              <span class="pet-id-badge primary">★ Carteira Única do Pet</span>
+              <span class="pet-id-badge">👪 Integrado com Multisserviços</span>
+              <span class="pet-id-badge">🔔 Acesso a cuidados e alertas</span>
+            </div>
+            <span class="pet-id-number" id="pet-id-number"># 001</span>
+          </div>
           <div class="pet-id-actions">
             <button class="btn btn-primary" id="pet-id-export-btn">⬇️ Exportar carteira em PDF</button>
             <button class="btn btn-outline" id="pet-id-export-png-btn">🖼️ Exportar em imagem (PNG)</button>
@@ -4635,6 +4671,7 @@
           el.appendChild(img);
         }
       });
+      document.querySelectorAll('.pet-id-logo-img').forEach(function(img){ img.src = src; });
     }
   })();
 
@@ -4851,7 +4888,7 @@
       code: 'KODA-THOR-0417',
       especie: 'Cão', raca: 'SRD (Sem Raça Definida)', cor: 'Caramelo',
       nascimento: '04/2023', peso: '14 kg', idadeLabel: '3 anos',
-      sexo: 'Macho', castrado: 'Sim', microchip: '',
+      sexo: 'Macho', castrado: 'Sim', microchip: '', tutor: 'Pedro', numero: '001',
       alergias: 'Nenhuma alergia registrada até o momento.',
       medicacoes: 'Nenhuma medicação contínua.',
       prontuario: {
@@ -4879,7 +4916,7 @@
       code: 'KODA-MIA-0892',
       especie: 'Gato', raca: 'Siamês', cor: 'Creme e marrom (colorpoint)',
       nascimento: '06/2024', peso: '4 kg', idadeLabel: '2 anos',
-      sexo: 'Fêmea', castrado: 'Sim', microchip: '',
+      sexo: 'Fêmea', castrado: 'Sim', microchip: '', tutor: 'Pedro', numero: '002',
       alergias: 'Sensibilidade a frango — dieta especial.',
       medicacoes: 'Nenhuma medicação contínua.',
       prontuario: {
@@ -4901,12 +4938,13 @@
   function fillPetWallet(p){
     document.getElementById('pet-id-photo').src = p.photo;
     document.getElementById('pet-id-name').textContent = p.name;
-    document.getElementById('pet-id-code').textContent = 'ID ' + p.code;
-    document.getElementById('pet-id-raca').textContent = p.especie + ' · ' + p.raca;
+    document.getElementById('pet-id-nascimento').textContent = p.nascimento;
+    document.getElementById('pet-id-tutor').textContent = p.tutor || 'Pedro';
+    document.getElementById('pet-id-raca').textContent = p.raca;
+    document.getElementById('pet-id-sexo').textContent = p.sexo;
     document.getElementById('pet-id-cor').textContent = p.cor;
     document.getElementById('pet-id-peso').textContent = p.peso;
-    document.getElementById('pet-id-idade').textContent = p.idadeLabel;
-    document.getElementById('pet-id-restricoes').textContent = p.alergias;
+    document.getElementById('pet-id-number').textContent = '# ' + (p.numero || '001');
 
     var setVal = function(id, val){ var el = document.getElementById(id); if(el) el.value = val; };
     setVal('input-pet-nome', p.name);
@@ -5201,6 +5239,7 @@
           especie: especie, raca: raca, cor: cor,
           nascimento: nascimento, peso: peso, idadeLabel: idadeLabel,
           sexo: sexo, castrado: castrado, microchip: microchip,
+          tutor: 'Pedro', numero: String(Object.keys(petProfileData).length + 1).padStart(3, '0'),
           alergias: alergias,
           medicacoes: medicacoes,
           prontuario: {
@@ -5231,10 +5270,11 @@
     savePetDataBtn.addEventListener('click', function(){
       var getVal = function(id){ var el = document.getElementById(id); return el ? el.value : ''; };
       document.getElementById('pet-id-name').textContent = getVal('input-pet-nome') || 'Pet';
-      document.getElementById('pet-id-raca').textContent = getVal('input-pet-especie') + ' · ' + getVal('input-pet-raca');
+      document.getElementById('pet-id-nascimento').textContent = getVal('input-pet-nascimento');
+      document.getElementById('pet-id-raca').textContent = getVal('input-pet-raca');
+      document.getElementById('pet-id-sexo').textContent = getVal('input-pet-sexo');
       document.getElementById('pet-id-cor').textContent = getVal('input-pet-cor');
       document.getElementById('pet-id-peso').textContent = getVal('input-pet-peso');
-      document.getElementById('pet-id-restricoes').textContent = getVal('input-pet-alergias');
     });
   }
 
@@ -5248,16 +5288,13 @@
     var W = 380, H = 620;
 
     var name = document.getElementById('pet-id-name').textContent || 'Pet';
-    var code = document.getElementById('pet-id-code').textContent;
+    var nascimento = document.getElementById('pet-id-nascimento').textContent;
+    var tutor = document.getElementById('pet-id-tutor').textContent;
     var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var sexo = document.getElementById('pet-id-sexo').textContent;
     var cor = document.getElementById('pet-id-cor').textContent;
     var peso = document.getElementById('pet-id-peso').textContent;
-    var idade = document.getElementById('pet-id-idade').textContent;
-    var restricoes = document.getElementById('pet-id-restricoes').textContent;
-    var sexoEl = document.getElementById('input-pet-sexo');
-    var sexo = sexoEl ? sexoEl.value : '';
-    var medEl = document.getElementById('input-pet-medicacoes');
-    var medicacoes = medEl ? medEl.value : '';
+    var numero = document.getElementById('pet-id-number').textContent;
     var photoEl = document.getElementById('pet-id-photo');
 
     function buildPdf(photoDataUrl){
@@ -5266,71 +5303,81 @@
       // Fundo em gradiente simulado com formas sobrepostas, no estilo visual da Carteira Digital
       doc.setFillColor(34, 56, 58); doc.rect(0, 0, W, H, 'F');
       doc.setFillColor(54, 81, 83); doc.triangle(0, H, W, H, W, H - 200, 'F');
-      doc.setFillColor(243, 124, 94); doc.circle(W - 40, 40, 70, 'F');
+      try{
+        if(doc.setGState && doc.GState){
+          doc.setGState(new doc.GState({opacity:0.08}));
+          doc.setFillColor(255, 255, 255);
+          doc.circle(W + 10, 30, 80, 'F');
+          doc.setGState(new doc.GState({opacity:1}));
+        }
+      }catch(e){ /* opacidade não suportada nesta versão do jsPDF — segue sem o círculo decorativo */ }
 
+      // Topo: logotipo Koda + chip estilo cartão
       doc.setTextColor(255, 255, 255);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(11);
-      doc.text('CARTEIRA DE IDENTIDADE PET', 30, 40);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(9);
-      doc.text('KODA — Connecting pets. Empowering care.', 30, 54);
-      doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
-      doc.line(30, 66, W - 30, 66);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(13);
+      doc.text('🐾 Koda', 30, 42);
+      doc.setFillColor(244, 216, 168);
+      doc.roundedRect(W - 30 - 34, 26, 34, 26, 5, 5, 'F');
 
-      // Foto do pet (mesma imagem exibida no card), com moldura branca
-      var photoSize = 78, photoX = W - 30 - photoSize, photoY = 84;
+      // Foto do pet, com moldura branca
+      var photoSize = 78, photoX = 30, photoY = 76;
       if(photoDataUrl){
         try{
           doc.setFillColor(255, 255, 255);
-          doc.roundedRect(photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 8, 8, 'F');
+          doc.roundedRect(photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 10, 10, 'F');
           doc.addImage(photoDataUrl, 'JPEG', photoX, photoY, photoSize, photoSize, undefined, 'FAST');
         }catch(e){ /* segue sem a foto se algo falhar na hora de desenhar */ }
       }
 
       doc.setTextColor(255, 255, 255);
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
-      doc.text(name, 30, 105);
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
-      doc.text(code, 30, 122);
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+      doc.text(name, photoX + photoSize + 18, 108);
 
       var fields = [
-        ['Espécie / Raça', racaLinha],
-        ['Cor', cor],
-        ['Peso', peso],
-        ['Idade', idade],
-        ['Sexo', sexo || '—']
+        ['Data de Nascimento', nascimento || '—'],
+        ['Tutor', tutor || '—'],
+        ['Raça', racaLinha || '—'],
+        ['Sexo', sexo || '—'],
+        ['Cor', cor || '—'],
+        ['Peso', peso || '—']
       ];
-      var y = 190;
-      fields.forEach(function(f){
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-        doc.text(String(f[0]).toUpperCase(), 30, y);
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(12.5); doc.setTextColor(255, 255, 255);
-        doc.text(String(f[1] || '—'), 30, y + 15);
-        y += 40;
+      var colX = [photoX + photoSize + 18, photoX + photoSize + 18 + 100];
+      var rowY = [138, 168, 198];
+      fields.forEach(function(f, i){
+        var x = colX[Math.floor(i / 3)];
+        var y = rowY[i % 3];
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(210, 235, 235);
+        doc.text(String(f[0]).toUpperCase(), x, y);
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
+        doc.text(String(f[1]), x, y + 14);
       });
 
-      y += 6;
-      doc.setDrawColor(255, 255, 255); doc.line(30, y, W - 30, y);
-      y += 20;
+      var y = 240;
+      doc.setDrawColor(255, 255, 255); doc.setLineWidth(0.7);
+      if(doc.setLineDashPattern){ doc.setLineDashPattern([2, 2], 0); }
+      doc.line(30, y, W - 30, y);
+      if(doc.setLineDashPattern){ doc.setLineDashPattern([], 0); }
+      y += 24;
 
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-      doc.text('RESTRIÇÕES / ALERGIAS', 30, y);
-      y += 15;
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
-      var restricoesLines = doc.splitTextToSize(restricoes || '—', W - 60);
-      doc.text(restricoesLines, 30, y);
-      y += restricoesLines.length * 13 + 16;
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(180, 210, 210);
+      doc.text('MEMBRO DA COMUNIDADE KODA', 30, y);
+      y += 18;
 
-      if(medicacoes){
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5); doc.setTextColor(210, 235, 235);
-        doc.text('MEDICAÇÕES EM USO', 30, y);
-        y += 15;
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(10.5); doc.setTextColor(255, 255, 255);
-        var medLines = doc.splitTextToSize(medicacoes, W - 60);
-        doc.text(medLines, 30, y);
-      }
+      var badges = ['★ Carteira Única do Pet', '👪 Multisserviços', '🔔 Alertas de cuidado'];
+      var bx = 30;
+      badges.forEach(function(b){
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(8);
+        var tw = doc.getTextWidth(b) + 18;
+        doc.setFillColor(255, 255, 255); doc.setDrawColor(255,255,255);
+        doc.roundedRect(bx, y - 12, tw, 20, 10, 10, 'S');
+        doc.setTextColor(255, 255, 255);
+        doc.text(b, bx + 9, y + 2);
+        bx += tw + 8;
+      });
 
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(210, 235, 235);
-      doc.text('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(180, 210, 210);
+      doc.text(numero || '# 001', W - 30, H - 24, { align: 'right' });
+      doc.text('Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 24);
 
       doc.save('carteira-pet-' + name.toLowerCase().replace(/\s+/g, '-') + '.pdf');
       showToast('Carteira de ' + name + ' exportada em PDF! 🦴 +5 pontos de cuidado');
@@ -5362,19 +5409,17 @@
   // Desenha a Carteira de Identidade Pet num <canvas> (mesmo visual do card/PDF), usado tanto
   // para exportar em PNG quanto para anexar a imagem ao compartilhar.
   function buildPetWalletCanvas(callback){
-    var W = 380, H = 620, SCALE = 2;
+    var W = 380, H = 560, SCALE = 2;
     var name = document.getElementById('pet-id-name').textContent || 'Pet';
-    var code = document.getElementById('pet-id-code').textContent;
+    var nascimento = document.getElementById('pet-id-nascimento').textContent;
+    var tutor = document.getElementById('pet-id-tutor').textContent;
     var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var sexo = document.getElementById('pet-id-sexo').textContent;
     var cor = document.getElementById('pet-id-cor').textContent;
     var peso = document.getElementById('pet-id-peso').textContent;
-    var idade = document.getElementById('pet-id-idade').textContent;
-    var restricoes = document.getElementById('pet-id-restricoes').textContent;
-    var sexoEl = document.getElementById('input-pet-sexo');
-    var sexo = sexoEl ? sexoEl.value : '';
-    var medEl = document.getElementById('input-pet-medicacoes');
-    var medicacoes = medEl ? medEl.value : '';
+    var numero = document.getElementById('pet-id-number').textContent;
     var photoEl = document.getElementById('pet-id-photo');
+    var logoEl = document.querySelector('.pet-id-logo-img');
 
     function roundRect(ctx, x, y, w, h, r){
       ctx.beginPath();
@@ -5415,87 +5460,84 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
 
-      ctx.fillStyle = 'rgba(243,124,94,0.9)';
-      ctx.beginPath(); ctx.arc(W - 40, 40, 70, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      ctx.beginPath(); ctx.arc(W + 10, 10, 90, 0, Math.PI * 2); ctx.fill();
 
+      // Topo: logotipo Koda + chip estilo cartão
       ctx.fillStyle = '#fff';
-      ctx.font = '700 13px Poppins, Arial, sans-serif';
-      ctx.fillText('CARTEIRA DE IDENTIDADE PET', 30, 42);
-      ctx.font = '400 10px Inter, Arial, sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.82)';
-      ctx.fillText('KODA — Connecting pets. Empowering care.', 30, 58);
-      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(30, 68); ctx.lineTo(W - 30, 68); ctx.stroke();
+      ctx.font = '800 17px Poppins, Arial, sans-serif';
+      ctx.fillText('🐾 Koda', 26, 44);
+      roundRect(ctx, W - 26 - 40, 24, 40, 30, 6);
+      ctx.fillStyle = '#F4D8A8'; ctx.fill();
 
-      var photoSize = 78, photoX = W - 30 - photoSize, photoY = 86;
-      ctx.fillStyle = '#fff';
-      roundRect(ctx, photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 8); ctx.fill();
+      var photoSize = 92, photoX = 26, photoY = 76;
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      roundRect(ctx, photoX - 3, photoY - 3, photoSize + 6, photoSize + 6, 18); ctx.fill();
       if(photoImg){
         ctx.save();
-        roundRect(ctx, photoX, photoY, photoSize, photoSize, 6);
+        roundRect(ctx, photoX, photoY, photoSize, photoSize, 16);
         ctx.clip();
         ctx.drawImage(photoImg, photoX, photoY, photoSize, photoSize);
         ctx.restore();
       }
 
+      var infoX = photoX + photoSize + 20;
       ctx.fillStyle = '#fff';
-      ctx.font = '800 24px Poppins, Arial, sans-serif';
-      ctx.fillText(name, 30, 112);
-      ctx.font = '400 11px Inter, Arial, sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.85)';
-      ctx.fillText(code, 30, 130);
+      ctx.font = '800 25px Poppins, Arial, sans-serif';
+      ctx.fillText(name, infoX, 108);
 
       var fields = [
-        ['ESPÉCIE / RAÇA', racaLinha],
+        ['DATA DE NASCIMENTO', nascimento],
+        ['TUTOR', tutor],
+        ['RAÇA', racaLinha],
+        ['SEXO', sexo],
         ['COR', cor],
-        ['PESO', peso],
-        ['IDADE', idade],
-        ['SEXO', sexo || '—']
+        ['PESO', peso]
       ];
-      var y = 195;
-      fields.forEach(function(f){
+      var colX = [infoX, infoX + 130];
+      var rowY = [140, 172, 204];
+      fields.forEach(function(f, i){
+        var x = colX[Math.floor(i / 3)];
+        var y = rowY[i % 3];
         ctx.font = '600 9px Inter, Arial, sans-serif';
-        ctx.fillStyle = 'rgba(210,235,235,0.9)';
-        ctx.fillText(f[0], 30, y);
-        ctx.font = '700 14px Inter, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.68)';
+        ctx.fillText(f[0], x, y);
+        ctx.font = '700 13.5px Inter, Arial, sans-serif';
         ctx.fillStyle = '#fff';
-        ctx.fillText(f[1] || '—', 30, y + 18);
-        y += 42;
+        ctx.fillText(f[1] || '—', x, y + 18);
       });
 
-      y += 8;
-      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-      ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(W - 30, y); ctx.stroke();
-      y += 24;
+      var y = 244;
+      ctx.strokeStyle = 'rgba(255,255,255,0.32)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath(); ctx.moveTo(26, y); ctx.lineTo(W - 26, y); ctx.stroke();
+      ctx.setLineDash([]);
+      y += 28;
 
-      ctx.font = '600 9px Inter, Arial, sans-serif';
-      ctx.fillStyle = 'rgba(210,235,235,0.9)';
-      ctx.fillText('RESTRIÇÕES / ALERGIAS', 30, y);
-      y += 18;
-      ctx.font = '400 11.5px Inter, Arial, sans-serif';
-      ctx.fillStyle = '#fff';
-      y = wrapText(ctx, restricoes, 30, y, W - 60, 16);
+      ctx.font = '800 9.5px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillText('MEMBRO DA COMUNIDADE KODA', 26, y);
+      y += 20;
 
-      if(medicacoes){
-        y += 12;
-        ctx.font = '600 9px Inter, Arial, sans-serif';
-        ctx.fillStyle = 'rgba(210,235,235,0.9)';
-        ctx.fillText('MEDICAÇÕES EM USO', 30, y);
-        y += 18;
-        ctx.font = '400 11.5px Inter, Arial, sans-serif';
+      var badges = ['★ Carteira Única do Pet', '👪 Multisserviços', '🔔 Alertas de cuidado'];
+      var bx = 26, by = y, maxW = W - 52, lineH = 30;
+      badges.forEach(function(b){
+        ctx.font = '700 10.5px Inter, Arial, sans-serif';
+        var tw = ctx.measureText(b).width + 22;
+        if(bx + tw > 26 + maxW){ bx = 26; by += lineH; }
+        ctx.fillStyle = 'rgba(255,255,255,0.14)';
+        roundRect(ctx, bx, by - 15, tw, 26, 13); ctx.fill();
         ctx.fillStyle = '#fff';
-        wrapText(ctx, medicacoes, 30, y, W - 60, 16);
-      }
+        ctx.fillText(b, bx + 11, by + 3);
+        bx += tw + 8;
+      });
+      y = by + 34;
 
-      ctx.font = '400 9px Inter, Arial, sans-serif';
-      ctx.fillStyle = 'rgba(210,235,235,0.9)';
-      ctx.fillText('Tutor(a): Pedro  ·  Gerado pelo Koda em ' + new Date().toLocaleDateString('pt-BR'), 30, H - 20);
-
-      ctx.font = '800 12px Poppins, Arial, sans-serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.3)';
+      ctx.font = '700 10px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
       ctx.textAlign = 'right';
-      ctx.fillText('KODA', W - 22, H - 16);
+      ctx.fillText(numero || '# 001', W - 26, H - 20);
       ctx.textAlign = 'left';
 
       callback(canvas, name);
@@ -5537,15 +5579,16 @@
   // compartilhamento de arquivos (Web Share API Level 2); cai para texto, depois para copiar.
   function sharePetWallet(){
     var name = document.getElementById('pet-id-name').textContent || 'Pet';
+    var nascimento = document.getElementById('pet-id-nascimento').textContent;
+    var tutor = document.getElementById('pet-id-tutor').textContent;
     var racaLinha = document.getElementById('pet-id-raca').textContent;
+    var sexo = document.getElementById('pet-id-sexo').textContent;
     var cor = document.getElementById('pet-id-cor').textContent;
     var peso = document.getElementById('pet-id-peso').textContent;
-    var idade = document.getElementById('pet-id-idade').textContent;
-    var restricoes = document.getElementById('pet-id-restricoes').textContent;
-    var texto = 'Carteira de Identidade Pet — ' + name + '\n' +
-      racaLinha + ' · ' + cor + '\n' +
-      'Peso: ' + peso + ' · Idade: ' + idade + '\n' +
-      'Restrições/alergias: ' + restricoes + '\n' +
+    var numero = document.getElementById('pet-id-number').textContent;
+    var texto = 'Carteira de Identidade Pet — ' + name + ' (' + numero + ')\n' +
+      racaLinha + ' · ' + sexo + ' · ' + cor + '\n' +
+      'Nascimento: ' + nascimento + ' · Peso: ' + peso + ' · Tutor: ' + tutor + '\n' +
       'Gerado pelo Koda 🐾';
 
     function fallbackShare(){
