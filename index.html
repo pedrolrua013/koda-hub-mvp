@@ -228,20 +228,24 @@
     body.home-screen-active .home-map-wrap{margin:0;border-radius:0;height:calc(100vh - 62px);min-height:0;box-shadow:none;}
 
     .home-mobile-header{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
       position:sticky;top:0;left:0;right:0;z-index:60;
       background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
       padding:12px 16px;box-shadow:0 2px 14px rgba(0,0,0,0.08);
     }
-    .home-hamburger-btn,.home-mobile-logout-btn{
-      width:40px;height:40px;border-radius:50%;flex-shrink:0;
+    .home-hamburger-btn{justify-self:start;}
+    .home-mobile-header-right{justify-self:end;display:flex;align-items:center;gap:8px;}
+    .home-hamburger-btn,.home-mobile-logout-btn,.home-mobile-notif-btn{
+      width:40px;height:40px;border-radius:50%;flex-shrink:0;position:relative;
       display:flex;align-items:center;justify-content:center;
       background:var(--gray-100);border:1.5px solid var(--gray-300);color:var(--gray-700);
       transition:all .15s ease;
     }
-    .home-hamburger-btn:hover,.home-mobile-logout-btn:hover{background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary-light);}
-    .home-hamburger-btn svg,.home-mobile-logout-btn svg{width:19px;height:19px;}
-    .home-mobile-logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;color:var(--dark);white-space:nowrap;}
+    .home-hamburger-btn:hover,.home-mobile-logout-btn:hover,.home-mobile-notif-btn:hover{background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary-light);}
+    .home-hamburger-btn svg,.home-mobile-logout-btn svg,.home-mobile-notif-btn svg{width:19px;height:19px;}
+    .home-mobile-notif-btn.has-unread svg{animation:notifBellRing 4s ease-in-out infinite;}
+    .home-mobile-notif-btn .notif-badge{top:-2px;right:-2px;}
+    .home-mobile-logo{justify-self:center;display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;color:var(--dark);white-space:nowrap;}
     .home-mobile-logo .paw-badge{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .home-mobile-logo .paw-badge img{width:100%;height:100%;object-fit:contain;display:block;}
 
@@ -801,7 +805,8 @@
   .rank-row.top3{background:linear-gradient(90deg,#FBE7D9,var(--gray-100) 70%);}
   .rank-pos{width:28px;flex-shrink:0;text-align:center;font-size:14.5px;font-weight:800;color:var(--gray-500);}
   .rank-row.top1 .rank-pos,.rank-row.top2 .rank-pos,.rank-row.top3 .rank-pos{font-size:19px;}
-  .rank-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;}
+  .rank-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0;background-size:cover;background-position:center;box-shadow:0 0 0 2px #fff, 0 0 0 3px rgba(6,40,48,0.08);}
+  .rank-row.top1 .rank-avatar,.rank-row.top2 .rank-avatar,.rank-row.top3 .rank-avatar{width:42px;height:42px;}
   .rank-info{flex:1;min-width:0;}
   .rank-info h4{margin:0 0 2px;font-size:13.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
   .rank-info>span{font-size:11px;color:var(--gray-500);}
@@ -1373,10 +1378,47 @@
     position:fixed;right:24px;bottom:94px;z-index:2500;
     width:368px;max-height:min(70vh,540px);
     background:#fff;border-radius:22px;box-shadow:var(--shadow-lg);border:1px solid var(--gray-300);
-    display:none;flex-direction:column;overflow:hidden;
+    display:flex;flex-direction:column;overflow:hidden;
+    opacity:0;visibility:hidden;pointer-events:none;transform:translateY(14px) scale(.98);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
   }
-  .assistant-panel.active{display:flex;animation:fadeIn .25s ease;}
-  @media (max-width:640px){ .assistant-panel{right:12px;left:12px;bottom:76px;width:auto;max-height:64vh;} }
+  .assistant-panel.active{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s linear 0s;
+  }
+  /* Backdrop do assistente (mobile — sheet estilo app) */
+  .assistant-backdrop{display:none;position:fixed;inset:0;background:rgba(13,36,39,0.46);z-index:2450;opacity:0;transition:opacity .25s ease;}
+  @media (max-width:640px){
+    .assistant-backdrop{display:block;pointer-events:none;}
+    body.assistant-open .assistant-backdrop{opacity:1;pointer-events:auto;}
+    body.assistant-open{overflow:hidden;}
+    .assistant-panel{
+      left:0;right:0;bottom:0;top:auto;
+      width:100%;
+      max-height:none;
+      height:min(88dvh,720px);
+      height:min(88vh,720px);
+      border-radius:22px 22px 0 0;
+      border:none;
+      box-shadow:0 -10px 44px rgba(6,20,24,0.3);
+      transform:translateY(100%) scale(1);
+      transition:transform .34s cubic-bezier(.32,.72,0,1), visibility 0s linear .34s;
+    }
+    .assistant-panel.active{
+      transform:translateY(0) scale(1);
+      transition:transform .34s cubic-bezier(.32,.72,0,1), visibility 0s linear 0s;
+    }
+    .assistant-panel-head{position:relative;padding-top:20px;border-radius:22px 22px 0 0;}
+    .assistant-panel-head::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:38px;height:4px;border-radius:100px;background:rgba(255,255,255,0.55);}
+    .assistant-messages{min-height:0;-webkit-overflow-scrolling:touch;padding:16px 16px 10px;}
+    .assistant-msg{font-size:14px;max-width:86%;}
+    .assistant-quick-replies{padding:8px 14px 12px;}
+    .assistant-quick-reply{font-size:12.5px;padding:8px 13px;}
+    .assistant-input-row{padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));gap:10px;}
+    .assistant-input-row input{font-size:16px;padding:12px 16px;}
+    .assistant-send-btn{width:44px;height:44px;flex-shrink:0;}
+    .assistant-close-btn{width:34px;height:34px;font-size:15px;}
+  }
   .assistant-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;background:linear-gradient(120deg,var(--turquoise-1),var(--secondary));flex-shrink:0;}
   .assistant-head-info{display:flex;align-items:center;gap:11px;min-width:0;}
   .assistant-head-avatar{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;padding:5px;flex-shrink:0;box-shadow:0 0 0 2px rgba(255,255,255,0.4);}
@@ -1835,9 +1877,15 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <span class="home-mobile-logo"><span class="paw-badge"><img class="home-mobile-logo-img" src="" alt="Koda"></span> Koda</span>
-    <button type="button" class="home-mobile-logout-btn" id="home-mobile-logout-btn" title="Sair" aria-label="Sair">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
-    </button>
+    <div class="home-mobile-header-right">
+      <button type="button" class="home-mobile-notif-btn tabs-consumidor has-unread" id="home-mobile-notif-btn" title="Notificações" aria-label="Notificações">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+        <span class="notif-badge" id="home-mobile-notif-badge">3</span>
+      </button>
+      <button type="button" class="home-mobile-logout-btn" id="home-mobile-logout-btn" title="Sair" aria-label="Sair">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      </button>
+    </div>
   </div>
 
   <div class="app-main" id="app-main">
@@ -2551,6 +2599,27 @@
               </div>
               <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span>Nenhuma alergia registrada até o momento.</span></div>
             </div>
+
+            <div class="pet-id-card" style="margin-bottom:0;margin-top:16px;">
+              <div class="pet-id-top">
+                <span class="pet-id-label">🐾 Carteira de Identidade Pet</span>
+                <div class="pet-id-chip"></div>
+              </div>
+              <div class="pet-id-body">
+                <img class="pet-id-photo" src="https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Caramelo">
+                <div class="pet-id-info">
+                  <h3>Caramelo</h3>
+                  <div class="pet-id-code">ID KODA-CARAMELO-0822</div>
+                  <div class="pet-id-grid">
+                    <div>Espécie / Raça<b>Cão · Vira-lata</b></div>
+                    <div>Cor<b>Caramelo</b></div>
+                    <div>Peso<b>9 kg</b></div>
+                    <div>Idade<b>2 anos</b></div>
+                  </div>
+                </div>
+              </div>
+              <div class="pet-id-restrictions"><b>Restrições / alergias:</b> <span>Sensibilidade a ração com corante artificial.</span></div>
+            </div>
           </div>
 
           <button class="btn btn-primary btn-block" data-goto="solicitacoes">Enviar cadastro para análise</button>
@@ -2758,7 +2827,7 @@
           <div class="rank-list">
             <div class="rank-row top1">
               <div class="rank-pos">🥇</div>
-              <div class="rank-avatar" style="background:var(--primary-dark);">CM</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Dra. Carla Mendes</h4>
                 <span>Veterinária · Clínica geral</span>
@@ -2768,7 +2837,7 @@
             </div>
             <div class="rank-row top2">
               <div class="rank-pos">🥈</div>
-              <div class="rank-avatar" style="background:var(--secondary);">VA</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/10013055/pexels-photo-10013055.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Clínica Vet Aurora</h4>
                 <span>Veterinária · Equipe multidisciplinar</span>
@@ -2778,7 +2847,7 @@
             </div>
             <div class="rank-row top3">
               <div class="rank-pos">🥉</div>
-              <div class="rank-avatar" style="background:var(--secondary-dark);">LB</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/6234624/pexels-photo-6234624.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Dr. Lucas Barbosa</h4>
                 <span>Veterinário · Ortopedia e cirurgia</span>
@@ -2788,7 +2857,7 @@
             </div>
             <div class="rank-row">
               <div class="rank-pos">4</div>
-              <div class="rank-avatar" style="background:#0d8f74;">BF</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/6578817/pexels-photo-6578817.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Bianca Ferraz</h4>
                 <span>Pet Sitter · Hospedagem na casa dela</span>
@@ -2798,7 +2867,7 @@
             </div>
             <div class="rank-row">
               <div class="rank-pos">5</div>
-              <div class="rank-avatar" style="background:#C97A00;">JT</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/1436139/pexels-photo-1436139.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Juliana Torres</h4>
                 <span>Banho &amp; Tosa · A domicílio</span>
@@ -2809,7 +2878,7 @@
             <div class="rank-ellipsis">⋮</div>
             <div class="rank-row me">
               <div class="rank-pos">#12</div>
-              <div class="rank-avatar" style="background:var(--secondary-dark);">RS</div>
+              <div class="rank-avatar" style="background-image:url('https://images.pexels.com/photos/30810890/pexels-photo-30810890.jpeg?auto=compress&cs=tinysrgb&w=100');"></div>
               <div class="rank-info">
                 <h4>Rafael Souza <span class="me-tag">Você</span></h4>
                 <span>Passeador · Cães de todos os portes</span>
@@ -3847,6 +3916,7 @@
   <span class="koda-assistant-fab-logo" id="koda-assistant-fab-logo"></span>
 </button>
 
+<div class="assistant-backdrop" id="assistant-backdrop"></div>
 <div class="assistant-panel" id="assistant-panel">
   <div class="assistant-panel-head">
     <div class="assistant-head-info">
@@ -4993,13 +5063,15 @@
   }
 
   function renderNotifBadge(){
-    var badge = document.getElementById('notif-badge');
-    var bell = document.getElementById('notif-bell-btn');
-    if(!badge || !bell) return;
     var count = notifUnreadCount();
-    badge.textContent = count > 9 ? '9+' : String(count);
-    badge.classList.toggle('zero', count === 0);
-    bell.classList.toggle('has-unread', count > 0);
+    [['notif-badge','notif-bell-btn'], ['home-mobile-notif-badge','home-mobile-notif-btn']].forEach(function(pair){
+      var badge = document.getElementById(pair[0]);
+      var bell = document.getElementById(pair[1]);
+      if(!badge || !bell) return;
+      badge.textContent = count > 9 ? '9+' : String(count);
+      badge.classList.toggle('zero', count === 0);
+      bell.classList.toggle('has-unread', count > 0);
+    });
   }
 
   function renderNotifList(){
@@ -5046,8 +5118,15 @@
     else openNotifPanel();
   }
 
+  var homeMobileNotifBtn = document.getElementById('home-mobile-notif-btn');
   if(notifBellBtn){
     notifBellBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleNotifPanel();
+    });
+  }
+  if(homeMobileNotifBtn){
+    homeMobileNotifBtn.addEventListener('click', function(e){
       e.stopPropagation();
       toggleNotifPanel();
     });
@@ -5056,7 +5135,7 @@
     notifPanel.addEventListener('click', function(e){ e.stopPropagation(); });
   }
   document.addEventListener('click', function(e){
-    if(notifPanel && notifPanel.classList.contains('active') && !notifPanel.contains(e.target) && e.target !== notifBellBtn){
+    if(notifPanel && notifPanel.classList.contains('active') && !notifPanel.contains(e.target) && e.target !== notifBellBtn && e.target !== homeMobileNotifBtn && !(homeMobileNotifBtn && homeMobileNotifBtn.contains(e.target))){
       closeNotifPanel();
     }
   });
@@ -5136,6 +5215,7 @@
   (function(){
     var fabBtn = document.getElementById('koda-assistant-fab');
     var panel = document.getElementById('assistant-panel');
+    var backdrop = document.getElementById('assistant-backdrop');
     var closeBtn = document.getElementById('assistant-close-btn');
     var messagesEl = document.getElementById('assistant-messages');
     var quickRepliesEl = document.getElementById('assistant-quick-replies');
@@ -5231,6 +5311,7 @@
 
     function openAssistant(){
       panel.classList.add('active');
+      document.body.classList.add('assistant-open');
       if(!hasGreeted){
         hasGreeted = true;
         renderQuickReplies();
@@ -5238,10 +5319,12 @@
           addMessage('Oi! 👋 Eu sou o assistente virtual da Koda. Posso te ajudar com agendamentos, planos, prontuário médico, Patinhas de recompensa e mais. Como posso ajudar?', 'bot');
         }, 300);
       }
-      if(inputEl) inputEl.focus();
+      if(inputEl && window.innerWidth > 640) inputEl.focus();
     }
     function closeAssistant(){
       panel.classList.remove('active');
+      document.body.classList.remove('assistant-open');
+      if(inputEl) inputEl.blur();
     }
     function toggleAssistant(){
       if(panel.classList.contains('active')) closeAssistant();
@@ -5253,6 +5336,7 @@
       toggleAssistant();
     });
     if(closeBtn) closeBtn.addEventListener('click', closeAssistant);
+    if(backdrop) backdrop.addEventListener('click', closeAssistant);
     panel.addEventListener('click', function(e){ e.stopPropagation(); });
     document.addEventListener('click', function(e){
       if(panel.classList.contains('active') && !panel.contains(e.target) && e.target !== fabBtn && !fabBtn.contains(e.target)){
