@@ -418,15 +418,20 @@
   .search-header{padding:24px 44px 0;}
   .search-header h2{font-size:22px;margin:0 0 4px;}
   .search-header p.muted{color:var(--gray-500);font-size:13.5px;margin:0 0 18px;}
-  .filter-bar{display:flex;gap:10px;flex-wrap:wrap;padding:0 44px 20px;}
-  .chip{display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:100px;background:#fff;border:1.5px solid var(--gray-300);font-size:13px;font-weight:600;color:var(--gray-700);}
+  .filter-bar{display:flex;gap:10px;flex-wrap:wrap;padding:0 44px 14px;}
+  .chip{display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:100px;background:#fff;border:1.5px solid var(--gray-300);font-size:13px;font-weight:600;color:var(--gray-700);font-family:inherit;}
   .chip.active{background:var(--dark);color:#fff;border-color:var(--dark);}
   .chip svg{width:13px;height:13px;}
+  .chip-chevron{transition:transform .2s ease;}
+  #busca-filters-toggle[aria-expanded="true"] .chip-chevron{transform:rotate(180deg);}
 
-  .results-layout{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:0 44px 50px;align-items:start;}
-  @media (max-width:900px){.results-layout{grid-template-columns:1fr;}}
-  .filters-panel{background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:20px;position:sticky;top:78px;}
-  .filters-panel h4{font-size:13.5px;margin:0 0 14px;}
+  /* Filtros: card minimizado (colapsado por padrão), logo abaixo da descrição de resultados */
+  .filters-panel{
+    margin:0 44px 18px;background:var(--card);border:1px solid var(--gray-300);border-radius:16px;
+    padding:0 20px;max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .28s ease, opacity .2s ease, padding .28s ease;
+  }
+  .filters-panel.open{max-height:900px;opacity:1;padding:18px 20px;}
   .fgroup{margin-bottom:20px;}
   .fgroup:last-child{margin-bottom:0;}
   .fgroup .flabel{font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em;}
@@ -438,33 +443,34 @@
   .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--gray-500);}
   .info-tag{font-size:11px;color:var(--gray-500);display:flex;align-items:center;gap:5px;margin-top:6px;}
 
-  .results-col{display:flex;flex-direction:column;gap:14px;}
+  .results-col{display:flex;flex-direction:column;gap:14px;padding:0 44px 50px;}
   .results-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray-500);margin-bottom:2px;}
   .sort-select{border:1.5px solid var(--gray-300);border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:600;color:var(--gray-700);background:#fff;}
 
-  #busca-results{display:flex;flex-direction:column;gap:14px;}
-  .result-card{display:flex;gap:16px;background:var(--card);border:1px solid var(--gray-300);border-radius:16px;padding:16px;transition:all .15s ease;}
+  /* Resultados: cards horizontais e compactos — foto, nome/avaliação e categoria/distância na mesma linha, preço+ação à direita */
+  #busca-results{display:flex;flex-direction:column;gap:10px;}
+  .result-card{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--gray-300);border-radius:14px;padding:10px 14px;transition:all .15s ease;}
   .result-card:hover{box-shadow:var(--shadow);border-color:#fff;}
-  .result-photo{width:92px;height:92px;border-radius:14px;flex-shrink:0;position:relative;background-size:cover;background-position:center;}
-  .result-photo .avatar-fallback{width:100%;height:100%;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:26px;}
-  .result-photo .online-dot{position:absolute;bottom:3px;right:3px;width:13px;height:13px;background:#3BC17A;border:2.5px solid #fff;border-radius:50%;}
+  .result-photo{width:56px;height:56px;border-radius:12px;flex-shrink:0;position:relative;background-size:cover;background-position:center;}
+  .result-photo .avatar-fallback{width:100%;height:100%;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;}
+  .result-photo .online-dot{position:absolute;bottom:2px;right:2px;width:11px;height:11px;background:#3BC17A;border:2px solid #fff;border-radius:50%;}
   .result-info{flex:1;min-width:0;}
-  .result-info .rtop{display:flex;justify-content:space-between;gap:8px;}
-  .result-info h4{margin:0;font-size:15.5px;}
-  .result-info .rcat{font-size:12px;color:var(--secondary-dark);font-weight:600;margin:2px 0 6px;}
-  .result-tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0;}
+  .result-info .rtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .result-info h4{margin:0;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .result-info .stars{font-size:11.5px;white-space:nowrap;}
+  .result-info .rcat{font-size:12px;color:var(--secondary-dark);font-weight:600;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .tag{background:var(--gray-100);color:var(--gray-700);font-size:11px;font-weight:600;padding:4px 9px;border-radius:100px;}
-  .result-meta{display:flex;align-items:center;gap:14px;font-size:12.5px;color:var(--gray-500);margin-top:8px;flex-wrap:wrap;}
-  .result-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:8px;}
-  .result-right .price{font-size:12px;color:var(--gray-500);}
+  .result-right{text-align:right;flex-shrink:0;display:flex;align-items:center;gap:12px;}
+  .result-right .price{font-size:11.5px;color:var(--gray-500);white-space:nowrap;}
+  @media (max-width:640px){
+    .result-info .rtop{flex-direction:column;align-items:flex-start;gap:1px;}
+    .result-right{flex-direction:column;align-items:flex-end;gap:6px;}
+  }
   .result-right .price b{font-size:16px;color:var(--dark);display:block;}
 
   .map-mock{background:linear-gradient(135deg,var(--secondary-light),#fff);border:1px solid var(--gray-300);border-radius:16px;height:210px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:14px;}
   .map-mock .pin{position:absolute;font-size:20px;}
   .sidebar{z-index:1000 !important;}
-  #busca-map{height:300px;border-radius:16px;overflow:hidden;margin-bottom:10px;border:1px solid var(--gray-300);position:relative;z-index:0;background:var(--gray-100);}
-  #busca-map .leaflet-pane, #busca-map .leaflet-top, #busca-map .leaflet-bottom{z-index:5;}
-  #busca-map .leaflet-popup-content{font-family:'Inter',sans-serif;font-size:12.5px;}
   .you-dot{width:16px;height:16px;border-radius:50%;background:#2D9CDB;border:3px solid #fff;box-shadow:0 0 0 5px rgba(45,156,219,0.3);}
   .map-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--gray-500);font-weight:600;background:var(--gray-100);z-index:1;}
 
@@ -1756,14 +1762,14 @@
       <div class="home-search-card">
         <div class="search-field">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <select>
-            <option>Qual serviço você procura?</option>
-            <option>Veterinário</option>
-            <option>Banho &amp; Tosa</option>
-            <option>Pet Sitter</option>
-            <option>Passeador</option>
-            <option>Adestrador</option>
-            <option>Creche</option>
+          <select id="home-service-select">
+            <option value="">Qual serviço você procura?</option>
+            <option value="vet">Veterinário</option>
+            <option value="banho">Banho &amp; Tosa</option>
+            <option value="sitter">Pet Sitter</option>
+            <option value="passeador">Passeador</option>
+            <option value="adestrador">Adestrador</option>
+            <option value="creche">Creche</option>
           </select>
         </div>
         <div class="search-divider"></div>
@@ -1771,7 +1777,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.4 7-12a7 7 0 10-14 0c0 4.6 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
           <input type="text" placeholder="Seu bairro ou cidade" value="Vila Mariana, SP">
         </div>
-        <button class="btn btn-primary" data-goto="busca">Buscar</button>
+        <button class="btn btn-primary" id="home-buscar-btn" data-goto="busca">Buscar</button>
       </div>
     </div>
 
@@ -1950,108 +1956,90 @@
       <h2 id="busca-title"><span id="busca-title-icon" aria-hidden="true">🩺</span> Veterinário perto de você</h2>
       <p class="muted" id="busca-sub">32 parceiros encontrados em Vila Mariana, SP · usando sua geolocalização</p>
     </div>
+
     <div class="filter-bar">
-      <div class="chip active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>Todos os filtros</div>
+      <button type="button" class="chip active" id="busca-filters-toggle" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+        Filtrar resultados
+        <svg class="chip-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
       <div class="chip" id="busca-cat-chip">Categoria: Veterinário</div>
       <div class="chip">Avaliação 4.5+</div>
       <div class="chip">Disponível hoje</div>
       <div class="chip">📍 Até 5 km</div>
     </div>
 
-    <div class="results-layout">
-      <aside class="filters-panel">
-        <h4>Filtrar resultados</h4>
-        <div class="fgroup" id="busca-cat-filters">
-          <div class="flabel">Categoria</div>
-          <label class="frow"><input type="checkbox" checked data-cat="vet"> Veterinário</label>
-          <label class="frow"><input type="checkbox" data-cat="banho"> Banho &amp; Tosa</label>
-          <label class="frow"><input type="checkbox" data-cat="sitter"> Pet Sitter</label>
-          <label class="frow"><input type="checkbox" data-cat="passeador"> Passeador</label>
-          <label class="frow"><input type="checkbox" data-cat="adestrador"> Adestrador</label>
-          <label class="frow"><input type="checkbox" data-cat="creche"> Creche</label>
-        </div>
-        <div class="fgroup">
-          <div class="flabel">Preço (por atendimento)</div>
-          <div class="range-track"><div class="range-fill"></div><div class="range-thumb"></div></div>
-          <div class="range-labels"><span>R$ 30</span><span>R$ 250</span></div>
-        </div>
-        <div class="fgroup">
-          <div class="flabel">Avaliação mínima</div>
-          <div class="frow"><input type="checkbox" checked> 4.5 ★ ou mais</div>
-          <div class="frow"><input type="checkbox"> 4.0 ★ ou mais</div>
-          <div class="info-tag">ⓘ Nota combina avaliações do Google + tutores do app</div>
-        </div>
-        <div class="fgroup">
-          <div class="flabel">Disponibilidade</div>
-          <div class="frow"><input type="checkbox" checked> Disponível hoje</div>
-          <div class="frow"><input type="checkbox"> Atende fim de semana</div>
-          <div class="frow"><input type="checkbox"> Atendimento domiciliar</div>
-        </div>
-      </aside>
+    <div class="filters-panel" id="busca-filters-panel">
+      <div class="fgroup" id="busca-cat-filters">
+        <div class="flabel">Categoria</div>
+        <label class="frow"><input type="checkbox" checked data-cat="vet"> Veterinário</label>
+        <label class="frow"><input type="checkbox" data-cat="banho"> Banho &amp; Tosa</label>
+        <label class="frow"><input type="checkbox" data-cat="sitter"> Pet Sitter</label>
+        <label class="frow"><input type="checkbox" data-cat="passeador"> Passeador</label>
+        <label class="frow"><input type="checkbox" data-cat="adestrador"> Adestrador</label>
+        <label class="frow"><input type="checkbox" data-cat="creche"> Creche</label>
+      </div>
+      <div class="fgroup">
+        <div class="flabel">Preço (por atendimento)</div>
+        <div class="range-track"><div class="range-fill"></div><div class="range-thumb"></div></div>
+        <div class="range-labels"><span>R$ 30</span><span>R$ 250</span></div>
+      </div>
+      <div class="fgroup">
+        <div class="flabel">Avaliação mínima</div>
+        <div class="frow"><input type="checkbox" checked> 4.5 ★ ou mais</div>
+        <div class="frow"><input type="checkbox"> 4.0 ★ ou mais</div>
+        <div class="info-tag">ⓘ Nota combina avaliações do Google + tutores do app</div>
+      </div>
+      <div class="fgroup">
+        <div class="flabel">Disponibilidade</div>
+        <div class="frow"><input type="checkbox" checked> Disponível hoje</div>
+        <div class="frow"><input type="checkbox"> Atende fim de semana</div>
+        <div class="frow"><input type="checkbox"> Atendimento domiciliar</div>
+      </div>
+    </div>
 
-      <div class="results-col">
-        <div id="busca-map"><div class="map-loading" id="busca-map-loading">📍 Obtendo sua localização...</div></div>
-        <div class="info-tag" style="margin:-4px 0 14px;">🖐️ Arraste para navegar e use scroll/pinça para zoom · mapa real (OpenStreetMap) baseado na sua geolocalização</div>
-        <div class="results-top">
-          <span id="busca-count">32 resultados</span>
-          <select class="sort-select"><option>Ordenar: Relevância</option><option>Menor preço</option><option>Melhor avaliação</option><option>Mais próximo</option></select>
-        </div>
+    <div class="results-col">
+      <div class="results-top">
+        <span id="busca-count">32 resultados</span>
+        <select class="sort-select"><option>Ordenar: Relevância</option><option>Menor preço</option><option>Melhor avaliação</option><option>Mais próximo</option></select>
+      </div>
 
-        <div id="busca-results">
-        <div class="result-card" data-goto="perfil">
-          <div class="result-photo" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"><div class="online-dot"></div></div>
-          <div class="result-info">
-            <div class="rtop"><h4>Dra. Carla Mendes</h4></div>
-            <div class="rcat">Veterinária • Clínica geral e felinos</div>
-            <span class="stars">★★★★★ 4.9 (218 avaliações)</span>
-            <div class="result-tags"><span class="tag">Atende em domicílio</span><span class="tag">Aceita PIX</span><span class="tag">Emergência</span></div>
-            <div class="result-meta">
-              <span class="meta-item">📍 1.2 km</span>
-              <span class="meta-item">⏱ Responde em 10 min</span>
-            </div>
-          </div>
-          <div class="result-right">
-            <div class="price">a partir de<b>R$ 90</b></div>
-            <button class="btn btn-outline btn-sm">Ver perfil</button>
-          </div>
+      <div id="busca-results">
+      <div class="result-card" data-goto="perfil">
+        <div class="result-photo" style="background-image:url('https://images.pexels.com/photos/7468978/pexels-photo-7468978.jpeg?auto=compress&cs=tinysrgb&w=200');"><div class="online-dot"></div></div>
+        <div class="result-info">
+          <div class="rtop"><h4>Dra. Carla Mendes</h4><span class="stars">★★★★★ 4.9 (218)</span></div>
+          <div class="rcat">Veterinária • Clínica geral e felinos · 📍 1.2 km · ⏱ 10 min</div>
         </div>
+        <div class="result-right">
+          <div class="price">a partir de<b>R$ 90</b></div>
+          <button class="btn btn-outline btn-sm">Ver perfil</button>
+        </div>
+      </div>
 
-        <div class="result-card" data-goto="perfil">
-          <div class="result-photo" style="background-image:url('https://images.pexels.com/photos/6234624/pexels-photo-6234624.jpeg?auto=compress&cs=tinysrgb&w=200');"><div class="online-dot"></div></div>
-          <div class="result-info">
-            <div class="rtop"><h4>Dr. Lucas Barbosa</h4></div>
-            <div class="rcat">Veterinário • Ortopedia e cirurgia</div>
-            <span class="stars">★★★★★ 4.8 (142 avaliações)</span>
-            <div class="result-tags"><span class="tag">Clínica própria</span><span class="tag">Convênios pet</span></div>
-            <div class="result-meta">
-              <span class="meta-item">📍 2.4 km</span>
-              <span class="meta-item">⏱ Responde em 25 min</span>
-            </div>
-          </div>
-          <div class="result-right">
-            <div class="price">a partir de<b>R$ 130</b></div>
-            <button class="btn btn-outline btn-sm">Ver perfil</button>
-          </div>
+      <div class="result-card" data-goto="perfil">
+        <div class="result-photo" style="background-image:url('https://images.pexels.com/photos/6234624/pexels-photo-6234624.jpeg?auto=compress&cs=tinysrgb&w=200');"><div class="online-dot"></div></div>
+        <div class="result-info">
+          <div class="rtop"><h4>Dr. Lucas Barbosa</h4><span class="stars">★★★★★ 4.8 (142)</span></div>
+          <div class="rcat">Veterinário • Ortopedia e cirurgia · 📍 2.4 km · ⏱ 25 min</div>
         </div>
+        <div class="result-right">
+          <div class="price">a partir de<b>R$ 130</b></div>
+          <button class="btn btn-outline btn-sm">Ver perfil</button>
+        </div>
+      </div>
 
-        <div class="result-card" data-goto="perfil">
-          <div class="result-photo"><div class="avatar-fallback" style="background:linear-gradient(135deg,#FFC26F,#FF9F45);">AV</div></div>
-          <div class="result-info">
-            <div class="rtop"><h4>Dra. Amanda Vieira</h4></div>
-            <div class="rcat">Veterinária • Dermatologia animal</div>
-            <span class="stars">★★★★☆ 4.6 (77 avaliações)</span>
-            <div class="result-tags"><span class="tag">Teleconsulta</span><span class="tag">Aceita PIX</span></div>
-            <div class="result-meta">
-              <span class="meta-item">📍 3.1 km</span>
-              <span class="meta-item">⏱ Responde em 1h</span>
-            </div>
-          </div>
-          <div class="result-right">
-            <div class="price">a partir de<b>R$ 100</b></div>
-            <button class="btn btn-outline btn-sm">Ver perfil</button>
-          </div>
+      <div class="result-card" data-goto="perfil">
+        <div class="result-photo"><div class="avatar-fallback" style="background:linear-gradient(135deg,#FFC26F,#FF9F45);">AV</div></div>
+        <div class="result-info">
+          <div class="rtop"><h4>Dra. Amanda Vieira</h4><span class="stars">★★★★☆ 4.6 (77)</span></div>
+          <div class="rcat">Veterinária • Dermatologia animal · 📍 3.1 km · ⏱ 1h</div>
         </div>
+        <div class="result-right">
+          <div class="price">a partir de<b>R$ 100</b></div>
+          <button class="btn btn-outline btn-sm">Ver perfil</button>
         </div>
+      </div>
       </div>
     </div>
   </section>
@@ -3757,10 +3745,6 @@
       b.classList.toggle('active', b.getAttribute('data-goto') === tabName);
     });
     window.scrollTo(0,0);
-    if(tabName === 'busca'){
-      startBuscaMap();
-      setTimeout(function(){ if(window.buscaMap){ window.buscaMap.invalidateSize(); } }, 200);
-    }
     if(tabName === 'home'){
       startHomeMap();
       setTimeout(function(){ if(window.homeMap){ window.homeMap.invalidateSize(); } }, 200);
@@ -3935,15 +3919,12 @@
     var photoHtml = item.photo
       ? '<div class="result-photo" style="background-image:url(\'https://images.pexels.com/photos/'+item.photo+'/pexels-photo-'+item.photo+'.jpeg?auto=compress&cs=tinysrgb&w=200\');"><div class="online-dot"></div></div>'
       : '<div class="result-photo"><div class="avatar-fallback" style="background:'+item.avatarBg+';">'+item.initials+'</div></div>';
-    var tagsHtml = item.tags.map(function(t){ return '<span class="tag">'+t+'</span>'; }).join('');
+    var starsShort = item.stars.replace(' avaliações', '');
     return '<div class="result-card" data-goto="perfil">'
       + photoHtml
       + '<div class="result-info">'
-      +   '<div class="rtop"><h4>'+item.name+'</h4></div>'
-      +   '<div class="rcat">'+item.cat+'</div>'
-      +   '<span class="stars">'+item.stars+'</span>'
-      +   '<div class="result-tags">'+tagsHtml+'</div>'
-      +   '<div class="result-meta"><span class="meta-item">📍 '+item.dist+'</span><span class="meta-item">⏱ '+item.resp+'</span></div>'
+      +   '<div class="rtop"><h4>'+item.name+'</h4><span class="stars">'+starsShort+'</span></div>'
+      +   '<div class="rcat">'+item.cat+' · 📍 '+item.dist+' · ⏱ '+item.resp+'</div>'
       + '</div>'
       + '<div class="result-right"><div class="price">a partir de<b>'+item.price+'</b></div><button class="btn btn-outline btn-sm">Ver perfil</button></div>'
       + '</div>';
@@ -4239,6 +4220,30 @@
     // Fecha o drawer ao navegar por qualquer item do menu
     document.querySelectorAll('.sidebar .tab-btn, .sidebar-sec-btn').forEach(function(btn){
       btn.addEventListener('click', closeMobileMenu);
+    });
+  })();
+
+  // ===== Busca a partir do Início: leva a categoria escolhida no select para a tela Buscar =====
+  (function(){
+    var serviceSelect = document.getElementById('home-service-select');
+    var buscarBtn = document.getElementById('home-buscar-btn');
+    if(!serviceSelect || !buscarBtn) return;
+    buscarBtn.setAttribute('data-cat', 'vet');
+    serviceSelect.addEventListener('change', function(){
+      if(serviceSelect.value){ buscarBtn.setAttribute('data-cat', serviceSelect.value); }
+      else { buscarBtn.removeAttribute('data-cat'); }
+    });
+  })();
+
+  // ===== Tela Buscar: card de filtros minimizado (colapsado por padrão) =====
+  (function(){
+    var toggleBtn = document.getElementById('busca-filters-toggle');
+    var panel = document.getElementById('busca-filters-panel');
+    if(!toggleBtn || !panel) return;
+    toggleBtn.addEventListener('click', function(){
+      var open = panel.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggleBtn.classList.toggle('active', open);
     });
   })();
 
