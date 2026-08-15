@@ -600,7 +600,7 @@
   /* ===== Modal: Criar/configurar nova carteira de pet ===== */
   .new-pet-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,26,36,0.66);backdrop-filter:blur(4px);z-index:3100;align-items:center;justify-content:center;padding:24px 16px;}
   .new-pet-modal-overlay.active{display:flex;}
-  .new-pet-modal{background:#fff;border-radius:22px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative;padding:28px 26px 24px;}
+  .new-pet-modal{background:#fff;border-radius:22px;max-width:460px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative;padding:28px 26px 24px;}
   .new-pet-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--gray-100);color:var(--gray-700);display:flex;align-items:center;justify-content:center;font-size:15px;border:none;cursor:pointer;z-index:2;}
   .new-pet-modal-close:hover{background:var(--gray-300);}
   .new-pet-modal h3{margin:0 0 4px;font-size:18px;padding-right:36px;}
@@ -614,6 +614,18 @@
   .new-pet-photo-btn:hover{border-color:var(--primary);color:var(--primary-dark);}
   .new-pet-modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
   @media (max-width:520px){ .new-pet-photo-block{flex-direction:column;align-items:flex-start;} .new-pet-modal-foot{flex-direction:column-reverse;} .new-pet-modal-foot .btn{width:100%;} }
+
+  /* ===== Modal: Triagem de boas-vindas (login como convidado) ===== */
+  .new-pet-modal.triage-modal{max-width:460px;}
+  .triage-welcome-icon{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 14px;}
+  .triage-modal .form-field{margin-top:4px;}
+  .triage-cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px;}
+  .triage-cat-circle{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:8px 4px;border-radius:14px;transition:background .15s ease;}
+  .triage-cat-circle:hover{background:var(--gray-100);}
+  .triage-cat-circle .circle-ico{width:52px;height:52px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid transparent;transition:all .15s ease;}
+  .triage-cat-circle.active .circle-ico{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary-dark);color:#fff;box-shadow:0 4px 10px rgba(243,124,94,0.35);}
+  .triage-cat-circle .circle-label{font-size:10.5px;font-weight:700;color:var(--gray-700);text-align:center;line-height:1.25;}
+  .triage-cat-circle.active .circle-label{color:var(--primary-dark);}
 
   /* ===== CRM de Clientes (kanban) — Meu Negócio ===== */
   .crm-section{padding-top:6px;margin-top:26px;border-top:1px solid var(--gray-200,var(--gray-100));}
@@ -3167,7 +3179,6 @@
         <p class="muted" style="margin:4px 0 0;color:var(--gray-500);font-size:13px;">Tudo pra ajudar você a gerenciar e fazer crescer seu negócio pet</p>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-        <div class="tools-balance">🐾 750 Patinhas <span class="add-btn" data-goto="assinatura-pro" style="cursor:pointer;">+</span></div>
         <input class="tools-search" type="text" placeholder="Pesquisar ferramenta">
       </div>
     </div>
@@ -3188,7 +3199,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6235650/pexels-photo-6235650.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🩺</span>
-            <div class="tool-cost">🐾 100</div>
           </div>
           <div class="tool-body">
             <h4>Prontuário Assistido por Voz</h4>
@@ -3201,7 +3211,6 @@
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6234978/pexels-photo-6234978.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🔬</span>
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">🐾 120</div>
           </div>
           <div class="tool-body">
             <h4>Assistente de Triagem por Imagem</h4>
@@ -3213,7 +3222,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7469213/pexels-photo-7469213.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">💉</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Lembrete Inteligente de Vacinas &amp; Retorno</h4>
@@ -3232,7 +3240,6 @@
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19145882/pexels-photo-19145882.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📸</span>
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">🐾 60</div>
           </div>
           <div class="tool-body">
             <h4>Gerador de Fotos Antes/Depois</h4>
@@ -3244,7 +3251,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/13062569/pexels-photo-13062569.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🗓️</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Agenda Otimizada de Encaixes</h4>
@@ -3256,7 +3262,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/8498858/pexels-photo-8498858.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📋</span>
-            <div class="tool-cost">🐾 30</div>
           </div>
           <div class="tool-body">
             <h4>Ficha de Preferências do Pet</h4>
@@ -3274,7 +3279,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/37587432/pexels-photo-37587432.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📷</span>
-            <div class="tool-cost">🐾 50</div>
           </div>
           <div class="tool-body">
             <h4>Diário de Hospedagem com Fotos</h4>
@@ -3286,7 +3290,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/11616422/pexels-photo-11616422.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">✅</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Checklist de Rotina do Pet</h4>
@@ -3299,7 +3302,6 @@
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/30537541/pexels-photo-30537541.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🎥</span>
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">🐾 80</div>
           </div>
           <div class="tool-body">
             <h4>Resumo do Dia por IA</h4>
@@ -3317,7 +3319,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🗺️</span>
-            <div class="tool-cost">🐾 40</div>
           </div>
           <div class="tool-body">
             <h4>Rota Inteligente de Passeio</h4>
@@ -3329,7 +3330,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19175821/pexels-photo-19175821.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📊</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Relatório Automático do Passeio</h4>
@@ -3341,7 +3341,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/35427578/pexels-photo-35427578.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">☀️</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Alerta de Clima</h4>
@@ -3359,7 +3358,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6568478/pexels-photo-6568478.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🐕‍🦺</span>
-            <div class="tool-cost">🐾 80</div>
           </div>
           <div class="tool-body">
             <h4>Gerador de Rotina de Treinamento IA</h4>
@@ -3371,7 +3369,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7210456/pexels-photo-7210456.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📈</span>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Diário de Evolução do Pet</h4>
@@ -3384,7 +3381,6 @@
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19017771/pexels-photo-19017771.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🎬</span>
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">🐾 40</div>
           </div>
           <div class="tool-body">
             <h4>Biblioteca de Exercícios em Vídeo</h4>
@@ -3402,7 +3398,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/37443358/pexels-photo-37443358.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">🎒</span>
-            <div class="tool-cost">🐾 60</div>
           </div>
           <div class="tool-body">
             <h4>Carteirinha do Aluno &amp; Gestão de Turmas</h4>
@@ -3415,7 +3410,6 @@
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/18709056/pexels-photo-18709056.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📝</span>
             <div class="tool-ribbon">Novo</div>
-            <div class="tool-cost">Grátis</div>
           </div>
           <div class="tool-body">
             <h4>Boletim Diário Automático por IA</h4>
@@ -3427,7 +3421,6 @@
           <div class="tool-visual">
             <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/5966513/pexels-photo-5966513.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
             <span class="tool-visual-icon">📹</span>
-            <div class="tool-cost">🐾 70</div>
           </div>
           <div class="tool-body">
             <h4>Câmeras ao Vivo para os Tutores</h4>
@@ -4148,54 +4141,79 @@
   <div class="new-pet-modal">
     <button class="new-pet-modal-close" id="new-pet-modal-close" aria-label="Fechar">✕</button>
     <h3>🐾 Criar carteira de um novo pet</h3>
-    <p class="new-pet-modal-sub">Preencha os dados abaixo para gerar a Carteira de Identidade Pet. As informações ficam salvas apenas nesta sessão do protótipo (não são enviadas para nenhum servidor).</p>
+    <p class="new-pet-modal-sub">Só 3 passinhos rápidos para gerar a Carteira de Identidade Pet. Dá pra completar o resto depois, direto no perfil do pet.</p>
 
     <div class="new-pet-photo-block">
       <div class="new-pet-photo-preview" id="new-pet-photo-preview">📷</div>
       <div class="new-pet-photo-info">
-        <p id="new-pet-photo-hint">A Koda precisa da sua permissão para acessar a galeria de fotos do celular e escolher a imagem do pet.</p>
-        <button type="button" class="new-pet-photo-btn" id="new-pet-photo-permission-btn">Permitir acesso à galeria</button>
+        <p id="new-pet-photo-hint">Toque para escolher uma foto do pet (opcional).</p>
+        <button type="button" class="new-pet-photo-btn" id="new-pet-photo-permission-btn">Escolher foto</button>
         <input type="file" accept="image/*" id="new-pet-photo-input" style="display:none;">
       </div>
     </div>
 
-    <div class="form-grid">
-      <div class="form-field"><label>Nome do pet *</label><input type="text" id="new-pet-nome" placeholder="Ex: Luna" autocomplete="off"></div>
-      <div class="form-field">
-        <label>Espécie</label>
-        <select id="new-pet-especie">
-          <option value="Cão">Cão</option>
-          <option value="Gato">Gato</option>
-          <option value="Outro">Outro</option>
-        </select>
+    <div class="form-field full">
+      <label>Nome do pet *</label>
+      <input type="text" id="new-pet-nome" placeholder="Ex: Luna" autocomplete="off">
+    </div>
+
+    <div class="form-field full" style="margin-top:16px;">
+      <label>Espécie</label>
+      <div class="triage-cat-grid" id="new-pet-especie-grid">
+        <button type="button" class="triage-cat-circle active" data-especie="Cão"><span class="circle-ico">🐕</span><span class="circle-label">Cão</span></button>
+        <button type="button" class="triage-cat-circle" data-especie="Gato"><span class="circle-ico">🐈</span><span class="circle-label">Gato</span></button>
+        <button type="button" class="triage-cat-circle" data-especie="Outro"><span class="circle-ico">🐾</span><span class="circle-label">Outro</span></button>
       </div>
-      <div class="form-field"><label>Raça</label><input type="text" id="new-pet-raca" placeholder="Ex: SRD, Labrador, Siamês..." autocomplete="off"></div>
-      <div class="form-field"><label>Cor da pelagem</label><input type="text" id="new-pet-cor" placeholder="Ex: Preto e branco" autocomplete="off"></div>
-      <div class="form-field"><label>Data de nascimento</label><input type="text" id="new-pet-nascimento" placeholder="mm/aaaa"></div>
-      <div class="form-field"><label>Peso</label><input type="text" id="new-pet-peso" placeholder="Ex: 8 kg"></div>
-      <div class="form-field"><label>Idade</label><input type="text" id="new-pet-idade" placeholder="Ex: 1 ano"></div>
-      <div class="form-field">
-        <label>Sexo</label>
-        <select id="new-pet-sexo">
-          <option value="Macho">Macho</option>
-          <option value="Fêmea">Fêmea</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label>Castrado(a)</label>
-        <select id="new-pet-castrado">
-          <option value="Não">Não</option>
-          <option value="Sim">Sim</option>
-        </select>
-      </div>
-      <div class="form-field"><label>Microchip (opcional)</label><input type="text" id="new-pet-microchip" placeholder="Número do microchip"></div>
-      <div class="form-field full"><label>Alergias e restrições</label><textarea id="new-pet-alergias" placeholder="Ex: Nenhuma alergia registrada até o momento."></textarea></div>
-      <div class="form-field full"><label>Medicações em uso</label><textarea id="new-pet-medicacoes" placeholder="Ex: Nenhuma medicação contínua."></textarea></div>
     </div>
 
     <div class="new-pet-modal-foot">
       <button type="button" class="btn btn-outline" id="new-pet-cancel-btn">Cancelar</button>
       <button type="button" class="btn btn-primary" id="new-pet-save-btn">Criar carteira do pet</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal: Triagem de boas-vindas — Modo Tutor ===== -->
+<div class="new-pet-modal-overlay" id="triage-tutor-modal-overlay">
+  <div class="new-pet-modal triage-modal">
+    <button class="new-pet-modal-close" id="triage-tutor-modal-close" aria-label="Fechar">✕</button>
+    <div class="triage-welcome-icon">🐾</div>
+    <h3 style="text-align:center;">Qual o nome do seu pet?</h3>
+    <p class="new-pet-modal-sub" style="text-align:center;">Vamos preparar tudo certinho para cuidar do seu companheiro por aqui.</p>
+    <div class="form-field full">
+      <label>Nome do pet</label>
+      <input type="text" id="triage-tutor-pet-nome" placeholder="Ex: Thor" autocomplete="off">
+    </div>
+    <div class="new-pet-modal-foot" style="justify-content:center;">
+      <button type="button" class="btn btn-primary btn-block" id="triage-tutor-confirm-btn">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal: Triagem de boas-vindas — Modo Parceiro ===== -->
+<div class="new-pet-modal-overlay" id="triage-parceiro-modal-overlay">
+  <div class="new-pet-modal triage-modal">
+    <button class="new-pet-modal-close" id="triage-parceiro-modal-close" aria-label="Fechar">✕</button>
+    <div class="triage-welcome-icon">💼</div>
+    <h3 style="text-align:center;">Como você se chama?</h3>
+    <p class="new-pet-modal-sub" style="text-align:center;">Conte um pouco sobre você para personalizarmos sua área de parceiro.</p>
+    <div class="form-field full">
+      <label>Seu nome</label>
+      <input type="text" id="triage-parceiro-nome" placeholder="Ex: Ana Souza" autocomplete="off">
+    </div>
+    <div class="form-field full">
+      <label>Qual o seu perfil de parceiro?</label>
+      <div class="triage-cat-grid">
+        <button type="button" class="triage-cat-circle" data-cat="vet" data-cat-label="Veterinário"><span class="circle-ico">🩺</span><span class="circle-label">Veterinário</span></button>
+        <button type="button" class="triage-cat-circle" data-cat="banho" data-cat-label="Banho &amp; Tosa"><span class="circle-ico">🛁</span><span class="circle-label">Banho &amp; Tosa</span></button>
+        <button type="button" class="triage-cat-circle" data-cat="sitter" data-cat-label="Pet Sitter"><span class="circle-ico">🏠</span><span class="circle-label">Pet Sitter</span></button>
+        <button type="button" class="triage-cat-circle" data-cat="passeador" data-cat-label="Passeador"><span class="circle-ico">🐕</span><span class="circle-label">Passeador</span></button>
+        <button type="button" class="triage-cat-circle" data-cat="adestrador" data-cat-label="Adestrador"><span class="circle-ico">🎓</span><span class="circle-label">Adestrador</span></button>
+        <button type="button" class="triage-cat-circle" data-cat="creche" data-cat-label="Creche"><span class="circle-ico">🏫</span><span class="circle-label">Creche</span></button>
+      </div>
+    </div>
+    <div class="new-pet-modal-foot" style="justify-content:center;">
+      <button type="button" class="btn btn-primary btn-block" id="triage-parceiro-confirm-btn">Confirmar</button>
     </div>
   </div>
 </div>
@@ -4874,7 +4892,7 @@
     });
   });
 
-  // ===== Login / Cadastro (split-screen) =====
+  // ===== Login / Cadastro (split-screen) — acesso direto via #login, ainda usado por "Entrar"/"Criar conta" =====
   var pendingAuth = { mode: 'consumidor', destination: 'home' };
 
   document.querySelectorAll('[data-login-goto]').forEach(function(el){
@@ -4887,7 +4905,12 @@
       if(pill){
         pill.textContent = pendingAuth.mode === 'profissional' ? '💼 Entrando como parceiro' : '🧑 Entrando como tutor';
       }
-      goTo('login');
+      // Entrar como convidado: em vez do login fake, dispara a triagem de boas-vindas.
+      if(pendingAuth.mode === 'profissional'){
+        openTriageParceiro();
+      } else {
+        openTriageTutor();
+      }
     });
   });
 
@@ -4896,6 +4919,127 @@
     setMode(pendingAuth.mode);
     goTo(pendingAuth.destination);
     showToast(pendingAuth.mode === 'profissional' ? 'Bem-vindo(a) de volta! 👋' : 'Bem-vindo(a) de volta! 🐾');
+  }
+
+  // ===== Triagem de boas-vindas (login como convidado) =====
+  var triageOnboarding = { active:false, prevPetKey:null, origSub:null };
+
+  function openTriageTutor(){
+    var overlay = document.getElementById('triage-tutor-modal-overlay');
+    var input = document.getElementById('triage-tutor-pet-nome');
+    if(!overlay) return;
+    if(input) input.value = '';
+    overlay.classList.add('active');
+    setTimeout(function(){ if(input) input.focus(); }, 150);
+  }
+  function closeTriageTutor(){
+    var overlay = document.getElementById('triage-tutor-modal-overlay');
+    if(overlay) overlay.classList.remove('active');
+  }
+  function openTriageParceiro(){
+    var overlay = document.getElementById('triage-parceiro-modal-overlay');
+    var input = document.getElementById('triage-parceiro-nome');
+    if(!overlay) return;
+    if(input) input.value = '';
+    document.querySelectorAll('#triage-parceiro-modal-overlay .triage-cat-circle').forEach(function(c){ c.classList.remove('active'); });
+    overlay.classList.add('active');
+    setTimeout(function(){ if(input) input.focus(); }, 150);
+  }
+  function closeTriageParceiro(){
+    var overlay = document.getElementById('triage-parceiro-modal-overlay');
+    if(overlay) overlay.classList.remove('active');
+  }
+
+  // Após a triagem do tutor, reaproveita o modal de "nova carteira de pet" (já pré-preenchido com o
+  // nome informado) para completar os demais dados. Ao salvar, leva direto para a Carteira Pet pronta,
+  // com as opções de exportar em PNG / baixar que já existem no Perfil do Pet.
+  function openOnboardingPetForm(petName){
+    var openBtn = document.getElementById('new-pet-open-btn');
+    var overlay = document.getElementById('new-pet-modal-overlay');
+    var nameInput = document.getElementById('new-pet-nome');
+    var sub = document.querySelector('#new-pet-modal-overlay .new-pet-modal-sub');
+    if(!openBtn || !overlay) return;
+    triageOnboarding.active = true;
+    triageOnboarding.prevPetKey = (typeof currentPetKey !== 'undefined') ? currentPetKey : null;
+    if(sub && triageOnboarding.origSub === null) triageOnboarding.origSub = sub.textContent;
+    openBtn.click();
+    if(nameInput) nameInput.value = petName;
+    if(sub) sub.textContent = 'Falta pouco! Complete os dados de ' + petName + ' para gerar a Carteira de Identidade Pet.';
+  }
+  function cancelOnboardingPetForm(){
+    triageOnboarding.active = false;
+    var sub = document.querySelector('#new-pet-modal-overlay .new-pet-modal-sub');
+    if(sub && triageOnboarding.origSub !== null) sub.textContent = triageOnboarding.origSub;
+  }
+
+  (function(){
+    var tutorOverlay = document.getElementById('triage-tutor-modal-overlay');
+    var tutorClose = document.getElementById('triage-tutor-modal-close');
+    var tutorConfirm = document.getElementById('triage-tutor-confirm-btn');
+    var tutorInput = document.getElementById('triage-tutor-pet-nome');
+    if(tutorOverlay){
+      if(tutorClose) tutorClose.addEventListener('click', closeTriageTutor);
+      tutorOverlay.addEventListener('click', function(e){ if(e.target === tutorOverlay) closeTriageTutor(); });
+      if(tutorInput && tutorConfirm) tutorInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); tutorConfirm.click(); } });
+      if(tutorConfirm){
+        tutorConfirm.addEventListener('click', function(){
+          var petName = tutorInput ? tutorInput.value.trim() : '';
+          if(!petName){ showToast('Digite o nome do seu pet para continuar.'); return; }
+          closeTriageTutor();
+          document.body.classList.remove('landing-active');
+          setMode('consumidor');
+          goTo('home');
+          showToast('Bem-vindo(a), ' + petName + '! 🐾');
+          setTimeout(function(){ openOnboardingPetForm(petName); }, 700);
+        });
+      }
+    }
+
+    var parceiroOverlay = document.getElementById('triage-parceiro-modal-overlay');
+    var parceiroClose = document.getElementById('triage-parceiro-modal-close');
+    var parceiroConfirm = document.getElementById('triage-parceiro-confirm-btn');
+    var parceiroInput = document.getElementById('triage-parceiro-nome');
+    if(parceiroOverlay){
+      if(parceiroClose) parceiroClose.addEventListener('click', closeTriageParceiro);
+      parceiroOverlay.addEventListener('click', function(e){ if(e.target === parceiroOverlay) closeTriageParceiro(); });
+      document.querySelectorAll('#triage-parceiro-modal-overlay .triage-cat-circle').forEach(function(circle){
+        circle.addEventListener('click', function(){
+          document.querySelectorAll('#triage-parceiro-modal-overlay .triage-cat-circle').forEach(function(c){ c.classList.remove('active'); });
+          circle.classList.add('active');
+        });
+      });
+      if(parceiroInput && parceiroConfirm) parceiroInput.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); parceiroConfirm.click(); } });
+      if(parceiroConfirm){
+        parceiroConfirm.addEventListener('click', function(){
+          var nome = parceiroInput ? parceiroInput.value.trim() : '';
+          var catEl = document.querySelector('#triage-parceiro-modal-overlay .triage-cat-circle.active');
+          if(!nome){ showToast('Digite seu nome para continuar.'); return; }
+          if(!catEl){ showToast('Selecione seu perfil de parceiro para continuar.'); return; }
+          closeTriageParceiro();
+          document.body.classList.remove('landing-active');
+          setMode('profissional');
+          goTo('painel-pro');
+          showToast('Bem-vindo(a), ' + nome + '! 👋');
+        });
+      }
+    }
+  })();
+
+  document.getElementById('new-pet-modal-close') && document.getElementById('new-pet-modal-close').addEventListener('click', cancelOnboardingPetForm);
+  document.getElementById('new-pet-cancel-btn') && document.getElementById('new-pet-cancel-btn').addEventListener('click', cancelOnboardingPetForm);
+
+  var newPetSaveBtnOnboardingRef = document.getElementById('new-pet-save-btn');
+  if(newPetSaveBtnOnboardingRef){
+    newPetSaveBtnOnboardingRef.addEventListener('click', function(){
+      if(!triageOnboarding.active) return;
+      setTimeout(function(){
+        if(typeof currentPetKey !== 'undefined' && currentPetKey && currentPetKey !== triageOnboarding.prevPetKey){
+          cancelOnboardingPetForm();
+          goTo('perfil-pet');
+          showToast('Aqui está a carteira do seu pet — exporte em PNG ou baixe quando quiser! 📥');
+        }
+      }, 50);
+    });
   }
 
   var authSubmitEntrar = document.getElementById('auth-submit-entrar');
@@ -5419,19 +5563,24 @@
 
     var photoDataUrl = null;
     var FALLBACK_PHOTO = 'https://images.pexels.com/photos/1490908/pexels-photo-1490908.jpeg?auto=compress&cs=tinysrgb&w=200';
-    var formIds = ['new-pet-nome','new-pet-raca','new-pet-cor','new-pet-nascimento','new-pet-peso','new-pet-idade','new-pet-microchip','new-pet-alergias','new-pet-medicacoes'];
+    var formIds = ['new-pet-nome'];
+
+    document.querySelectorAll('#new-pet-especie-grid .triage-cat-circle').forEach(function(circle){
+      circle.addEventListener('click', function(){
+        document.querySelectorAll('#new-pet-especie-grid .triage-cat-circle').forEach(function(c){ c.classList.remove('active'); });
+        circle.classList.add('active');
+      });
+    });
 
     function resetForm(){
       formIds.forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
-      var especieEl = document.getElementById('new-pet-especie'); if(especieEl) especieEl.value = 'Cão';
-      var sexoEl = document.getElementById('new-pet-sexo'); if(sexoEl) sexoEl.value = 'Macho';
-      var castradoEl = document.getElementById('new-pet-castrado'); if(castradoEl) castradoEl.value = 'Não';
+      document.querySelectorAll('#new-pet-especie-grid .triage-cat-circle').forEach(function(c, i){ c.classList.toggle('active', i === 0); });
       photoDataUrl = null;
       photoPreview.style.backgroundImage = '';
       photoPreview.textContent = '📷';
       photoPreview.classList.remove('has-photo');
-      if(permissionBtn) permissionBtn.textContent = 'Permitir acesso à galeria';
-      if(photoHint) photoHint.textContent = 'A Koda precisa da sua permissão para acessar a galeria de fotos do celular e escolher a imagem do pet.';
+      if(permissionBtn) permissionBtn.textContent = 'Escolher foto';
+      if(photoHint) photoHint.textContent = 'Toque para escolher uma foto do pet (opcional).';
       if(photoInput) photoInput.value = '';
     }
 
@@ -5485,10 +5634,11 @@
         var key = baseKey, n = 2;
         while(petProfileData[key]){ key = baseKey + n; n++; }
 
-        var especie = getVal('new-pet-especie') || 'Cão';
+        var especieEl = document.querySelector('#new-pet-especie-grid .triage-cat-circle.active');
+        var especie = especieEl ? especieEl.getAttribute('data-especie') : 'Cão';
         var raca = getVal('new-pet-raca') || 'SRD (Sem Raça Definida)';
         var cor = getVal('new-pet-cor') || 'Não informada';
-        var nascimento = getVal('new-pet-nascimento');
+        var nascimento = getVal('new-pet-nascimento') || 'Não informada';
         var peso = getVal('new-pet-peso') || 'Não informado';
         var idadeLabel = getVal('new-pet-idade') || 'Não informada';
         var sexo = getVal('new-pet-sexo') || 'Macho';
