@@ -1312,11 +1312,15 @@
   .xp-fill-shine{position:absolute;top:0;bottom:0;width:38%;left:-50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);animation:xpShine 2.8s ease-in-out infinite;}
   @keyframes xpShine{0%{left:-50%;}100%{left:120%;}}
   .xp-pct{font-size:11.5px;font-weight:800;color:var(--dark);white-space:nowrap;background:var(--gray-100);padding:3px 9px;border-radius:100px;flex-shrink:0;}
-  .header-gamification{display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-width:0;width:100%;padding:10px 16px 4px;}
+  .header-gamification{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;width:100%;padding:10px 16px 4px;}
   .header-gamification .hg-label{font-size:10.5px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;}
-  .header-gamification .xp-progress{width:100%;}
+  .header-gamification .xp-progress{width:100%;gap:8px;}
   .header-gamification .xp-track{flex:1;width:auto;min-width:0;height:9px;}
   .header-gamification .xp-badge{width:24px;height:24px;font-size:11px;}
+  /* Pata mini do sidebar: tamanho fixo e discreto (não deve competir com o avatar/pill) */
+  .header-gamification .paw-progress-svg{flex:0 0 auto;width:30px;height:auto;filter:drop-shadow(0 1.5px 2.5px rgba(74,20,6,0.16));transition:transform .25s ease;}
+  .header-gamification .xp-progress:hover .paw-progress-svg{transform:scale(1.08);}
+  .header-gamification .xp-pct{font-size:10.5px;padding:3px 8px;}
   @media (max-width:980px){ .header-gamification{display:none;} .sidebar-patinhas{display:none;} }
 
   /* Versão grande, usada dentro de cards (Nível de Cuidado / painel do parceiro) */
@@ -1325,7 +1329,7 @@
   .xp-progress.lg .xp-track{width:160px;min-width:160px;height:14px;}
   .xp-progress.lg .xp-pct{font-size:14px;padding:5px 13px;}
   /* Nível de Cuidado / Nível de Parceiro: pata vetorizada com preenchimento verde no lugar da barra */
-  .xp-progress.lg.paw-progress .paw-progress-svg{flex:0 0 auto;width:70px;height:auto;aspect-ratio:100/90;}
+  .xp-progress.lg.paw-progress .paw-progress-svg{flex:0 0 auto;width:58px;height:auto;aspect-ratio:100/90;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.14));}
   .xp-progress.lg.paw-progress .xp-pct{font-size:14px;padding:5px 13px;}
 
   .level-card{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px;}
@@ -1837,11 +1841,11 @@
           <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
             <defs>
               <g id="hgPawShape">
-                <ellipse cx="50" cy="62" rx="28" ry="22"/>
-                <ellipse cx="14" cy="39" rx="11" ry="14"/>
-                <ellipse cx="36" cy="18" rx="12" ry="15"/>
-                <ellipse cx="64" cy="18" rx="12" ry="15"/>
-                <ellipse cx="86" cy="39" rx="11" ry="14"/>
+                <ellipse cx="50" cy="65" rx="23" ry="19"/>
+                <ellipse cx="21" cy="38" rx="9.5" ry="12"/>
+                <ellipse cx="39" cy="21" rx="10.5" ry="13"/>
+                <ellipse cx="61" cy="21" rx="10.5" ry="13"/>
+                <ellipse cx="79" cy="38" rx="9.5" ry="12"/>
               </g>
               <clipPath id="hgPawClip" clipPathUnits="userSpaceOnUse">
                 <rect id="hg-paw-clip-rect" x="0" y="0" width="64" height="90"/>
@@ -2903,11 +2907,11 @@
               <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
                 <defs>
                   <g id="hgPawShape2">
-                    <ellipse cx="50" cy="62" rx="28" ry="22"/>
-                    <ellipse cx="14" cy="39" rx="11" ry="14"/>
-                    <ellipse cx="36" cy="18" rx="12" ry="15"/>
-                    <ellipse cx="64" cy="18" rx="12" ry="15"/>
-                    <ellipse cx="86" cy="39" rx="11" ry="14"/>
+                    <ellipse cx="50" cy="65" rx="23" ry="19"/>
+                    <ellipse cx="21" cy="38" rx="9.5" ry="12"/>
+                    <ellipse cx="39" cy="21" rx="10.5" ry="13"/>
+                    <ellipse cx="61" cy="21" rx="10.5" ry="13"/>
+                    <ellipse cx="79" cy="38" rx="9.5" ry="12"/>
                   </g>
                   <clipPath id="proLevelPawClip" clipPathUnits="userSpaceOnUse">
                     <rect id="pro-level-paw-clip-rect" x="0" y="0" width="55" height="90"/>
@@ -3447,11 +3451,11 @@
               <svg class="paw-progress-svg" viewBox="0 0 100 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true" focusable="false">
                 <defs>
                   <g id="hgPawShape3">
-                    <ellipse cx="50" cy="62" rx="28" ry="22"/>
-                    <ellipse cx="14" cy="39" rx="11" ry="14"/>
-                    <ellipse cx="36" cy="18" rx="12" ry="15"/>
-                    <ellipse cx="64" cy="18" rx="12" ry="15"/>
-                    <ellipse cx="86" cy="39" rx="11" ry="14"/>
+                    <ellipse cx="50" cy="65" rx="23" ry="19"/>
+                    <ellipse cx="21" cy="38" rx="9.5" ry="12"/>
+                    <ellipse cx="39" cy="21" rx="10.5" ry="13"/>
+                    <ellipse cx="61" cy="21" rx="10.5" ry="13"/>
+                    <ellipse cx="79" cy="38" rx="9.5" ry="12"/>
                   </g>
                   <clipPath id="petLevelPawClip" clipPathUnits="userSpaceOnUse">
                     <rect id="pet-level-paw-clip-rect" x="0" y="0" width="64" height="90"/>
