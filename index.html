@@ -1525,6 +1525,19 @@
   .toast{background:rgba(14,46,54,0.94);color:#fff;padding:12px 20px;border-radius:100px;font-size:13.5px;font-weight:600;box-shadow:var(--shadow-lg);backdrop-filter:blur(10px);opacity:0;transform:translateY(10px);transition:all .25s ease;}
   .toast.show{opacity:1;transform:translateY(0);}
 
+  /* Banner: carteira do pet pronta (baixar/salvar sem sair do Início) */
+  .wallet-ready-banner{display:none;position:fixed;left:20px;right:20px;bottom:20px;max-width:440px;margin:0 auto;background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);padding:16px 40px 16px 16px;align-items:center;gap:12px;z-index:2800;border:1px solid var(--gray-300);}
+  .wallet-ready-banner.active{display:flex;animation:wrbSlideUp .35s ease;}
+  @keyframes wrbSlideUp{from{transform:translateY(24px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .wrb-icon{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .wrb-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+  .wrb-text strong{font-size:12.5px;line-height:1.3;}
+  .wrb-text span{font-size:11px;color:var(--gray-500);line-height:1.3;}
+  .wallet-ready-banner .btn-sm{white-space:nowrap;padding:9px 14px;font-size:12px;flex-shrink:0;}
+  .wrb-close{position:absolute;top:10px;right:12px;width:24px;height:24px;border-radius:50%;background:var(--gray-100);border:none;color:var(--gray-700);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .wrb-close:hover{background:var(--gray-300);}
+  @media (max-width:520px){ .wallet-ready-banner{flex-direction:column;align-items:stretch;left:12px;right:12px;bottom:12px;} .wallet-ready-banner .btn-sm{width:100%;} }
+
   /* ===== Sistema de notificações (tutor) — sino + painel + pop-ups ===== */
   .notif-bell-btn{position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-700);background:var(--gray-100);border:1.5px solid var(--gray-300);flex-shrink:0;transition:all .15s ease;}
   .notif-bell-btn:hover{background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary-light);}
@@ -2866,7 +2879,7 @@
     <div class="pro-metrics-panel">
       <div class="pmp-top-row">
         <div>
-          <h2 class="pmp-greeting">Olá, Rafael 👋</h2>
+          <h2 class="pmp-greeting">Olá, <span id="pmp-greeting-name">Rafael</span> 👋</h2>
           <p class="pmp-sub">Painel de performance como parceiro Koda</p>
           <span class="pmp-month-tag">📅 Agosto de 2026 · dados atualizados hoje</span>
         </div>
@@ -4299,6 +4312,17 @@
   </div>
 </div>
 
+<!-- ===== Banner: carteira do pet pronta (baixar sem sair do Início) ===== -->
+<div class="wallet-ready-banner" id="wallet-ready-banner">
+  <button type="button" class="wrb-close" id="wrb-close-btn" aria-label="Fechar">✕</button>
+  <span class="wrb-icon">🐾</span>
+  <div class="wrb-text">
+    <strong>Carteira de <span id="wrb-pet-name">seu pet</span> pronta!</strong>
+    <span>Baixe uma cópia para guardar no seu celular.</span>
+  </div>
+  <button type="button" class="btn btn-primary btn-sm" id="wrb-save-btn">📥 Baixar carteira</button>
+</div>
+
 <div id="toast-container"></div>
 
 <div class="notif-panel" id="notif-panel">
@@ -5019,6 +5043,8 @@
           document.body.classList.remove('landing-active');
           setMode('profissional');
           goTo('painel-pro');
+          var greetingNameEl = document.getElementById('pmp-greeting-name');
+          if(greetingNameEl) greetingNameEl.textContent = nome.split(' ')[0];
           showToast('Bem-vindo(a), ' + nome + '! 👋');
         });
       }
@@ -5028,15 +5054,42 @@
   document.getElementById('new-pet-modal-close') && document.getElementById('new-pet-modal-close').addEventListener('click', cancelOnboardingPetForm);
   document.getElementById('new-pet-cancel-btn') && document.getElementById('new-pet-cancel-btn').addEventListener('click', cancelOnboardingPetForm);
 
+  // Banner "carteira pronta" — fica na tela de Início, sem navegar para a aba da carteira.
+  function showWalletReadyBanner(petName){
+    var banner = document.getElementById('wallet-ready-banner');
+    if(!banner) return;
+    var nameEl = document.getElementById('wrb-pet-name');
+    if(nameEl) nameEl.textContent = petName || 'seu pet';
+    banner.classList.add('active');
+  }
+  function hideWalletReadyBanner(){
+    var banner = document.getElementById('wallet-ready-banner');
+    if(banner) banner.classList.remove('active');
+  }
+  (function(){
+    var banner = document.getElementById('wallet-ready-banner');
+    if(!banner) return;
+    var closeBtn = document.getElementById('wrb-close-btn');
+    var saveBtn = document.getElementById('wrb-save-btn');
+    if(closeBtn) closeBtn.addEventListener('click', hideWalletReadyBanner);
+    if(saveBtn){
+      saveBtn.addEventListener('click', function(){
+        if(typeof exportPetWalletPNG === 'function') exportPetWalletPNG();
+        hideWalletReadyBanner();
+      });
+    }
+  })();
+
   var newPetSaveBtnOnboardingRef = document.getElementById('new-pet-save-btn');
   if(newPetSaveBtnOnboardingRef){
     newPetSaveBtnOnboardingRef.addEventListener('click', function(){
       if(!triageOnboarding.active) return;
       setTimeout(function(){
         if(typeof currentPetKey !== 'undefined' && currentPetKey && currentPetKey !== triageOnboarding.prevPetKey){
+          var createdName = petProfileData[currentPetKey] ? petProfileData[currentPetKey].name : '';
           cancelOnboardingPetForm();
-          goTo('perfil-pet');
-          showToast('Aqui está a carteira do seu pet — exporte em PNG ou baixe quando quiser! 📥');
+          // Permanece na tela de Início — não navega para a aba da carteira.
+          showWalletReadyBanner(createdName);
         }
       }, 50);
     });
