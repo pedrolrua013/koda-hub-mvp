@@ -234,13 +234,15 @@
   .mobile-menu-backdrop{display:none;}
   @media (max-width:980px){
     #tabs-mobile{display:none !important;}
-    .app-main{padding-bottom:0;}
+    .app-main{padding-bottom:0;padding-top:64px;}
     .footer{display:none !important;}
-    body.home-screen-active .home-map-wrap{margin:0;border-radius:0;height:calc(100vh - 62px);min-height:0;box-shadow:none;}
+    body.home-screen-active .home-map-wrap{margin:0;border-radius:0;height:calc(100vh - 64px);min-height:0;box-shadow:none;}
 
+    /* position:fixed (não sticky) — garante que o header nunca role para fora da tela,
+       mesmo em navegadores/engines onde sticky+backdrop-filter falha durante scroll momentum (iOS Safari). */
     .home-mobile-header{
       display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
-      position:sticky;top:0;left:0;right:0;z-index:60;
+      position:fixed;top:0;left:0;right:0;z-index:60;
       background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
       padding:12px 16px;box-shadow:0 2px 14px rgba(0,0,0,0.08);
     }
@@ -1643,6 +1645,12 @@
   .assistant-send-btn{width:38px;height:38px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .12s ease;}
   .assistant-send-btn:hover{transform:scale(1.06);}
   .assistant-send-btn svg{width:16px;height:16px;}
+  .assistant-attach-btn{width:38px;height:38px;border-radius:50%;background:var(--gray-100);color:var(--gray-700);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s ease;}
+  .assistant-attach-btn:hover{background:var(--gray-300);color:var(--dark);}
+  .assistant-attach-btn svg{width:16px;height:16px;}
+  .assistant-msg.image{padding:6px;max-width:70%;}
+  .assistant-msg.image img{width:100%;border-radius:11px;display:block;}
+  .assistant-msg.analyzing{display:flex;align-items:center;gap:8px;}
   .notif-popup{pointer-events:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;border-left:4px solid var(--primary);opacity:0;transform:translateX(24px);transition:all .32s ease;cursor:pointer;}
   .notif-popup.show{opacity:1;transform:translateX(0);}
   .notif-popup-icon{width:36px;height:36px;border-radius:50%;background:var(--turquoise-4);display:flex;align-items:center;justify-content:center;font-size:15.5px;flex-shrink:0;}
@@ -4353,6 +4361,10 @@
   <div class="assistant-messages" id="assistant-messages"></div>
   <div class="assistant-quick-replies" id="assistant-quick-replies"></div>
   <form class="assistant-input-row" id="assistant-input-row">
+    <button type="button" class="assistant-attach-btn" id="assistant-attach-btn" aria-label="Enviar foto do pet para análise">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="10.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 00-2.1 0L5 19"/></svg>
+    </button>
+    <input type="file" accept="image/*" id="assistant-photo-input" style="display:none;">
     <input type="text" id="assistant-input" placeholder="Pergunte algo sobre a Koda..." autocomplete="off">
     <button type="submit" class="assistant-send-btn" aria-label="Enviar mensagem">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
@@ -7396,6 +7408,8 @@
     var quickRepliesEl = document.getElementById('assistant-quick-replies');
     var formEl = document.getElementById('assistant-input-row');
     var inputEl = document.getElementById('assistant-input');
+    var attachBtn = document.getElementById('assistant-attach-btn');
+    var photoInput = document.getElementById('assistant-photo-input');
     if(!fabBtn || !panel) return;
 
     var hasGreeted = false;
@@ -7405,12 +7419,18 @@
     var KNOWLEDGE = [
       { keys:['oi','olá','ola','bom dia','boa tarde','boa noite','opa','eae','e ai'],
         reply:'Oi! 👋 Eu sou o assistente virtual da Koda. Posso te ajudar a agendar serviços, entender os planos, o prontuário do seu pet, as Patinhas de recompensa e muito mais. O que você quer saber?' },
+      { keys:['cancelar','desmarcar','remarcar'],
+        reply:'Para cancelar ou remarcar, vá em "Agenda" no menu, toque no atendimento e escolha a opção de cancelamento — o profissional é avisado automaticamente. Cancelamentos com pouca antecedência podem afetar sua nota de bom tutor. ⏳' },
       { keys:['agendar','agendamento','marcar','marcar consulta','horário','horario','reservar'],
         reply:'Para agendar um serviço: vá em "Buscar" na barra lateral, escolha a categoria (veterinário, banho & tosa, pet sitter etc.), selecione um profissional verificado e escolha o horário disponível. O pagamento é feito direto pelo app, sem sair da Koda. 📅' },
       { keys:['plano','planos','assinatura','assinaturas','preço','preco','quanto custa','mensalidade'],
         reply:'A Koda tem planos para tutores e para parceiros. Para parceiros, existem 3 níveis de assinatura B2B com benefícios crescentes de destaque e ferramentas. Dá uma olhada na aba "Planos" do menu do parceiro para ver os valores atualizados. 💳' },
+      { keys:['vip','koda vip','cashback'],
+        reply:'O Koda VIP é o clube de assinatura para tutores: mais cashback em Patinhas, benefícios exclusivos e prioridade em agendamentos. Você encontra os detalhes na aba Koda VIP do menu. ⭐' },
       { keys:['prontuário','prontuario','exame','exames','vacina','vacinas','saúde','saude','histórico médico','historico medico'],
         reply:'O Prontuário Médico fica no Perfil do Pet. Lá você encontra consultas, vacinas e exames organizados por categoria — inclusive documentos anexados, como laudos de exame. É a memória de saúde completa do seu pet. 🩺' },
+      { keys:['emergência','emergencia','urgente','urgência','urgencia'],
+        reply:'Em caso de emergência real, procure direto uma clínica veterinária 24h da sua região — o app ainda não substitui atendimento de urgência. Mas você pode buscar veterinários com horário mais próximo na aba Buscar, filtrando por "Veterinário". 🚨' },
       { keys:['patinha','patinhas','recompensa','recompensas','pontos','cupom','desconto koda'],
         reply:'Patinhas são a moeda de recompensa da Koda! Você ganha ao completar missões, agendar serviços e cuidar do seu pet pelo app, e pode trocar por benefícios na Central de Recompensas. 🦴' },
       { keys:['ranking','desempenho','performance','minha posição','minha posicao'],
@@ -7421,20 +7441,49 @@
         reply:'O sininho no topo do menu lateral mostra suas notificações — lembretes de banho e tosa, vacinas, consultas aceitas e novidades da rede Koda. É só clicar para abrir. 🔔' },
       { keys:['missão','missao','missões','missoes'],
         reply:'A Central de Missões tem desafios diários e semanais que rendem Patinhas quando completados — é uma forma leve de manter o cuidado do seu pet em dia. 🎯' },
+      { keys:['passeio','passear','passeador','caminhada'],
+        reply:'Os passeadores parceiros da Koda enviam GPS ao vivo durante o passeio e um relatório automático no final (distância, paradas, duração). Você acompanha tudo direto no app. 🐕' },
+      { keys:['banho','tosa','banho e tosa'],
+        reply:'Pra banho e tosa, filtre por "Banho & Tosa" na Busca — dá pra ver fotos de antes/depois de outros pets atendidos e agendar no horário livre mais próximo. 🛁' },
+      { keys:['adestrador','adestramento','treinar','comportamento'],
+        reply:'Adestradores parceiros montam planos de treinamento personalizados e registram a evolução do seu pet a cada sessão. Você acompanha o progresso direto pelo app. 🎓' },
+      { keys:['creche','hospedagem','hotel','pousada'],
+        reply:'Na creche/hospedagem, você recebe um diário com fotos e boletim do dia do seu pet — assim fica tranquilo mesmo longe de casa. 🏫' },
+      { keys:['sitter','pet sitter','cuidador'],
+        reply:'Pet sitters registram um diário de hospedagem com fotos e observações, então você acompanha como foi o dia do seu pet mesmo à distância. 🏠' },
+      { keys:['avaliar','avaliação','avaliacao','review','nota'],
+        reply:'Depois de um atendimento, você pode avaliar o profissional direto na Agenda — isso ajuda outros tutores e também rende Patinhas de recompensa. ⭐' },
+      { keys:['privacidade','dados pessoais','segurança','seguranca','lgpd'],
+        reply:'Seus dados e os do seu pet só são compartilhados com o profissional no momento do atendimento. Você pode revisar tudo em Configurações → Privacidade & Conta. 🔒' },
+      { keys:['humano','atendente','suporte','falar com alguém','falar com alguem'],
+        reply:'No momento não tenho um time de suporte humano conectado por aqui, mas você encontra os canais de atendimento da Koda em Configurações. 📩' },
+      { keys:['foto','imagem','enviar foto','analisar foto','mandar foto','anexar'],
+        reply:'Você pode enviar uma foto do seu pet clicando no ícone de câmera ao lado do campo de mensagem — eu dou uma pré-análise visual rapidinha! 📷' },
       { keys:['o que é a koda','o que e a koda','quem é a koda','sobre a koda','o que vocês fazem','o que voces fazem'],
         reply:'A Koda é o hub que conecta tutores, profissionais e parceiros pet num único ecossistema — conectando pessoas, serviços e cuidado ao longo da vida do pet. 🐾' },
+      { keys:['meu pet','como está','como esta','está o thor','esta o thor','sobre o thor','dados do meu pet'],
+        reply:function(){
+          var pet = (typeof petProfileData !== 'undefined' && typeof currentPetKey !== 'undefined') ? petProfileData[currentPetKey] : null;
+          if(!pet) return 'Ainda não encontrei os dados do seu pet por aqui — crie a carteira digital no Perfil do Pet pra eu poder te dar informações personalizadas! 🐾';
+          return 'O(a) ' + pet.name + ' está com a carteira em dia: ' + (pet.especie || 'pet') + ' · ' + (pet.raca || 'raça não informada') + ' · ' + (pet.idadeLabel || 'idade não informada') + '. Você confere tudo isso e mais no Perfil do Pet. 🐾';
+        } },
+      { keys:['tchau','até mais','ate mais','flw','falou','até logo','ate logo'],
+        reply:'Até mais! Qualquer dúvida sobre a Koda, é só me chamar de novo por aqui. 🐾' },
       { keys:['obrigado','obrigada','valeu','vlw','thanks'],
         reply:'Disponha! Se precisar de mais alguma coisa sobre a Koda, é só chamar. 😊' }
     ];
     var FALLBACKS = [
       'Ainda estou aprendendo sobre esse assunto específico, mas posso te ajudar com agendamentos, planos, prontuário médico, Patinhas de recompensa ou o Ranking Koda. O que você gostaria de saber?',
-      'Não tenho certeza sobre isso ainda — mas posso explicar como agendar serviços, como funcionam as Patinhas ou o prontuário do seu pet. Quer tentar alguma dessas?'
+      'Não tenho certeza sobre isso ainda — mas posso explicar como agendar serviços, como funcionam as Patinhas ou o prontuário do seu pet. Quer tentar alguma dessas?',
+      'Essa eu ainda não sei responder com precisão, mas você também pode me enviar uma foto do seu pet clicando no ícone de câmera, se for sobre isso. 📷',
+      'Hmm, não captei direito. Posso ajudar com agendamentos, planos, prontuário, Patinhas ou dúvidas sobre passeio, banho & tosa, creche e adestramento. O que você precisa?'
     ];
     var QUICK_REPLIES = [
       'Como agendo um serviço?',
       'Quais são os planos?',
       'Como funciona o prontuário?',
-      'O que são Patinhas?'
+      'O que são Patinhas?',
+      '📷 Enviar foto do meu pet'
     ];
 
     function getReply(text){
@@ -7442,7 +7491,7 @@
       for(var i = 0; i < KNOWLEDGE.length; i++){
         var item = KNOWLEDGE[i];
         for(var j = 0; j < item.keys.length; j++){
-          if(t.indexOf(item.keys[j]) !== -1) return item.reply;
+          if(t.indexOf(item.keys[j]) !== -1) return typeof item.reply === 'function' ? item.reply() : item.reply;
         }
       }
       return FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)];
@@ -7458,6 +7507,42 @@
       bubble.textContent = text;
       messagesEl.appendChild(bubble);
       scrollToBottom();
+    }
+
+    function addImageMessage(dataUrl, who){
+      var bubble = document.createElement('div');
+      bubble.className = 'assistant-msg image ' + who;
+      var img = document.createElement('img');
+      img.src = dataUrl;
+      img.alt = 'Foto enviada para análise';
+      bubble.appendChild(img);
+      messagesEl.appendChild(bubble);
+      scrollToBottom();
+    }
+
+    // Pré-análise visual simulada (sem chamar nenhuma API externa) — pool de observações plausíveis.
+    var PHOTO_FINDINGS = [
+      'Pelagem parece saudável e bem cuidada, sem áreas de queda aparentes.',
+      'Postura e expressão parecem tranquilas — nada preocupante à primeira vista.',
+      'Peso e hidratação aparentam estar adequados pela imagem.',
+      'Olhos e orelhas parecem limpos e sem sinais de secreção na foto.',
+      'Notei uma possível área de sensibilidade ou vermelhidão leve na pele.',
+      'Há algo que pode merecer uma olhada mais de perto, como leve inchaço ou irritação.'
+    ];
+
+    function analyzePetPhoto(dataUrl){
+      addImageMessage(dataUrl, 'user');
+      var typing = document.createElement('div');
+      typing.className = 'assistant-msg bot typing';
+      typing.innerHTML = '<i></i><i></i><i></i>';
+      messagesEl.appendChild(typing);
+      scrollToBottom();
+      var delay = 900 + Math.random() * 700;
+      setTimeout(function(){
+        typing.remove();
+        var finding = PHOTO_FINDINGS[Math.floor(Math.random() * PHOTO_FINDINGS.length)];
+        addMessage('📷 Pré-análise: ' + finding + ' ⚠️ Isso é uma pré-análise visual simples e não substitui avaliação veterinária profissional — se notar algo fora do comum, agende uma consulta pelo app.', 'bot');
+      }, delay);
     }
 
     function renderQuickReplies(){
@@ -7527,7 +7612,23 @@
       quickRepliesEl.addEventListener('click', function(e){
         var btn = e.target.closest('.assistant-quick-reply');
         if(!btn) return;
+        if(btn.textContent.indexOf('Enviar foto') !== -1){
+          if(photoInput) photoInput.click();
+          return;
+        }
         sendUserMessage(btn.textContent);
+      });
+    }
+    if(attachBtn && photoInput){
+      attachBtn.addEventListener('click', function(){ photoInput.click(); });
+      photoInput.addEventListener('change', function(){
+        var file = photoInput.files && photoInput.files[0];
+        if(!file) return;
+        if(!panel.classList.contains('active')) openAssistant();
+        var reader = new FileReader();
+        reader.onload = function(e){ analyzePetPhoto(e.target.result); };
+        reader.readAsDataURL(file);
+        photoInput.value = '';
       });
     }
   })();
