@@ -676,6 +676,101 @@
   .crm-delete-link:hover{text-decoration:underline;}
   @media (max-width:520px){ .crm-modal-foot{flex-direction:column-reverse;align-items:stretch;} .crm-modal-foot-right{flex-direction:column-reverse;} .crm-modal-foot .btn{width:100%;} .crm-column{flex-basis:82vw;width:82vw;} .crm-add-column-card{flex-basis:60vw;width:60vw;} }
 
+  /* ===== Modal genérico das Ferramentas do parceiro ===== */
+  .tool-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,26,36,0.66);backdrop-filter:blur(4px);z-index:3300;align-items:center;justify-content:center;padding:24px 16px;}
+  .tool-modal-overlay.active{display:flex;}
+  .tool-modal{background:#fff;border-radius:22px;max-width:620px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative;padding:26px 26px 24px;}
+  .tool-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--gray-100);color:var(--gray-700);display:flex;align-items:center;justify-content:center;font-size:15px;border:none;cursor:pointer;z-index:2;}
+  .tool-modal-close:hover{background:var(--gray-300);}
+  .tool-modal-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-right:36px;}
+  .tool-modal-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .tool-modal-head h3{margin:0 0 4px;font-size:17.5px;}
+  .tool-modal-sub{margin:0;font-size:12.5px;color:var(--gray-500);line-height:1.55;}
+  .tool-modal-body{font-size:13.5px;}
+
+  .tm-section{margin-bottom:18px;}
+  .tm-section:last-child{margin-bottom:0;}
+  .tm-section-label{font-size:11px;font-weight:800;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px;}
+  .tm-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .tm-btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  @media (max-width:480px){ .tm-btn-row{flex-direction:column;} .tm-btn-row .btn{width:100%;} }
+
+  .tm-chip-toggle-row{display:flex;gap:8px;flex-wrap:wrap;}
+  .tm-chip-toggle{padding:8px 14px;border-radius:100px;background:var(--gray-100);border:1.5px solid var(--gray-300);font-size:12.5px;font-weight:700;color:var(--gray-700);cursor:pointer;font-family:inherit;transition:all .12s ease;}
+  .tm-chip-toggle:hover{border-color:var(--primary);}
+  .tm-chip-toggle.active{background:var(--dark);color:#fff;border-color:var(--dark);}
+
+  .tm-output{background:var(--gray-100);border-radius:14px;padding:16px 18px;}
+  .tm-output.accent{background:linear-gradient(135deg,#FDEBE4,#fff);border:1px solid var(--primary-light,#F7C9B8);}
+  .tm-output p{margin:0 0 8px;font-size:13px;line-height:1.7;color:var(--gray-700);}
+  .tm-output p:last-child{margin-bottom:0;}
+  .tm-output-title{font-size:12px;font-weight:800;color:var(--dark);margin:0 0 8px;display:flex;align-items:center;gap:6px;}
+  .tm-empty{font-size:12.5px;color:var(--gray-500);text-align:center;padding:18px 10px;border:1.5px dashed var(--gray-300);border-radius:12px;}
+
+  .tm-timeline{display:flex;flex-direction:column;gap:0;}
+  .tm-timeline-item{display:flex;gap:12px;position:relative;padding-bottom:18px;}
+  .tm-timeline-item:last-child{padding-bottom:0;}
+  .tm-timeline-item::before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--gray-300);}
+  .tm-timeline-item:last-child::before{display:none;}
+  .tm-timeline-icon{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--primary);color:var(--primary-dark);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;z-index:1;}
+  .tm-timeline-body{flex:1;padding-top:3px;}
+  .tm-timeline-body h5{margin:0 0 2px;font-size:13px;font-weight:800;color:var(--dark);}
+  .tm-timeline-body p{margin:0;font-size:12px;color:var(--gray-500);line-height:1.55;}
+
+  .tm-checklist{display:flex;flex-direction:column;gap:2px;}
+  .tm-check-item{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--gray-100);cursor:pointer;user-select:none;}
+  .tm-check-item:last-child{border-bottom:none;}
+  .tm-check-box{width:20px;height:20px;border-radius:6px;border:2px solid var(--gray-300);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;transition:all .12s ease;}
+  .tm-check-item.done .tm-check-box{background:var(--secondary);border-color:var(--secondary);}
+  .tm-check-label{flex:1;font-size:13px;color:var(--dark);}
+  .tm-check-item.done .tm-check-label{color:var(--gray-500);text-decoration:line-through;}
+  .tm-check-time{font-size:11px;color:var(--gray-500);flex-shrink:0;}
+
+  .tm-diary-item{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--gray-100);}
+  .tm-diary-item:last-child{border-bottom:none;}
+  .tm-diary-thumb{width:44px;height:44px;border-radius:10px;background:var(--gray-300) center/cover no-repeat;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+  .tm-diary-body{flex:1;min-width:0;}
+  .tm-diary-body .tm-diary-time{font-size:10.5px;color:var(--gray-500);font-weight:700;text-transform:uppercase;}
+  .tm-diary-body p{margin:3px 0 0;font-size:12.5px;color:var(--gray-700);line-height:1.5;}
+
+  .tm-video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  @media (max-width:480px){ .tm-video-grid{grid-template-columns:1fr;} }
+  .tm-video-card{border-radius:12px;overflow:hidden;border:1px solid var(--gray-300);cursor:pointer;background:#fff;}
+  .tm-video-thumb{height:90px;background-size:cover;background-position:center;position:relative;display:flex;align-items:center;justify-content:center;}
+  .tm-video-thumb::after{content:"";position:absolute;inset:0;background:rgba(18,26,36,0.28);}
+  .tm-video-play{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.95);color:var(--dark);display:flex;align-items:center;justify-content:center;font-size:13px;z-index:1;}
+  .tm-video-info{padding:8px 10px;}
+  .tm-video-info h5{margin:0 0 2px;font-size:12px;}
+  .tm-video-info span{font-size:10.5px;color:var(--gray-500);}
+
+  .tm-camera-mock{position:relative;border-radius:14px;overflow:hidden;height:190px;background-size:cover;background-position:center;}
+  .tm-camera-mock::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,26,36,0.15),rgba(18,26,36,0.55));}
+  .tm-camera-live{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:6px;background:rgba(18,26,36,0.72);color:#fff;font-size:10.5px;font-weight:800;padding:5px 10px;border-radius:100px;z-index:1;letter-spacing:.03em;}
+  .tm-camera-dot{width:7px;height:7px;border-radius:50%;background:#FF5A5A;animation:tmPulse 1.4s ease-in-out infinite;}
+  @keyframes tmPulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .tm-camera-caption{position:absolute;bottom:10px;left:12px;right:12px;color:#fff;font-size:11.5px;font-weight:700;z-index:1;}
+
+  .tm-roster-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--gray-100);}
+  .tm-roster-item:last-child{border-bottom:none;}
+  .tm-roster-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .tm-roster-info{flex:1;min-width:0;}
+  .tm-roster-info b{display:block;font-size:12.5px;color:var(--dark);}
+  .tm-roster-info span{font-size:11px;color:var(--gray-500);}
+  .tm-roster-badge{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:100px;background:var(--secondary-light);color:var(--secondary-dark);white-space:nowrap;}
+
+  .tm-compare-wrap{position:relative;border-radius:14px;overflow:hidden;height:220px;background:var(--gray-100);}
+  .tm-compare-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity .3s ease;}
+  .tm-compare-tag{position:absolute;top:10px;left:10px;background:rgba(18,26,36,0.72);color:#fff;font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:100px;z-index:1;}
+  .tm-compare-toggle{display:flex;gap:8px;margin-top:10px;justify-content:center;}
+
+  .tm-weather-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  @media (max-width:480px){ .tm-weather-grid{grid-template-columns:repeat(2,1fr);} }
+  .tm-weather-day{text-align:center;background:var(--gray-100);border-radius:12px;padding:10px 6px;}
+  .tm-weather-day.alert{background:#FDEBE4;border:1px solid var(--primary);}
+  .tm-weather-day .wlabel{font-size:10.5px;font-weight:700;color:var(--gray-500);text-transform:uppercase;}
+  .tm-weather-day .wicon{font-size:22px;margin:6px 0;}
+  .tm-weather-day .wtemp{font-size:13px;font-weight:800;color:var(--dark);}
+
   .card-block h3{font-size:15.5px;margin:0 0 14px;}
   .card-block p.bio{font-size:13.5px;color:var(--gray-700);line-height:1.7;margin:0 0 14px;}
   .pill-row{display:flex;gap:8px;flex-wrap:wrap;}
@@ -927,17 +1022,20 @@
   .tools-group h3{font-size:15px;margin:0 0 16px;color:var(--gray-700);}
   .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
   @media (max-width:900px){.tools-grid{grid-template-columns:1fr;}}
-  .tool-card{background:#fff;border:1px solid var(--gray-300);border-radius:18px;overflow:hidden;transition:all .15s ease;}
+  .tool-card{background:#fff;border:1px solid var(--gray-300);border-radius:18px;overflow:hidden;transition:all .15s ease;cursor:pointer;}
   .tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
-  .tool-visual{height:150px;position:relative;display:flex;align-items:center;justify-content:center;font-size:50px;overflow:hidden;}
-  .tv-a{background:linear-gradient(135deg,#6C5CE7,#4A3FBF);}
-  .tv-b{background:linear-gradient(135deg,var(--secondary),#0a6d58);}
-  .tv-c{background:linear-gradient(135deg,var(--primary),var(--primary-dark));}
-  .tool-ribbon{position:absolute;top:16px;left:-38px;width:155px;text-align:center;background:rgba(255,255,255,0.24);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:5px 0;transform:rotate(-45deg);text-transform:uppercase;}
-  .tool-cost{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.95);color:var(--dark);font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:100px;display:flex;align-items:center;gap:4px;}
+  .tool-card:hover .tool-visual-img{transform:scale(1.06);}
+  .tool-visual{height:150px;position:relative;overflow:hidden;background:var(--gray-300);}
+  .tool-visual-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .4s ease;}
+  .tool-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,26,36,0) 45%,rgba(18,26,36,0.62) 100%);pointer-events:none;}
+  .tool-visual-icon{position:absolute;bottom:11px;left:12px;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,0.95);display:flex;align-items:center;justify-content:center;font-size:16px;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.18);}
+  .tool-ribbon{position:absolute;top:16px;left:-38px;width:155px;text-align:center;background:rgba(255,255,255,0.9);color:var(--dark);font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:5px 0;transform:rotate(-45deg);text-transform:uppercase;z-index:2;}
+  .tool-cost{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.95);color:var(--dark);font-size:11.5px;font-weight:800;padding:6px 12px;border-radius:100px;display:flex;align-items:center;gap:4px;z-index:2;}
   .tool-body{padding:16px 18px 20px;}
   .tool-body h4{margin:0 0 7px;font-size:15px;}
-  .tool-body p{margin:0;font-size:12px;color:var(--gray-500);line-height:1.6;}
+  .tool-body p{margin:0 0 12px;font-size:12px;color:var(--gray-500);line-height:1.6;}
+  .tool-open-link{font-size:12px;font-weight:800;color:var(--primary-dark);display:inline-flex;align-items:center;gap:4px;}
+  .tool-card:hover .tool-open-link{text-decoration:underline;}
 
   /* Tela de entrada (seleção de perfil) */
   body.landing-active .sidebar,
@@ -3086,35 +3184,41 @@
     <div class="tools-group tools-cat-group" data-toolcat="vet" style="padding-bottom:50px;">
       <h3>Ferramentas para Veterinário</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="vet-prontuario-voz">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6235650/pexels-photo-6235650.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🩺</span>
             <div class="tool-cost">🐾 100</div>
-            🩺
           </div>
           <div class="tool-body">
             <h4>Prontuário Assistido por Voz</h4>
             <p>Narre o atendimento e a IA organiza automaticamente anamnese, diagnóstico e prescrição direto na carteira digital do pet.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="vet-triagem-imagem">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6234978/pexels-photo-6234978.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🔬</span>
             <div class="tool-ribbon">Novo</div>
             <div class="tool-cost">🐾 120</div>
-            🔬
           </div>
           <div class="tool-body">
             <h4>Assistente de Triagem por Imagem</h4>
             <p>Envie fotos de lesões, olhos ou pele e receba sugestões de triagem e diagnósticos diferenciais para apoiar sua avaliação clínica.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="vet-lembrete-vacinas">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7469213/pexels-photo-7469213.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">💉</span>
             <div class="tool-cost">Grátis</div>
-            💉
           </div>
           <div class="tool-body">
             <h4>Lembrete Inteligente de Vacinas &amp; Retorno</h4>
             <p>Notificações automáticas de vacinas e retornos vencendo, enviadas direto pro tutor na carteira digital do pet.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -3123,35 +3227,41 @@
     <div class="tools-group tools-cat-group" data-toolcat="banho" style="padding-bottom:50px;">
       <h3>Ferramentas para Banho &amp; Tosa</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="banho-fotos-antes-depois">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19145882/pexels-photo-19145882.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📸</span>
             <div class="tool-ribbon">Novo</div>
             <div class="tool-cost">🐾 60</div>
-            📸
           </div>
           <div class="tool-body">
             <h4>Gerador de Fotos Antes/Depois</h4>
             <p>Cria composições profissionais de antes/depois pro seu portfólio e redes sociais a partir das fotos do atendimento.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="banho-agenda-encaixes">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/13062569/pexels-photo-13062569.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🗓️</span>
             <div class="tool-cost">Grátis</div>
-            🗓️
           </div>
           <div class="tool-body">
             <h4>Agenda Otimizada de Encaixes</h4>
             <p>Sugere os melhores horários pra encaixar banhos extras sem estourar o tempo de secagem e tosa.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="banho-ficha-preferencias">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/8498858/pexels-photo-8498858.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📋</span>
             <div class="tool-cost">🐾 30</div>
-            📋
           </div>
           <div class="tool-body">
             <h4>Ficha de Preferências do Pet</h4>
             <p>Guarda tipo de tosa, sensibilidades de pele e produtos preferidos de cada pet pra não errar na próxima visita.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -3160,35 +3270,41 @@
     <div class="tools-group tools-cat-group" data-toolcat="sitter" style="padding-bottom:50px;">
       <h3>Ferramentas para Pet Sitter</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="sitter-diario-hospedagem">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/37587432/pexels-photo-37587432.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📷</span>
             <div class="tool-cost">🐾 50</div>
-            📷
           </div>
           <div class="tool-body">
             <h4>Diário de Hospedagem com Fotos</h4>
             <p>Gera um resumo diário com fotos e observações da estadia, enviado automaticamente pro tutor.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="sitter-checklist-rotina">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/11616422/pexels-photo-11616422.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">✅</span>
             <div class="tool-cost">Grátis</div>
-            ✅
           </div>
           <div class="tool-body">
             <h4>Checklist de Rotina do Pet</h4>
             <p>Lista de alimentação, remédios e passeios combinados com o tutor, com lembretes ao longo do dia.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="sitter-resumo-dia-ia">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/30537541/pexels-photo-30537541.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🎥</span>
             <div class="tool-ribbon">Novo</div>
             <div class="tool-cost">🐾 80</div>
-            🎥
           </div>
           <div class="tool-body">
             <h4>Resumo do Dia por IA</h4>
             <p>Transforma as fotos e anotações do dia em um resumo curto e afetuoso pra mandar pro tutor.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -3197,34 +3313,40 @@
     <div class="tools-group tools-cat-group active" data-toolcat="passeador" style="padding-bottom:50px;">
       <h3>Ferramentas para Passeador</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="passeador-rota-inteligente">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7210754/pexels-photo-7210754.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🗺️</span>
             <div class="tool-cost">🐾 40</div>
-            🗺️
           </div>
           <div class="tool-body">
             <h4>Rota Inteligente de Passeio</h4>
             <p>Sugere o melhor trajeto considerando duração, sombra e pontos de água pro pet.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="passeador-relatorio-automatico">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19175821/pexels-photo-19175821.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📊</span>
             <div class="tool-cost">Grátis</div>
-            📊
           </div>
           <div class="tool-body">
             <h4>Relatório Automático do Passeio</h4>
             <p>Distância, tempo e paradas registrados automaticamente e enviados pro tutor ao final do passeio.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="passeador-alerta-clima">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/35427578/pexels-photo-35427578.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">☀️</span>
             <div class="tool-cost">Grátis</div>
-            ☀️
           </div>
           <div class="tool-body">
             <h4>Alerta de Clima</h4>
             <p>Avisa com antecedência sobre chuva ou calor extremo pra você reagendar com o tutor.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -3233,35 +3355,41 @@
     <div class="tools-group tools-cat-group" data-toolcat="adestrador" style="padding-bottom:50px;">
       <h3>Ferramentas para Adestrador</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="adestrador-rotina-treinamento">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/6568478/pexels-photo-6568478.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🐕‍🦺</span>
             <div class="tool-cost">🐾 80</div>
-            🐕‍🦺
           </div>
           <div class="tool-body">
             <h4>Gerador de Rotina de Treinamento IA</h4>
             <p>Responda um questionário sobre o pet (porte, energia, comportamentos-problema) e receba um plano de treino semanal progressivo, com diário de evolução automático.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="adestrador-diario-evolucao">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/7210456/pexels-photo-7210456.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📈</span>
             <div class="tool-cost">Grátis</div>
-            📈
           </div>
           <div class="tool-body">
             <h4>Diário de Evolução do Pet</h4>
             <p>Registro visual do progresso do pet a cada sessão, compartilhado automaticamente com o tutor.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="adestrador-biblioteca-videos">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/19017771/pexels-photo-19017771.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🎬</span>
             <div class="tool-ribbon">Novo</div>
             <div class="tool-cost">🐾 40</div>
-            🎬
           </div>
           <div class="tool-body">
             <h4>Biblioteca de Exercícios em Vídeo</h4>
             <p>Vídeos curtos de exercícios pra indicar ao tutor praticar em casa entre as sessões.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -3270,35 +3398,41 @@
     <div class="tools-group tools-cat-group" data-toolcat="creche" style="padding-bottom:50px;">
       <h3>Ferramentas para Creche</h3>
       <div class="tools-grid">
-        <div class="tool-card">
-          <div class="tool-visual tv-b">
+        <div class="tool-card" data-tool="creche-carteirinha-turmas">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/37443358/pexels-photo-37443358.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">🎒</span>
             <div class="tool-cost">🐾 60</div>
-            🎒
           </div>
           <div class="tool-body">
             <h4>Carteirinha do Aluno &amp; Gestão de Turmas</h4>
             <p>Controle vacinação, restrições e perfil de sociabilização de cada pet-aluno, com sugestão automática de turmas compatíveis.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-c">
+        <div class="tool-card" data-tool="creche-boletim-diario">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/18709056/pexels-photo-18709056.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📝</span>
             <div class="tool-ribbon">Novo</div>
             <div class="tool-cost">Grátis</div>
-            📝
           </div>
           <div class="tool-body">
             <h4>Boletim Diário Automático por IA</h4>
             <p>Gera um boletim do dia do pet (brincadeiras, socialização, humor) a partir das suas anotações rápidas.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
-        <div class="tool-card">
-          <div class="tool-visual tv-a">
+        <div class="tool-card" data-tool="creche-cameras-vivo">
+          <div class="tool-visual">
+            <div class="tool-visual-img" style="background-image:url('https://images.pexels.com/photos/5966513/pexels-photo-5966513.jpeg?auto=compress&cs=tinysrgb&w=400');"></div>
+            <span class="tool-visual-icon">📹</span>
             <div class="tool-cost">🐾 70</div>
-            📹
           </div>
           <div class="tool-body">
             <h4>Câmeras ao Vivo para os Tutores</h4>
             <p>Link de transmissão ao vivo do pátio pros tutores acompanharem o pet durante o dia.</p>
+            <span class="tool-open-link">Abrir ferramenta →</span>
           </div>
         </div>
       </div>
@@ -4129,6 +4263,21 @@
         <button type="button" class="btn btn-primary" id="crm-column-save-btn">Salvar coluna</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ===== Modal genérico: Ferramentas do parceiro ===== -->
+<div class="tool-modal-overlay" id="tool-modal-overlay">
+  <div class="tool-modal">
+    <button type="button" class="tool-modal-close" id="tool-modal-close" aria-label="Fechar">✕</button>
+    <div class="tool-modal-head">
+      <span class="tool-modal-icon" id="tool-modal-icon">🛠️</span>
+      <div>
+        <h3 id="tool-modal-title">Ferramenta</h3>
+        <p class="tool-modal-sub" id="tool-modal-sub">Descrição da ferramenta</p>
+      </div>
+    </div>
+    <div class="tool-modal-body" id="tool-modal-body"></div>
   </div>
 </div>
 
@@ -5718,6 +5867,740 @@
     document.getElementById('crm-add-column-btn').addEventListener('click', function(){ openColumnModal(null); });
 
     renderBoard();
+  })();
+
+  // ===== Ferramentas do parceiro: modal genérico + interatividade real de cada ferramenta =====
+  (function(){
+    var overlay = document.getElementById('tool-modal-overlay');
+    if(!overlay) return;
+    var titleEl = document.getElementById('tool-modal-title');
+    var subEl = document.getElementById('tool-modal-sub');
+    var iconEl = document.getElementById('tool-modal-icon');
+    var bodyEl = document.getElementById('tool-modal-body');
+    var closeBtn = document.getElementById('tool-modal-close');
+
+    function tEsc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    function pad2(n){ n = Math.floor(n); return (n<10?'0':'')+n; }
+    function randomPick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+    function nowHM(){ var d=new Date(); return pad2(d.getHours())+':'+pad2(d.getMinutes()); }
+
+    function wireExclusiveChips(container, selector){
+      container.querySelectorAll(selector).forEach(function(chip){
+        chip.addEventListener('click', function(){
+          container.querySelectorAll(selector).forEach(function(c){ c.classList.remove('active'); });
+          chip.classList.add('active');
+        });
+      });
+    }
+    function wireMultiChips(container, selector){
+      container.querySelectorAll(selector).forEach(function(chip){
+        chip.addEventListener('click', function(){ chip.classList.toggle('active'); });
+      });
+    }
+    function activeChipVal(container, selector){
+      var el = container.querySelector(selector + '.active');
+      return el ? el.getAttribute('data-val') : null;
+    }
+    function activeChipVals(container, selector){
+      return Array.from(container.querySelectorAll(selector + '.active')).map(function(c){ return c.getAttribute('data-val'); });
+    }
+
+    // ---- estado persistente das ferramentas (em memória, dura enquanto a página estiver aberta) ----
+    var toolState = {
+      diarioHospedagem: [
+        { hora:'08:30', texto:'Chegada tranquila, já explorou o quintal e tomou água.', foto:null }
+      ],
+      checklistRotina: [
+        { id:1, label:'Alimentação da manhã (08h)', done:true },
+        { id:2, label:'Medicação/suplemento (12h)', done:false },
+        { id:3, label:'Passeio da tarde (16h)', done:false },
+        { id:4, label:'Brincadeira e enriquecimento (18h)', done:false },
+        { id:5, label:'Última água antes de dormir (21h)', done:false }
+      ],
+      checklistSeq: 6,
+      fichaPreferencias: [],
+      diarioEvolucao: [
+        { data:'12/08', nota:'Respondeu bem ao comando "senta" com reforço positivo.', estrelas:4 }
+      ],
+      roster: [
+        { nome:'Thor', porte:'grande', energia:'alta' },
+        { nome:'Mia', porte:'pequeno', energia:'media' },
+        { nome:'Bidu', porte:'medio', energia:'alta' },
+        { nome:'Luna', porte:'pequeno', energia:'baixa' }
+      ],
+      vacinas: [
+        { nome:'V10 (Múltipla)', pet:'Thor', dias:6, enviado:false },
+        { nome:'Antirrábica', pet:'Mia', dias:14, enviado:false },
+        { nome:'Retorno pós-cirúrgico', pet:'Bidu', dias:2, enviado:false }
+      ]
+    };
+    function turmaFor(porte, energia){
+      if(porte === 'pequeno' && energia !== 'alta') return 'Turma Filhotes';
+      if(energia === 'alta') return 'Turma Ativos';
+      return 'Turma Geral';
+    }
+    var walkTimer = { seconds:0, distancia:0, paradas:0, interval:null, running:false };
+
+    function wirePhotoInput(input, onLoaded){
+      input.addEventListener('change', function(){
+        var file = input.files && input.files[0];
+        if(!file) return;
+        var reader = new FileReader();
+        reader.onload = function(e){ onLoaded(e.target.result); };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    var TOOLS = {};
+
+    // 1) Prontuário Assistido por Voz -----------------------------------------
+    TOOLS['vet-prontuario-voz'] = {
+      icon:'🩺', title:'Prontuário Assistido por Voz',
+      sub:'Narre o atendimento em texto livre e a IA organiza automaticamente em anamnese, diagnóstico e prescrição.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Narração do atendimento</p>'+
+          '<textarea id="pv-texto" rows="4" style="width:100%;border:1px solid var(--gray-300);border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;" placeholder="Ex.: Paciente Thor, apresentou vômito e apatia há dois dias, sem febre. Abdômen sensível à palpação."></textarea></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="pv-gerar">🎙️ Gerar prontuário estruturado</button>'+
+          '<div id="pv-out"></div>';
+        el.querySelector('#pv-gerar').addEventListener('click', function(){
+          var txt = el.querySelector('#pv-texto').value.trim();
+          var out = el.querySelector('#pv-out');
+          if(!txt){ out.innerHTML = '<p class="tm-empty">Narre o atendimento antes de gerar o prontuário.</p>'; return; }
+          var sentences = txt.split(/\.\s*/).filter(Boolean);
+          var anamnese = sentences.slice(0, Math.max(1, Math.ceil(sentences.length/2))).join('. ') + '.';
+          var achados = [];
+          var lower = txt.toLowerCase();
+          if(lower.indexOf('vômit') !== -1 || lower.indexOf('vomit') !== -1) achados.push('suspeita de gastroenterite leve');
+          if(lower.indexOf('dor') !== -1 || lower.indexOf('sensív') !== -1) achados.push('quadro álgico compatível com sensibilidade abdominal');
+          if(lower.indexOf('febre') !== -1) achados.push('investigar processo infeccioso/febril');
+          if(lower.indexOf('apat') !== -1 || lower.indexOf('letarg') !== -1) achados.push('avaliar letargia associada');
+          if(achados.length === 0) achados.push('quadro compatível com os achados descritos; recomenda-se exames complementares');
+          var diagnostico = 'Hipótese diagnóstica: ' + achados.join('; ') + '.';
+          var prescricao = 'Dieta leve por 48h, observação domiciliar e retorno se sintomas persistirem.';
+          if(lower.indexOf('vômit') !== -1) prescricao = 'Antiemético conforme peso, dieta leve fracionada por 48h e retorno se os vômitos persistirem.';
+          else if(lower.indexOf('dor') !== -1) prescricao = 'Anti-inflamatório/analgésico conforme peso, repouso relativo e reavaliação em 3 dias.';
+          out.innerHTML =
+            '<div class="tm-output accent"><div class="tm-output-title">📄 Prontuário estruturado</div>'+
+            '<p><strong>Anamnese:</strong> '+tEsc(anamnese)+'</p>'+
+            '<p><strong>Diagnóstico:</strong> '+tEsc(diagnostico)+'</p>'+
+            '<p><strong>Prescrição:</strong> '+tEsc(prescricao)+'</p></div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="pv-salvar">💾 Salvar na carteira digital do pet</button></div>';
+          el.querySelector('#pv-salvar').addEventListener('click', function(){ showToast('Prontuário salvo na carteira digital do pet! 🐾'); });
+        });
+      }
+    };
+
+    // 2) Assistente de Triagem por Imagem -------------------------------------
+    TOOLS['vet-triagem-imagem'] = {
+      icon:'🔬', title:'Assistente de Triagem por Imagem',
+      sub:'Envie uma foto do local afetado para uma pré-análise visual de apoio à triagem.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Foto para análise</p>'+
+          '<input type="file" accept="image/*" id="ti-file"></div>'+
+          '<div id="ti-preview" style="margin:12px 0;"></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="ti-analisar" disabled>🔬 Analisar imagem</button>'+
+          '<div id="ti-out"></div>';
+        var analisarBtn = el.querySelector('#ti-analisar');
+        wirePhotoInput(el.querySelector('#ti-file'), function(dataUrl){
+          el.querySelector('#ti-preview').innerHTML = '<img src="'+dataUrl+'" style="max-width:100%;max-height:180px;border-radius:12px;display:block;">';
+          analisarBtn.disabled = false;
+        });
+        var pool = [
+          { achado:'Leve hiperemia (vermelhidão) localizada, sem sinais de secreção.', rec:'Observação por 48h; higienizar com solução salina.' },
+          { achado:'Possível reação alérgica de contato na região.', rec:'Evitar novos alérgenos e considerar anti-histamínico sob orientação.' },
+          { achado:'Área compatível com pequena lesão superficial em cicatrização.', rec:'Manter limpo e seco; retorno se houver secreção ou piora.' },
+          { achado:'Sinais leves de irritação, sem indícios de infecção ativa.', rec:'Reavaliar em consulta presencial para confirmação.' }
+        ];
+        analisarBtn.addEventListener('click', function(){
+          var out = el.querySelector('#ti-out');
+          out.innerHTML = '<p class="tm-empty">🔄 Analisando imagem...</p>';
+          analisarBtn.disabled = true;
+          setTimeout(function(){
+            var r = randomPick(pool);
+            out.innerHTML =
+              '<div class="tm-output accent"><div class="tm-output-title">🔬 Pré-análise (apoio à triagem)</div>'+
+              '<p><strong>Achado sugerido:</strong> '+tEsc(r.achado)+'</p>'+
+              '<p><strong>Recomendação:</strong> '+tEsc(r.rec)+'</p>'+
+              '<p style="font-size:11.5px;color:var(--gray-500);margin-top:8px;">⚠️ Pré-análise assistida por IA — não substitui avaliação clínica presencial.</p></div>';
+            analisarBtn.disabled = false;
+          }, 900);
+        });
+      }
+    };
+
+    // 3) Lembrete Inteligente de Vacinas & Retorno ----------------------------
+    TOOLS['vet-lembrete-vacinas'] = {
+      icon:'💉', title:'Lembrete Inteligente de Vacinas & Retorno',
+      sub:'Acompanhe os próximos vencimentos e dispare lembretes automáticos para os tutores.',
+      render:function(el){
+        function draw(){
+          el.innerHTML = '<div class="tm-timeline">' + toolState.vacinas.map(function(v, i){
+            var urgente = v.dias <= 3;
+            return '<div class="tm-timeline-item"><span class="tm-timeline-icon">'+(urgente?'⚠️':'💉')+'</span>'+
+              '<div class="tm-timeline-body"><h5>'+tEsc(v.nome)+' — '+tEsc(v.pet)+'</h5>'+
+              '<p>Vence em '+v.dias+' dia(s).'+(v.enviado?' <strong style="color:var(--secondary-dark);">Lembrete enviado ✓</strong>':'')+'</p>'+
+              (v.enviado ? '' : '<button type="button" class="btn btn-outline btn-sm" data-idx="'+i+'" data-act="enviar-vacina">Enviar lembrete agora</button>')+
+              '</div></div>';
+          }).join('') + '</div>';
+          el.querySelectorAll('[data-act="enviar-vacina"]').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              var idx = parseInt(btn.getAttribute('data-idx'), 10);
+              toolState.vacinas[idx].enviado = true;
+              showToast('Lembrete enviado ao tutor de ' + toolState.vacinas[idx].pet + '! 🐾');
+              draw();
+            });
+          });
+        }
+        draw();
+      }
+    };
+
+    // 4) Gerador de Fotos Antes/Depois -----------------------------------------
+    TOOLS['banho-fotos-antes-depois'] = {
+      icon:'📸', title:'Gerador de Fotos Antes/Depois',
+      sub:'Envie a foto de antes e depois do banho/tosa e monte a composição para compartilhar com o tutor.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="form-grid">'+
+          '<div class="form-field"><label>Foto de antes</label><input type="file" accept="image/*" id="ad-antes"></div>'+
+          '<div class="form-field"><label>Foto de depois</label><input type="file" accept="image/*" id="ad-depois"></div>'+
+          '</div>'+
+          '<div class="tm-compare-wrap" id="ad-compare" style="margin-top:14px;">'+
+          '<span class="tm-compare-tag" id="ad-tag">Antes</span>'+
+          '<img class="tm-compare-img" id="ad-img" src="" style="display:none;">'+
+          '<div class="tm-empty" id="ad-empty">Envie as duas fotos para visualizar</div>'+
+          '</div>'+
+          '<div class="tm-btn-row" style="margin-top:10px;">'+
+          '<button type="button" class="btn btn-outline btn-sm tm-compare-toggle" id="ad-toggle" disabled>🔄 Ver antes/depois</button>'+
+          '<button type="button" class="btn btn-primary btn-sm" id="ad-enviar" disabled>📲 Enviar composição pro tutor</button>'+
+          '</div>';
+        var imgs = { antes:null, depois:null };
+        var showing = 'antes';
+        function refresh(){
+          var imgEl = el.querySelector('#ad-img');
+          var emptyEl = el.querySelector('#ad-empty');
+          var tagEl = el.querySelector('#ad-tag');
+          var current = imgs[showing];
+          if(current){
+            imgEl.src = current; imgEl.style.display = 'block'; emptyEl.style.display = 'none';
+          } else {
+            imgEl.style.display = 'none'; emptyEl.style.display = 'block';
+          }
+          tagEl.textContent = showing === 'antes' ? 'Antes' : 'Depois';
+          var ready = !!(imgs.antes && imgs.depois);
+          el.querySelector('#ad-toggle').disabled = !ready;
+          el.querySelector('#ad-enviar').disabled = !ready;
+        }
+        wirePhotoInput(el.querySelector('#ad-antes'), function(d){ imgs.antes = d; showing = 'antes'; refresh(); });
+        wirePhotoInput(el.querySelector('#ad-depois'), function(d){ imgs.depois = d; showing = 'depois'; refresh(); });
+        el.querySelector('#ad-toggle').addEventListener('click', function(){ showing = showing === 'antes' ? 'depois' : 'antes'; refresh(); });
+        el.querySelector('#ad-enviar').addEventListener('click', function(){ showToast('Foto antes/depois enviada para o tutor! 📸'); });
+        refresh();
+      }
+    };
+
+    // 5) Agenda Otimizada de Encaixes ------------------------------------------
+    TOOLS['banho-agenda-encaixes'] = {
+      icon:'🗓️', title:'Agenda Otimizada de Encaixes',
+      sub:'Informe a duração do serviço e a IA sugere o melhor horário livre na agenda do dia.',
+      render:function(el){
+        var slots = [
+          { hora:'09:00', livre:true }, { hora:'10:00', livre:false }, { hora:'11:00', livre:true },
+          { hora:'13:00', livre:true }, { hora:'14:00', livre:false }, { hora:'15:00', livre:true },
+          { hora:'16:00', livre:true }, { hora:'17:00', livre:false }
+        ];
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Duração estimada do serviço</p>'+
+          '<div class="tm-chip-toggle-row" id="ag-duracao">'+
+          '<button type="button" class="tm-chip-toggle" data-val="30">30 min</button>'+
+          '<button type="button" class="tm-chip-toggle active" data-val="60">1 hora</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="90">1h30</button>'+
+          '</div></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="ag-calcular">🗓️ Calcular melhor encaixe</button>'+
+          '<div id="ag-out"></div>';
+        wireExclusiveChips(el, '#ag-duracao .tm-chip-toggle');
+        el.querySelector('#ag-calcular').addEventListener('click', function(){
+          var dur = parseInt(activeChipVal(el, '#ag-duracao .tm-chip-toggle'), 10);
+          var livres = slots.filter(function(s){ return s.livre; });
+          var precisa = dur > 60 ? 2 : 1;
+          var sugestoes = livres.slice(0, Math.max(1, 3 - precisa + 1));
+          var out = el.querySelector('#ag-out');
+          out.innerHTML = '<div class="tm-output accent"><div class="tm-output-title">🗓️ Horários sugeridos (' + dur + ' min)</div>'+
+            sugestoes.map(function(s){ return '<p>✅ <strong>'+s.hora+'</strong> — encaixe livre, ideal para o serviço.</p>'; }).join('') +
+            '</div><div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="ag-confirmar">Confirmar encaixe</button></div>';
+          el.querySelector('#ag-confirmar').addEventListener('click', function(){ showToast('Encaixe confirmado na agenda! 🗓️'); });
+        });
+      }
+    };
+
+    // 6) Ficha de Preferências do Pet ------------------------------------------
+    TOOLS['banho-ficha-preferencias'] = {
+      icon:'📋', title:'Ficha de Preferências do Pet',
+      sub:'Registre preferências e sensibilidades de cada pet para personalizar futuros atendimentos.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="form-grid">'+
+          '<div class="form-field"><label>Nome do pet</label><input type="text" id="fp-nome" placeholder="Ex.: Thor"></div>'+
+          '<div class="form-field"><label>Tipo de tosa preferida</label><select id="fp-tosa"><option>Higiênica</option><option>Tesoura</option><option>Máquina curta</option><option>Não tosar</option></select></div>'+
+          '<div class="form-field full"><label>Sensibilidades / cuidados especiais</label><textarea id="fp-sensib" rows="2" style="border:1px solid var(--gray-300);border-radius:12px;padding:8px 10px;font:inherit;" placeholder="Ex.: pele sensível, evitar secador quente"></textarea></div>'+
+          '</div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="fp-salvar" style="margin-top:10px;">💾 Salvar ficha</button>'+
+          '<div id="fp-lista" style="margin-top:16px;"></div>';
+        function draw(){
+          var list = el.querySelector('#fp-lista');
+          if(toolState.fichaPreferencias.length === 0){ list.innerHTML = '<p class="tm-empty">Nenhuma ficha registrada ainda.</p>'; return; }
+          list.innerHTML = toolState.fichaPreferencias.map(function(f, i){
+            return '<div class="tm-diary-item"><div class="tm-diary-thumb">🐾</div><div class="tm-diary-body"><h5>'+tEsc(f.nome)+' <span style="font-weight:600;color:var(--gray-500);font-size:11.5px;">· '+tEsc(f.tosa)+'</span></h5><p>'+tEsc(f.sensib || 'Sem observações.')+'</p></div></div>';
+          }).join('');
+        }
+        el.querySelector('#fp-salvar').addEventListener('click', function(){
+          var nome = el.querySelector('#fp-nome').value.trim();
+          if(!nome){ showToast('Informe o nome do pet.'); return; }
+          toolState.fichaPreferencias.unshift({ nome:nome, tosa: el.querySelector('#fp-tosa').value, sensib: el.querySelector('#fp-sensib').value.trim() });
+          el.querySelector('#fp-nome').value = ''; el.querySelector('#fp-sensib').value = '';
+          showToast('Ficha de preferências salva!');
+          draw();
+        });
+        draw();
+      }
+    };
+
+    // 7) Diário de Hospedagem com Fotos -----------------------------------------
+    TOOLS['sitter-diario-hospedagem'] = {
+      icon:'📷', title:'Diário de Hospedagem com Fotos',
+      sub:'Registre momentos do dia do pet hospedado com foto e observação para o tutor acompanhar.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="form-grid">'+
+          '<div class="form-field"><label>Foto do momento</label><input type="file" accept="image/*" id="dh-foto"></div>'+
+          '<div class="form-field full"><label>Observação</label><input type="text" id="dh-texto" placeholder="Ex.: brincou no jardim e almoçou tudo!"></div>'+
+          '</div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="dh-add" style="margin-top:6px;">📷 Adicionar ao diário</button>'+
+          '<div id="dh-lista" style="margin-top:16px;"></div>';
+        var pendingFoto = null;
+        wirePhotoInput(el.querySelector('#dh-foto'), function(d){ pendingFoto = d; });
+        function draw(){
+          var list = el.querySelector('#dh-lista');
+          list.innerHTML = toolState.diarioHospedagem.map(function(d){
+            return '<div class="tm-diary-item">'+(d.foto ? '<img class="tm-diary-thumb" src="'+d.foto+'" style="object-fit:cover;">' : '<div class="tm-diary-thumb">🐾</div>')+
+              '<div class="tm-diary-body"><h5>'+tEsc(d.hora)+'</h5><p>'+tEsc(d.texto)+'</p></div></div>';
+          }).join('');
+        }
+        el.querySelector('#dh-add').addEventListener('click', function(){
+          var texto = el.querySelector('#dh-texto').value.trim();
+          if(!texto){ showToast('Escreva uma observação para o registro.'); return; }
+          toolState.diarioHospedagem.unshift({ hora: nowHM(), texto: texto, foto: pendingFoto });
+          el.querySelector('#dh-texto').value = ''; pendingFoto = null; el.querySelector('#dh-foto').value = '';
+          draw();
+          showToast('Registro adicionado ao diário de hospedagem!');
+        });
+        draw();
+      }
+    };
+
+    // 8) Checklist de Rotina do Pet ---------------------------------------------
+    TOOLS['sitter-checklist-rotina'] = {
+      icon:'✅', title:'Checklist de Rotina do Pet',
+      sub:'Acompanhe e marque as tarefas da rotina diária do pet hospedado.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-checklist" id="cr-lista"></div>'+
+          '<div class="tm-row" style="margin-top:12px;gap:8px;">'+
+          '<input type="text" id="cr-novo" placeholder="Adicionar novo item..." style="flex:1;border:1px solid var(--gray-300);border-radius:10px;padding:8px 10px;font:inherit;">'+
+          '<button type="button" class="btn btn-outline btn-sm" id="cr-add">+ Adicionar</button></div>';
+        function draw(){
+          var list = el.querySelector('#cr-lista');
+          list.innerHTML = toolState.checklistRotina.map(function(item){
+            return '<div class="tm-check-item'+(item.done?' done':'')+'" data-id="'+item.id+'"><span class="tm-check-box">'+(item.done?'✓':'')+'</span><span class="tm-check-label">'+tEsc(item.label)+'</span></div>';
+          }).join('');
+          list.querySelectorAll('.tm-check-item').forEach(function(row){
+            row.addEventListener('click', function(){
+              var id = parseInt(row.getAttribute('data-id'), 10);
+              var item = toolState.checklistRotina.find(function(i){ return i.id === id; });
+              if(item){ item.done = !item.done; draw(); }
+            });
+          });
+        }
+        el.querySelector('#cr-add').addEventListener('click', function(){
+          var input = el.querySelector('#cr-novo');
+          var val = input.value.trim();
+          if(!val) return;
+          toolState.checklistRotina.push({ id: toolState.checklistSeq++, label: val, done:false });
+          input.value = '';
+          draw();
+        });
+        draw();
+      }
+    };
+
+    // 9) Resumo do Dia por IA -----------------------------------------------------
+    TOOLS['sitter-resumo-dia-ia'] = {
+      icon:'🎥', title:'Resumo do Dia por IA',
+      sub:'Liste algumas notas rápidas do dia e a IA transforma em um resumo carinhoso para o tutor.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Notas rápidas (uma por linha)</p>'+
+          '<textarea id="rd-notas" rows="4" style="width:100%;border:1px solid var(--gray-300);border-radius:12px;padding:10px 12px;font:inherit;resize:vertical;" placeholder="comeu tudo na hora do almoço\nbrincou bastante no quintal\ntirou uma soneca longa à tarde"></textarea></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="rd-gerar">🎥 Gerar resumo carinhoso</button>'+
+          '<div id="rd-out"></div>';
+        el.querySelector('#rd-gerar').addEventListener('click', function(){
+          var notas = el.querySelector('#rd-notas').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+          var out = el.querySelector('#rd-out');
+          if(notas.length === 0){ out.innerHTML = '<p class="tm-empty">Adicione ao menos uma nota do dia.</p>'; return; }
+          var abertura = randomPick(['Hoje foi um dia ótimo por aqui! 🐾', 'O dia rendeu boas histórias! 🐾', 'Mais um dia cheio de alegria! 🐾']);
+          var corpo = notas.map(function(n){ return n.charAt(0).toUpperCase()+n.slice(1); }).join(', ') + '.';
+          var fechamento = randomPick(['Até amanhã, com muito carinho! 💛', 'Mal podemos esperar pelo próximo dia juntos! 💛', 'Obrigado pela confiança!  💛']);
+          out.innerHTML = '<div class="tm-output accent"><div class="tm-output-title">🎥 Resumo do dia</div><p>'+tEsc(abertura)+' '+tEsc(corpo)+' '+tEsc(fechamento)+'</p></div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="rd-enviar">📲 Enviar pro tutor</button></div>';
+          el.querySelector('#rd-enviar').addEventListener('click', function(){ showToast('Resumo do dia enviado ao tutor! 🎥'); });
+        });
+      }
+    };
+
+    // 10) Rota Inteligente de Passeio (ferramenta principal) --------------------
+    TOOLS['passeador-rota-inteligente'] = {
+      icon:'🗺️', title:'Rota Inteligente de Passeio',
+      sub:'Configure a duração e as preferências do passeio para gerar um trajeto sugerido.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Duração desejada</p>'+
+          '<div class="tm-chip-toggle-row" id="ri-duracao">'+
+          '<button type="button" class="tm-chip-toggle" data-val="15">15 min</button>'+
+          '<button type="button" class="tm-chip-toggle active" data-val="30">30 min</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="45">45 min</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="60">60 min</button>'+
+          '</div></div>'+
+          '<div class="tm-section"><p class="tm-section-label">Preferências da rota</p>'+
+          '<div class="tm-chip-toggle-row" id="ri-prefs">'+
+          '<button type="button" class="tm-chip-toggle active" data-val="sombra">☀️ Priorizar sombra</button>'+
+          '<button type="button" class="tm-chip-toggle active" data-val="agua">💧 Pontos de água</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="ladeira">⛰️ Evitar ladeiras</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="grama">🌳 Priorizar grama/parque</button>'+
+          '</div></div>'+
+          '<div class="tm-section"><p class="tm-section-label">Ponto de partida</p>'+
+          '<div class="form-field full"><input type="text" id="ri-bairro" value="Vila Mariana, SP"></div></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="ri-gerar">🗺️ Gerar rota sugerida</button>'+
+          '<div id="ri-out" style="margin-top:16px;"></div>';
+
+        wireExclusiveChips(el, '#ri-duracao .tm-chip-toggle');
+        wireMultiChips(el, '#ri-prefs .tm-chip-toggle');
+
+        el.querySelector('#ri-gerar').addEventListener('click', function(){
+          var duracao = parseInt(activeChipVal(el, '#ri-duracao .tm-chip-toggle'), 10);
+          var prefs = activeChipVals(el, '#ri-prefs .tm-chip-toggle');
+          var bairro = el.querySelector('#ri-bairro').value.trim() || 'sua região';
+          var distanciaKm = (duracao/60*4.5).toFixed(1);
+
+          var pontos = [];
+          pontos.push({ icon:'🏠', title:'Saída', desc:'Início do passeio em ' + tEsc(bairro) + '.' });
+          if(prefs.indexOf('grama') !== -1) pontos.push({ icon:'🌳', title:'Praça arborizada', desc:'Trecho com grama e área verde para o pet cheirar e brincar.' });
+          if(prefs.indexOf('sombra') !== -1) pontos.push({ icon:'☀️', title:'Trecho com sombra', desc:'Calçada arborizada, ideal para os horários mais quentes.' });
+          if(prefs.indexOf('agua') !== -1) pontos.push({ icon:'💧', title:'Ponto de água', desc:'Bebedouro público ou chafariz pet friendly no meio do percurso.' });
+          if(prefs.indexOf('ladeira') !== -1) pontos.push({ icon:'📉', title:'Trajeto plano', desc:'Rota ajustada para evitar subidas e ladeiras íngremes.' });
+          pontos.push({ icon:'🏁', title:'Retorno', desc:'Volta ao ponto de partida, completando aproximadamente ' + distanciaKm + ' km.' });
+
+          var html = '<div class="tm-output accent"><div class="tm-output-title">🗺️ Rota sugerida — ' + duracao + ' min · ~' + distanciaKm + ' km</div>'+
+            '<div class="tm-timeline">' + pontos.map(function(p){
+              return '<div class="tm-timeline-item"><span class="tm-timeline-icon">'+p.icon+'</span><div class="tm-timeline-body"><h5>'+tEsc(p.title)+'</h5><p>'+tEsc(p.desc)+'</p></div></div>';
+            }).join('') + '</div></div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="ri-enviar">📲 Enviar rota pro tutor</button></div>';
+
+          el.querySelector('#ri-out').innerHTML = html;
+          el.querySelector('#ri-enviar').addEventListener('click', function(){ showToast('Rota enviada para o tutor! 🐾'); });
+        });
+      }
+    };
+
+    // 11) Relatório Automático do Passeio ---------------------------------------
+    TOOLS['passeador-relatorio-automatico'] = {
+      icon:'📊', title:'Relatório Automático do Passeio',
+      sub:'Inicie o cronômetro do passeio e gere automaticamente o relatório ao finalizar.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-output accent" style="text-align:center;">'+
+          '<div style="font-size:34px;font-weight:800;color:var(--secondary-dark);" id="pa-tempo">00:00</div>'+
+          '<p style="margin:6px 0 0;font-size:12.5px;color:var(--gray-500);">Distância estimada: <strong id="pa-dist">0.0 km</strong> · Paradas: <strong id="pa-paradas">0</strong></p>'+
+          '</div>'+
+          '<div class="tm-btn-row" style="margin-top:12px;">'+
+          '<button type="button" class="btn btn-primary btn-sm" id="pa-start">▶️ Iniciar passeio</button>'+
+          '<button type="button" class="btn btn-outline btn-sm" id="pa-stop" disabled>⏹️ Finalizar passeio</button>'+
+          '</div>'+
+          '<div id="pa-out"></div>';
+
+        walkTimer.seconds = 0; walkTimer.distancia = 0; walkTimer.paradas = 0;
+        if(walkTimer.interval){ clearInterval(walkTimer.interval); walkTimer.interval = null; }
+        walkTimer.running = false;
+
+        function tick(){
+          walkTimer.seconds += 1;
+          walkTimer.distancia += 4.5/3600;
+          if(walkTimer.seconds % 47 === 0) walkTimer.paradas += 1;
+          el.querySelector('#pa-tempo').textContent = pad2(Math.floor(walkTimer.seconds/60)) + ':' + pad2(walkTimer.seconds % 60);
+          el.querySelector('#pa-dist').textContent = walkTimer.distancia.toFixed(2) + ' km';
+          el.querySelector('#pa-paradas').textContent = String(walkTimer.paradas);
+        }
+        el.querySelector('#pa-start').addEventListener('click', function(){
+          if(walkTimer.running) return;
+          walkTimer.running = true;
+          el.querySelector('#pa-start').disabled = true;
+          el.querySelector('#pa-stop').disabled = false;
+          el.querySelector('#pa-out').innerHTML = '';
+          walkTimer.interval = setInterval(tick, 1000);
+          showToast('Passeio iniciado! Cronômetro em andamento.');
+        });
+        el.querySelector('#pa-stop').addEventListener('click', function(){
+          if(!walkTimer.running) return;
+          walkTimer.running = false;
+          clearInterval(walkTimer.interval); walkTimer.interval = null;
+          el.querySelector('#pa-start').disabled = false;
+          el.querySelector('#pa-stop').disabled = true;
+          el.querySelector('#pa-out').innerHTML =
+            '<div class="tm-output" style="margin-top:12px;"><div class="tm-output-title">📊 Relatório do passeio</div>'+
+            '<p>Duração: <strong>'+pad2(Math.floor(walkTimer.seconds/60))+':'+pad2(walkTimer.seconds%60)+'</strong></p>'+
+            '<p>Distância percorrida: <strong>'+walkTimer.distancia.toFixed(2)+' km</strong></p>'+
+            '<p>Paradas para cheirar/necessidades: <strong>'+walkTimer.paradas+'</strong></p></div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="pa-enviar">📲 Enviar relatório pro tutor</button></div>';
+          el.querySelector('#pa-enviar').addEventListener('click', function(){ showToast('Relatório do passeio enviado ao tutor! 📊'); });
+        });
+      }
+    };
+
+    // 12) Alerta de Clima ---------------------------------------------------------
+    TOOLS['passeador-alerta-clima'] = {
+      icon:'☀️', title:'Alerta de Clima',
+      sub:'Previsão dos próximos dias para planejar melhor os horários de passeio.',
+      render:function(el){
+        var dias = [
+          { d:'Hoje', icon:'☀️', temp:'27°', alerta:false },
+          { d:'Amanhã', icon:'🌧️', temp:'19°', alerta:true },
+          { d:'Depois de amanhã', icon:'⛅', temp:'22°', alerta:false },
+          { d:'Em 3 dias', icon:'☀️', temp:'26°', alerta:false }
+        ];
+        el.innerHTML =
+          '<div class="tm-weather-grid">' + dias.map(function(d){
+            return '<div class="tm-weather-day'+(d.alerta?' alert':'')+'"><div style="font-size:11px;font-weight:700;">'+d.d+'</div><div style="font-size:26px;">'+d.icon+'</div><div style="font-weight:800;">'+d.temp+'</div></div>';
+          }).join('') + '</div>'+
+          '<div class="tm-output" style="margin-top:14px;border-left:3px solid #E0A45C;"><div class="tm-output-title">⚠️ Alerta</div>'+
+          '<p>Chuva forte prevista para <strong>amanhã à tarde</strong> — considere reagendar passeios longos ou antecipar para o período da manhã.</p></div>'+
+          '<div class="tm-btn-row" style="margin-top:10px;"><button type="button" class="btn btn-outline btn-sm" id="cl-notificar">📲 Notificar tutores com passeio agendado</button></div>';
+        el.querySelector('#cl-notificar').addEventListener('click', function(){ showToast('Tutores com passeio agendado para amanhã foram notificados! ☔'); });
+      }
+    };
+
+    // 13) Gerador de Rotina de Treinamento IA -------------------------------------
+    TOOLS['adestrador-rotina-treinamento'] = {
+      icon:'🐕‍🦺', title:'Gerador de Rotina de Treinamento IA',
+      sub:'Informe o perfil do pet e os comportamentos a trabalhar para gerar um plano semanal.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Porte do pet</p>'+
+          '<div class="tm-chip-toggle-row" id="tr-porte">'+
+          '<button type="button" class="tm-chip-toggle" data-val="pequeno">Pequeno</button>'+
+          '<button type="button" class="tm-chip-toggle active" data-val="medio">Médio</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="grande">Grande</button>'+
+          '</div></div>'+
+          '<div class="tm-section"><p class="tm-section-label">Comportamentos a trabalhar</p>'+
+          '<div class="tm-chip-toggle-row" id="tr-comport">'+
+          '<button type="button" class="tm-chip-toggle active" data-val="coleira">Puxa na coleira</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="late">Late muito</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="ansiedade">Ansiedade de separação</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="chamado">Não obedece chamado</button>'+
+          '</div></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="tr-gerar">🐕‍🦺 Gerar plano semanal</button>'+
+          '<div id="tr-out" style="margin-top:14px;"></div>';
+        wireExclusiveChips(el, '#tr-porte .tm-chip-toggle');
+        wireMultiChips(el, '#tr-comport .tm-chip-toggle');
+        var exerciciosPorProblema = {
+          coleira: 'Caminhada com iscas e paradas a cada puxão (guia curta)',
+          late: 'Exercício de dessensibilização a estímulos sonoros',
+          ansiedade: 'Treino de saídas curtas progressivas para tolerância à ausência',
+          chamado: 'Reforço positivo do comando de chamado em ambiente controlado'
+        };
+        var geral = ['Sessão de obediência básica (senta, fica, deita)', 'Enriquecimento ambiental com brinquedos de faro', 'Socialização supervisionada com outros pets', 'Caminhada de reconhecimento em novo ambiente', 'Revisão dos comandos aprendidos na semana'];
+        var dias = ['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
+        el.querySelector('#tr-gerar').addEventListener('click', function(){
+          var comport = activeChipVals(el, '#tr-comport .tm-chip-toggle');
+          var pool = comport.map(function(c){ return exerciciosPorProblema[c]; }).filter(Boolean).concat(geral);
+          var plano = dias.map(function(d, i){ return { dia:d, exercicio: pool[i % pool.length] }; });
+          el.querySelector('#tr-out').innerHTML =
+            '<div class="tm-timeline">' + plano.map(function(p){
+              return '<div class="tm-timeline-item"><span class="tm-timeline-icon">🐕</span><div class="tm-timeline-body"><h5>'+p.dia+'</h5><p>'+tEsc(p.exercicio)+'</p></div></div>';
+            }).join('') + '</div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="tr-salvar">💾 Salvar plano</button></div>';
+          el.querySelector('#tr-salvar').addEventListener('click', function(){ showToast('Plano de treinamento semanal salvo!'); });
+        });
+      }
+    };
+
+    // 14) Diário de Evolução do Pet ------------------------------------------------
+    TOOLS['adestrador-diario-evolucao'] = {
+      icon:'📈', title:'Diário de Evolução do Pet',
+      sub:'Registre o progresso de cada sessão de treinamento com uma nota de avaliação.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="form-grid">'+
+          '<div class="form-field full"><label>Observação da sessão</label><input type="text" id="de-nota" placeholder="Ex.: Respondeu bem ao comando senta"></div>'+
+          '<div class="form-field"><label>Avaliação</label><select id="de-estrelas"><option value="5">⭐⭐⭐⭐⭐ Excelente</option><option value="4" selected>⭐⭐⭐⭐ Muito bom</option><option value="3">⭐⭐⭐ Bom</option><option value="2">⭐⭐ Regular</option><option value="1">⭐ Precisa reforçar</option></select></div>'+
+          '</div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="de-add" style="margin-top:6px;">📈 Adicionar ao diário</button>'+
+          '<div id="de-lista" style="margin-top:16px;"></div>';
+        function draw(){
+          el.querySelector('#de-lista').innerHTML = toolState.diarioEvolucao.map(function(d){
+            return '<div class="tm-diary-item"><div class="tm-diary-thumb">'+'⭐'.repeat(d.estrelas)+'</div><div class="tm-diary-body"><h5>'+tEsc(d.data)+'</h5><p>'+tEsc(d.nota)+'</p></div></div>';
+          }).join('');
+        }
+        el.querySelector('#de-add').addEventListener('click', function(){
+          var nota = el.querySelector('#de-nota').value.trim();
+          if(!nota){ showToast('Escreva uma observação da sessão.'); return; }
+          var hoje = new Date();
+          toolState.diarioEvolucao.unshift({ data: pad2(hoje.getDate())+'/'+pad2(hoje.getMonth()+1), nota: nota, estrelas: parseInt(el.querySelector('#de-estrelas').value, 10) });
+          el.querySelector('#de-nota').value = '';
+          draw();
+          showToast('Progresso registrado no diário de evolução!');
+        });
+        draw();
+      }
+    };
+
+    // 15) Biblioteca de Exercícios em Vídeo -----------------------------------------
+    TOOLS['adestrador-biblioteca-videos'] = {
+      icon:'🎬', title:'Biblioteca de Exercícios em Vídeo',
+      sub:'Vídeos curtos de exercícios prontos para indicar aos tutores entre as sessões.',
+      render:function(el){
+        var videos = [
+          { titulo:'Comando "Senta" passo a passo', dur:'2:14', icon:'🐕' },
+          { titulo:'Dessensibilização a barulhos', dur:'3:05', icon:'🔊' },
+          { titulo:'Guia curta sem puxar', dur:'2:40', icon:'🦮' },
+          { titulo:'Chamado com reforço positivo', dur:'1:58', icon:'📣' },
+          { titulo:'Enriquecimento com faro', dur:'2:32', icon:'👃' },
+          { titulo:'Rotina de saídas para ansiedade', dur:'3:20', icon:'🚪' }
+        ];
+        el.innerHTML = '<div class="tm-video-grid">' + videos.map(function(v, i){
+          return '<div class="tm-video-card" data-idx="'+i+'"><div class="tm-video-thumb"><span>'+v.icon+'</span><span class="tm-video-play">▶</span></div><div class="tm-video-info"><h5>'+tEsc(v.titulo)+'</h5><span>'+v.dur+'</span></div></div>';
+        }).join('') + '</div>';
+        el.querySelectorAll('.tm-video-card').forEach(function(card){
+          card.addEventListener('click', function(){
+            var idx = parseInt(card.getAttribute('data-idx'), 10);
+            showToast('Reproduzindo: ' + videos[idx].titulo + ' (demonstração)');
+          });
+        });
+      }
+    };
+
+    // 16) Carteirinha do Aluno & Gestão de Turmas ------------------------------------
+    TOOLS['creche-carteirinha-turmas'] = {
+      icon:'🎒', title:'Carteirinha do Aluno & Gestão de Turmas',
+      sub:'Gerencie o mural de alunos da creche com atribuição automática de turma por porte e energia.',
+      render:function(el){
+        el.innerHTML =
+          '<div id="ct-lista"></div>'+
+          '<div class="tm-section" style="margin-top:14px;"><p class="tm-section-label">Adicionar novo aluno</p>'+
+          '<div class="form-grid">'+
+          '<div class="form-field"><label>Nome</label><input type="text" id="ct-nome" placeholder="Ex.: Bela"></div>'+
+          '<div class="form-field"><label>Porte</label><select id="ct-porte"><option value="pequeno">Pequeno</option><option value="medio">Médio</option><option value="grande">Grande</option></select></div>'+
+          '<div class="form-field full"><label>Nível de energia</label><select id="ct-energia"><option value="baixa">Baixa</option><option value="media" selected>Média</option><option value="alta">Alta</option></select></div>'+
+          '</div>'+
+          '<button type="button" class="btn btn-outline btn-sm" id="ct-add" style="margin-top:8px;">+ Adicionar aluno</button></div>';
+        function draw(){
+          el.querySelector('#ct-lista').innerHTML = toolState.roster.map(function(r){
+            return '<div class="tm-roster-item"><div class="tm-roster-avatar">🐾</div><div class="tm-roster-info"><h5>'+tEsc(r.nome)+'</h5><span>Porte '+tEsc(r.porte)+' · energia '+tEsc(r.energia)+'</span></div><span class="tm-roster-badge">'+turmaFor(r.porte, r.energia)+'</span></div>';
+          }).join('');
+        }
+        el.querySelector('#ct-add').addEventListener('click', function(){
+          var nome = el.querySelector('#ct-nome').value.trim();
+          if(!nome){ showToast('Informe o nome do aluno.'); return; }
+          toolState.roster.push({ nome:nome, porte: el.querySelector('#ct-porte').value, energia: el.querySelector('#ct-energia').value });
+          el.querySelector('#ct-nome').value = '';
+          draw();
+          showToast(nome + ' adicionado(a) à turma!');
+        });
+        draw();
+      }
+    };
+
+    // 17) Boletim Diário Automático por IA --------------------------------------------
+    TOOLS['creche-boletim-diario'] = {
+      icon:'📝', title:'Boletim Diário Automático por IA',
+      sub:'Preencha os campos rápidos do dia e gere o boletim para enviar aos tutores.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-section"><p class="tm-section-label">Socialização com outros pets</p>'+
+          '<div class="tm-chip-toggle-row" id="bd-social">'+
+          '<button type="button" class="tm-chip-toggle active" data-val="Ótima">Ótima</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="Boa">Boa</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="Regular">Regular</button>'+
+          '</div></div>'+
+          '<div class="tm-section"><p class="tm-section-label">Humor geral</p>'+
+          '<div class="tm-chip-toggle-row" id="bd-humor">'+
+          '<button type="button" class="tm-chip-toggle active" data-val="Animado">😄 Animado</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="Tranquilo">😌 Tranquilo</button>'+
+          '<button type="button" class="tm-chip-toggle" data-val="Agitado">🤪 Agitado</button>'+
+          '</div></div>'+
+          '<div class="tm-section"><p class="tm-section-label">Notas sobre as brincadeiras</p>'+
+          '<input type="text" id="bd-notas" style="width:100%;border:1px solid var(--gray-300);border-radius:10px;padding:8px 10px;font:inherit;" placeholder="Ex.: adorou a piscina de bolinhas"></div>'+
+          '<button type="button" class="btn btn-primary btn-block" id="bd-gerar">📝 Gerar boletim do dia</button>'+
+          '<div id="bd-out"></div>';
+        wireExclusiveChips(el, '#bd-social .tm-chip-toggle');
+        wireExclusiveChips(el, '#bd-humor .tm-chip-toggle');
+        el.querySelector('#bd-gerar').addEventListener('click', function(){
+          var social = activeChipVal(el, '#bd-social .tm-chip-toggle');
+          var humor = activeChipVal(el, '#bd-humor .tm-chip-toggle');
+          var notas = el.querySelector('#bd-notas').value.trim();
+          var texto = 'Hoje o dia na creche foi ótimo! Socialização com os amiguinhos: ' + social.toLowerCase() + '. Humor geral: ' + humor.toLowerCase() + '.' + (notas ? ' ' + notas.charAt(0).toUpperCase()+notas.slice(1) + '.' : '');
+          el.querySelector('#bd-out').innerHTML = '<div class="tm-output accent"><div class="tm-output-title">📝 Boletim do dia</div><p>'+tEsc(texto)+'</p></div>'+
+            '<div class="tm-btn-row"><button type="button" class="btn btn-outline btn-sm" id="bd-enviar">📲 Enviar boletim pro tutor</button></div>';
+          el.querySelector('#bd-enviar').addEventListener('click', function(){ showToast('Boletim diário enviado aos tutores! 📝'); });
+        });
+      }
+    };
+
+    // 18) Câmeras ao Vivo para os Tutores -----------------------------------------------
+    TOOLS['creche-cameras-vivo'] = {
+      icon:'📹', title:'Câmeras ao Vivo para os Tutores',
+      sub:'Compartilhe o link de transmissão ao vivo do ambiente da creche com os tutores.',
+      render:function(el){
+        el.innerHTML =
+          '<div class="tm-camera-mock">'+
+          '<div class="tm-camera-live"><span class="tm-camera-dot"></span> AO VIVO</div>'+
+          '<div style="font-size:44px;">📹</div>'+
+          '<div class="tm-camera-caption">Pátio principal · Creche Koda</div>'+
+          '</div>'+
+          '<div class="tm-btn-row" style="margin-top:12px;">'+
+          '<button type="button" class="btn btn-primary btn-sm" id="cv-copiar">🔗 Copiar link de transmissão</button>'+
+          '</div>';
+        el.querySelector('#cv-copiar').addEventListener('click', function(){
+          var link = 'https://koda.app/creche/cameras/patio-principal';
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(link).then(function(){ showToast('Link de transmissão copiado!'); }).catch(function(){ showToast('Link: ' + link); });
+          } else {
+            showToast('Link: ' + link);
+          }
+        });
+      }
+    };
+
+    function openTool(id){
+      var tool = TOOLS[id];
+      if(!tool) return;
+      titleEl.textContent = tool.title;
+      subEl.textContent = tool.sub;
+      iconEl.textContent = tool.icon;
+      bodyEl.innerHTML = '';
+      tool.render(bodyEl);
+      overlay.classList.add('active');
+    }
+    function closeTool(){
+      overlay.classList.remove('active');
+      if(walkTimer.interval){ clearInterval(walkTimer.interval); walkTimer.interval = null; walkTimer.running = false; }
+    }
+    closeBtn.addEventListener('click', closeTool);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeTool(); });
+
+    document.querySelectorAll('.tool-card[data-tool]').forEach(function(card){
+      card.addEventListener('click', function(){ openTool(card.getAttribute('data-tool')); });
+    });
   })();
 
   // Sincroniza edições manuais do formulário de volta para o cartão de identidade
