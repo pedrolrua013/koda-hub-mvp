@@ -615,6 +615,67 @@
   .new-pet-modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
   @media (max-width:520px){ .new-pet-photo-block{flex-direction:column;align-items:flex-start;} .new-pet-modal-foot{flex-direction:column-reverse;} .new-pet-modal-foot .btn{width:100%;} }
 
+  /* ===== CRM de Clientes (kanban) — Meu Negócio ===== */
+  .crm-section{padding-top:6px;margin-top:26px;border-top:1px solid var(--gray-200,var(--gray-100));}
+  .crm-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin:22px 0 4px;}
+  .crm-head h2{margin:0 0 4px;font-size:19px;display:flex;align-items:center;gap:8px;}
+  .crm-head p{margin:0;max-width:520px;}
+  .crm-head-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+
+  .crm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 22px;}
+  .crm-stat{background:#fff;border:1.5px solid var(--gray-300);border-radius:14px;padding:13px 16px;}
+  .crm-stat .csv{font-size:19px;font-weight:800;font-family:'Poppins',sans-serif;color:var(--dark);line-height:1.2;}
+  .crm-stat .csl{font-size:10.5px;color:var(--gray-500);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:3px;}
+  @media (max-width:760px){ .crm-stats{grid-template-columns:repeat(2,1fr);} }
+
+  .crm-board{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 12px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;}
+  .crm-board::-webkit-scrollbar{height:8px;}
+  .crm-board::-webkit-scrollbar-thumb{background:var(--gray-300);border-radius:100px;}
+  .crm-column{flex:0 0 274px;width:274px;background:var(--gray-100);border-radius:16px;display:flex;flex-direction:column;max-height:620px;scroll-snap-align:start;transition:background .15s ease, outline .15s ease;}
+  .crm-column.drag-over{outline:2px dashed var(--primary);outline-offset:-2px;background:#FDEBE4;}
+  .crm-column-head{display:flex;align-items:center;gap:7px;padding:14px 10px 10px 14px;}
+  .crm-col-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .crm-col-title{flex:1;min-width:0;font-size:13.5px;font-weight:800;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .crm-col-count{font-size:11px;font-weight:700;color:var(--gray-500);background:#fff;padding:2px 8px;border-radius:100px;flex-shrink:0;}
+  .crm-col-icon-btn{width:24px;height:24px;border-radius:8px;border:none;background:transparent;color:var(--gray-500);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:12px;padding:0;}
+  .crm-col-icon-btn:hover{background:#fff;color:var(--dark);}
+  .crm-column-body{flex:1;min-height:50px;overflow-y:auto;padding:2px 10px 6px 14px;display:flex;flex-direction:column;gap:8px;}
+  .crm-column-empty{font-size:11.5px;color:var(--gray-500);text-align:center;padding:14px 6px;border:1.5px dashed var(--gray-300);border-radius:10px;}
+  .crm-column-add{margin:2px 10px 12px 14px;background:transparent;border:1.5px dashed var(--gray-300);color:var(--gray-500);border-radius:10px;padding:8px;font-size:12px;font-weight:700;cursor:pointer;text-align:center;}
+  .crm-column-add:hover{border-color:var(--primary);color:var(--primary-dark);background:#fff;}
+  .crm-add-column-card{flex:0 0 200px;width:200px;border-radius:16px;border:2px dashed var(--gray-300);background:transparent;color:var(--gray-500);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;min-height:120px;scroll-snap-align:start;}
+  .crm-add-column-card:hover{border-color:var(--primary);color:var(--primary-dark);}
+
+  .crm-card{background:#fff;border-radius:12px;padding:12px 12px 10px;box-shadow:0 1px 3px rgba(18,26,36,0.08);border:1px solid var(--gray-300);cursor:grab;transition:box-shadow .15s ease;}
+  .crm-card:hover{box-shadow:0 4px 14px rgba(18,26,36,0.13);}
+  .crm-card.dragging{opacity:.4;}
+  .crm-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .crm-card-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .crm-card-name{font-size:13px;font-weight:800;color:var(--dark);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .crm-card-pet{font-size:11.5px;color:var(--gray-500);margin:0 0 8px;}
+  .crm-card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+  .crm-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;background:var(--secondary-light);color:var(--secondary-dark);white-space:nowrap;}
+  .crm-card-foot{display:flex;align-items:center;justify-content:space-between;gap:6px;padding-top:8px;border-top:1px solid var(--gray-100);}
+  .crm-card-value{font-size:12.5px;font-weight:800;color:var(--dark);white-space:nowrap;}
+  .crm-card-move{font-size:10.5px;border:1px solid var(--gray-300);border-radius:8px;padding:3px 4px;background:#fff;color:var(--gray-700);max-width:118px;flex-shrink:1;min-width:0;}
+
+  .crm-modal-overlay{display:none;position:fixed;inset:0;background:rgba(18,26,36,0.66);backdrop-filter:blur(4px);z-index:3200;align-items:center;justify-content:center;padding:24px 16px;}
+  .crm-modal-overlay.active{display:flex;}
+  .crm-modal{background:#fff;border-radius:22px;max-width:540px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);position:relative;padding:28px 26px 24px;}
+  .crm-modal.crm-modal-sm{max-width:400px;}
+  .crm-modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:var(--gray-100);color:var(--gray-700);display:flex;align-items:center;justify-content:center;font-size:15px;border:none;cursor:pointer;z-index:2;}
+  .crm-modal-close:hover{background:var(--gray-300);}
+  .crm-modal h3{margin:0 0 4px;font-size:18px;padding-right:36px;}
+  .crm-modal-sub{margin:0 0 20px;font-size:12.5px;color:var(--gray-500);line-height:1.55;}
+  .crm-color-picker{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px;}
+  .crm-color-swatch{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;box-shadow:0 0 0 1px var(--gray-300);}
+  .crm-color-swatch.active{border-color:#fff;box-shadow:0 0 0 2px var(--dark);}
+  .crm-modal-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap;}
+  .crm-modal-foot-right{display:flex;gap:10px;flex-wrap:wrap;}
+  .crm-delete-link{background:none;border:none;color:var(--danger,#D14343);font-size:12.5px;font-weight:700;cursor:pointer;padding:8px 0;}
+  .crm-delete-link:hover{text-decoration:underline;}
+  @media (max-width:520px){ .crm-modal-foot{flex-direction:column-reverse;align-items:stretch;} .crm-modal-foot-right{flex-direction:column-reverse;} .crm-modal-foot .btn{width:100%;} .crm-column{flex-basis:82vw;width:82vw;} .crm-add-column-card{flex-basis:60vw;width:60vw;} }
+
   .card-block h3{font-size:15.5px;margin:0 0 14px;}
   .card-block p.bio{font-size:13.5px;color:var(--gray-700);line-height:1.7;margin:0 0 14px;}
   .pill-row{display:flex;gap:8px;flex-wrap:wrap;}
@@ -2594,6 +2655,23 @@
           </div>
         </aside>
       </div>
+
+      <div class="crm-section">
+        <div class="crm-head">
+          <div>
+            <h2>📋 CRM de Clientes</h2>
+            <p class="muted">Organize seus leads e clientes em um funil personalizável. Arraste os cards entre as colunas ou use o menu "Mover" em cada card.</p>
+          </div>
+          <div class="crm-head-actions">
+            <button type="button" class="btn btn-outline btn-sm" id="crm-add-column-btn">+ Nova coluna</button>
+            <button type="button" class="btn btn-primary btn-sm" id="crm-add-card-btn">+ Novo cliente</button>
+          </div>
+        </div>
+
+        <div class="crm-stats" id="crm-stats"></div>
+
+        <div class="crm-board" id="crm-board"></div>
+      </div>
     </div>
   </section>
 
@@ -3988,6 +4066,72 @@
   </div>
 </div>
 
+<!-- ===== Modal: Criar/editar card do CRM (cliente) ===== -->
+<div class="crm-modal-overlay" id="crm-card-modal-overlay">
+  <div class="crm-modal">
+    <button type="button" class="crm-modal-close" id="crm-card-modal-close" aria-label="Fechar">✕</button>
+    <h3 id="crm-card-modal-title">Novo cliente</h3>
+    <p class="crm-modal-sub">Preencha os dados do lead ou cliente para acompanhar no seu funil.</p>
+
+    <div class="form-grid">
+      <div class="form-field full"><label>Nome do cliente *</label><input type="text" id="crm-card-nome" placeholder="Ex: Juliana Ferreira" autocomplete="off"></div>
+      <div class="form-field"><label>Pet</label><input type="text" id="crm-card-pet" placeholder="Ex: Thor (cão)" autocomplete="off"></div>
+      <div class="form-field"><label>Contato</label><input type="text" id="crm-card-contato" placeholder="Ex: (11) 98888-1234" autocomplete="off"></div>
+      <div class="form-field"><label>Serviço de interesse</label><input type="text" id="crm-card-servico" placeholder="Ex: Passeio 60 min" autocomplete="off"></div>
+      <div class="form-field"><label>Valor estimado</label><input type="text" id="crm-card-valor" placeholder="Ex: R$ 35" autocomplete="off"></div>
+      <div class="form-field">
+        <label>Coluna</label>
+        <select id="crm-card-coluna"></select>
+      </div>
+      <div class="form-field">
+        <label>Etiqueta</label>
+        <select id="crm-card-tag">
+          <option value="">Nenhuma</option>
+          <option value="Novo">Novo</option>
+          <option value="Recorrente">Recorrente</option>
+          <option value="VIP">VIP</option>
+          <option value="Urgente">Urgente</option>
+        </select>
+      </div>
+      <div class="form-field full"><label>Observações</label><textarea id="crm-card-obs" placeholder="Anotações sobre a conversa, preferências, restrições do pet, etc."></textarea></div>
+    </div>
+
+    <div class="crm-modal-foot">
+      <button type="button" class="crm-delete-link" id="crm-card-delete-btn" style="display:none;">Excluir cliente</button>
+      <div class="crm-modal-foot-right">
+        <button type="button" class="btn btn-outline" id="crm-card-cancel-btn">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="crm-card-save-btn">Salvar cliente</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modal: Criar/renomear coluna do CRM ===== -->
+<div class="crm-modal-overlay" id="crm-column-modal-overlay">
+  <div class="crm-modal crm-modal-sm">
+    <button type="button" class="crm-modal-close" id="crm-column-modal-close" aria-label="Fechar">✕</button>
+    <h3 id="crm-column-modal-title">Nova coluna</h3>
+    <p class="crm-modal-sub">Personalize as etapas do seu funil de atendimento.</p>
+
+    <div class="form-field full" style="margin-bottom:16px;">
+      <label>Nome da coluna *</label>
+      <input type="text" id="crm-column-nome" placeholder="Ex: Em negociação" autocomplete="off">
+    </div>
+    <div class="form-field full">
+      <label>Cor</label>
+      <div class="crm-color-picker" id="crm-color-picker"></div>
+    </div>
+
+    <div class="crm-modal-foot">
+      <button type="button" class="crm-delete-link" id="crm-column-delete-btn" style="display:none;">Excluir coluna</button>
+      <div class="crm-modal-foot-right">
+        <button type="button" class="btn btn-outline" id="crm-column-cancel-btn">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="crm-column-save-btn">Salvar coluna</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="toast-container"></div>
 
 <div class="notif-panel" id="notif-panel">
@@ -5239,6 +5383,341 @@
         showToast('Carteira do ' + name + ' criada com sucesso! 🐾');
       });
     }
+  })();
+
+  // ===== CRM de Clientes (kanban) — Meu Negócio =====
+  (function(){
+    var board = document.getElementById('crm-board');
+    var statsEl = document.getElementById('crm-stats');
+    if(!board) return;
+
+    var COLORS = ['#F37C5E','#E0A45C','#4A6B6D','#365153','#7C93C9','#D8598F'];
+
+    var crmData = {
+      columns: [
+        { id:'col-leads', title:'Novos Leads', color:'#F37C5E' },
+        { id:'col-contato', title:'Em Contato', color:'#E0A45C' },
+        { id:'col-agendado', title:'Agendado', color:'#4A6B6D' },
+        { id:'col-cliente', title:'Cliente Fiel', color:'#365153' }
+      ],
+      cards: [
+        { id:'card-1', columnId:'col-leads', nome:'Marina Costa', pet:'Bidu (cão)', contato:'(11) 97711-2233', servico:'Banho e tosa', valor:'R$ 60', tag:'Novo', obs:'Chegou pelo Instagram, pediu orçamento.' },
+        { id:'card-2', columnId:'col-leads', nome:'Roberto Lima', pet:'Nina (gata)', contato:'(11) 96622-4455', servico:'Hospedagem diária', valor:'R$ 80', tag:'Urgente', obs:'Precisa para o fim de semana, aguardando confirmação.' },
+        { id:'card-3', columnId:'col-contato', nome:'Fernanda Alves', pet:'Zeca (cão)', contato:'(11) 95533-6677', servico:'Passeio 60 min', valor:'R$ 35', tag:'', obs:'Já trocamos mensagens, vai decidir até sexta.' },
+        { id:'card-4', columnId:'col-agendado', nome:'Juliana Ferreira', pet:'Thor (cão)', contato:'(11) 98888-1234', servico:'Passeio 60 min', valor:'R$ 35', tag:'Recorrente', obs:'Cliente de terças e quintas.' },
+        { id:'card-5', columnId:'col-cliente', nome:'Marcos Oliveira', pet:'Mia (gata)', contato:'(11) 94411-8899', servico:'Hospedagem diária', valor:'R$ 80', tag:'VIP', obs:'Cliente desde 2025, sempre indica novos clientes.' },
+        { id:'card-6', columnId:'col-cliente', nome:'Beatriz Tavares', pet:'Luna (cão)', contato:'(11) 93300-7788', servico:'Passeio 30 min', valor:'R$ 25', tag:'Recorrente', obs:'' }
+      ]
+    };
+
+    var colIdSeq = crmData.columns.length + 1;
+    var cardIdSeq = crmData.cards.length + 1;
+    var editingCardId = null;
+    var editingColumnId = null;
+    var draggedCardId = null;
+
+    function crmEsc(s){
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+
+    function crmInitials(name){
+      var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+      if(!parts.length) return '?';
+      if(parts.length === 1) return parts[0].slice(0,2).toUpperCase();
+      return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+    }
+
+    function crmParseValor(v){
+      if(!v) return 0;
+      var n = String(v).replace(/[^\d,.-]/g,'').replace(/\.(?=\d{3},)/g,'').replace(',', '.');
+      var f = parseFloat(n);
+      return isNaN(f) ? 0 : f;
+    }
+
+    function crmFormatBRL(n){
+      return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    }
+
+    function cardsInColumn(colId){
+      return crmData.cards.filter(function(c){ return c.columnId === colId; });
+    }
+
+    function renderStats(){
+      var total = crmData.cards.length;
+      var totalValor = crmData.cards.reduce(function(sum,c){ return sum + crmParseValor(c.valor); }, 0);
+      var lastCol = crmData.columns[crmData.columns.length - 1];
+      var clientesFieis = lastCol ? cardsInColumn(lastCol.id).length : 0;
+      var taxa = total ? Math.round((clientesFieis / total) * 100) : 0;
+      var novos = crmData.columns[0] ? cardsInColumn(crmData.columns[0].id).length : 0;
+
+      statsEl.innerHTML =
+        '<div class="crm-stat"><div class="csv">' + total + '</div><div class="csl">Clientes no funil</div></div>' +
+        '<div class="crm-stat"><div class="csv">' + crmFormatBRL(totalValor) + '</div><div class="csl">Em negociação</div></div>' +
+        '<div class="crm-stat"><div class="csv">' + novos + '</div><div class="csl">Novos leads</div></div>' +
+        '<div class="crm-stat"><div class="csv">' + taxa + '%</div><div class="csl">Taxa de fidelização</div></div>';
+    }
+
+    function cardHTML(card){
+      var moveOptions = crmData.columns.map(function(col){
+        return '<option value="' + col.id + '"' + (col.id === card.columnId ? ' selected' : '') + '>' + crmEsc(col.title) + '</option>';
+      }).join('');
+      var petLine = card.pet ? ('🐾 ' + crmEsc(card.pet) + (card.servico ? ' · ' + crmEsc(card.servico) : '')) : (card.servico ? crmEsc(card.servico) : '');
+      return '' +
+        '<div class="crm-card" draggable="true" data-card-id="' + card.id + '">' +
+          '<div class="crm-card-top">' +
+            '<span class="crm-card-avatar">' + crmEsc(crmInitials(card.nome)) + '</span>' +
+            '<span class="crm-card-name">' + crmEsc(card.nome || 'Sem nome') + '</span>' +
+          '</div>' +
+          (petLine ? '<p class="crm-card-pet">' + petLine + '</p>' : '') +
+          (card.tag ? '<div class="crm-card-tags"><span class="crm-tag">' + crmEsc(card.tag) + '</span></div>' : '') +
+          '<div class="crm-card-foot">' +
+            '<span class="crm-card-value">' + crmEsc(card.valor || '') + '</span>' +
+            '<select class="crm-card-move" data-card-id="' + card.id + '" aria-label="Mover cliente para outra coluna">' + moveOptions + '</select>' +
+          '</div>' +
+        '</div>';
+    }
+
+    function columnHTML(col){
+      var cards = cardsInColumn(col.id);
+      var cardsHtml = cards.length ? cards.map(cardHTML).join('') : '<div class="crm-column-empty">Nenhum cliente aqui ainda</div>';
+      return '' +
+        '<div class="crm-column" data-column-id="' + col.id + '">' +
+          '<div class="crm-column-head">' +
+            '<span class="crm-col-dot" style="background:' + col.color + ';"></span>' +
+            '<span class="crm-col-title">' + crmEsc(col.title) + '</span>' +
+            '<span class="crm-col-count">' + cards.length + '</span>' +
+            '<button type="button" class="crm-col-icon-btn crm-col-rename-btn" data-column-id="' + col.id + '" title="Renomear coluna" aria-label="Renomear coluna">✏️</button>' +
+          '</div>' +
+          '<div class="crm-column-body" data-column-id="' + col.id + '">' + cardsHtml + '</div>' +
+          '<button type="button" class="crm-column-add" data-column-id="' + col.id + '">+ Adicionar cliente</button>' +
+        '</div>';
+    }
+
+    function renderBoard(){
+      var html = crmData.columns.map(columnHTML).join('');
+      html += '<button type="button" class="crm-add-column-card" id="crm-inline-add-column-btn">+ Nova coluna</button>';
+      board.innerHTML = html;
+      renderStats();
+      wireBoardEvents();
+    }
+
+    function wireBoardEvents(){
+      board.querySelectorAll('.crm-card').forEach(function(cardEl){
+        cardEl.addEventListener('dragstart', function(e){
+          draggedCardId = cardEl.getAttribute('data-card-id');
+          cardEl.classList.add('dragging');
+          if(e.dataTransfer){
+            e.dataTransfer.effectAllowed = 'move';
+            try{ e.dataTransfer.setData('text/plain', draggedCardId); }catch(err){}
+          }
+        });
+        cardEl.addEventListener('dragend', function(){
+          cardEl.classList.remove('dragging');
+          draggedCardId = null;
+        });
+        cardEl.addEventListener('click', function(e){
+          if(e.target && e.target.closest && e.target.closest('.crm-card-move')) return;
+          openCardModal(cardEl.getAttribute('data-card-id'));
+        });
+      });
+
+      board.querySelectorAll('.crm-column-body').forEach(function(bodyEl){
+        bodyEl.addEventListener('dragover', function(e){
+          e.preventDefault();
+          if(e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+          var col = bodyEl.closest('.crm-column');
+          if(col) col.classList.add('drag-over');
+        });
+        bodyEl.addEventListener('dragleave', function(){
+          var col = bodyEl.closest('.crm-column');
+          if(col) col.classList.remove('drag-over');
+        });
+        bodyEl.addEventListener('drop', function(e){
+          e.preventDefault();
+          var col = bodyEl.closest('.crm-column');
+          if(col) col.classList.remove('drag-over');
+          var id = draggedCardId || (e.dataTransfer && e.dataTransfer.getData('text/plain'));
+          moveCard(id, bodyEl.getAttribute('data-column-id'));
+        });
+      });
+
+      board.querySelectorAll('.crm-card-move').forEach(function(sel){
+        sel.addEventListener('click', function(e){ e.stopPropagation(); });
+        sel.addEventListener('change', function(){
+          moveCard(sel.getAttribute('data-card-id'), sel.value);
+        });
+      });
+
+      board.querySelectorAll('.crm-column-add').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          openCardModal(null, btn.getAttribute('data-column-id'));
+        });
+      });
+
+      board.querySelectorAll('.crm-col-rename-btn').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          openColumnModal(btn.getAttribute('data-column-id'));
+        });
+      });
+
+      var inlineAddCol = document.getElementById('crm-inline-add-column-btn');
+      if(inlineAddCol) inlineAddCol.addEventListener('click', function(){ openColumnModal(null); });
+    }
+
+    function moveCard(cardId, targetColId){
+      var card = crmData.cards.filter(function(c){ return c.id === cardId; })[0];
+      if(!card || !targetColId || card.columnId === targetColId){ renderBoard(); return; }
+      card.columnId = targetColId;
+      var targetCol = crmData.columns.filter(function(c){ return c.id === targetColId; })[0];
+      renderBoard();
+      showToast('Cliente movido para "' + (targetCol ? targetCol.title : '') + '"');
+    }
+
+    // ===== Modal de card (cliente) =====
+    var cardModalOverlay = document.getElementById('crm-card-modal-overlay');
+    var cardModalTitle = document.getElementById('crm-card-modal-title');
+    var cardColSelect = document.getElementById('crm-card-coluna');
+    var cardDeleteBtn = document.getElementById('crm-card-delete-btn');
+
+    function refreshColumnSelect(selectedId){
+      cardColSelect.innerHTML = crmData.columns.map(function(c){
+        return '<option value="' + c.id + '"' + (c.id === selectedId ? ' selected' : '') + '>' + crmEsc(c.title) + '</option>';
+      }).join('');
+    }
+
+    function openCardModal(cardId, presetColumnId){
+      editingCardId = cardId;
+      var card = cardId ? crmData.cards.filter(function(c){ return c.id === cardId; })[0] : null;
+      cardModalTitle.textContent = card ? 'Editar cliente' : 'Novo cliente';
+      document.getElementById('crm-card-nome').value = card ? card.nome : '';
+      document.getElementById('crm-card-pet').value = card ? card.pet : '';
+      document.getElementById('crm-card-contato').value = card ? card.contato : '';
+      document.getElementById('crm-card-servico').value = card ? card.servico : '';
+      document.getElementById('crm-card-valor').value = card ? card.valor : '';
+      document.getElementById('crm-card-tag').value = card ? (card.tag || '') : '';
+      document.getElementById('crm-card-obs').value = card ? card.obs : '';
+      refreshColumnSelect(card ? card.columnId : (presetColumnId || (crmData.columns[0] && crmData.columns[0].id)));
+      cardDeleteBtn.style.display = card ? 'inline-block' : 'none';
+      cardModalOverlay.classList.add('active');
+      setTimeout(function(){ var el = document.getElementById('crm-card-nome'); if(el) el.focus(); }, 50);
+    }
+
+    function closeCardModal(){
+      cardModalOverlay.classList.remove('active');
+      editingCardId = null;
+    }
+
+    document.getElementById('crm-card-modal-close').addEventListener('click', closeCardModal);
+    document.getElementById('crm-card-cancel-btn').addEventListener('click', closeCardModal);
+    cardModalOverlay.addEventListener('click', function(e){ if(e.target === cardModalOverlay) closeCardModal(); });
+
+    document.getElementById('crm-card-save-btn').addEventListener('click', function(){
+      var nome = document.getElementById('crm-card-nome').value.trim();
+      if(!nome){ showToast('Digite o nome do cliente para salvar.'); return; }
+      var data = {
+        nome: nome,
+        pet: document.getElementById('crm-card-pet').value.trim(),
+        contato: document.getElementById('crm-card-contato').value.trim(),
+        servico: document.getElementById('crm-card-servico').value.trim(),
+        valor: document.getElementById('crm-card-valor').value.trim(),
+        tag: document.getElementById('crm-card-tag').value,
+        obs: document.getElementById('crm-card-obs').value.trim(),
+        columnId: cardColSelect.value
+      };
+      if(editingCardId){
+        var card = crmData.cards.filter(function(c){ return c.id === editingCardId; })[0];
+        if(card) Object.keys(data).forEach(function(k){ card[k] = data[k]; });
+        showToast('Cliente atualizado com sucesso.');
+      } else {
+        data.id = 'card-' + (cardIdSeq++);
+        crmData.cards.push(data);
+        showToast('Cliente adicionado ao funil! 📋');
+      }
+      closeCardModal();
+      renderBoard();
+    });
+
+    cardDeleteBtn.addEventListener('click', function(){
+      if(!editingCardId) return;
+      crmData.cards = crmData.cards.filter(function(c){ return c.id !== editingCardId; });
+      showToast('Cliente removido do funil.');
+      closeCardModal();
+      renderBoard();
+    });
+
+    // ===== Modal de coluna =====
+    var columnModalOverlay = document.getElementById('crm-column-modal-overlay');
+    var columnModalTitle = document.getElementById('crm-column-modal-title');
+    var columnDeleteBtn = document.getElementById('crm-column-delete-btn');
+    var colorPicker = document.getElementById('crm-color-picker');
+    var selectedColor = COLORS[0];
+
+    function renderColorPicker(active){
+      selectedColor = active || COLORS[0];
+      colorPicker.innerHTML = COLORS.map(function(c){
+        return '<button type="button" class="crm-color-swatch' + (c === selectedColor ? ' active' : '') + '" style="background:' + c + ';" data-color="' + c + '" aria-label="Cor ' + c + '"></button>';
+      }).join('');
+      colorPicker.querySelectorAll('.crm-color-swatch').forEach(function(sw){
+        sw.addEventListener('click', function(){
+          selectedColor = sw.getAttribute('data-color');
+          colorPicker.querySelectorAll('.crm-color-swatch').forEach(function(s){ s.classList.remove('active'); });
+          sw.classList.add('active');
+        });
+      });
+    }
+
+    function openColumnModal(columnId){
+      editingColumnId = columnId;
+      var col = columnId ? crmData.columns.filter(function(c){ return c.id === columnId; })[0] : null;
+      columnModalTitle.textContent = col ? 'Renomear coluna' : 'Nova coluna';
+      document.getElementById('crm-column-nome').value = col ? col.title : '';
+      renderColorPicker(col ? col.color : COLORS[crmData.columns.length % COLORS.length]);
+      columnDeleteBtn.style.display = col ? 'inline-block' : 'none';
+      columnModalOverlay.classList.add('active');
+      setTimeout(function(){ var el = document.getElementById('crm-column-nome'); if(el) el.focus(); }, 50);
+    }
+
+    function closeColumnModal(){
+      columnModalOverlay.classList.remove('active');
+      editingColumnId = null;
+    }
+
+    document.getElementById('crm-column-modal-close').addEventListener('click', closeColumnModal);
+    document.getElementById('crm-column-cancel-btn').addEventListener('click', closeColumnModal);
+    columnModalOverlay.addEventListener('click', function(e){ if(e.target === columnModalOverlay) closeColumnModal(); });
+
+    document.getElementById('crm-column-save-btn').addEventListener('click', function(){
+      var nome = document.getElementById('crm-column-nome').value.trim();
+      if(!nome){ showToast('Digite um nome para a coluna.'); return; }
+      if(editingColumnId){
+        var col = crmData.columns.filter(function(c){ return c.id === editingColumnId; })[0];
+        if(col){ col.title = nome; col.color = selectedColor; }
+        showToast('Coluna atualizada.');
+      } else {
+        crmData.columns.push({ id:'col-' + (colIdSeq++), title:nome, color:selectedColor });
+        showToast('Coluna "' + nome + '" criada! 📋');
+      }
+      closeColumnModal();
+      renderBoard();
+    });
+
+    columnDeleteBtn.addEventListener('click', function(){
+      if(!editingColumnId) return;
+      if(crmData.columns.length <= 1){ showToast('Você precisa manter ao menos uma coluna no funil.'); return; }
+      if(cardsInColumn(editingColumnId).length > 0){ showToast('Mova os clientes desta coluna para outra antes de excluí-la.'); return; }
+      crmData.columns = crmData.columns.filter(function(c){ return c.id !== editingColumnId; });
+      showToast('Coluna removida.');
+      closeColumnModal();
+      renderBoard();
+    });
+
+    document.getElementById('crm-add-card-btn').addEventListener('click', function(){ openCardModal(null); });
+    document.getElementById('crm-add-column-btn').addEventListener('click', function(){ openColumnModal(null); });
+
+    renderBoard();
   })();
 
   // Sincroniza edições manuais do formulário de volta para o cartão de identidade
